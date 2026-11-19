@@ -1036,6 +1036,100 @@
   .msb-text{font-size:19px;font-weight:900;letter-spacing:-.6px;color:#3A3428;white-space:nowrap}
   .msb-x{border:none;background:rgba(0,0,0,.06);color:#6C665C;width:30px;height:30px;border-radius:50%;font-weight:900;font-size:14px;flex:none}
 
+  /* ---------------- 🌟 특급칭찬 ---------------- */
+  .praise-pill{
+    display:inline-flex;align-items:center;gap:6px;flex:none;border:none;    background:linear-gradient(180deg,#FFDE6A 0%,#FFB01F 58%,#FF8A00 100%);color:#5A3200;
+    font-weight:900;font-size:12.5px;border-radius:12px;padding:7px 12px;white-space:nowrap;
+    box-shadow:0 6px 14px rgba(255,158,18,.34),inset 0 1px 0 rgba(255,255,255,.72);
+    animation:praiseGlow 2.8s ease-in-out infinite;
+  }
+  .praise-pill b{font-size:14px;font-weight:900;letter-spacing:-.3px}
+  .praise-pill:active{transform:scale(.96)}
+  @keyframes praiseGlow{
+    0%,100%{box-shadow:0 6px 14px rgba(255,158,18,.34),inset 0 1px 0 rgba(255,255,255,.72)}
+    50%{box-shadow:0 8px 22px rgba(255,140,0,.58),inset 0 1px 0 rgba(255,255,255,.85)}
+  }
+  .tab .badge.praise-badge{background:#FFB01F;color:#4A2C00}
+
+  .praise-card{max-width:520px}
+  .praise-sub{font-size:12.5px;font-weight:800;color:#8A8377;margin:-6px 0 14px;line-height:1.5;word-break:keep-all}
+  .pr-block + .pr-block{margin-top:14px}
+  .praise-label{font-size:13.5px;font-weight:900;color:#5D574B;margin:0 0 7px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .praise-label span{font-size:11.5px;font-weight:800;color:#A39C8E}
+  .pin-input{
+    width:100%;border:2px solid #EFE8D8;border-radius:14px;padding:12px 14px;font-size:22px;font-weight:900;
+    letter-spacing:11px;text-align:center;background:#FDFBF6;min-height:56px;color:#3A3428;
+    font-variant-numeric:tabular-nums;
+  }
+  .pin-input::placeholder{letter-spacing:5px;color:#D3CBB9;font-size:18px}
+  .pin-input:focus{outline:none;border-color:#FFC93C;background:#fff;box-shadow:0 0 0 4px rgba(255,201,60,.18)}
+  .pin-input + .pin-input{margin-top:8px}
+  .pin-err{font-size:12px;font-weight:900;color:#D93A2B;margin-top:7px;min-height:16px;line-height:1.4}
+  .pin-err:empty{display:none}
+  .pin-input.shake{animation:pinShake .32s ease}
+  @keyframes pinShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}55%{transform:translateX(5px)}80%{transform:translateX(-3px)}}
+  .pchips{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 10px}
+  .pchip{
+    border:2px solid #FFE3A3;background:#FFFBF0;color:#8A6B12;font-weight:900;font-size:12.5px;
+    border-radius:999px;padding:8px 12px;min-height:40px;transition:background .14s ease,border-color .14s ease,transform .12s ease;
+  }
+  .pchip:active{transform:scale(.96)}
+  .pchip.on{background:#FFE9A8;border-color:#FFC93C;color:#5A3200;box-shadow:0 4px 10px rgba(255,201,60,.3)}
+  .praise-text{
+    width:100%;min-height:92px;border:2px solid #EFE8D8;border-radius:14px;padding:12px;font-size:16px;font-weight:800;
+    line-height:1.5;background:#FDFBF6;resize:vertical;font-family:inherit;color:#3A3428;
+  }
+  .praise-text:focus{outline:none;border-color:#FFC93C;background:#fff;box-shadow:0 0 0 4px rgba(255,201,60,.18)}
+  .praise-actions{display:flex;gap:8px;margin-top:16px}
+  .praise-actions .btn{flex:1}
+  .btn-praise{
+    flex:1.5 !important;background:linear-gradient(180deg,#FFD24A 0%,#FF9E10 100%);color:#4A2C00;
+    box-shadow:0 8px 18px rgba(255,150,0,.3);font-size:15px;
+  }
+
+  .pin-card{max-width:390px;text-align:center;padding:22px 20px 18px}
+  .pin-card h3{margin:0 0 4px;font-size:21px;font-weight:900;letter-spacing:-.5px}
+  .pin-card .pin-sub{font-size:12.5px;font-weight:800;color:#8A8377;margin:0 0 14px;line-height:1.5;word-break:keep-all}
+  .pin-card .pin-input{font-size:20px;letter-spacing:9px;min-height:52px}
+  .pin-card .confirm-actions{margin-top:12px}
+
+  /* 🌟 칭찬 탭 */
+  .pr-sum{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-bottom:14px}
+  .pr-sum-ico{
+    width:58px;height:58px;flex:none;border-radius:18px;display:grid;place-items:center;font-size:29px;
+    background:linear-gradient(160deg,#FFF6C9,#FFE07A);border:2px solid #FFD34D;box-shadow:0 8px 18px rgba(255,190,20,.24);
+  }
+  .pr-sum h2{font-size:21px}
+  .pr-sum-text{font-size:14px;font-weight:900;color:#8A6B12;margin:4px 0 0}
+  .pr-sum-text b{color:#D93A2B;font-size:16px}
+  .praise-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+  .pr-item{
+    display:flex;align-items:flex-start;gap:12px;border:2px solid #F0E7D2;background:#FFFDF8;
+    border-radius:18px;padding:13px 15px;
+  }
+  .pr-when{flex:none;min-width:130px;display:flex;flex-direction:column;gap:2px;padding-top:1px}
+  .pr-when b{font-size:13.5px;font-weight:900;color:#5D574B;white-space:nowrap}
+  .pr-when span{font-size:12px;font-weight:800;color:#A39C8E;white-space:nowrap}
+  .pr-text{margin:0;font-size:16px;font-weight:800;line-height:1.5;color:#3A3428;word-break:keep-all;overflow-wrap:anywhere;flex:1;min-width:0}
+  .pr-award{
+    flex:none;font-size:12.5px;font-weight:900;color:#B3281D;background:#FFE9E5;
+    border:1.5px solid #FFC9C0;border-radius:999px;padding:6px 10px;white-space:nowrap;
+  }
+  .pr-del{
+    flex:none;border:1.5px solid #ECE4D4;background:#fff;color:#B6AE9D;border-radius:10px;
+    width:38px;height:38px;font-size:15px;line-height:1;
+  }
+  .pr-del:active{background:#F7F2E6}
+  .pr-empty{text-align:center;padding:38px 10px;color:#A39C8E;font-weight:900;font-size:14px;line-height:1.8}
+  .pr-empty .big{display:block;font-size:34px;margin-bottom:6px}
+  .pr-note{margin-top:12px;font-size:11.5px;font-weight:800;color:#B6AE9D;text-align:center}
+  @media (max-width:720px){
+    .pr-item{flex-wrap:wrap;gap:8px}
+    .pr-when{flex-direction:row;align-items:baseline;gap:7px;min-width:0;width:100%}
+    .pr-text{flex:1 1 100%;order:3}
+    .pr-award{margin-left:auto}
+  }
+
   /* ---------------- responsive ---------------- */
   @media (max-width:1399px){
     .hero-count{font-size:clamp(24px,2.2vw,30px)}
@@ -1300,6 +1394,7 @@
       <button class="tab" data-act="tab" data-tab="academy" type="button">🏫 학원 스케줄</button>
       <button class="tab" data-act="tab" data-tab="study" type="button">📚 공부</button>
       <button class="tab" data-act="tab" data-tab="dex" type="button">🔴 포켓몬 도감 <span class="badge js-ball-count">0</span></button>
+      <button class="tab" data-act="tab" data-tab="praise" type="button">🌟 칭찬 <span class="badge praise-badge js-praise-count">0</span></button>
     </nav>
 
     <div class="top-tools">
@@ -1395,6 +1490,7 @@
             <span class="stat-k">몬스터볼</span>
             <span class="stat-v js-ball-count">0개</span>
           </div>
+          <button class="praise-pill" type="button" data-act="praise-open">🌟 특급칭찬 <b>+5</b></button>
           <button class="hero-gacha" type="button" data-act="goto" data-tab="dex">도감 가기 →</button>
         </div>
       </section>
@@ -1514,6 +1610,7 @@
             <span class="stat-k">몬스터볼</span>
             <span class="stat-v js-ball-count">0개</span>
           </div>
+          <button class="praise-pill" type="button" data-act="praise-open">🌟 특급칭찬 <b>+5</b></button>
           <button class="hero-gacha eve" type="button" data-act="goto" data-tab="dex">도감 가기 →</button>
         </div>
       </section>
@@ -1670,6 +1767,32 @@
     </div>
   </section>
 
+  <!-- ================= PRAISE ================= -->
+  <section class="panel" id="panel-praise">
+    <div class="card" style="margin-bottom:16px">
+      <div class="pr-sum">
+        <div class="pr-sum-ico">🌟</div>
+        <div>
+          <h2>🌟 특급칭찬 기록</h2>
+          <p class="pr-sum-text" id="praiseSummary">총 <b>0</b>번의 특급칭찬 · 누적 볼 <b>0</b>개</p>
+        </div>
+        <div class="spacer"></div>
+        <button class="ghost-btn" type="button" data-act="pin-change">🔑 비밀번호 변경</button>
+        <button class="btn btn-praise" style="flex:0 0 auto !important" type="button" data-act="praise-open">🌟 특급칭찬 +5</button>
+      </div>
+      <p class="hint" style="margin:-4px 0 0">엄마가 특급칭찬을 남길 때마다 몬스터볼이 5개씩 쌓여요. 기록은 이 브라우저에만 저장돼요.</p>
+    </div>
+
+    <div class="card">
+      <div class="sec-head">
+        <h2>칭찬 목록</h2>
+        <span class="sec-sub">최신 칭찬부터 보여요</span>
+      </div>
+      <ul class="praise-list" id="praiseList"></ul>
+      <div class="pr-note">칭찬 기록을 지워도 이미 받은 몬스터볼은 그대로예요.</div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="foot">
@@ -1724,6 +1847,64 @@
   </div>
 </div>
 
+<!-- 🌟 특급칭찬 모달 (엄마 비밀번호 + 칭찬 내용) -->
+<div class="modal" id="praiseModal">
+  <div class="modal-card praise-card">
+    <div class="modal-head">
+      <h3 id="praiseTitle">🌟 특급칭찬</h3>
+      <button class="modal-close" type="button" data-act="close-praise" aria-label="닫기">✕</button>
+    </div>
+    <p class="praise-sub" id="praiseSub">엄마만 쓸 수 있어요. 비밀번호를 넣고 칭찬을 남기면 몬스터볼 +5!</p>
+
+    <div class="pr-block">
+      <div class="praise-label" id="praisePinLabel">엄마 비밀번호 <span>(4자리)</span></div>
+      <input class="pin-input" id="praisePin" type="password" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="off" aria-label="엄마 비밀번호 4자리">
+      <input class="pin-input" id="praisePin2" type="password" inputmode="numeric" maxlength="4" placeholder="한 번 더" autocomplete="off" aria-label="엄마 비밀번호 한 번 더">
+      <div class="pin-err" id="praisePinErr"></div>
+    </div>
+
+    <div class="pr-block">
+      <div class="praise-label">칭찬 내용 <span>윤재가 무엇을 잘했나요?</span></div>
+      <div class="pchips" id="praiseChips">
+        <button class="pchip" type="button" data-act="praise-chip" data-chip="동생/친구 배려">동생/친구 배려</button>
+        <button class="pchip" type="button" data-act="praise-chip" data-chip="스스로 정리정돈">스스로 정리정돈</button>
+        <button class="pchip" type="button" data-act="praise-chip" data-chip="예쁜 말 사용">예쁜 말 사용</button>
+        <button class="pchip" type="button" data-act="praise-chip" data-chip="씩씩하게 도전">씩씩하게 도전</button>
+        <button class="pchip" type="button" data-act="praise-chip" data-chip="인사 잘하기">인사 잘하기</button>
+      </div>
+      <textarea class="praise-text" id="praiseText" maxlength="200" placeholder="예: 동생에게 장난감을 먼저 양보했어요" enterkeyhint="done"></textarea>
+      <div class="pin-err" id="praiseTextErr"></div>
+    </div>
+
+    <div class="praise-actions">
+      <button class="btn btn-ghost" type="button" data-act="close-praise">취소</button>
+      <button class="btn btn-praise" type="button" data-act="praise-submit" id="praiseSubmit">🌟 칭찬하고 볼 +5</button>
+    </div>
+  </div>
+</div>
+
+<!-- 엄마 비밀번호 확인/변경 모달 -->
+<div class="modal" id="pinModal">
+  <div class="modal-card pin-card">
+    <button class="modal-close" type="button" data-act="close-pin" aria-label="닫기" style="position:absolute;top:14px;right:14px">✕</button>
+    <h3 id="pinTitle">🔑 엄마 비밀번호</h3>
+    <p class="pin-sub" id="pinSub">비밀번호를 넣어 주세요.</p>
+    <div id="pinOneWrap">
+      <input class="pin-input" id="pinOne" type="password" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="off" aria-label="엄마 비밀번호 4자리">
+    </div>
+    <div id="pinChangeWrap" style="display:none">
+      <input class="pin-input" id="pinCur" type="password" inputmode="numeric" maxlength="4" placeholder="지금 비밀번호" autocomplete="off" aria-label="지금 비밀번호">
+      <input class="pin-input" id="pinNew" type="password" inputmode="numeric" maxlength="4" placeholder="새 비밀번호" autocomplete="off" aria-label="새 비밀번호">
+      <input class="pin-input" id="pinNew2" type="password" inputmode="numeric" maxlength="4" placeholder="새 비밀번호 한 번 더" autocomplete="off" aria-label="새 비밀번호 한 번 더">
+    </div>
+    <div class="pin-err" id="pinErr"></div>
+    <div class="confirm-actions">
+      <button class="btn btn-ghost" type="button" data-act="close-pin">취소</button>
+      <button class="btn btn-yellow" type="button" data-act="pin-ok" id="pinOk">확인</button>
+    </div>
+  </div>
+</div>
+
 <!-- reveal modal -->
 <div class="modal" id="revealModal">
   <div class="modal-card reveal-card" id="revealBody"></div>
@@ -1774,7 +1955,9 @@
     stones: 'yj_stones_v1',
     stoneAwards: 'yj_stone_awards_v1',
     sound: 'yj_sound_v1',
-    msAlerts: 'yj_ms_alerts_v1'
+    msAlerts: 'yj_ms_alerts_v1',
+    momPin: 'yj_mom_pin_v1',
+    praises: 'yj_praises_v1'
   };
 
   var W_URL = 'https://api.open-meteo.com/v1/forecast?latitude=36.8428&longitude=127.1394'
@@ -2020,6 +2203,10 @@
       step: function () { tone(784, 0, 0.12, 'sine', 0.13); tone(1047, 0.1, 0.16, 'sine', 0.12); },
       ball: function () { tone(988, 0, 0.09, 'triangle', 0.12); tone(1319, 0.08, 0.13, 'triangle', 0.11); },
       fanfare: function () { [523, 659, 784, 1047].forEach(function (f, i) { tone(f, i * 0.11, 0.24, 'triangle', 0.13); }); },
+      praise: function () {
+        [659, 880, 1047, 1319, 1568].forEach(function (f, i) { tone(f, i * 0.1, 0.3, 'triangle', 0.12); });
+        [1319, 1568].forEach(function (f, i) { tone(f, 0.52 + i * 0.12, 0.34, 'sine', 0.09); });
+      },
       shake: function () { for (var i = 0; i < 7; i++) tone(180 + i * 55, i * 0.13, 0.06, 'square', 0.045); },
       reveal: function () { [659, 784, 988, 1319, 1568].forEach(function (f, i) { tone(f, i * 0.09, 0.3, 'triangle', 0.12); }); },
       nope: function () { tone(230, 0, 0.14, 'sawtooth', 0.05); tone(170, 0.12, 0.2, 'sawtooth', 0.045); },
@@ -2040,7 +2227,8 @@
     items: [], eveningItems: [], routineDone: {}, eveningDone: {}, academies: [],
     homeschoolTasks: {}, homeschoolDone: {},
     balls: 0, dex: {}, awards: {},
-    perfectDays: [], stones: 0, stoneAwards: []
+    perfectDays: [], stones: 0, stoneAwards: [],
+    momPin: '', praises: []
   };
 
   var DEFAULT6 = ['세수·로션', '유산균·물 마시기', '아침식사·영어영상', '용변·양치', '옷입고 양말신기', '원리셈·따풀'];
@@ -2309,6 +2497,29 @@
     state.stones = (typeof stn === 'number' && stn >= 0) ? stn : 0;
     var sa = store.get(K.stoneAwards, []);
     state.stoneAwards = (sa && typeof sa.slice === 'function') ? sa : [];
+
+    /* 엄마 비밀번호 · 특급칭찬 기록 */
+    var mp = store.get(K.momPin, '');
+    state.momPin = (typeof mp === 'string' && /^\d{4}$/.test(mp)) ? mp : '';
+    var prs = store.get(K.praises, []);
+    var clean = [];
+    if (prs && typeof prs.slice === 'function') {
+      for (var qi = 0; qi < prs.length; qi++) {
+        var q = prs[qi];
+        if (!q || typeof q !== 'object') continue;
+        var qtext = String(q.text == null ? '' : q.text).trim();
+        if (!qtext) continue;
+        clean.push({
+          id: q.id || uid(),
+          dateISO: q.dateISO || '',
+          dateLabel: q.dateLabel || '',
+          timeLabel: q.timeLabel || '',
+          text: qtext,
+          balls: (typeof q.balls === 'number' && q.balls > 0) ? q.balls : 5
+        });
+      }
+    }
+    state.praises = clean;
   }
 
   /* ======================= 완벽한 하루 · 진화의 돌 ======================= */
@@ -2452,6 +2663,7 @@
     if (name === 'academy') renderWeek();
     if (name === 'study') renderStudy();
     if (name === 'dex') renderDex();
+    if (name === 'praise') renderPraise();
     window.scrollTo(0, 0);
   }
 
@@ -2845,6 +3057,248 @@
     return true;
   }
 
+  /* ======================= 🌟 특급칭찬 ======================= */
+  var PRAISE_BALLS = 5;
+  var praiseSetupMode = false;
+
+  function saveMomPin() { store.set(K.momPin, state.momPin || ''); }
+  function savePraises() { store.set(K.praises, state.praises); }
+  function hasMomPin() { return /^\d{4}$/.test(String(state.momPin || '')); }
+  function digits4(v) { return String(v == null ? '' : v).replace(/[^0-9]/g, '').slice(0, 4); }
+  function clockLabel(d) {
+    var h = d.getHours(), ap = h < 12 ? '오전' : '오후', h12 = h % 12;
+    if (h12 === 0) h12 = 12;
+    return ap + ' ' + h12 + ':' + pad2(d.getMinutes());
+  }
+
+  function openPraiseModal() {
+    praiseSetupMode = !hasMomPin();
+    $('praiseTitle').textContent = praiseSetupMode ? '🌟 엄마 비밀번호 정하기' : '🌟 특급칭찬';
+    $('praiseSub').textContent = praiseSetupMode
+      ? '처음 한 번만 엄마 비밀번호 4자리를 정하면 돼요. 윤재가 몰라도 괜찮아요.'
+      : '엄마만 쓸 수 있어요. 비밀번호를 넣고 칭찬을 남기면 몬스터볼 +5!';
+    $('praisePinLabel').innerHTML = praiseSetupMode
+      ? '엄마 비밀번호 정하기 <span>(4자리 · 숫자)</span>'
+      : '엄마 비밀번호 <span>(4자리)</span>';
+    $('praisePin2').style.display = praiseSetupMode ? '' : 'none';
+    $('praisePin').value = '';
+    $('praisePin2').value = '';
+    $('praiseText').value = '';
+    $('praisePinErr').textContent = '';
+    $('praiseTextErr').textContent = '';
+    $('praiseSubmit').textContent = praiseSetupMode ? '🌟 비밀번호 정하고 볼 +5' : '🌟 칭찬하고 볼 +5';
+    syncPraiseChips();
+    $('praiseModal').classList.add('show');
+    setTimeout(function () { try { $('praisePin').focus(); } catch (e) {} }, 90);
+  }
+
+  function closePraiseModal() {
+    $('praiseModal').classList.remove('show');
+    $('praisePin').value = '';
+    $('praisePin2').value = '';
+    $('praiseText').value = '';
+    $('praisePinErr').textContent = '';
+    $('praiseTextErr').textContent = '';
+    praiseSetupMode = false;
+  }
+
+  function praiseFail(boxId, msg) {
+    var box = $(boxId);
+    if (box) box.textContent = msg;
+    var pin = $('praisePin');
+    if (boxId === 'praisePinErr' && pin) {
+      pin.classList.remove('shake');
+      void pin.offsetWidth;
+      pin.classList.add('shake');
+      try { pin.focus(); pin.select(); } catch (e) {}
+    }
+    SFX.nope();
+  }
+
+  function submitPraise() {
+    var pin = digits4($('praisePin').value);
+    var text = $('praiseText').value.trim();
+    $('praisePinErr').textContent = '';
+    $('praiseTextErr').textContent = '';
+
+    if (pin.length !== 4) { praiseFail('praisePinErr', '비밀번호 4자리를 넣어 주세요'); return; }
+    if (praiseSetupMode) {
+      var pin2 = digits4($('praisePin2').value);
+      if (pin2 !== pin) { praiseFail('praisePinErr', '두 번 넣은 비밀번호가 달라요. 다시 넣어 주세요'); return; }
+    } else if (pin !== state.momPin) {
+      praiseFail('praisePinErr', '비밀번호가 맞지 않아요. 다시 넣어 주세요');
+      return;
+    }
+    if (!text) {
+      $('praiseTextErr').textContent = '칭찬 내용을 적어 주세요';
+      SFX.nope();
+      try { $('praiseText').focus(); } catch (e) {}
+      return;
+    }
+
+    if (praiseSetupMode) {
+      state.momPin = pin;
+      saveMomPin();
+    }
+    closePraiseModal();
+    awardPraise(text);
+  }
+
+  function awardPraise(text) {
+    var now = new Date();
+    state.praises.unshift({
+      id: uid(),
+      dateISO: dateKey(now),
+      dateLabel: (now.getMonth() + 1) + '월 ' + now.getDate() + '일 ' + DAY_KO[now.getDay()] + '요일',
+      timeLabel: clockLabel(now),
+      text: text,
+      balls: PRAISE_BALLS
+    });
+    savePraises();
+    addBalls(PRAISE_BALLS);
+    renderPraise();
+    toast('🌟 특급칭찬! 몬스터볼 +' + PRAISE_BALLS + ' 🔴');
+    SFX.praise();
+    confettiBurst();
+  }
+
+  function renderPraise() {
+    var box = $('praiseList');
+    if (!box) return;
+    var n = state.praises.length, total = 0, i;
+    for (i = 0; i < n; i++) total += (state.praises[i].balls || PRAISE_BALLS);
+    var sum = $('praiseSummary');
+    if (sum) sum.innerHTML = '총 <b>' + n + '</b>번의 특급칭찬 · 누적 볼 <b>' + total + '</b>개';
+    setAll('.js-praise-count', String(n));
+    if (!n) {
+      box.innerHTML = '<li class="pr-empty"><span class="big">🌟</span>아직 특급칭찬이 없어요.<br>윤재가 잘한 일이 있으면 ‘🌟 특급칭찬 +5’를 눌러 주세요!</li>';
+      return;
+    }
+    var html = '';
+    for (i = 0; i < n; i++) {
+      var p = state.praises[i];
+      html += '<li class="pr-item">'
+        + '<div class="pr-when"><b>' + esc(p.dateLabel || p.dateISO) + '</b><span>' + esc(p.timeLabel || '') + '</span></div>'
+        + '<p class="pr-text">' + esc(p.text) + '</p>'
+        + '<span class="pr-award">🔴 +' + (p.balls || PRAISE_BALLS) + '</span>'
+        + '<button class="pr-del" type="button" data-act="praise-del" data-id="' + esc(p.id) + '" aria-label="칭찬 기록 지우기">🗑</button>'
+        + '</li>';
+    }
+    box.innerHTML = html;
+  }
+
+  function syncPraiseChips() {
+    var t = $('praiseText').value;
+    each('.pchip', function (b) {
+      if (t.indexOf(b.getAttribute('data-chip')) !== -1) b.classList.add('on');
+      else b.classList.remove('on');
+    });
+  }
+
+  function togglePraiseChip(btn) {
+    var v = btn.getAttribute('data-chip');
+    var ta = $('praiseText');
+    var cur = ta.value;
+    var idx = cur.indexOf(v);
+    if (idx !== -1) {
+      var before = cur.slice(0, idx).replace(/[\s,]+$/, '');
+      var after = cur.slice(idx + v.length).replace(/^[\s,]+/, '');
+      ta.value = [before, after].filter(function (s) { return s; }).join(', ');
+    } else {
+      var base = cur.replace(/[\s,]+$/, '');
+      ta.value = base ? (base + ', ' + v) : v;
+    }
+    $('praiseTextErr').textContent = '';
+    syncPraiseChips();
+    SFX.step();
+  }
+
+  function askDeletePraise(id) {
+    if (!hasMomPin()) { openPraiseModal(); return; }
+    openPinModal('verify', {
+      title: '🗑 칭찬 기록을 지울까요?',
+      sub: '엄마 비밀번호를 넣으면 지울 수 있어요. 받은 몬스터볼은 그대로 남아요.',
+      okLabel: '지우기',
+      onOk: function () { deletePraise(id); }
+    });
+  }
+
+  function deletePraise(id) {
+    for (var i = 0; i < state.praises.length; i++) {
+      if (state.praises[i].id === id) { state.praises.splice(i, 1); break; }
+    }
+    savePraises();
+    renderPraise();
+    toast('칭찬 기록을 지웠어요');
+    SFX.step();
+  }
+
+  /* 엄마 비밀번호 확인 · 변경 */
+  var pinMode = 'verify';
+  var pinOnOk = null;
+
+  function openPinModal(mode, opts) {
+    opts = opts || {};
+    pinMode = mode;
+    pinOnOk = opts.onOk || null;
+    $('pinTitle').textContent = opts.title || '🔑 엄마 비밀번호';
+    $('pinSub').textContent = opts.sub || '비밀번호를 넣어 주세요.';
+    $('pinOk').textContent = opts.okLabel || '확인';
+    $('pinOneWrap').style.display = mode === 'change' ? 'none' : '';
+    $('pinChangeWrap').style.display = mode === 'change' ? '' : 'none';
+    $('pinOne').value = '';
+    $('pinCur').value = '';
+    $('pinNew').value = '';
+    $('pinNew2').value = '';
+    $('pinErr').textContent = '';
+    $('pinModal').classList.add('show');
+    setTimeout(function () { try { (mode === 'change' ? $('pinCur') : $('pinOne')).focus(); } catch (e) {} }, 90);
+  }
+
+  function closePinModal() {
+    $('pinModal').classList.remove('show');
+    pinOnOk = null;
+    $('pinErr').textContent = '';
+  }
+
+  function submitPinModal() {
+    if (pinMode === 'change') {
+      var cur = digits4($('pinCur').value);
+      var n1 = digits4($('pinNew').value);
+      var n2 = digits4($('pinNew2').value);
+      var err = '';
+      if (cur !== state.momPin) err = '지금 비밀번호가 맞지 않아요';
+      else if (n1.length !== 4) err = '새 비밀번호 4자리를 넣어 주세요';
+      else if (n1 !== n2) err = '새 비밀번호를 두 번 똑같이 넣어 주세요';
+      if (err) { $('pinErr').textContent = err; SFX.nope(); return; }
+      state.momPin = n1;
+      saveMomPin();
+      closePinModal();
+      toast('엄마 비밀번호를 바꿨어요 🔑');
+      SFX.step();
+      return;
+    }
+    var p = digits4($('pinOne').value);
+    if (p.length !== 4 || p !== state.momPin) {
+      $('pinErr').textContent = '비밀번호가 맞지 않아요. 다시 넣어 주세요';
+      SFX.nope();
+      try { $('pinOne').focus(); $('pinOne').select(); } catch (e) {}
+      return;
+    }
+    var cb = pinOnOk;
+    closePinModal();
+    if (cb) cb();
+  }
+
+  function changeMomPin() {
+    if (!hasMomPin()) { openPraiseModal(); return; }
+    openPinModal('change', {
+      title: '🔑 비밀번호 변경',
+      sub: '지금 비밀번호를 넣고 새 비밀번호를 두 번 넣어 주세요.',
+      okLabel: '바꾸기'
+    });
+  }
+
   /* ======================= 루틴 카드 ======================= */
   var ILLUS = [
     { keys: ['세수', '로션', '씻', '손'], img: 'assets/routine-wash.png', emoji: '🧼' },
@@ -3102,13 +3556,14 @@
 
   /* 테스트 기록 초기화 (엄마용) */
   function resetTestData() {
-    if (!window.confirm('볼·도감·진화의 돌·오늘 체크를 모두 0으로 되돌릴까요?\n\n루틴 목록과 요일별 공부표는 그대로 남아요.')) return;
+    if (!window.confirm('볼·도감·진화의 돌·오늘 체크를 모두 0으로 되돌릴까요?\n\n특급칭찬 기록도 함께 지우고, 루틴 목록·요일별 공부표·엄마 비밀번호는 그대로 남아요.')) return;
     var key = todayKey();
     state.balls = 0;
     state.dex = {};
     state.stones = 0;
     state.perfectDays = [];
     state.stoneAwards = [];
+    state.praises = [];
     state.routineDone[key] = [];
     state.eveningDone[key] = [];
     state.homeschoolDone[key] = [];
@@ -3118,6 +3573,7 @@
     saveStones();
     savePerfect();
     saveStoneAwards();
+    savePraises();
     store.set(K.routineDone, state.routineDone);
     store.set(K.eveningDone, state.eveningDone);
     store.set(K.hsDone, state.homeschoolDone);
@@ -3129,6 +3585,7 @@
     renderHomeHomeschool();
     renderStudy();
     renderDex();
+    renderPraise();
     closeRoutineEdit();
     toast('기록을 깨끗하게 비웠어요 ✨');
   }
@@ -4535,6 +4992,30 @@
       case 'reset-test':
         resetTestData();
         break;
+      case 'praise-open':
+        openPraiseModal();
+        break;
+      case 'close-praise':
+        closePraiseModal();
+        break;
+      case 'praise-submit':
+        submitPraise();
+        break;
+      case 'praise-chip':
+        togglePraiseChip(el);
+        break;
+      case 'praise-del':
+        askDeletePraise(id);
+        break;
+      case 'pin-change':
+        changeMomPin();
+        break;
+      case 'pin-ok':
+        submitPinModal();
+        break;
+      case 'close-pin':
+        closePinModal();
+        break;
       case 'dex-view': {
         var pid = parseInt(id, 10);
         var pp = byId(pid);
@@ -4563,6 +5044,8 @@
     if (e.key === 'Escape') {
       $('routineModal').classList.remove('show');
       $('revealModal').classList.remove('show');
+      if ($('praiseModal').classList.contains('show')) closePraiseModal();
+      if ($('pinModal').classList.contains('show')) closePinModal();
       if (pendingYes) closeConfirm();
     }
   });
@@ -4596,6 +5079,33 @@
   $('routineModal').addEventListener('click', function (e) {
     if (e.target === this) closeRoutineEdit();
   });
+  $('praiseModal').addEventListener('click', function (e) {
+    if (e.target === this) closePraiseModal();
+  });
+  $('pinModal').addEventListener('click', function (e) {
+    if (e.target === this) closePinModal();
+  });
+
+  /* 엄마 비밀번호 입력: 숫자 4자리만 */
+  ['praisePin', 'praisePin2', 'pinOne', 'pinCur', 'pinNew', 'pinNew2'].forEach(function (pid) {
+    var el = $(pid);
+    el.addEventListener('input', function () {
+      var v = digits4(el.value);
+      if (v !== el.value) el.value = v;
+      $('praisePinErr').textContent = '';
+      $('pinErr').textContent = '';
+    });
+    el.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter') return;
+      e.preventDefault();
+      if (pid.indexOf('praise') === 0) submitPraise();
+      else submitPinModal();
+    });
+  });
+  $('praiseText').addEventListener('input', function () {
+    $('praiseTextErr').textContent = '';
+    syncPraiseChips();
+  });
 
   document.addEventListener('visibilitychange', function () {
     if (!document.hidden) {
@@ -4622,6 +5132,7 @@
     renderStudy();
     renderAffirm();
     renderDex();
+    renderPraise();
     paintBallIcons();
     updateBallUI();
     updateStoneUI();
