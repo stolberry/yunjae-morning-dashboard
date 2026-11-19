@@ -653,7 +653,12 @@
     transition:transform .12s ease,box-shadow .2s ease,background .18s ease,color .18s ease;
   }
   .gacha-btn:active{transform:scale(.97)}
-  .gacha-btn .gball{width:44px;height:44px;flex:none}
+  .gacha-btn .gball{
+    width:48px;height:48px;flex:none;border-radius:50%;background:#fff;
+    box-shadow:0 2px 8px rgba(0,0,0,.22),inset 0 0 0 1px rgba(0,0,0,.06);
+    display:block;overflow:hidden;
+  }
+  .gacha-btn .gball svg{display:block}
   .gacha-btn .gacha-txt{display:flex;flex-direction:column;align-items:flex-start;gap:2px;font-size:18px;font-weight:900;letter-spacing:-.5px;line-height:1.12;min-width:0}
   .gacha-btn .gacha-txt small{font-size:11px;font-weight:900;opacity:.95;letter-spacing:0;line-height:1.3}
   .gacha-btn.normal{background:linear-gradient(180deg,#FF5F52,#DE2A1F)}
@@ -762,6 +767,13 @@
   .cs-hint{position:absolute;bottom:16px;left:0;right:0;text-align:center;font-size:11.5px;font-weight:800;color:rgba(255,255,255,.45);z-index:3}
 
   .cs-ball{width:min(30vmin,240px);height:min(30vmin,240px);filter:drop-shadow(0 0 46px rgba(255,255,255,.35));animation:csShake .5s ease-in-out infinite}
+  .cs-ball.super{filter:drop-shadow(0 0 46px rgba(90,160,255,.6))}
+  .cs-ball.master{filter:drop-shadow(0 0 50px rgba(190,120,255,.7))}
+  .cs-ballwrap{display:flex;flex-direction:column;align-items:center;gap:16px}
+  .cs-ball-name{
+    font-size:clamp(16px,2.4vw,24px);font-weight:900;letter-spacing:-.6px;color:#fff;
+    text-shadow:0 4px 18px rgba(0,0,0,.6);
+  }
   .cs-ball.burst{animation:csBurst .45s ease-out forwards}
   @keyframes csShake{
     0%,100%{transform:rotate(-11deg) scale(1)}
@@ -1622,44 +1634,17 @@
         <p>아침 루틴 2개 · 저녁 루틴 1개 · 오늘의 공부는 항목마다 1개! 매일 모아서 뽑기에 도전해 보세요.<br>일반 10개 · 슈퍼 25개 · <b>마스터 50개는 전설·메가진화 100% 확정!</b></p>
         <div class="gacha-row">
           <button class="gacha-btn normal" type="button" data-act="gacha" data-tier="normal" data-cost="10">
-            <span class="gball">
-              <svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true">
-                <defs><clipPath id="gb1"><circle cx="50" cy="50" r="46"/></clipPath></defs>
-                <circle cx="50" cy="50" r="46" fill="#fff" stroke="#2E2A25" stroke-width="5"/>
-                <g clip-path="url(#gb1)"><rect x="0" y="0" width="100" height="50" fill="#EE1515"/></g>
-                <rect x="2" y="44" width="96" height="12" fill="#2E2A25"/>
-                <circle cx="50" cy="50" r="15" fill="#fff" stroke="#2E2A25" stroke-width="5"/>
-                <circle cx="50" cy="50" r="6" fill="#EE1515"/>
-              </svg>
-            </span>
+            <span class="gball" data-ball="normal"></span>
             <span class="gacha-txt">일반 뽑기<small>볼 10개 · <b class="js-gacha-state">10개 필요</b></small></span>
           </button>
 
           <button class="gacha-btn super" type="button" data-act="gacha" data-tier="super" data-cost="25">
-            <span class="gball">
-              <svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true">
-                <defs><clipPath id="gb2"><circle cx="50" cy="50" r="46"/></clipPath></defs>
-                <circle cx="50" cy="50" r="46" fill="#fff" stroke="#2E2A25" stroke-width="5"/>
-                <g clip-path="url(#gb2)"><rect x="0" y="0" width="100" height="50" fill="#3D7DCA"/></g>
-                <rect x="2" y="44" width="96" height="12" fill="#2E2A25"/>
-                <circle cx="50" cy="50" r="15" fill="#fff" stroke="#2E2A25" stroke-width="5"/>
-                <circle cx="50" cy="50" r="6" fill="#3D7DCA"/>
-              </svg>
-            </span>
+            <span class="gball" data-ball="super"></span>
             <span class="gacha-txt">슈퍼 뽑기<small>볼 25개 · <b class="js-gacha-state">25개 필요</b></small></span>
           </button>
 
           <button class="gacha-btn master" type="button" data-act="gacha" data-tier="master" data-cost="50">
-            <span class="gball">
-              <svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true">
-                <defs><clipPath id="gb3"><circle cx="50" cy="50" r="46"/></clipPath></defs>
-                <circle cx="50" cy="50" r="46" fill="#fff" stroke="#2E2A25" stroke-width="5"/>
-                <g clip-path="url(#gb3)"><rect x="0" y="0" width="100" height="50" fill="#7A3FC9"/></g>
-                <rect x="2" y="44" width="96" height="12" fill="#2E2A25"/>
-                <circle cx="50" cy="50" r="15" fill="#fff" stroke="#2E2A25" stroke-width="5"/>
-                <circle cx="50" cy="50" r="6" fill="#7A3FC9"/>
-              </svg>
-            </span>
+            <span class="gball" data-ball="master"></span>
             <span class="gacha-txt">마스터 뽑기<small>볼 50개 · <b class="js-gacha-state">50개 필요</b></small></span>
           </button>
         </div>
@@ -1923,9 +1908,9 @@
 
   /* 뽑기 3단계: 단계별 확률 */
   var DRAW = {
-    normal: { cost: 10, name: '일반 뽑기', color: '#E8362B', weights: { '일반': 70, '진화': 30 } },
-    super: { cost: 25, name: '슈퍼 뽑기', color: '#2C6BA8', weights: { '일반': 20, '진화': 55, '전설': 20, '메가진화': 5 } },
-    master: { cost: 50, name: '마스터 뽑기', color: '#6B34B8', weights: { '전설': 50, '메가진화': 50 } }
+    normal: { cost: 10, name: '일반 뽑기', color: '#EE1515', weights: { '일반': 70, '진화': 30 } },
+    super: { cost: 25, name: '슈퍼 뽑기', color: '#2B7CD3', weights: { '일반': 20, '진화': 55, '전설': 20, '메가진화': 5 } },
+    master: { cost: 50, name: '마스터 뽑기', color: '#7B3FE4', weights: { '전설': 50, '메가진화': 50 } }
   };
 
   var toastTimer = null;
@@ -4190,14 +4175,63 @@
     fn();
   }
 
-  function ballSvgCut(color) {
-    return '<svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true">'
-      + '<defs><clipPath id="csBallClip"><circle cx="50" cy="50" r="46"/></clipPath></defs>'
-      + '<circle cx="50" cy="50" r="46" fill="#fff" stroke="#2E2A25" stroke-width="4"/>'
-      + '<g clip-path="url(#csBallClip)"><rect x="0" y="0" width="100" height="50" fill="' + color + '"/></g>'
-      + '<rect x="2" y="44" width="96" height="12" fill="#2E2A25"/>'
-      + '<circle cx="50" cy="50" r="15" fill="#fff" stroke="#2E2A25" stroke-width="4"/>'
-      + '<circle cx="50" cy="50" r="6" fill="' + color + '"/></svg>';
+  /* 몬스터볼 · 슈퍼볼 · 마스터볼 그림 — 한 곳에서 그리고 버튼·컷신이 함께 씁니다 */
+  var BALL_ART = {
+    normal: { top: '#EE1515', topL: '#FF4438', ink: '#241F1A' },
+    super: { top: '#2B7CD3', topL: '#4E9BEA', ink: '#241F1A', stripe: '#EE1515' },
+    master: { top: '#7B3FE4', topL: '#9463F0', ink: '#241F1A', bump: '#EC4899' }
+  };
+  var BALL_NAME = { normal: '몬스터볼', super: '슈퍼볼', master: '마스터볼' };
+  var ballUid = 0;
+
+  function ballArt(kind) {
+    if (!BALL_ART[kind]) kind = 'normal';
+    var k = BALL_ART[kind];
+    var u = 'ball' + (++ballUid);
+    var s = '<svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true" focusable="false">'
+      + '<defs>'
+      + '<clipPath id="' + u + 'c"><circle cx="50" cy="50" r="45"/></clipPath>'
+      + '<clipPath id="' + u + 'd"><path d="M5 50a45 45 0 0 1 90 0z"/></clipPath>'
+      + '<linearGradient id="' + u + 'g" x1="0" y1="0" x2="0" y2="1">'
+      + '<stop offset="0" stop-color="' + k.topL + '"/>'
+      + '<stop offset=".55" stop-color="' + k.top + '"/>'
+      + '<stop offset="1" stop-color="' + k.top + '"/>'
+      + '</linearGradient>'
+      + '</defs>'
+      /* 볼 몸통 */
+      + '<circle cx="50" cy="50" r="45" fill="#FFFFFF"/>'
+      /* 위쪽 반구 + 무늬 */
+      + '<g clip-path="url(#' + u + 'd)">'
+      + '<rect x="0" y="0" width="100" height="50" fill="url(#' + u + 'g)"/>';
+    if (kind === 'super') {
+      s += '<path d="M-6 54 14 0 30 0 10 54Z" fill="' + k.stripe + '"/>'
+        + '<path d="M106 54 86 0 70 0 90 54Z" fill="' + k.stripe + '"/>';
+    }
+    if (kind === 'master') {
+      s += '<path d="M37.5 36.5 37.5 18 50 29.5 62.5 18 62.5 36.5" fill="none" stroke="#FFFFFF"'
+        + ' stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>';
+    }
+    s += '</g>'
+      /* 가운데 검정 띠 */
+      + '<g clip-path="url(#' + u + 'c)"><rect x="0" y="43.5" width="100" height="13" fill="' + k.ink + '"/></g>'
+      /* 외곽선 */
+      + '<circle cx="50" cy="50" r="45" fill="none" stroke="' + k.ink + '" stroke-width="5"/>';
+    if (kind === 'master') {
+      /* 마스터볼 옆의 분홍색 혹 두 개 */
+      s += '<circle cx="12" cy="50" r="10" fill="' + k.bump + '" stroke="' + k.ink + '" stroke-width="4"/>'
+        + '<circle cx="88" cy="50" r="10" fill="' + k.bump + '" stroke="' + k.ink + '" stroke-width="4"/>';
+    }
+    /* 가운데 버튼 */
+    s += '<circle cx="50" cy="50" r="15.5" fill="#FFFFFF" stroke="' + k.ink + '" stroke-width="4.5"/>'
+      + '<circle cx="50" cy="50" r="7.2" fill="#FFFFFF" stroke="' + k.ink + '" stroke-width="3"/>'
+      + '</svg>';
+    return s;
+  }
+
+  function paintBallIcons() {
+    each('.gball[data-ball]', function (el) {
+      el.innerHTML = ballArt(el.getAttribute('data-ball'));
+    });
   }
   function pokeMarkup(p, extra) {
     var tc = TIER[p.tier] || TIER['일반'];
@@ -4213,8 +4247,10 @@
 
   function runGachaCutscene(kind, p, isNew, count, done) {
     var d = DRAW[kind] || DRAW.normal;
+    var bk = DRAW[kind] ? kind : 'normal';
     var stage = csOpen('gacha');
-    stage.innerHTML = '<div class="cs-ball">' + ballSvgCut(d.color) + '</div>';
+    stage.innerHTML = '<div class="cs-ballwrap"><div class="cs-ball ' + bk + '">' + ballArt(bk) + '</div>'
+      + '<div class="cs-ball-name">' + BALL_NAME[bk] + '</div></div>';
     SFX.shake();
 
     csLater(function () {
@@ -4579,6 +4615,7 @@
     renderStudy();
     renderAffirm();
     renderDex();
+    paintBallIcons();
     updateBallUI();
     updateStoneUI();
     syncPerfectDay();
