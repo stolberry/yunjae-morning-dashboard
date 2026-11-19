@@ -131,39 +131,39 @@
 
   /* ---------------- hero ---------------- */
   .hero{
-    display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:22px;align-items:center;
+    display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;
     background:
       radial-gradient(520px 240px at 0% 0%, #FFF3B8 0%, rgba(255,243,184,0) 70%),
       linear-gradient(120deg,#FFFBE6 0%,#FFFFFF 52%,#EDF6FF 100%);
-    border:3px solid #FFE07A;box-shadow:0 14px 34px rgba(214,180,40,.18);
-    border-radius:30px;padding:18px 24px;margin-bottom:18px;position:relative;overflow:hidden;
+    border:3px solid #FFE07A;box-shadow:0 12px 28px rgba(214,180,40,.16);
+    border-radius:26px;padding:10px 18px;margin-bottom:14px;position:relative;overflow:hidden;
   }
   .hero::after{
     content:"";position:absolute;right:-60px;top:-70px;width:240px;height:240px;border-radius:50%;
     background:radial-gradient(circle,rgba(255,203,5,.22),rgba(255,203,5,0) 70%);pointer-events:none;
   }
-  .hero-pika{width:112px;height:112px;flex:none;animation:pikaBob 2.6s ease-in-out infinite}
-  @keyframes pikaBob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
+  .hero-pika{width:78px;height:78px;flex:none;animation:pikaBob 2.6s ease-in-out infinite}
+  @keyframes pikaBob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(2deg)}}
   .hero-main{min-width:0}
-  .hero-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-  .hero-name{font-size:24px;font-weight:900;letter-spacing:-.6px}
-  .hero-meta{font-size:14px;font-weight:900;color:#8A6B12;background:#FFF3BF;border-radius:999px;padding:5px 12px}
+  .hero-top{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .hero-name{font-size:19px;font-weight:900;letter-spacing:-.5px}
+  .hero-meta{font-size:12px;font-weight:900;color:#8A6B12;background:#FFF3BF;border-radius:999px;padding:3px 10px}
   .hero-clock{
-    margin-left:auto;font-size:26px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.5px;
+    margin-left:auto;font-size:19px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.3px;
     color:#3A3428;
   }
-  .hero-date{font-size:12px;font-weight:800;color:var(--muted);width:100%;margin-top:2px}
+  .hero-date{font-size:11px;font-weight:800;color:var(--muted);width:100%;margin-top:0}
   .hero-count{
-    font-size:clamp(38px,5vw,68px);font-weight:900;letter-spacing:-2.5px;line-height:1.06;
-    color:#2B2A26;margin:2px 0 4px;
+    font-size:clamp(25px,2.5vw,33px);font-weight:900;letter-spacing:-1.2px;line-height:1.15;
+    color:#2B2A26;margin:2px 0 1px;
   }
   .hero-count.done{color:#2F7A3C}
   .hero-count.urgent{color:#D93A2B;animation:pulseUrgent 1s ease-in-out infinite}
   @keyframes pulseUrgent{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
-  .hero-status{font-size:14px;font-weight:900;color:#7A6A46}
-  .hero-progress{margin-top:10px;position:relative;padding-right:6px}
+  .hero-status{font-size:13px;font-weight:900;color:#7A6A46}
+  .hero-progress{margin-top:6px;position:relative;padding-right:5px}
   .hp-track{
-    height:20px;border-radius:999px;background:#EFEADC;border:2px solid #E2DBC8;
+    height:13px;border-radius:999px;background:#EFEADC;border:2px solid #E2DBC8;
     position:relative;overflow:visible;
   }
   .hp-fill{
@@ -172,30 +172,30 @@
   }
   .hp-runner{
     position:absolute;top:50%;left:0;transform:translate(-50%,-56%);
-    width:42px;height:42px;transition:left .8s cubic-bezier(.3,.9,.3,1);pointer-events:none;
-    filter:drop-shadow(0 3px 4px rgba(0,0,0,.16));
+    width:27px;height:27px;transition:left .8s cubic-bezier(.3,.9,.3,1);pointer-events:none;
+    filter:drop-shadow(0 2px 3px rgba(0,0,0,.16));
   }
   .hp-runner.run{animation:runnerHop .7s ease-in-out infinite}
   @keyframes runnerHop{0%,100%{transform:translate(-50%,-56%)}50%{transform:translate(-50%,-64%)}}
-  .hp-labels{display:flex;justify-content:space-between;font-size:11px;font-weight:900;color:#A79E8B;margin-top:5px}
+  .hp-labels{display:flex;justify-content:space-between;font-size:10px;font-weight:900;color:#A79E8B;margin-top:2px}
 
-  .hero-side{display:flex;flex-direction:column;gap:8px;min-width:168px}
+  .hero-side{display:flex;flex-direction:column;gap:6px;min-width:152px}
   .stat-pill{
-    display:flex;align-items:center;gap:8px;background:#fff;border:2px solid #F0E7D2;
-    border-radius:16px;padding:9px 13px;
+    display:flex;align-items:center;gap:7px;background:#fff;border:2px solid #F0E7D2;
+    border-radius:13px;padding:6px 11px;
   }
-  .stat-pill .stat-k{font-size:12px;font-weight:900;color:var(--muted)}
-  .stat-pill .stat-v{margin-left:auto;font-size:19px;font-weight:900;letter-spacing:-.5px}
+  .stat-pill .stat-k{font-size:11.5px;font-weight:900;color:var(--muted)}
+  .stat-pill .stat-v{margin-left:auto;font-size:17px;font-weight:900;letter-spacing:-.5px}
   .stat-pill.balls{background:#FFF6F5;border-color:#FFD7D2}
-  .stat-pill .mini{width:22px;height:22px;flex:none}
+  .stat-pill .mini{width:19px;height:19px;flex:none}
   .hero-gacha{
-    border:none;background:linear-gradient(180deg,#FF5B4E,#E8362B);color:#fff;font-weight:900;font-size:14px;
-    border-radius:16px;padding:11px 14px;box-shadow:0 8px 16px rgba(232,54,43,.28);
+    border:none;background:linear-gradient(180deg,#FF5B4E,#E8362B);color:#fff;font-weight:900;font-size:13px;
+    border-radius:13px;padding:8px 12px;box-shadow:0 7px 14px rgba(232,54,43,.26);
   }
 
   /* ---------------- routine cards ---------------- */
-  .routine-wrap{margin-bottom:16px}
-  .routine-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
+  .routine-wrap{margin-bottom:14px}
+  .routine-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
   .rcard{
     position:relative;display:flex;flex-direction:column;gap:10px;text-align:left;
     background:#fff;border:3px solid #EFE6D2;border-radius:28px;padding:14px 14px 13px;
@@ -235,7 +235,11 @@
   .rcard.pulse{animation:cardPulse .55s ease}
   @keyframes cardPulse{0%{box-shadow:0 0 0 0 rgba(255,203,5,.7)}100%{box-shadow:0 0 0 22px rgba(255,203,5,0)}}
 
-  /* ---------------- today's academy (full width) ---------------- */
+  /* ---------------- today row: academy + homeschool ---------------- */
+  .today-row{display:grid;grid-template-columns:1fr 1fr;gap:13px;align-items:start}
+  .today-row .card{padding:16px 18px}
+  .today-row .sec-head{gap:8px;margin-bottom:10px}
+  .today-row h2{font-size:20px}
   .today-academy{display:flex;flex-wrap:wrap;gap:10px}
   .today-academy .empty-soft{flex:1 1 100%}
   .today-class{
@@ -255,6 +259,27 @@
     font-weight:900;color:#8A8377;font-size:16px;line-height:1.5;
   }
   .empty-soft small{font-weight:800;font-size:12px;color:#A79E8B}
+
+  /* ---------------- today's homeschool (home card) ---------------- */
+  .hs-list{display:flex;flex-direction:column;gap:7px}
+  .hs-item{
+    display:flex;align-items:center;gap:10px;width:100%;text-align:left;font-family:inherit;
+    background:#FFFDF6;border:2px solid #F2E8CF;border-radius:14px;padding:7px 11px;
+    transition:transform .12s ease,background .15s ease,border-color .15s ease;
+  }
+  .hs-item:active{transform:scale(.98)}
+  .hs-item .hs-check{
+    width:29px;height:29px;flex:none;border-radius:50%;border:2.5px solid #DCD4C2;background:#fff;
+    display:flex;align-items:center;justify-content:center;color:transparent;font-size:15px;font-weight:900;
+  }
+  .hs-item .hs-label{flex:1;font-size:16.5px;font-weight:900;letter-spacing:-.3px;line-height:1.2;word-break:keep-all}
+  .hs-item .hs-ball{font-size:11.5px;font-weight:900;color:#B0A896;white-space:nowrap;display:flex;align-items:center;gap:3px}
+  .hs-item .hs-ball .mini{width:14px;height:14px}
+  .hs-item.done{background:#F4FBF4;border-color:#CBE8CE}
+  .hs-item.done .hs-check{background:var(--green);border-color:var(--green);color:#fff}
+  .hs-item.done .hs-label{color:#9CB6A0;text-decoration:line-through}
+  .hs-item.done .hs-ball{color:#4E9A5C}
+  .hs-empty{background:#F8F6F0;border:2px dashed #E4DCCB;border-radius:16px;padding:16px;text-align:center;font-weight:900;color:#8A8377;font-size:14.5px}
 
   /* ---------------- bottom slim strips (weather + affirmation) ---------------- */
   .home-bottom{display:grid;grid-template-columns:1.25fr 1fr;gap:13px;margin-top:13px;align-items:stretch}
@@ -349,10 +374,10 @@
 
   .day-tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
   .day-tab{
-    border:2px solid #EFE8D8;background:#fff;border-radius:14px;padding:9px 14px;min-width:64px;
+    border:2px solid #EFE8D8;background:#fff;border-radius:14px;padding:9px 14px;min-width:76px;
     font-weight:900;font-size:14px;color:#7C7466;display:flex;flex-direction:column;align-items:center;gap:1px;
   }
-  .day-tab small{font-size:9.5px;font-weight:900;color:#B0A896}
+  .day-tab small{font-size:9.5px;font-weight:900;color:#B0A896;white-space:nowrap}
   .day-tab.on{background:var(--yellow);border-color:var(--yellow-deep);color:#463400}
   .day-tab.on small{color:#7A5B00}
   .study-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
@@ -467,13 +492,17 @@
   @media (max-width:1180px){
     .week-grid{grid-template-columns:repeat(4,1fr)}
     .form-grid{grid-template-columns:1fr 1fr}
-    .routine-grid{grid-template-columns:repeat(5,1fr);gap:10px}
-    .rcard{padding:10px 10px 11px;border-radius:22px}
-    .rcard .illu{aspect-ratio:1/1;border-radius:16px}
-    .rcard .r-title{font-size:15.5px}
-    .rcard .cta{font-size:11.5px;padding:8px 4px}
-    .rcard .step{width:30px;height:30px;font-size:15px;top:8px;left:8px}
-    .rcard .stamp{width:34px;height:34px;font-size:20px;top:9px;right:9px}
+    .routine-grid{grid-template-columns:repeat(6,1fr);gap:8px}
+    .rcard{padding:8px 8px 9px;border-radius:19px;gap:7px}
+    .rcard .illu{aspect-ratio:1/1;border-radius:14px}
+    .rcard .r-title{font-size:14.5px;letter-spacing:-.5px;line-height:1.2}
+    .rcard .cta{font-size:11px;padding:7px 4px;gap:3px}
+    .rcard .cta .mini{width:14px;height:14px}
+    .rcard .step{width:27px;height:27px;font-size:14px;border-width:2.5px;top:7px;left:7px}
+    .rcard .stamp{width:30px;height:30px;font-size:18px;border-width:2.5px;top:8px;right:8px}
+  }
+  @media (max-width:1000px){
+    .today-row{grid-template-columns:1fr}
   }
   @media (max-width:900px){
     .routine-grid{grid-template-columns:repeat(3,1fr);gap:12px}
@@ -501,11 +530,13 @@
     .tab{font-size:13px;padding:10px 12px;min-height:44px}
     .top-tools{margin-left:0;width:100%}
     .tool-btn{flex:1;justify-content:center;min-height:42px}
-    .hero{padding:14px}
-    .hero-pika{width:74px;height:74px}
-    .hero-clock{font-size:20px}
-    .hero-name{font-size:20px}
-    .hero-meta{font-size:12px}
+    .hero{padding:10px 12px;gap:10px}
+    .hero-pika{width:58px;height:58px}
+    .hero-clock{font-size:16px}
+    .hero-name{font-size:17px}
+    .hero-meta{font-size:11px}
+    .hero-count{font-size:clamp(21px,4.6vw,26px)}
+    .hs-item .hs-label{font-size:15px}
     .routine-grid{grid-template-columns:repeat(2,1fr);gap:10px}
     .rcard .illu{aspect-ratio:4/3}
     .rcard .r-title{font-size:16px}
@@ -515,6 +546,8 @@
     .week-grid{grid-template-columns:1fr 1fr}
     .form-grid{grid-template-columns:1fr}
     .today-class .t-name{font-size:17px}
+    .day-tab{min-width:56px;padding:8px 9px}
+    .day-tab small{font-size:9px}
   }
   @media (min-width:1500px){
     .rcard .illu{aspect-ratio:5/4}
@@ -543,7 +576,7 @@
     <nav class="tabs" aria-label="메뉴">
       <button class="tab active" data-act="tab" data-tab="home" type="button">🏠 대시보드</button>
       <button class="tab" data-act="tab" data-tab="academy" type="button">🏫 학원 스케줄</button>
-      <button class="tab" data-act="tab" data-tab="study" type="button">📚 공부</button>
+      <button class="tab" data-act="tab" data-tab="study" type="button">📚 홈스쿨</button>
       <button class="tab" data-act="tab" data-tab="dex" type="button">🔴 포켓몬 도감 <span class="badge js-ball-count">0</span></button>
     </nav>
 
@@ -621,7 +654,7 @@
       <div class="hero-side">
         <div class="stat-pill">
           <span class="stat-k">루틴</span>
-          <span class="stat-v js-routine-count">0/5</span>
+          <span class="stat-v js-routine-count">0/6</span>
         </div>
         <div class="stat-pill balls">
           <svg class="mini" viewBox="0 0 100 100" aria-hidden="true">
@@ -638,28 +671,41 @@
       </div>
     </section>
 
-    <!-- 4 routine cards -->
+    <!-- 6 routine cards -->
     <section class="routine-wrap">
       <div class="sec-head">
-        <h2>🎒 아침 루틴 5단계</h2>
+        <h2>🎒 아침 루틴 6단계</h2>
         <span class="sec-sub">카드를 누르면 완료 · 몬스터볼 +1</span>
-        <span class="count-pill js-routine-count">0/5</span>
+        <span class="count-pill js-routine-count">0/6</span>
         <div class="spacer"></div>
         <button class="ghost-btn" type="button" data-act="open-routine-edit">⚙️ 루틴 편집</button>
       </div>
       <div class="routine-grid" id="routineGrid"></div>
     </section>
 
-    <!-- today's academy (full width, prominent) -->
-    <div class="card">
-      <div class="sec-head" style="margin-bottom:12px">
-        <h2>🏫 오늘의 학원 스케줄</h2>
-        <span class="hint">오늘 하루 일정</span>
-        <div class="spacer"></div>
-        <button class="link-btn" type="button" data-act="goto" data-tab="academy">전체 보기 →</button>
-        <button class="btn btn-yellow" style="padding:9px 14px;font-size:13.5px;min-height:42px" type="button" data-act="academy-add">+ 학원 추가</button>
+    <!-- today: academy + homeschool -->
+    <div class="today-row">
+      <div class="card">
+        <div class="sec-head">
+          <h2>🏫 오늘의 학원 스케줄</h2>
+          <span class="hint">오늘 하루 일정</span>
+          <div class="spacer"></div>
+          <button class="link-btn" type="button" data-act="goto" data-tab="academy">전체 보기 →</button>
+          <button class="btn btn-yellow" style="padding:8px 12px;font-size:13px;min-height:38px" type="button" data-act="academy-add">+ 학원 추가</button>
+        </div>
+        <div id="todayAcademy" class="today-academy"></div>
       </div>
-      <div id="todayAcademy" class="today-academy"></div>
+
+      <div class="card">
+        <div class="sec-head">
+          <h2>📚 오늘의 홈스쿨</h2>
+          <span class="count-pill" id="homeHsCount">0/0</span>
+          <div class="spacer"></div>
+          <button class="link-btn" type="button" data-act="hs-add">+ 홈스쿨 추가</button>
+          <button class="link-btn" type="button" data-act="goto" data-tab="study">전체 보기 →</button>
+        </div>
+        <div id="homeHomeschool" class="hs-list"></div>
+      </div>
     </div>
 
     <!-- slim strips: weather · affirmation -->
@@ -729,26 +775,26 @@
     </div>
   </section>
 
-  <!-- ================= STUDY ================= -->
+  <!-- ================= HOMESCHOOL ================= -->
   <section class="panel" id="panel-study">
     <div class="card">
       <div class="sec-head">
-        <h2>📚 공부 체크</h2>
+        <h2>📚 홈스쿨 체크</h2>
         <div class="count-pill" id="studyCount">0 / 0</div>
         <div class="spacer"></div>
-        <span class="hint">오늘 공부를 체크하면 몬스터볼 +1</span>
+        <span class="hint">오늘 홈스쿨을 체크하면 몬스터볼 +1</span>
       </div>
       <div class="day-tabs" id="studyDayTabs"></div>
       <div class="study-head">
         <span class="study-date" id="studyDateLabel">—</span>
-        <span class="hint">요일을 누르면 그 요일 숙제를 볼 수 있어요</span>
+        <span class="hint">요일을 누르면 그 요일 홈스쿨을 볼 수 있어요</span>
       </div>
       <ul class="list" id="studyList"></ul>
       <div class="add-row">
-        <input id="studyInput" type="text" placeholder="공부 항목 추가 (예: 받아쓰기 1회)" enterkeyhint="done" autocomplete="off">
+        <input id="studyInput" type="text" placeholder="홈스쿨 항목 추가 (예: 리틀팍스 20분)" enterkeyhint="done" autocomplete="off">
         <button class="btn btn-yellow" id="studyAdd" type="button">+ 추가</button>
       </div>
-      <div class="study-badge" id="studyBadge">오늘의 공부를 체크하면 몬스터볼을 받을 수 있어요 🔴</div>
+      <div class="study-badge" id="studyBadge">오늘의 홈스쿨을 체크하면 몬스터볼을 받을 수 있어요 🔴</div>
     </div>
   </section>
 
@@ -757,7 +803,7 @@
     <section class="card dex-hero">
       <div>
         <h2>🔴 몬스터볼 뽑기</h2>
-        <p>아침 루틴과 공부를 완료해서 몬스터볼을 모아 보세요!<br>몬스터볼 하나로 포켓몬 한 마리를 만날 수 있어요.</p>
+        <p>아침 루틴과 홈스쿨을 완료해서 몬스터볼을 모아 보세요!<br>몬스터볼 하나로 포켓몬 한 마리를 만날 수 있어요.</p>
         <button class="gacha-btn" id="gachaBtn" data-act="gacha" type="button">
           <span class="gball">
             <svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true">
@@ -803,7 +849,7 @@
       <h3>⚙️ 아침 루틴 편집</h3>
       <button class="modal-close" type="button" data-act="close-routine-edit">✕</button>
     </div>
-    <p class="hint" style="margin:0 0 12px">이름을 고치거나 순서를 바꿀 수 있어요. 5개를 추천해요!</p>
+    <p class="hint" style="margin:0 0 12px">이름을 고치거나 순서를 바꿀 수 있어요. 6개를 추천해요!</p>
     <div id="routineEditList"></div>
     <div class="add-row" style="margin-top:12px">
       <input id="routineInput" type="text" placeholder="루틴 추가 (예: 물 한 잔 마시기)" enterkeyhint="done" autocomplete="off">
@@ -838,11 +884,13 @@
   var SPR = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
 
   var K = {
-    items: 'yj_routine_items_v2',
+    items: 'yj_routine_items_v3',
+    itemsV2: 'yj_routine_items_v2',
+    itemsV1: 'yj_routine_items_v1',
     routineDone: 'yj_routine_done_v1',
     academies: 'yj_academies_v1',
-    studyTasks: 'yj_study_tasks_v1',
-    studyDone: 'yj_study_done_v1',
+    hsTasks: 'yj_homeschool_tasks_v1',
+    hsDone: 'yj_homeschool_done_v1',
     weather: 'yj_weather_cache_v1',
     balls: 'yj_balls_v1',
     dex: 'yj_dex_v1',
@@ -1033,80 +1081,136 @@
   /* ======================= 상태 ======================= */
   var state = {
     items: [], routineDone: {}, academies: [],
-    studyTasks: {}, studyDone: {},
+    homeschoolTasks: {}, homeschoolDone: {},
     balls: 0, dex: {}, awards: {}
   };
 
+  var DEFAULT6 = ['세수·로션', '유산균·물 마시기', '아침먹으면서 영어영상', '용변·양치', '옷입고 양말신기', '원리셈·따풀'];
+  var DEFAULT5 = ['세수·로션', '유산균·물 마시기', '아침먹으면서 영어영상', '용변·양치', '옷입고 양말신기'];
+  var DEFAULT4 = ['세수·로션', '영어영상', '양치', '옷입기'];
+
   function defaultItems() {
-    return [
-      { id: uid(), label: '세수·로션' },
-      { id: uid(), label: '유산균·물 마시기' },
-      { id: uid(), label: '아침먹으면서 영어영상' },
-      { id: uid(), label: '용변·양치' },
-      { id: uid(), label: '옷입고 양말신기' }
-    ];
+    var out = [];
+    for (var i = 0; i < DEFAULT6.length; i++) out.push({ id: uid(), label: DEFAULT6[i] });
+    return out;
   }
 
-  /* 예전 4개 기본 루틴이면 새 5개 루틴으로 자동 교체 (직접 고친 항목은 그대로 유지) */
-  var OLD_DEFAULT_LABELS = ['세수·로션', '영어영상', '양치', '옷입기'];
-  function isOldDefaultList(list) {
-    if (!list || list.length !== 4) return false;
-    var labels = [];
-    var i, j;
-    for (i = 0; i < list.length; i++) labels.push(String((list[i] && list[i].label) || '').replace(/\s/g, ''));
-    for (i = 0; i < OLD_DEFAULT_LABELS.length; i++) {
-      var want = OLD_DEFAULT_LABELS[i].replace(/\s/g, '');
-      var found = false;
-      for (j = 0; j < labels.length; j++) if (labels[j] === want) found = true;
+  function normLabel(s) { return String(s == null ? '' : s).replace(/\s/g, ''); }
+
+  /* 목록이 기본값과 (순서 상관없이) 같은지 */
+  function isDefaultList(list, labels) {
+    if (!list || !labels || list.length !== labels.length) return false;
+    var have = [], i, j;
+    for (i = 0; i < list.length; i++) have.push(normLabel(list[i] && list[i].label));
+    for (i = 0; i < labels.length; i++) {
+      var want = normLabel(labels[i]), found = false;
+      for (j = 0; j < have.length; j++) if (have[j] === want) { found = true; break; }
       if (!found) return false;
+      have.splice(j, 1);
     }
     return true;
   }
+
   function mkTasks(arr) {
     var out = [];
     for (var i = 0; i < arr.length; i++) out.push({ id: uid(), label: arr[i] });
     return out;
   }
-  function defaultStudy() {
-    return {
-      '1': mkTasks(['수학 연산', '영어 리딩']),
-      '2': mkTasks(['수학 연산', '책 읽기 20분']),
-      '3': mkTasks(['영어 리딩', '받아쓰기']),
-      '4': mkTasks(['수학 연산', '책 읽기 20분']),
-      '5': mkTasks(['받아쓰기', '영어 단어 10개']),
-      '6': mkTasks(['독서 30분']),
-      '0': mkTasks(['일기 쓰기'])
-    };
+
+  /* 홈스쿨 주간표: 매일 공통 + 요일별 */
+  function defaultHomeschool() {
+    var base = ['원리셈·따풀 숙제', '리틀팍스', '숙제'];
+    var out = {};
+    for (var dow = 0; dow < 7; dow++) {
+      var arr = base.slice();
+      if (dow === 1 || dow === 3 || dow === 5) arr.push('빅박스·화상영어');          // 월·수·금
+      if (dow === 2 || dow === 4) arr.push('사고력수학');                            // 화·목
+      if (dow === 2 || dow === 3 || dow === 5 || dow === 6 || dow === 0) arr.push('피아노연습'); // 화·수·금·토·일
+      out[String(dow)] = mkTasks(arr);
+    }
+    return out;
+  }
+
+  /* 옛 루틴 목록(v4·v5)의 체크 기록을 새 목록 id로 옮기기 (같은 이름끼리) */
+  function remapRoutineProgress(oldList, newList) {
+    var map = {}, i, j;
+    for (i = 0; i < oldList.length; i++) {
+      var key = normLabel(oldList[i] && oldList[i].label);
+      for (j = 0; j < newList.length; j++) {
+        if (normLabel(newList[j].label) === key) { map[oldList[i].id] = newList[j].id; break; }
+      }
+    }
+    if (!map) return;
+    var changed = false, d, k, arr, next, seen;
+    for (d in state.routineDone) {
+      if (!Object.prototype.hasOwnProperty.call(state.routineDone, d)) continue;
+      arr = state.routineDone[d] || [];
+      next = [];
+      seen = {};
+      for (i = 0; i < arr.length; i++) {
+        k = map[arr[i]] || arr[i];
+        if (!seen[k]) { seen[k] = true; next.push(k); }
+      }
+      if (next.join(',') !== arr.join(',')) { state.routineDone[d] = next; changed = true; }
+    }
+    if (changed) store.set(K.routineDone, state.routineDone);
+
+    var achanged = false;
+    for (d in state.awards) {
+      if (!Object.prototype.hasOwnProperty.call(state.awards, d)) continue;
+      var a = state.awards[d];
+      if (!a || !a.r || !a.r.length) continue;
+      next = [];
+      seen = {};
+      for (i = 0; i < a.r.length; i++) {
+        k = map[a.r[i]] || a.r[i];
+        if (!seen[k]) { seen[k] = true; next.push(k); }
+      }
+      if (next.join(',') !== a.r.join(',')) { a.r = next; achanged = true; }
+    }
+    if (achanged) saveAwards();
   }
 
   function loadState() {
+    state.routineDone = store.get(K.routineDone, {}) || {};
+    var aw = store.get(K.awards, {});
+    state.awards = (aw && typeof aw === 'object') ? aw : {};
+
+    /* 아침 루틴: 6단계 기본값. 직접 고친 목록은 그대로 살리고,
+       옛 기본값(4개·5개)이면 새 6개로 올리면서 체크 기록을 옮긴다. */
     var items = store.get(K.items, null);
-    if (!items || !items.length || !items[0] || !items[0].id) {
-      var old = store.get('yj_routine_items_v1', null);
-      if (old && old.length && old[0] && old[0].id && !isOldDefaultList(old)) {
-        items = old;               // 직접 꾸며 둔 루틴은 살리기
+    if (!(items && items.length && items[0] && items[0].id)) {
+      var v2 = store.get(K.itemsV2, null);
+      var v1 = store.get(K.itemsV1, null);
+      var validV2 = (v2 && v2.length && v2[0] && v2[0].id) ? v2 : null;
+      var validV1 = (v1 && v1.length && v1[0] && v1[0].id) ? v1 : null;
+      if (validV2 && !isDefaultList(validV2, DEFAULT5)) {
+        items = validV2;                                  // 직접 꾸밈 목록은 그대로
+      } else if (validV1 && !isDefaultList(validV1, DEFAULT4) && !isDefaultList(validV1, DEFAULT5)) {
+        items = validV1;
       } else {
-        items = defaultItems();    // 처음이거나 예전 4개 기본값이면 새 5개
+        var legacy = validV2 || validV1;
+        items = defaultItems();
+        if (legacy) remapRoutineProgress(legacy, items);  // 오늘 체크한 항목은 이어지게
       }
       store.set(K.items, items);
     }
     state.items = items;
-    state.routineDone = store.get(K.routineDone, {}) || {};
     state.academies = store.get(K.academies, null) || [];
-    var st = store.get(K.studyTasks, null);
-    if (!st || typeof st !== 'object') {
-      st = defaultStudy();
-      store.set(K.studyTasks, st);
+
+    /* 홈스쿨 주간표 */
+    var ht = store.get(K.hsTasks, null);
+    if (!ht || typeof ht !== 'object' || !Object.keys(ht).length) {
+      ht = defaultHomeschool();
+      store.set(K.hsTasks, ht);
     }
-    state.studyTasks = st;
-    state.studyDone = store.get(K.studyDone, {}) || {};
+    state.homeschoolTasks = ht;
+    state.homeschoolDone = store.get(K.hsDone, {}) || {};
 
     var balls = store.get(K.balls, 0);
     state.balls = (typeof balls === 'number' && balls >= 0) ? balls : 0;
     var dex = store.get(K.dex, {});
     state.dex = (dex && typeof dex === 'object') ? dex : {};
-    var aw = store.get(K.awards, {});
-    state.awards = (aw && typeof aw === 'object') ? aw : {};
   }
 
   function saveBalls() { store.set(K.balls, state.balls); }
@@ -1172,6 +1276,7 @@
         selectedDow = now.getDay();
         renderRoutine();
         renderTodayAcademy();
+        renderHomeHomeschool();
         renderStudy();
         renderAffirm();
         renderDex();
@@ -1287,7 +1392,7 @@
     addBalls(1);
     saveAwards();
     updateBallUI();
-    toast('공부 완료! 몬스터볼 +1 🔴');
+    toast('홈스쿨 완료! 몬스터볼 +1 🔴');
     SFX.ball();
     return true;
   }
@@ -1298,7 +1403,8 @@
     { keys: ['유산균', '물 마시', '물마시', '영양제'], img: 'assets/routine-probiotics.png', emoji: '🥛' },
     { keys: ['영어', '영상', '시청'], img: 'assets/routine-english.png', emoji: '📺' },
     { keys: ['양치', '이빨', '칫솔', '용변'], img: 'assets/routine-brush.png', emoji: '🪥' },
-    { keys: ['옷', '입기', '교복', '양말'], img: 'assets/routine-dress.png', emoji: '👕' }
+    { keys: ['옷', '입기', '교복', '양말'], img: 'assets/routine-dress.png', emoji: '👕' },
+    { keys: ['원리셈', '따풀', '수학', '연산', '문제집'], img: 'assets/routine-math.png', emoji: '✏️' }
   ];
 
   function illuFor(label) {
@@ -1692,7 +1798,7 @@
     toast('요일과 시간을 골라 저장해 주세요');
   }
 
-  /* ======================= 공부 ======================= */
+  /* ======================= 홈스쿨 ======================= */
   function renderStudyDayTabs() {
     var box = $('studyDayTabs');
     var todayDow = new Date().getDay();
@@ -1700,14 +1806,23 @@
     for (var i = 0; i < ORDER.length; i++) {
       var dow = ORDER[i];
       var d = dateForWeekday(dow);
+      var tasks = hsTaskList(dow);
+      var cnt = doneIdsFor(dateKey(d), tasks).length;
       html += '<button class="day-tab' + (dow === selectedDow ? ' on' : '') + '" type="button" data-act="dow" data-dow="' + dow + '">'
-        + DAY_KO[dow] + (dow === todayDow ? '<small>오늘</small>' : '<small>' + (d.getMonth() + 1) + '/' + d.getDate() + '</small>')
+        + DAY_KO[dow] + '<small>' + (dow === todayDow ? '오늘 · ' : '') + cnt + '/' + tasks.length + '</small>'
         + '</button>';
     }
     box.innerHTML = html;
   }
 
-  function studyTaskList(dow) { return state.studyTasks[String(dow)] || []; }
+  function hsTaskList(dow) { return state.homeschoolTasks[String(dow)] || []; }
+
+  function doneIdsFor(key, tasks) {
+    var arr = state.homeschoolDone[key] || [];
+    var out = [];
+    for (var i = 0; i < tasks.length; i++) if (arr.indexOf(tasks[i].id) !== -1) out.push(tasks[i].id);
+    return out;
+  }
 
   function renderStudy() {
     renderStudyDayTabs();
@@ -1715,19 +1830,15 @@
     var d = dateForWeekday(dow);
     var key = dateKey(d);
     var isToday = (key === todayKey());
-    var tasks = studyTaskList(dow);
-    var doneAll = state.studyDone[key] || [];
-    var doneIds = [];
-    var i, j;
-    for (i = 0; i < doneAll.length; i++) {
-      for (j = 0; j < tasks.length; j++) if (tasks[j].id === doneAll[i]) doneIds.push(doneAll[i]);
-    }
+    var tasks = hsTaskList(dow);
+    var doneIds = doneIdsFor(key, tasks);
+    var i;
 
-    $('studyDateLabel').textContent = prettyDate(d) + ' 공부' + (isToday ? ' (오늘)' : '');
+    $('studyDateLabel').textContent = prettyDate(d) + ' 홈스쿨' + (isToday ? ' (오늘)' : '');
 
     var html = '';
     if (!tasks.length) {
-      html = '<li class="empty">이 요일에는 공부 항목이 없어요.<br>아래에서 추가해 보세요!</li>';
+      html = '<li class="empty">이 요일에는 홈스쿨 항목이 없어요.<br>아래에서 추가해 보세요!</li>';
     } else {
       for (i = 0; i < tasks.length; i++) {
         var t = tasks[i];
@@ -1750,11 +1861,11 @@
     var badge = $('studyBadge');
     if (tasks.length > 0 && doneIds.length === tasks.length) {
       badge.className = 'study-badge earned';
-      badge.innerHTML = '<span class="stamp">🏅</span>' + esc(DAY_KO[dow]) + '요일 공부 완료! 배지 획득!<br>'
+      badge.innerHTML = '<span class="stamp">🏅</span>' + esc(DAY_KO[dow]) + '요일 홈스쿨 완료! 배지 획득!<br>'
         + '<span style="font-size:12px;font-weight:800;opacity:.85">' + tasks.length + '개 모두 끝냈어요' + (isToday ? ' · 몬스터볼도 받았어요 🔴' : '') + '</span>';
     } else if (tasks.length === 0) {
       badge.className = 'study-badge';
-      badge.innerHTML = '오늘의 공부를 체크하면 몬스터볼을 받을 수 있어요 🔴';
+      badge.innerHTML = '오늘의 홈스쿨을 체크하면 몬스터볼을 받을 수 있어요 🔴';
     } else {
       badge.className = 'study-badge';
       badge.innerHTML = '조금만 더! ' + (tasks.length - doneIds.length) + '개 남았어요 🏅'
@@ -1762,20 +1873,50 @@
     }
   }
 
-  function toggleStudy(id) {
-    var d = dateForWeekday(selectedDow);
+  /* 홈 대시보드의 “오늘의 홈스쿨” */
+  function renderHomeHomeschool() {
+    var box = $('homeHomeschool');
+    if (!box) return;
+    var dow = new Date().getDay();
+    var tasks = hsTaskList(dow);
+    var key = todayKey();
+    var doneIds = doneIdsFor(key, tasks);
+    var pill = $('homeHsCount');
+    if (pill) pill.textContent = doneIds.length + '/' + tasks.length;
+
+    if (!tasks.length) {
+      box.innerHTML = '<div class="hs-empty">오늘은 홈스쿨 숙제가 없어요 🎉</div>';
+      return;
+    }
+    var html = '';
+    for (var i = 0; i < tasks.length; i++) {
+      var t = tasks[i];
+      var done = doneIds.indexOf(t.id) !== -1;
+      html += '<button class="hs-item' + (done ? ' done' : '') + '" type="button" data-act="h-toggle" data-id="' + esc(t.id) + '" aria-pressed="' + done + '">'
+        + '<span class="hs-check">✓</span>'
+        + '<span class="hs-label">' + esc(t.label) + '</span>'
+        + '<span class="hs-ball">' + (done ? '완료' : miniBallSvg() + ' +1') + '</span>'
+        + '</button>';
+    }
+    box.innerHTML = html;
+  }
+
+  function toggleHomeschool(id, dow) {
+    if (typeof dow !== 'number' || isNaN(dow)) dow = selectedDow;
+    var d = dateForWeekday(dow);
     var key = dateKey(d);
-    var arr = state.studyDone[key] || [];
+    var arr = state.homeschoolDone[key] || [];
     var idx = arr.indexOf(id);
     var added = false;
     if (idx === -1) { arr.push(id); added = true; } else { arr.splice(idx, 1); }
-    state.studyDone[key] = arr;
-    store.set(K.studyDone, state.studyDone);
+    state.homeschoolDone[key] = arr;
+    store.set(K.hsDone, state.homeschoolDone);
 
-    var tasks = studyTaskList(selectedDow);
+    var tasks = hsTaskList(dow);
     var cnt = 0;
     for (var i = 0; i < tasks.length; i++) if (arr.indexOf(tasks[i].id) !== -1) cnt++;
     renderStudy();
+    renderHomeHomeschool();
 
     if (added) {
       SFX.step();
@@ -1783,7 +1924,7 @@
       if (tasks.length > 0 && cnt === tasks.length) {
         confettiBurst();
         SFX.fanfare();
-        if (key === todayKey()) toast('공부 완료! 배지 획득 🏅');
+        if (key === todayKey()) toast('홈스쿨 완료! 배지 획득 🏅');
       }
     }
   }
@@ -1793,33 +1934,36 @@
     var v = input.value.trim();
     if (!v) { input.focus(); return; }
     var k = String(selectedDow);
-    if (!state.studyTasks[k]) state.studyTasks[k] = [];
-    state.studyTasks[k].push({ id: uid(), label: v });
-    store.set(K.studyTasks, state.studyTasks);
+    if (!state.homeschoolTasks[k]) state.homeschoolTasks[k] = [];
+    state.homeschoolTasks[k].push({ id: uid(), label: v });
+    store.set(K.hsTasks, state.homeschoolTasks);
     input.value = '';
     renderStudy();
+    renderHomeHomeschool();
     input.focus();
   }
 
   function deleteStudy(id) {
-    var tasks = studyTaskList(selectedDow);
+    var tasks = hsTaskList(selectedDow);
     var t = null, i;
     for (i = 0; i < tasks.length; i++) if (tasks[i].id === id) t = tasks[i];
     if (!t) return;
     if (!window.confirm('“' + t.label + '” 항목을 삭제할까요?')) return;
     var next = [];
     for (i = 0; i < tasks.length; i++) if (tasks[i].id !== id) next.push(tasks[i]);
-    state.studyTasks[String(selectedDow)] = next;
-    store.set(K.studyTasks, state.studyTasks);
+    state.homeschoolTasks[String(selectedDow)] = next;
+    store.set(K.hsTasks, state.homeschoolTasks);
     renderStudy();
+    renderHomeHomeschool();
     toast('삭제했어요');
   }
 
   function renameStudy(id, label) {
-    var tasks = studyTaskList(selectedDow);
+    var tasks = hsTaskList(selectedDow);
     for (var i = 0; i < tasks.length; i++) if (tasks[i].id === id) tasks[i].label = label;
-    store.set(K.studyTasks, state.studyTasks);
+    store.set(K.hsTasks, state.homeschoolTasks);
     renderStudy();
+    renderHomeHomeschool();
   }
 
   /* ======================= 응원 문구 ======================= */
@@ -2079,7 +2223,7 @@
     SFX.unlock();
     if (state.balls < 1) {
       SFX.nope();
-      toast('몬스터볼이 없어요! 루틴과 공부를 완료해서 모아 보세요 🔴');
+      toast('몬스터볼이 없어요! 루틴과 홈스쿨을 완료해서 모아 보세요 🔴');
       return;
     }
     rolling = true;
@@ -2161,7 +2305,15 @@
         deleteRoutine(id);
         break;
       case 's-toggle':
-        toggleStudy(id);
+        toggleHomeschool(id, selectedDow);
+        break;
+      case 'h-toggle':
+        toggleHomeschool(id, new Date().getDay());
+        break;
+      case 'hs-add':
+        selectedDow = new Date().getDay();
+        showTab('study');
+        setTimeout(function () { $('studyInput').focus(); }, 240);
         break;
       case 's-edit':
         li = el.closest ? el.closest('li') : null;
@@ -2282,6 +2434,7 @@
     tickClock();
     renderRoutine();
     renderTodayAcademy();
+    renderHomeHomeschool();
     renderWeek();
     renderStudy();
     renderAffirm();
