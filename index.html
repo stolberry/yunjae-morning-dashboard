@@ -802,6 +802,61 @@
   }
   .list-tab.on{background:#fff;color:#3A3428;box-shadow:0 3px 9px rgba(120,108,72,.16)}
 
+  /* ---------------- 날짜·시간 카드 / 등교 알림 ---------------- */
+  .left-col{display:flex;flex-direction:column;gap:9px;min-width:0;min-height:0}
+  .left-col .hero{flex:1 1 auto;min-height:0}
+  .dt-card{
+    display:flex;align-items:center;gap:12px;padding:8px 16px;border-radius:18px;flex:none;
+    background:linear-gradient(120deg,#FFFFFF 0%,#FFF8E2 100%);border:2px solid #FFE08A;box-shadow:var(--shadow);
+  }
+  .dtc-date{display:flex;align-items:center;gap:7px;font-size:15px;font-weight:900;color:#5F594D;letter-spacing:-.3px;white-space:nowrap}
+  .dtc-ico{font-size:16px;line-height:1}
+  .dtc-clock{margin-left:auto;font-size:31px;font-weight:900;letter-spacing:-1.4px;color:#3A3428;font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.05}
+  .dt-card.eve{background:linear-gradient(120deg,#FFFFFF 0%,#F2EEFF 100%);border-color:#D3CAF6}
+  .dt-card.eve .dtc-date{color:#544A8C}
+  .dt-card.eve .dtc-clock{color:#3B3266}
+
+  .ms-dot{
+    position:absolute;top:50%;width:9px;height:9px;border-radius:50%;background:#fff;border:2px solid #BDB5A2;
+    transform:translate(-50%,-50%);z-index:2;
+  }
+  .ms-dot.past{background:#3FA34D;border-color:#2F7A3C}
+  .ms-dot.now{background:#FFCB05;border-color:#B98A00;box-shadow:0 0 0 3px rgba(255,203,5,.4)}
+  .ms-labels{position:relative;height:17px;margin-top:6px}
+  .ms{position:absolute;top:0;transform:translateX(-50%);display:flex;align-items:baseline;gap:3px;line-height:1.15;white-space:nowrap}
+  .ms:first-child{transform:none}
+  .ms:last-child{transform:translateX(-100%)}
+  .ms b{font-size:10px;font-weight:900;color:#A79E8B;font-variant-numeric:tabular-nums}
+  .ms span{font-size:11px;font-weight:900;color:#8A8377}
+  .ms.past b{color:#2F7A3C}
+  .ms.past span{color:#3F8B4A}
+  .ms.now b{color:#B4551F}
+  .ms.now span{color:#B4551F}
+  .ms-foot{display:flex;align-items:center;gap:6px;margin-top:5px;flex-wrap:wrap}
+  .ms-now{
+    display:inline-flex;align-items:center;gap:5px;background:#FFF6D8;border:1.5px solid #FFE08A;
+    border-radius:999px;padding:3px 10px;font-size:12px;font-weight:900;color:#8A6B12;white-space:nowrap;
+  }
+  .ms-now.done{background:#EAF8EA;border-color:#A9DCAF;color:#2F7A3C}
+  .ms-test{
+    border:1.5px solid #E7DFCF;background:#fff;color:#8A8377;font-weight:900;font-size:11px;
+    border-radius:999px;padding:4px 9px;min-height:26px;white-space:nowrap;
+  }
+  .ms-test:active{background:#F3EEE1}
+
+  .ms-banner{
+    position:fixed;left:50%;top:74px;transform:translateX(-50%) translateY(-16px);z-index:100;
+    display:flex;align-items:center;gap:10px;max-width:92vw;
+    background:linear-gradient(120deg,#FFF6D6,#FFE9E4 58%,#EAF3FF);
+    border:3px solid #FFCB05;border-radius:20px;padding:13px 16px;
+    box-shadow:0 16px 40px rgba(120,108,72,.3);
+    opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease;
+  }
+  .ms-banner.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+  .msb-ico{font-size:26px;line-height:1}
+  .msb-text{font-size:19px;font-weight:900;letter-spacing:-.6px;color:#3A3428;white-space:nowrap}
+  .msb-x{border:none;background:rgba(0,0,0,.06);color:#6C665C;width:30px;height:30px;border-radius:50%;font-weight:900;font-size:14px;flex:none}
+
   /* ---------------- responsive ---------------- */
   @media (max-width:1399px){
     .hero-count{font-size:clamp(24px,2.2vw,30px)}
@@ -899,6 +954,14 @@
   /* 넓은 태블릿(갤럭시탭 S8 울트라 등)에서는 화면에 맞게 크게 */
   @media (min-width:1400px){
     .brand-title{font-size:19px}
+    .dt-card{padding:9px 20px;border-radius:20px}
+    .dtc-date{font-size:16.5px}
+    .dtc-ico{font-size:18px}
+    .dtc-clock{font-size:37px}
+    .ms b{font-size:10.5px}
+    .ms span{font-size:11.5px}
+    .ms-now{font-size:12.5px}
+    .msb-text{font-size:21px}
     .mode-pill{font-size:15px;padding:8px 17px;min-height:42px}
     .routine-grid.seven{gap:9px}
     .routine-grid.seven .r-title{font-size:15px}
@@ -1022,7 +1085,12 @@
     <div class="mode-pane" id="homeMorning">
 
       <div class="home-grid">
-      <!-- 등교 시간 (왼쪽) -->
+      <!-- 날짜·시간 + 등교 시간 (왼쪽) -->
+      <div class="left-col">
+      <div class="card dt-card">
+        <div class="dtc-date"><span class="dtc-ico">📅</span><span class="js-date">불러오는 중…</span></div>
+        <div class="dtc-clock js-clock">--:--</div>
+      </div>
       <section class="hero">
         <div class="hero-top">
           <div class="hero-pika">
@@ -1050,10 +1118,6 @@
             <div class="hero-name">윤재</div>
             <div class="hero-meta">등교 시간 08:15 · 07:00 준비 시작</div>
           </div>
-          <div class="hero-datetime">
-            <div class="dt-clock"><span class="dt-ico">🕒</span><span class="js-clock">--:--</span></div>
-            <div class="dt-date js-date">불러오는 중…</div>
-          </div>
         </div>
 
         <div class="hero-mid">
@@ -1065,6 +1129,11 @@
         <div class="hero-progress">
           <div class="hp-track">
             <div class="hp-fill" id="dayProgress"></div>
+            <span class="ms-dot" data-ms="0700" style="left:0%"></span>
+            <span class="ms-dot" data-ms="0710" style="left:13.333%"></span>
+            <span class="ms-dot" data-ms="0730" style="left:40%"></span>
+            <span class="ms-dot" data-ms="0745" style="left:60%"></span>
+            <span class="ms-dot" data-ms="0815" style="left:100%"></span>
             <div class="hp-runner" id="runner">
                 <svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true">
                   <g transform="rotate(-26 40 34)">
@@ -1082,7 +1151,17 @@
                 </svg>
               </div>
           </div>
-          <div class="hp-labels"><span>07:00 준비 시작</span><span>08:15 학교 출발 ⚡</span></div>
+          <div class="ms-labels">
+            <span class="ms" data-ms="0700" style="left:0%"><b>07:00</b><span>☀️ 기상</span></span>
+            <span class="ms" data-ms="0710" style="left:13.333%"><b>07:10</b><span>🍚 아침식사</span></span>
+            <span class="ms" data-ms="0730" style="left:40%"><b>07:30</b><span>🪥 양치</span></span>
+            <span class="ms" data-ms="0745" style="left:60%"><b>07:45</b><span>✏️ 원리셈</span></span>
+            <span class="ms" data-ms="0815" style="left:100%"><b>08:15</b><span>🎒 등교</span></span>
+          </div>
+          <div class="ms-foot">
+            <span class="ms-now" id="msNow">오늘도 힘차게 시작해요!</span>
+            <button class="ms-test" type="button" data-act="ms-test">🔔 알림 테스트</button>
+          </div>
         </div>
 
         <div class="hero-side">
@@ -1104,6 +1183,7 @@
           <button class="hero-gacha" type="button" data-act="goto" data-tab="dex">도감 가기 →</button>
         </div>
       </section>
+      </div>
 
         <div class="home-right">
           <div class="right-top">
@@ -1150,7 +1230,12 @@
     <div class="mode-pane" id="homeEvening">
 
       <div class="home-grid">
-      <!-- 취침 시간 (왼쪽) -->
+      <!-- 날짜·시간 + 취침 시간 (왼쪽) -->
+      <div class="left-col">
+      <div class="card dt-card eve">
+        <div class="dtc-date"><span class="dtc-ico">📅</span><span class="js-date">불러오는 중…</span></div>
+        <div class="dtc-clock js-clock">--:--</div>
+      </div>
       <section class="hero eve-hero">
         <div class="hero-top">
           <div class="hero-moon">
@@ -1166,10 +1251,6 @@
           <div class="hero-id">
             <div class="hero-name">윤재</div>
             <div class="hero-meta">17:30 시작 · 취침 시간 21:00</div>
-          </div>
-          <div class="hero-datetime">
-            <div class="dt-clock"><span class="dt-ico">🌙</span><span class="js-clock">--:--</span></div>
-            <div class="dt-date js-date">불러오는 중…</div>
           </div>
         </div>
 
@@ -1210,6 +1291,7 @@
           <button class="hero-gacha eve" type="button" data-act="goto" data-tab="dex">도감 가기 →</button>
         </div>
       </section>
+      </div>
 
         <div class="home-right">
           <div class="right-top">
@@ -1468,6 +1550,12 @@
 <div class="flash" id="flash"></div>
 <div class="toast" id="toast"></div>
 
+<div class="ms-banner" id="msBanner" role="status" aria-live="polite">
+  <span class="msb-ico">⏰</span>
+  <span class="msb-text" id="msBannerText"></span>
+  <button class="msb-x" type="button" data-act="ms-banner-close" aria-label="알림 닫기">✕</button>
+</div>
+
 <noscript><div style="padding:20px;text-align:center;font-weight:800">이 대시보드는 자바스크립트가 필요해요. 브라우저 설정에서 자바스크립트를 켜 주세요.</div></noscript>
 
 <script>
@@ -1499,7 +1587,8 @@
     perfect: 'yj_perfect_days_v1',
     stones: 'yj_stones_v1',
     stoneAwards: 'yj_stone_awards_v1',
-    sound: 'yj_sound_v1'
+    sound: 'yj_sound_v1',
+    msAlerts: 'yj_ms_alerts_v1'
   };
 
   var W_URL = 'https://api.open-meteo.com/v1/forecast?latitude=36.8428&longitude=127.1394'
@@ -1747,7 +1836,8 @@
       fanfare: function () { [523, 659, 784, 1047].forEach(function (f, i) { tone(f, i * 0.11, 0.24, 'triangle', 0.13); }); },
       shake: function () { for (var i = 0; i < 7; i++) tone(180 + i * 55, i * 0.13, 0.06, 'square', 0.045); },
       reveal: function () { [659, 784, 988, 1319, 1568].forEach(function (f, i) { tone(f, i * 0.09, 0.3, 'triangle', 0.12); }); },
-      nope: function () { tone(230, 0, 0.14, 'sawtooth', 0.05); tone(170, 0.12, 0.2, 'sawtooth', 0.045); }
+      nope: function () { tone(230, 0, 0.14, 'sawtooth', 0.05); tone(170, 0.12, 0.2, 'sawtooth', 0.045); },
+      chime: function () { [880, 1108.7, 1318.5].forEach(function (f, i) { tone(f, i * 0.17, 0.6, 'sine', 0.1); }); }
     };
   })();
 
@@ -2134,6 +2224,105 @@
     window.scrollTo(0, 0);
   }
 
+  /* ======================= 등교 마일스톤 · 알림 ======================= */
+  var MS = [
+    { key: '0700', h: 7, m: 0, name: '기상', emoji: '☀️' },
+    { key: '0710', h: 7, m: 10, name: '아침식사', emoji: '🍚' },
+    { key: '0730', h: 7, m: 30, name: '양치', emoji: '🪥' },
+    { key: '0745', h: 7, m: 45, name: '원리셈', emoji: '✏️' },
+    { key: '0815', h: 8, m: 15, name: '등교', emoji: '🎒' }
+  ];
+  var msBannerTimer = null;
+  var msFired = {};
+
+  function msLabel(ms) { return ms.h + ':' + pad2(ms.m); }
+  function msMinutes(ms) { return ms.h * 60 + ms.m; }
+
+  function msAlertStore() {
+    var v = store.get(K.msAlerts, null);
+    if (!v || v.date !== todayKey() || !v.done || typeof v.done !== 'object') {
+      v = { date: todayKey(), done: {} };
+      store.set(K.msAlerts, v);
+    }
+    return v;
+  }
+
+  function showMsBanner(text) {
+    var b = $('msBanner'), t = $('msBannerText');
+    if (!b || !t) return;
+    t.textContent = text;
+    b.classList.add('show');
+    if (msBannerTimer) clearTimeout(msBannerTimer);
+    msBannerTimer = setTimeout(function () { b.classList.remove('show'); }, 8000);
+  }
+
+  function hideMsBanner() {
+    var b = $('msBanner');
+    if (b) b.classList.remove('show');
+  }
+
+  function updateMilestones(now) {
+    var mins = now.getHours() * 60 + now.getMinutes();
+    var idx = -1, i;
+    for (i = 0; i < MS.length; i++) if (mins >= msMinutes(MS[i])) idx = i;
+
+    each('.ms', function (el) {
+      var pos = -1;
+      for (var j = 0; j < MS.length; j++) if (MS[j].key === el.getAttribute('data-ms')) pos = j;
+      if (idx >= 0 && pos < idx) el.classList.add('past'); else el.classList.remove('past');
+      if (pos === idx) el.classList.add('now'); else el.classList.remove('now');
+    });
+    each('.ms-dot', function (el) {
+      var pos = -1;
+      for (var j = 0; j < MS.length; j++) if (MS[j].key === el.getAttribute('data-ms')) pos = j;
+      if (idx >= 0 && pos < idx) el.classList.add('past'); else el.classList.remove('past');
+      if (pos === idx) el.classList.add('now'); else el.classList.remove('now');
+    });
+
+    var box = $('msNow');
+    if (!box) return;
+    if (idx < 0) {
+      box.className = 'ms-now';
+      box.textContent = '곧 07:00 기상 시간이에요 ' + MS[0].emoji;
+    } else if (idx === MS.length - 1) {
+      box.className = 'ms-now done';
+      box.textContent = '08:15 등교 완료! 오늘도 화이팅 ' + MS[MS.length - 1].emoji;
+    } else {
+      box.className = 'ms-now';
+      box.textContent = '지금은 ' + msLabel(MS[idx]) + ' ' + MS[idx].name + ' 시간이에요! ' + MS[idx].emoji;
+    }
+  }
+
+  function fireMilestone(ms, isTest) {
+    showMsBanner((isTest ? '🔔 알림 테스트 · ' : '⏰ ') + msLabel(ms) + ' ' + ms.name + ' 시간이에요! ' + ms.emoji);
+    if (soundOn) { SFX.unlock(); SFX.chime(); }
+  }
+
+  /* 정각(07:00·07:10·07:30·07:45·08:15)에 하루 한 번만 알림 */
+  function checkMilestoneAlert(now) {
+    var cur = now.getHours() * 60 + now.getMinutes();
+    for (var i = 0; i < MS.length; i++) {
+      if (msMinutes(MS[i]) !== cur) continue;
+      var id = todayKey() + ':' + MS[i].key;
+      if (msFired[id]) return;
+      var st = msAlertStore();
+      if (st.done[MS[i].key]) { msFired[id] = true; return; }
+      msFired[id] = true;
+      st.done[MS[i].key] = true;
+      store.set(K.msAlerts, st);
+      fireMilestone(MS[i], false);
+      return;
+    }
+  }
+
+  function testMilestone() {
+    var now = new Date();
+    var mins = now.getHours() * 60 + now.getMinutes();
+    var pick = MS[MS.length - 1];
+    for (var i = 0; i < MS.length; i++) if (mins < msMinutes(MS[i])) { pick = MS[i]; break; }
+    fireMilestone(pick, true);
+  }
+
   /* ======================= 아침 · 저녁 모드 ======================= */
   var MODE_SWITCH_MIN = 17 * 60 + 30;   /* 17:30 부터 저녁 모드 */
   var EVE_H = 17, EVE_M = 30;
@@ -2261,6 +2450,9 @@
       else if (now >= eveStart) es.textContent = '저녁 루틴 ' + eDone + '/' + eTotal + ' · ' + eRemain + '개 남았어요';
       else es.textContent = '오늘 하루도 수고했어요 🌙';
     }
+
+    updateMilestones(now);
+    checkMilestoneAlert(now);
 
     /* 시간이 지나면 자동으로 모드 전환 (직접 고른 뒤에는 그대로) */
     if (!modeManual) {
@@ -3841,6 +4033,12 @@
         break;
       case 'mode':
         setMode(el.getAttribute('data-mode'), true);
+        break;
+      case 'ms-test':
+        testMilestone();
+        break;
+      case 'ms-banner-close':
+        hideMsBanner();
         break;
       case 'r-toggle':
         toggleRoutine(id);
