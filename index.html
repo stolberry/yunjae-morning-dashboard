@@ -421,9 +421,17 @@
       linear-gradient(120deg,#FFFFFF 0%,#F3EFFF 58%,#FFF6E8 100%);
     border-color:#D3CAF6;box-shadow:var(--shadow);
   }
-  .affirm-card.eve{flex-direction:row;align-items:center;gap:10px}
+  .affirm-card.eve{flex-direction:row;align-items:center;gap:10px;cursor:pointer}
+  .affirm-card.eve:active{filter:brightness(.98)}
   .affirm-card.eve .af-ico{font-size:19px;flex:none;line-height:1}
+  /* 최신 특급칭찬: 한 줄로 고정(길면 말줄임) — 카드 높이는 확언 때와 똑같이 */
   .affirm-card.eve .af-text{flex:1 1 auto;color:#3B3266;font-size:18px;font-weight:800;letter-spacing:-.5px;line-height:1.25}
+  .affirm-card.eve .js-affirm{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;-webkit-line-clamp:none}
+  .affirm-card.eve .af-when{
+    flex:none;font-size:10.5px;font-weight:900;color:#5B4B9A;background:#fff;border:1.5px solid #D9D0F7;
+    border-radius:999px;padding:2px 7px;letter-spacing:-.2px;line-height:1.2;
+  }
+  .affirm-card.eve .af-when[hidden]{display:none}
   .wx-card{
     padding:6px 34px 6px 10px;border-radius:18px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 7px;
     align-content:center;overflow:hidden;min-width:0;position:relative;
@@ -1401,8 +1409,9 @@
   .ms-card{max-width:580px}
   .ms-hint{font-size:11.5px;font-weight:800;color:#8A8377;margin:0 0 10px;line-height:1.5;word-break:keep-all}
   .ms-edit-list{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
-  .ms-row{background:#FDFBF6;border:2px solid #EFE8D8;border-radius:16px;padding:8px 9px;display:flex;flex-direction:column;gap:6px}
+  .ms-row{background:#FDFBF6;border:2px solid #EFE8D8;border-radius:16px;padding:6px 8px;display:flex;flex-direction:column;gap:4px}
   .ms-row-top{display:flex;align-items:center;gap:6px}
+  .ms-edit-list{max-height:min(52vh,470px);overflow-y:auto;padding-right:2px}
   .ms-row input[type=time]{width:106px;flex:none;border:2px solid #E8E0CD;border-radius:11px;padding:0 8px;font-size:15px;font-weight:900;background:#fff;min-height:44px;font-variant-numeric:tabular-nums;color:#3A3428}
   .ms-row .ms-name{flex:1;min-width:0;border:2px solid #E8E0CD;border-radius:11px;padding:0 10px;font-size:15px;font-weight:800;background:#fff;min-height:44px;color:#3A3428}
   .ms-row .ms-msg{width:100%;border:2px dashed #E8E0CD;border-radius:11px;padding:0 10px;font-size:12.5px;font-weight:700;background:#fff;min-height:38px;color:#5F594D}
@@ -1983,9 +1992,10 @@
         <div class="dtc-date"><span class="dtc-ico">📅</span><span class="js-date">불러오는 중…</span></div>
         <div class="dtc-clock js-clock">--:--</div>
       </div>
-      <div class="affirm-card eve">
-        <span class="af-ico" aria-hidden="true">✨</span>
+      <div class="affirm-card eve" data-act="goto" data-tab="praise" role="button" tabindex="0" aria-label="특급칭찬 보기">
+        <span class="af-ico" aria-hidden="true">🌟</span>
         <p class="af-text js-affirm">불러오는 중…</p>
+        <span class="af-when js-affirm-when" hidden></span>
       </div>
       </div>
       <section class="hero eve-hero">
@@ -4255,6 +4265,7 @@
     setAll('.js-praise-count', String(n));
     if (!n) {
       box.innerHTML = '<li class="pr-empty"><span class="big">🌟</span>아직 특급칭찬이 없어요.<br>윤재가 잘한 일이 있으면 ‘🌟 특급칭찬 +5’를 눌러 주세요!</li>';
+      renderAffirm();
       return;
     }
     var html = '';
@@ -4268,6 +4279,7 @@
         + '</li>';
     }
     box.innerHTML = html;
+    renderAffirm();
   }
 
   function syncPraiseChips() {
@@ -5890,12 +5902,23 @@
     renderHomeHomeschool();
   }
 
-  /* ======================= 응원 문구 ======================= */
+  /* ======================= 응원 문구 · 최신 특급칭찬 ======================= */
+  function praiseWhen(p) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(p.dateISO || '');
+    if (m) return parseInt(m[2], 10) + '/' + parseInt(m[3], 10);
+    return '';
+  }
   function renderAffirm() {
-    var now = new Date();
-    var start = new Date(now.getFullYear(), 0, 0);
-    var doy = Math.floor((now - start) / 86400000);
-    setAll('.js-affirm', '“' + AFFIRMS[doy % AFFIRMS.length] + '”');
+    var latest = (state.praises && state.praises.length) ? state.praises[0] : null;
+    var txt = latest
+      ? ('특급칭찬 · “' + latest.text + '”')
+      : '“오늘도 엄마가 윤재의 특급칭찬을 응원하고 있어요!”';
+    setAll('.js-affirm', txt);
+    var when = latest ? praiseWhen(latest) : '';
+    each('.js-affirm-when', function (el) {
+      if (when) { el.textContent = when; el.hidden = false; }
+      else { el.textContent = ''; el.hidden = true; }
+    });
   }
 
   /* ======================= 날씨 ======================= */
