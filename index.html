@@ -435,11 +435,11 @@
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   }
   .acad-row .ac-memo{
-    flex:none;max-width:34%;font-size:11.5px;font-weight:900;color:#2C6BA8;
+    flex:none;max-width:30%;font-size:11.5px;font-weight:900;color:#2C6BA8;
     background:#EAF3FF;border:1.5px solid #D3E6FA;border-radius:999px;padding:2px 8px;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.3px;
   }
-  .acad-row .ac-time{flex:none;font-size:13px;font-weight:900;color:#2C6BA8;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .acad-row .ac-time{flex:none;font-size:15.5px;font-weight:900;color:#1E4E7C;font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:-.2px}
   .today-academy .acad-row{flex:0 0 auto}
 
   /* 학원 없는 날 */
@@ -613,8 +613,8 @@
   .day-empty{font-size:11.5px;font-weight:800;color:#C3BAA6;text-align:center;padding:8px 0}
   .class-chip{background:#fff;border:2px solid #E9E1CF;border-radius:13px;padding:8px;margin-bottom:7px}
   .c-top{display:flex;align-items:center;gap:2px}
-  .c-name{font-size:12.5px;font-weight:900;flex:1;line-height:1.25;word-break:keep-all}
-  .c-time{font-size:11px;font-weight:800;color:#8496A8;margin-top:3px}
+  .c-name{font-size:13.5px;font-weight:900;flex:1;line-height:1.25;word-break:keep-all}
+  .c-time{font-size:15px;font-weight:800;color:#1E4E7C;margin-top:4px;line-height:1.25;font-variant-numeric:tabular-nums;letter-spacing:-.2px}
   .c-memo{font-size:10.5px;font-weight:800;color:#A79E8B;margin-top:3px}
   .icon-btn{
     border:none;background:none;font-size:12px;line-height:1;padding:4px 3px;border-radius:8px;opacity:.75;
@@ -670,6 +670,23 @@
   .list .item .mv[disabled]{opacity:.32;background:#F7F4EC;color:#B5AC99;border-color:#F0EADA}
   .list .empty{background:#F8F6F0;border:2px dashed #E4DCCB;border-radius:16px;padding:20px;text-align:center;font-weight:900;color:#8A8377}
   .inline-input{border:2px solid var(--yellow);border-radius:10px;padding:6px 9px;font-size:17px;font-weight:900;flex:1;background:#fff}
+
+  /* ⚡ 보너스 공부 관리 (공부 탭) */
+  .bonus-manage-card .sec-head h2{color:#7A5B00}
+  .bonus-manage-list .item{gap:11px}
+  .bonus-manage-list .bm-ico{
+    width:42px;height:42px;flex:none;border-radius:12px;background:#FFF9EA;border:2px solid #F2E3BF;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .bonus-manage-list .bm-ico svg{width:29px;height:29px;display:block}
+  .bonus-manage-list .item-label{cursor:pointer}
+  .bonus-manage-card .add-row input{background:#FFFDF6}
+  /* 보너스 칸 수가 바뀌면 저녁 홈 칸도 그만큼 늘고 줄어든다 */
+  .bonus-grid .bonus-empty{grid-column:1 / -1;text-align:center;font-size:12.5px;font-weight:900;color:#A08A4A;padding:12px 6px;line-height:1.4}
+  .bonus-grid.bonus-grid-many{overflow-y:auto;overscroll-behavior:contain;align-content:start;max-height:176px;padding-right:2px;scrollbar-width:thin}
+  .bonus-grid.bonus-grid-many::-webkit-scrollbar{width:8px}
+  .bonus-grid.bonus-grid-many::-webkit-scrollbar-track{background:transparent}
+  .bonus-grid.bonus-grid-many::-webkit-scrollbar-thumb{background:#E6DCC4;border-radius:999px}
 
   .day-tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
   .day-tab{
@@ -1350,6 +1367,13 @@
     .today-card .count-pill{font-size:14px;padding:4px 11px}
     .today-card .link-btn{font-size:13.5px}
     .today-class{padding:12px 14px;gap:13px}
+    /* 학원 스케줄: 시간을 한눈에 읽을 수 있게 크게 */
+    .acad-row{padding:9px 14px;gap:13px}
+    .acad-row .ac-name{font-size:18px}
+    .acad-row .ac-memo{font-size:12.5px;max-width:26%}
+    .acad-row .ac-time{font-size:16.5px}
+    .c-name{font-size:14px}
+    .c-time{font-size:16px}
     .today-class .ac-ico{width:52px;height:52px;border-radius:15px}
     .today-class .ac-ico svg{width:36px;height:36px}
     .today-class .t-name{font-size:22px}
@@ -1809,6 +1833,20 @@
       </div>
       <div class="study-badge" id="studyBadge">오늘의 공부를 체크하면 몬스터볼을 받을 수 있어요 🔴</div>
     </div>
+
+    <div class="card bonus-manage-card" style="margin-top:16px">
+      <div class="sec-head">
+        <h2>⚡ 보너스 공부 관리</h2>
+        <div class="count-pill" id="bonusManageCount">0개</div>
+        <div class="spacer"></div>
+        <span class="hint">저녁 홈의 ⚡ 보너스 공부 칸에 그대로 보여요</span>
+      </div>
+      <ul class="list bonus-manage-list" id="bonusManageList"></ul>
+      <div class="add-row">
+        <input id="bonusInput" type="text" placeholder="보너스 공부 추가 (예: 한자 쓰기 1장)" enterkeyhint="done" autocomplete="off">
+        <button class="btn btn-yellow" id="bonusAdd" type="button">+ 추가</button>
+      </div>
+    </div>
   </section>
 
   <!-- ================= POKEDEX ================= -->
@@ -2048,6 +2086,7 @@
     praises: 'yj_praises_v1',
     studyReading: 'yj_study_migrated_reading_v1',
     bonusDone: 'yj_bonus_done_v1',
+    bonusItems: 'yj_bonus_items_v1',
     dexCosts: 'yj_dex_costs_v1'
   };
 
@@ -2317,7 +2356,7 @@
   /* ======================= 상태 ======================= */
   var state = {
     items: [], eveningItems: [], routineDone: {}, eveningDone: {}, academies: [],
-    homeschoolTasks: {}, homeschoolDone: {}, bonusDone: {},
+    homeschoolTasks: {}, homeschoolDone: {}, bonusDone: {}, bonusItems: [],
     balls: 0, dex: {}, dexCosts: {}, awards: {},
     perfectDays: [], stones: 0, stoneAwards: [],
     momPin: '', praises: []
@@ -2330,14 +2369,39 @@
   var DEFAULT_EVENING_OLD7 = ['샤워', '저녁식사', '숙제', '공부', '독서', '양치', '가방정리'];
   var DEFAULT4 = ['세수·로션', '영어영상', '양치', '옷입기'];
 
-  /* ⚡ 보너스 공부: 하고 싶을 때 도전하는 선택 과목.
+  /* ⚡ 보너스 공부: 하고 싶을 때 도전하는 선택 과목. 공부 탭에서 직접 추가·수정·순서 바꾸기.
      완료마다 몬스터볼 +1, 100% 완벽한 날·연속 기록 조건에는 들어가지 않아요. */
-  var BONUS_STUDY = [
-    { id: 'bonus-reading', label: '리딩앤 3권', icon: 'reading' },
-    { id: 'bonus-writing', label: '영어 글쓰기', icon: 'writing' },
-    { id: 'bonus-diary', label: '그림일기', icon: 'diary' },
-    { id: 'bonus-report', label: '독후감', icon: 'report' }
+  var DEFAULT_BONUS = [
+    { id: 'bonus-reading', label: '리딩앤 3권' },
+    { id: 'bonus-writing', label: '영어 글쓰기' },
+    { id: 'bonus-diary', label: '그림일기' },
+    { id: 'bonus-report', label: '독후감' }
   ];
+
+  /* 기본 네 과목 — id를 그대로 둬서 예전 체크 기록(yj_bonus_done_v1)이 그대로 이어진다 */
+  function defaultBonusItems() {
+    var out = [];
+    for (var i = 0; i < DEFAULT_BONUS.length; i++) {
+      out.push({ id: DEFAULT_BONUS[i].id, label: DEFAULT_BONUS[i].label });
+    }
+    return out;
+  }
+
+  /* 저장된 보너스 목록 다듬기: 이름이 비었거나 id가 겹치는 항목은 버린다 */
+  function sanitizeBonusItems(arr) {
+    var out = [], seen = {}, i;
+    for (i = 0; i < arr.length; i++) {
+      var it = arr[i];
+      if (!it || typeof it !== 'object') continue;
+      var label = String(it.label == null ? '' : it.label).trim();
+      if (!label) continue;
+      var id = String(it.id == null ? '' : it.id).trim();
+      if (!id || seen[id]) id = 'bonus-' + uid();
+      seen[id] = true;
+      out.push({ id: id, label: label });
+    }
+    return out;
+  }
 
   function defaultItems() {
     var out = [];
@@ -2623,6 +2687,16 @@
       store.set(K.hsTasks, ht);
     }
     state.homeschoolTasks = ht;
+
+    /* ⚡ 보너스 공부 목록 — 없으면 기본 네 과목으로 시작 */
+    var bi = store.get(K.bonusItems, null);
+    if (bi && typeof bi === 'object' && typeof bi.slice === 'function') {
+      state.bonusItems = sanitizeBonusItems(bi);
+      if (bi.length > 0 && !state.bonusItems.length) state.bonusItems = defaultBonusItems();
+    } else {
+      state.bonusItems = defaultBonusItems();
+      store.set(K.bonusItems, state.bonusItems);
+    }
 
     /* ⚡ 보너스 공부(하고 싶을 때만) 체크 기록 */
     var bd = store.get(K.bonusDone, null);
@@ -4315,11 +4389,26 @@
       + '<path d="M33 28l6 6-10 10-7 1 1-7z" fill="#FFC93C" stroke="#D9AE55" stroke-width="1.9" stroke-linejoin="round"/>'
       + '</svg>';
   }
-  function bonusIcon(kind) {
-    if (kind === 'reading') return svgBonusReading();
-    if (kind === 'writing') return svgBonusWriting();
-    if (kind === 'diary') return svgDiary();
-    return svgBonusReport();
+  /* ⚡ 어떤 이름에도 어울리는 기본 아이콘 (별) */
+  function svgBonusStar() {
+    return '<svg viewBox="0 0 48 48" aria-hidden="true">'
+      + '<path d="M24 6.5l5.3 11 12.1 1.7-8.8 8.5 2.1 12-10.7-5.7-10.7 5.7 2.1-12-8.8-8.5 12.1-1.7z"'
+      + ' fill="#FFE066" stroke="#D9A32B" stroke-width="2.2" stroke-linejoin="round"/>'
+      + '<path d="M24 12.5l3 6.2 6.8 1-4.9 4.7 1.2 6.7-6.1-3.2-6.1 3.2 1.2-6.7-4.9-4.7 6.8-1z" fill="#FFF6C8" opacity=".75"/>'
+      + '</svg>';
+  }
+  /* 이름의 낱말로 알맞은 아이콘을 고른다 — 모르면 별 */
+  function bonusIconFor(label) {
+    var s = String(label || '');
+    if (/그림|미술|색칠/.test(s)) return svgDiary();
+    if (/독후감|감상문|서평|독서록/.test(s)) return svgBonusReport();
+    if (/리딩|독서|책|원서|낭독|동화/.test(s)) return svgBonusReading();
+    if (/한자|한문/.test(s)) return svgHomework();
+    if (/영어|글쓰기|작문|받아쓰기|쓰기|편지/.test(s)) return svgBonusWriting();
+    if (/피아노|음악|악기|바이올린|리코더/.test(s)) return svgPiano();
+    if (/수학|연산|원리셈|따풀|사고력|구구단|덧셈|뺄셈|곱셈/.test(s)) return svgMath();
+    if (/숙제|문제집|연습장|풀기/.test(s)) return svgHomework();
+    return svgBonusStar();
   }
 
   function studyIcon(label) {
@@ -4365,12 +4454,25 @@
   }
 
   /* ======================= ⚡ 보너스 공부 ======================= */
+  function bonusList() {
+    return (state.bonusItems && typeof state.bonusItems.slice === 'function') ? state.bonusItems : [];
+  }
+
   function bonusById(id) {
-    for (var i = 0; i < BONUS_STUDY.length; i++) if (BONUS_STUDY[i].id === id) return BONUS_STUDY[i];
+    var arr = bonusList();
+    for (var i = 0; i < arr.length; i++) if (arr[i].id === id) return arr[i];
     return null;
   }
 
   function saveBonusDone() { store.set(K.bonusDone, state.bonusDone); }
+  function saveBonusItems() { store.set(K.bonusItems, state.bonusItems); }
+
+  /* 오늘 끝난 보너스 중 지금 목록에 있는 것만 (지운 항목의 옛 기록은 세지 않는다) */
+  function bonusDoneInList() {
+    var arr = bonusDoneIds(), items = bonusList(), out = [];
+    for (var i = 0; i < items.length; i++) if (arr.indexOf(items[i].id) !== -1) out.push(items[i].id);
+    return out;
+  }
 
   /* 오래된 날짜 기록은 40일치만 남긴다 */
   function pruneBonusDone(obj) {
@@ -4399,21 +4501,70 @@
 
   function renderBonusStudy() {
     var grid = document.querySelector('.js-bonus-grid');
-    if (!grid) return;
-    var done = bonusDoneIds();
-    var html = '';
-    for (var i = 0; i < BONUS_STUDY.length; i++) {
-      var b = BONUS_STUDY[i];
-      var isDone = done.indexOf(b.id) !== -1;
-      html += '<button class="bonus-tile' + (isDone ? ' done' : '') + '" type="button" data-act="b-toggle" data-id="' + esc(b.id) + '" aria-pressed="' + isDone + '"'
-        + ' aria-label="' + esc(b.label) + (isDone ? ' 완료 취소' : ' 완료하고 몬스터볼 +1') + '">'
-        + '<span class="bt-ico">' + bonusIcon(b.icon) + '</span>'
-        + '<span class="bt-label">' + esc(b.label) + '</span>'
-        + '<span class="bt-cta">' + (isDone ? '✓ 완료' : miniBallSvg() + '+1') + '</span>'
-        + '</button>';
+    var items = bonusList();
+    var done = bonusDoneInList();
+    var i;
+
+    if (grid) {
+      var n = items.length;
+      var cols = Math.min(Math.max(n, 1), 4);
+      grid.style.gridTemplateColumns = 'repeat(' + cols + ',minmax(0,1fr))';
+      if (n > 4) grid.classList.add('bonus-grid-many');
+      else grid.classList.remove('bonus-grid-many');
+
+      var html = '';
+      if (!n) {
+        html = '<div class="bonus-empty">아직 보너스 공부가 없어요 — 공부 탭에서 추가해 보세요</div>';
+      } else {
+        for (i = 0; i < n; i++) {
+          var b = items[i];
+          var isDone = done.indexOf(b.id) !== -1;
+          html += '<button class="bonus-tile' + (isDone ? ' done' : '') + '" type="button" data-act="b-toggle" data-id="' + esc(b.id) + '" aria-pressed="' + isDone + '"'
+            + ' aria-label="' + esc(b.label) + (isDone ? ' 완료 취소' : ' 완료하고 몬스터볼 +1') + '">'
+            + '<span class="bt-ico">' + bonusIconFor(b.label) + '</span>'
+            + '<span class="bt-label">' + esc(b.label) + '</span>'
+            + '<span class="bt-cta">' + (isDone ? '✓ 완료' : miniBallSvg() + '+1') + '</span>'
+            + '</button>';
+        }
+      }
+      grid.innerHTML = html;
     }
-    grid.innerHTML = html;
-    setAll('.js-bonus-count', done.length + '/' + BONUS_STUDY.length);
+    setAll('.js-bonus-count', done.length + '/' + items.length);
+  }
+
+  /* 공부 탭의 ⚡ 보너스 공부 관리 */
+  function renderBonusManage() {
+    var list = $('bonusManageList');
+    if (!list) return;
+    var items = bonusList();
+    var html = '', i;
+    if (!items.length) {
+      html = '<li class="empty">보너스 공부가 아직 없어요.<br>아래에서 추가해 보세요!</li>';
+    } else {
+      for (i = 0; i < items.length; i++) {
+        var b = items[i];
+        html += '<li class="item">'
+          + '<span class="bm-ico" aria-hidden="true">' + bonusIconFor(b.label) + '</span>'
+          + '<span class="item-label" data-act="b-edit" data-id="' + esc(b.id) + '" role="button" tabindex="0"'
+          + ' aria-label="' + esc(b.label) + ' 이름 바꾸기">' + esc(b.label) + '</span>'
+          + '<span class="item-actions">'
+          + '<button class="mv" type="button" data-act="b-move" data-id="' + esc(b.id) + '" data-dir="-1"'
+          + ' aria-label="' + esc(b.label) + ' 위로 옮기기"' + (i === 0 ? ' disabled' : '') + '>' + moveSvg(-1) + '</button>'
+          + '<button class="mv" type="button" data-act="b-move" data-id="' + esc(b.id) + '" data-dir="1"'
+          + ' aria-label="' + esc(b.label) + ' 아래로 옮기기"' + (i === items.length - 1 ? ' disabled' : '') + '>' + moveSvg(1) + '</button>'
+          + '<button class="icon-btn" type="button" data-act="b-edit" data-id="' + esc(b.id) + '" aria-label="' + esc(b.label) + ' 수정">✏️</button>'
+          + '<button class="icon-btn" type="button" data-act="b-del" data-id="' + esc(b.id) + '" aria-label="' + esc(b.label) + ' 삭제">🗑️</button>'
+          + '</span></li>';
+      }
+    }
+    list.innerHTML = html;
+    var cnt = $('bonusManageCount');
+    if (cnt) cnt.textContent = items.length + '개';
+  }
+
+  function renderBonusAll() {
+    renderBonusStudy();
+    renderBonusManage();
   }
 
   function toggleBonus(id) {
@@ -4444,7 +4595,8 @@
     renderBonusStudy();
     SFX.ball();
     toast('보너스 공부 완료! 몬스터볼 +1 🔴');
-    if (arr.length === BONUS_STUDY.length) {
+    var items = bonusList();
+    if (items.length && bonusDoneInList().length === items.length) {
       confettiBurst();
       SFX.fanfare();
       toast('보너스 공부까지 다 했어요! 오늘은 진짜 최고! ⚡');
@@ -4469,6 +4621,71 @@
       toast('보너스 볼 하나를 돌려 놓았어요 🔴');
     }
     renderBonusStudy();
+  }
+
+  /* ---- 공부 탭: ⚡ 보너스 공부 직접 고치기 ---- */
+  function addBonus() {
+    var input = $('bonusInput');
+    if (!input) return;
+    var v = input.value.trim();
+    if (!v) { input.focus(); return; }
+    state.bonusItems = bonusList().slice();
+    state.bonusItems.push({ id: 'bonus-' + uid(), label: v });
+    saveBonusItems();
+    input.value = '';
+    renderBonusAll();
+    input.focus();
+    toast('보너스 공부에 넣었어요 ⚡');
+  }
+
+  function moveBonusItem(id, dir) {
+    var items = bonusList().slice();
+    var idx = -1, i;
+    for (i = 0; i < items.length; i++) if (items[i].id === id) idx = i;
+    if (idx < 0) return;
+    var to = idx + dir;
+    if (to < 0 || to >= items.length) return;
+    var tmp = items[idx];
+    items[idx] = items[to];
+    items[to] = tmp;
+    state.bonusItems = items;
+    saveBonusItems();
+    renderBonusAll();
+    try { SFX.step(); } catch (e) {}
+  }
+
+  function renameBonus(id, label) {
+    var v = String(label == null ? '' : label).trim();
+    if (!v) return;
+    var items = bonusList(), i;
+    for (i = 0; i < items.length; i++) if (items[i].id === id) items[i].label = v;
+    state.bonusItems = items;
+    saveBonusItems();
+    renderBonusAll();
+  }
+
+  function deleteBonus(id) {
+    var b = bonusById(id);
+    if (!b) return;
+    if (!window.confirm('“' + b.label + '” 보너스 공부를 지울까요?\n오늘 체크한 기록도 함께 사라져요.')) return;
+    var items = bonusList(), next = [], i;
+    for (i = 0; i < items.length; i++) if (items[i].id !== id) next.push(items[i]);
+    state.bonusItems = next;
+    saveBonusItems();
+
+    /* 오늘 체크한 기록만 정리 (이미 받은 몬스터볼은 그대로 둔다) */
+    var key = todayKey();
+    var arr = state.bonusDone[key];
+    if (arr && typeof arr.slice === 'function') {
+      var keep = [], j;
+      for (j = 0; j < arr.length; j++) if (arr[j] !== id) keep.push(arr[j]);
+      if (keep.length !== arr.length) {
+        state.bonusDone[key] = keep;
+        saveBonusDone();
+      }
+    }
+    renderBonusAll();
+    toast('보너스 공부에서 지웠어요');
   }
 
   function toggleHomeschool(id, dow) {
@@ -5278,6 +5495,17 @@
       case 'b-toggle':
         toggleBonus(id);
         break;
+      case 'b-move':
+        moveBonusItem(id, parseInt(el.getAttribute('data-dir'), 10));
+        break;
+      case 'b-edit':
+        li = el.closest ? el.closest('li') : null;
+        labelEl = li ? li.querySelector('.item-label') : null;
+        if (labelEl) inlineEdit(labelEl, function (v) { renameBonus(id, v); });
+        break;
+      case 'b-del':
+        deleteBonus(id);
+        break;
       case 'hs-add':
         selectedDow = new Date().getDay();
         showTab('study');
@@ -5428,6 +5656,10 @@
   $('studyInput').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') { e.preventDefault(); addStudy(); }
   });
+  $('bonusAdd').addEventListener('click', addBonus);
+  $('bonusInput').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') { e.preventDefault(); addBonus(); }
+  });
   $('acSave').addEventListener('click', saveAcademy);
   $('acCancel').addEventListener('click', function () {
     resetAcademyForm();
@@ -5496,6 +5728,7 @@
     renderTodayAcademy();
     renderHomeHomeschool();
     renderBonusStudy();
+    renderBonusManage();
     renderWeek();
     renderStudy();
     renderAffirm();
