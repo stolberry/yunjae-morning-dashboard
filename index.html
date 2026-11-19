@@ -298,7 +298,7 @@
   /* ---------------- home grid: 등교 | 학원 | 공부 ---------------- */
   .home-grid{
     display:grid;gap:10px;flex:1 1 auto;min-height:0;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1.5fr 1fr;
     grid-template-rows:minmax(0,1fr);
   }
   .home-right{display:flex;flex-direction:column;gap:9px;min-width:0;min-height:0}
@@ -320,8 +320,8 @@
   .today-class.line{gap:12px}
   .today-class .t-line{display:flex;align-items:baseline;gap:7px;min-width:0;flex:1;white-space:nowrap;overflow:hidden}
   .today-class .t-dot{font-size:14px;font-weight:900;color:#A9C1D8;flex:none}
-  .today-class .t-name{overflow:hidden;text-overflow:ellipsis;min-width:0}
-  .today-class .t-time{flex:none}
+  .today-class .t-name{flex:1;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .today-class .t-time{flex:none;margin-left:12px}
   .today-class{
     display:flex;align-items:center;gap:10px;background:#F7FBFF;border:2px solid #DCEBFA;
     border-radius:15px;padding:8px 11px;min-width:0;max-width:none;
@@ -910,7 +910,7 @@
     .hs-tile .hs-ico svg{width:26px;height:26px}
     .hs-tile .hs-label{font-size:14px}
     .hs-tile .hs-cta{font-size:10.5px;min-height:29px;padding:5px 4px}
-    .rcard .illu{min-height:90px;max-height:160px}
+    .rcard .illu{min-height:90px;max-height:156px}
     .rcard .r-title{font-size:14.5px}
     .rcard .cta{font-size:13px;min-height:42px}
     .af-text{font-size:13.5px}
@@ -1076,7 +1076,7 @@
     .routine-grid{gap:11px}
     .routine-wrap .sec-head h2{font-size:20px}
     .rcard{padding:9px 10px 10px;border-radius:18px;gap:6px}
-    .rcard .illu{border-radius:13px;min-height:130px;max-height:232px}
+    .rcard .illu{border-radius:13px;min-height:130px;max-height:226px}
     .rcard .r-title{font-size:17.5px}
     .rcard .cta{font-size:14.5px;padding:10px 6px;min-height:46px}
     .rcard .cta .mini{width:17px;height:17px}
@@ -3281,8 +3281,8 @@
       var a = list[i];
       html += '<div class="today-class line' + (list.length === 1 ? ' solo' : '') + '">'
         + '<span class="ac-ico">' + svgSchool() + '</span>'
-        + '<div class="t-line"><span class="t-time">' + esc(timeLabel(a)) + '</span>'
-        + '<span class="t-dot">·</span><span class="t-name">' + esc(a.name) + '</span></div>'
+        + '<div class="t-line"><span class="t-name">' + esc(a.name) + '</span>'
+        + '<span class="t-time">' + esc(timeLabel(a)) + '</span></div>'
         + '</div>';
     }
     if (list.length === 1) html += '<div class="t-note solo-note">오늘도 즐겁게 다녀와요! 🌈</div>';
