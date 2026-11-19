@@ -359,6 +359,16 @@
   /* 아침 오른쪽: 학원(자기 높이) + 아침 공부(남는 높이) — 절대 겹치지 않게 그리드로 */
   #homeMorning .home-right{display:grid;grid-template-rows:auto minmax(0,1fr);align-content:stretch;gap:9px;min-width:0;min-height:0}
   #homeMorning .morning-left{display:flex;flex-direction:column;gap:9px;min-width:0;min-height:0}
+  /* 주말 아침: 학교 카운트다운 대신 느긋한 주말 인사 */
+  #homeMorning .hero-weekend-note{display:none}
+  #homeMorning .hero.weekend .hero-progress{display:none}
+  #homeMorning .hero.weekend .hero-weekend-note{
+    display:flex;align-items:center;justify-content:center;text-align:center;gap:8px;
+    margin:8px 2px;padding:15px 16px;border-radius:18px;
+    background:linear-gradient(120deg,#FFFDF0 0%,#FFF4D2 58%,#FFE7B8 100%);border:2px dashed #F0D08A;
+    color:#8A6412;font-size:15.5px;font-weight:900;letter-spacing:-.4px;line-height:1.45;
+  }
+  #homeMorning .hero.weekend .hero-count{font-size:23px;white-space:normal;text-align:right;line-height:1.2}
   #homeMorning .dt-wx{display:grid;grid-template-columns:0.88fr 1.12fr;gap:10px;flex:0 0 auto;align-items:stretch;min-width:0}
   #homeMorning .morning-left>.hero{flex:1 1 auto;min-height:0}
   #homeMorning .wx-card .wsep{display:none}
@@ -1722,6 +1732,7 @@
           </div>
         </div>
 
+        <div class="hero-weekend-note">☀️ 오늘은 학교 없이 느긋한 주말 아침! 좋아하는 걸 마음껏 해 봐요</div>
         <div class="hero-side">
           <div class="stat-pill">
             <span class="stat-k">아침 루틴</span>
@@ -3252,6 +3263,13 @@
       }
     }
 
+    /* 주말(토·일)은 학교 카운트다운 대신 느긋한 주말 아침 */
+    var wkHero = (now.getDay() === 0 || now.getDay() === 6);
+    var heroEl = document.querySelector('#homeMorning .hero');
+    if (heroEl) heroEl.classList.toggle('weekend', wkHero);
+    var metaEl = document.querySelector('#homeMorning .hero-meta');
+    if (metaEl) metaEl.textContent = wkHero ? '☀️ 주말 아침' : '07:00 시작 · 08:15 출발';
+
     /* 아침: 등교까지 */
     var target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), SCHOOL_H, SCHOOL_M, 0);
     var start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), PREP_H, 0, 0);
@@ -3259,7 +3277,10 @@
     var txt = $('countdownText');
     if (txt) {
       txt.classList.remove('urgent', 'done');
-      if (left > 0) {
+      if (wkHero) {
+        txt.textContent = '즐거운 주말 아침! 오늘도 화이팅!';
+        txt.classList.add('done');
+      } else if (left > 0) {
         var h = Math.floor(left / 3600000);
         var m = Math.floor((left % 3600000) / 60000);
         var s2 = Math.floor((left % 60000) / 1000);
@@ -3273,21 +3294,23 @@
       }
     }
 
-    /* 지나간 시간(elapsed)만큼 초록색 '남은 시간' 막대가 줄어든다 */
-    var pct = 0;
-    if (left <= 0) pct = 100;
-    else if (now > start) pct = Math.min(100, ((now - start) / (target - start)) * 100);
-    pct = Math.max(0, Math.min(100, pct));
-    var remain = 100 - pct;
-    var trk = document.querySelector('#homeMorning .hp-track');
-    if (trk) trk.classList.toggle('finished', left <= 0);
-    var dp = $('dayProgress'); if (dp) dp.style.width = remain.toFixed(1) + '%';
-    var rn = $('runner');
-    if (rn) {
-      rn.style.left = pct.toFixed(1) + '%';
-      if (remain > 0 && remain < 100) rn.classList.add('run'); else rn.classList.remove('run');
+    /* 지나간 시간(elapsed)만큼 초록색 '남은 시간' 막대가 줄어든다 (주말엔 숨김) */
+    if (!wkHero) {
+      var pct = 0;
+      if (left <= 0) pct = 100;
+      else if (now > start) pct = Math.min(100, ((now - start) / (target - start)) * 100);
+      pct = Math.max(0, Math.min(100, pct));
+      var remain = 100 - pct;
+      var trk = document.querySelector('#homeMorning .hp-track');
+      if (trk) trk.classList.toggle('finished', left <= 0);
+      var dp = $('dayProgress'); if (dp) dp.style.width = remain.toFixed(1) + '%';
+      var rn = $('runner');
+      if (rn) {
+        rn.style.left = pct.toFixed(1) + '%';
+        if (remain > 0 && remain < 100) rn.classList.add('run'); else rn.classList.remove('run');
+      }
+      var hs = $('heroStatus'); if (hs) hs.textContent = statusFor(left);
     }
-    var hs = $('heroStatus'); if (hs) hs.textContent = statusFor(left);
 
     /* 저녁: 21:00 취침까지 */
     var bed = new Date(now.getFullYear(), now.getMonth(), now.getDate(), BED_H, BED_M, 0);
