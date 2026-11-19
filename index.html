@@ -431,7 +431,12 @@
     display:block;flex:0 0 auto;white-space:nowrap;color:#3B3266;font-size:18px;font-weight:800;letter-spacing:-.5px;line-height:1.25;
     -webkit-line-clamp:none;
   }
-  .affirm-card.eve .af-view.is-scroll{justify-content:flex-start}
+  .affirm-card.eve .af-view.is-scroll{
+    justify-content:flex-start;
+    /* 흐를 때는 양쪽 끝을 살짝 흐리게 해서 글자가 뚝 잘린 느낌을 없앤다 */
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%);
+  }
   .affirm-card.eve .af-view.is-scroll .af-track{
     gap:var(--af-gap,64px);animation:afMarquee var(--af-dur,14s) linear infinite;will-change:transform;
   }
