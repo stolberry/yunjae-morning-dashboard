@@ -212,10 +212,10 @@
   }
 
   /* ---------------- routine cards ---------------- */
-  .routine-wrap{margin-bottom:0}
-  .routine-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}
+  .routine-wrap{margin-bottom:0;display:flex;flex-direction:column;flex:1 1 auto;min-height:0}
+  .routine-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;flex:1 1 auto;min-height:0;align-items:stretch}
   .rcard{
-    position:relative;display:flex;flex-direction:column;gap:5px;text-align:left;min-width:0;
+    position:relative;display:flex;flex-direction:column;gap:5px;text-align:left;min-width:0;height:100%;
     background:#fff;border:2px solid #EFE6D2;border-radius:16px;padding:7px 8px 8px;
     box-shadow:0 6px 16px rgba(120,108,72,.09);transition:transform .14s ease,box-shadow .18s ease,border-color .18s ease,background .18s ease;
     min-height:0;
@@ -229,7 +229,7 @@
     border:2px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.12);
   }
   .rcard .illu{
-    aspect-ratio:4/3;max-height:132px;border-radius:11px;overflow:hidden;background:#FFF9EE;
+    aspect-ratio:auto;flex:1 1 auto;min-height:86px;max-height:none;border-radius:11px;overflow:hidden;background:#FFF9EE;
     display:flex;align-items:center;justify-content:center;width:100%;min-width:0;
   }
   .rcard .illu img{width:100%;height:100%;object-fit:cover;object-position:center 28%;display:block}
@@ -259,7 +259,7 @@
 
   /* ---------------- home grid: 등교 | 학원 | 공부 + 날씨 ---------------- */
   .home-grid{
-    display:grid;gap:10px;flex:0 0 auto;margin:auto 0;min-height:0;
+    display:grid;gap:10px;flex:0 0 auto;margin:0 0 4px;min-height:0;
     grid-template-columns:1.34fr 1fr 1fr;
     grid-template-rows:minmax(0,1fr) auto;
     grid-template-areas:"hero acad study" "hero wx wx";
@@ -605,7 +605,7 @@
     .form-grid{grid-template-columns:1fr 1fr}
     .routine-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}
     .rcard{padding:6px 6px 7px;border-radius:14px;gap:4px}
-    .rcard .illu{aspect-ratio:4/3;border-radius:9px}
+    .rcard .illu{border-radius:9px;min-height:78px}
     .rcard .r-title{font-size:12px;letter-spacing:-.4px}
     .rcard .cta{font-size:9.5px;padding:5px 2px}
     .rcard .cta .mini{width:11px;height:11px}
@@ -639,7 +639,6 @@
   @media (max-width:900px){
     .routine-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
     .rcard{padding:8px}
-    .rcard .illu{aspect-ratio:4/3}
     .rcard .r-title{font-size:14px}
     .rcard .cta{font-size:11px;padding:6px 4px}
     .rcard .step{width:24px;height:24px;font-size:12px;top:6px;left:6px}
@@ -717,7 +716,7 @@
     .routine-grid{gap:11px}
     .routine-wrap .sec-head h2{font-size:20px}
     .rcard{padding:9px 10px 10px;border-radius:18px;gap:6px}
-    .rcard .illu{max-height:152px;border-radius:13px}
+    .rcard .illu{border-radius:13px;min-height:120px}
     .rcard .r-title{font-size:15px}
     .rcard .cta{font-size:11.5px;padding:6px 3px}
     .rcard .step{width:25px;height:25px;font-size:13px}
