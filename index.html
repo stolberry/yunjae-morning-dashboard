@@ -270,7 +270,7 @@
     border:2px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.12);
   }
   .rcard .illu{
-    flex:1 1 auto;min-height:0;max-height:none;border-radius:11px;overflow:hidden;background:#FFF9EE;
+    flex:1 1 auto;aspect-ratio:1/1;min-height:0;max-height:none;border-radius:11px;overflow:hidden;background:#FFF9EE;
     display:flex;align-items:center;justify-content:center;width:100%;min-width:0;margin-top:2px;
   }
   .rcard .illu img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
@@ -585,6 +585,7 @@
   /* ---------------- 저녁 오른쪽: 오늘의 공부(위) + ⚡ 보너스 공부(아래) --------------
      오늘의 공부는 한 줄에 하나씩(넣은 순서 그대로) 크게, 보너스 공부는 네 과목을 한 줄로.
      완료 버튼은 ‘🔴+1 / ✓ 완료’ 알약으로 짧게 — 남는 가로 폭은 전부 이름에 준다. */
+  #homeEvening .home-right{display:grid;grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:9px;min-width:0;min-height:0}
   #homeEvening .study-card{padding:7px 9px 8px;display:flex;flex-direction:column;min-height:0;flex:1 1 auto}
   #homeEvening .study-card .sec-head{margin-bottom:5px;gap:6px}
   #homeEvening .study-card .count-pill{font-size:12.5px;padding:2px 9px}
