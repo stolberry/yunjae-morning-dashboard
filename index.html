@@ -822,8 +822,9 @@
   }
   .ms-dot.past{background:#3FA34D;border-color:#2F7A3C}
   .ms-dot.now{background:#FFCB05;border-color:#B98A00;box-shadow:0 0 0 3px rgba(255,203,5,.4)}
-  .ms-labels{position:relative;height:17px;margin-top:6px}
+  .ms-labels{position:relative;height:34px;margin-top:5px}
   .ms{position:absolute;top:0;transform:translateX(-50%);display:flex;align-items:baseline;gap:3px;line-height:1.15;white-space:nowrap}
+  .ms.down{top:17px}
   .ms:first-child{transform:none}
   .ms:last-child{transform:translateX(-100%)}
   .ms b{font-size:10px;font-weight:900;color:#A79E8B;font-variant-numeric:tabular-nums}
@@ -1122,7 +1123,6 @@
 
         <div class="hero-mid">
           <div class="hero-count" id="countdownText">--</div>
-          <div class="hero-status" id="heroStatus">오늘도 힘차게 시작해요!</div>
         </div>
 
         <div class="hero-progress">
@@ -1152,9 +1152,9 @@
           </div>
           <div class="ms-labels">
             <span class="ms" data-ms="0700" style="left:0%"><b>07:00</b><span>☀️ 기상</span></span>
-            <span class="ms" data-ms="0710" style="left:13.333%"><b>07:10</b><span>🍚 아침식사</span></span>
+            <span class="ms down" data-ms="0710" style="left:13.333%"><b>07:10</b><span>🍚 아침식사</span></span>
             <span class="ms" data-ms="0730" style="left:40%"><b>07:30</b><span>🪥 양치</span></span>
-            <span class="ms" data-ms="0745" style="left:60%"><b>07:45</b><span>✏️ 원리셈</span></span>
+            <span class="ms down" data-ms="0745" style="left:60%"><b>07:45</b><span>✏️ 원리셈</span></span>
             <span class="ms" data-ms="0815" style="left:100%"><b>08:15</b><span>🎒 등교</span></span>
           </div>
           <div class="ms-foot">
