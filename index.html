@@ -62,34 +62,34 @@
     border-bottom:2px solid var(--line);
   }
   .topbar-inner{
-    max-width:1420px;margin:0 auto;padding:10px 20px;
-    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    max-width:1420px;margin:0 auto;padding:5px 16px;
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
   }
-  .brand{display:flex;align-items:center;gap:11px;min-width:0}
-  .brand .ball{width:38px;height:38px;flex:none;animation:spinSlow 18s linear infinite}
+  .brand{display:flex;align-items:center;gap:9px;min-width:0}
+  .brand .ball{width:30px;height:30px;flex:none;animation:spinSlow 18s linear infinite}
   @keyframes spinSlow{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-  .brand-title{font-size:20px;font-weight:900;letter-spacing:-.5px;line-height:1.05}
-  .brand-sub{font-size:12px;color:var(--muted);font-weight:800;margin-top:3px}
+  .brand-title{font-size:17px;font-weight:900;letter-spacing:-.5px;line-height:1.05}
+  .brand-sub{font-size:10.5px;color:var(--muted);font-weight:800;margin-top:1px}
 
-  .tabs{display:flex;gap:7px;flex-wrap:wrap;margin-left:8px}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-left:6px}
   .tab{
-    border:none;background:#F3EEE1;color:#6C665C;font-weight:900;font-size:15px;
-    padding:12px 17px;border-radius:999px;min-height:48px;
-    display:inline-flex;align-items:center;gap:6px;
+    border:none;background:#F3EEE1;color:#6C665C;font-weight:900;font-size:14px;
+    padding:8px 13px;border-radius:999px;min-height:40px;
+    display:inline-flex;align-items:center;gap:5px;
     transition:transform .12s ease,background .15s ease,box-shadow .15s ease;
     white-space:nowrap;
   }
   .tab:active{transform:scale(.96)}
-  .tab.active{background:var(--yellow);color:#463400;box-shadow:0 8px 16px rgba(255,203,5,.45)}
+  .tab.active{background:var(--yellow);color:#463400;box-shadow:0 6px 14px rgba(255,203,5,.45)}
   .tab .badge{
     background:var(--red);color:#fff;border-radius:999px;
-    font-size:12px;font-weight:900;min-width:22px;height:22px;padding:0 6px;
+    font-size:11px;font-weight:900;min-width:20px;height:20px;padding:0 5px;
     display:inline-flex;align-items:center;justify-content:center;
   }
-  .top-tools{display:flex;gap:7px;margin-left:auto}
+  .top-tools{display:flex;gap:6px;margin-left:auto}
   .tool-btn{
-    border:2px solid var(--line);background:#fff;color:#5C564C;font-weight:900;font-size:14px;
-    border-radius:999px;min-height:48px;padding:0 15px;display:inline-flex;align-items:center;gap:6px;
+    border:2px solid var(--line);background:#fff;color:#5C564C;font-weight:900;font-size:13px;
+    border-radius:999px;min-height:40px;padding:0 12px;display:inline-flex;align-items:center;gap:5px;
     transition:transform .12s ease,background .15s ease;
   }
   .tool-btn:active{transform:scale(.96)}
@@ -97,7 +97,7 @@
   .tool-btn.on{background:#EAF7EC;border-color:#BFE3C6;color:#2F7A3C}
 
   /* ---------------- layout ---------------- */
-  .board{max-width:1420px;margin:0 auto;padding:18px 20px 60px}
+  .board{max-width:1420px;margin:0 auto;padding:9px 16px 12px}
   .panel{display:none}
   .panel.active{display:block;animation:fadeIn .25s ease}
   @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -131,18 +131,19 @@
 
   /* ---------------- hero ---------------- */
   .hero{
-    display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;
+    display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 10px;align-items:center;align-content:center;
     background:
       radial-gradient(520px 240px at 0% 0%, #FFF3B8 0%, rgba(255,243,184,0) 70%),
       linear-gradient(120deg,#FFFBE6 0%,#FFFFFF 52%,#EDF6FF 100%);
-    border:3px solid #FFE07A;box-shadow:0 12px 28px rgba(214,180,40,.16);
-    border-radius:26px;padding:10px 18px;margin-bottom:14px;position:relative;overflow:hidden;
+    border:3px solid #FFE07A;box-shadow:0 10px 24px rgba(214,180,40,.16);
+    border-radius:22px;padding:10px 14px;margin-bottom:0;position:relative;overflow:hidden;
+    min-width:0;
   }
   .hero::after{
     content:"";position:absolute;right:-60px;top:-70px;width:240px;height:240px;border-radius:50%;
     background:radial-gradient(circle,rgba(255,203,5,.22),rgba(255,203,5,0) 70%);pointer-events:none;
   }
-  .hero-pika{width:78px;height:78px;flex:none;animation:pikaBob 2.6s ease-in-out infinite}
+  .hero-pika{width:60px;height:60px;flex:none;animation:pikaBob 2.6s ease-in-out infinite}
   @keyframes pikaBob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(2deg)}}
   .hero-main{min-width:0}
   .hero-top{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
@@ -179,18 +180,20 @@
   @keyframes runnerHop{0%,100%{transform:translate(-50%,-56%)}50%{transform:translate(-50%,-64%)}}
   .hp-labels{display:flex;justify-content:space-between;font-size:10px;font-weight:900;color:#A79E8B;margin-top:2px}
 
-  .hero-side{display:flex;flex-direction:column;gap:6px;min-width:152px}
+  .hero-side{grid-column:1 / -1;display:flex;flex-direction:row;gap:6px;min-width:0}
+  .hero-side .stat-pill{flex:1 1 0;min-width:0;padding:5px 9px}
+  .hero-side .mini{width:16px;height:16px}
   .stat-pill{
-    display:flex;align-items:center;gap:7px;background:#fff;border:2px solid #F0E7D2;
-    border-radius:13px;padding:6px 11px;
+    display:flex;align-items:center;gap:5px;background:#fff;border:2px solid #F0E7D2;
+    border-radius:11px;padding:5px 9px;
   }
-  .stat-pill .stat-k{font-size:11.5px;font-weight:900;color:var(--muted)}
-  .stat-pill .stat-v{margin-left:auto;font-size:17px;font-weight:900;letter-spacing:-.5px}
+  .stat-pill .stat-k{font-size:10.5px;font-weight:900;color:var(--muted);white-space:nowrap}
+  .stat-pill .stat-v{margin-left:auto;font-size:15px;font-weight:900;letter-spacing:-.4px;white-space:nowrap}
   .stat-pill.balls{background:#FFF6F5;border-color:#FFD7D2}
-  .stat-pill .mini{width:19px;height:19px;flex:none}
+  .stat-pill .mini{width:16px;height:16px;flex:none}
   .hero-gacha{
-    border:none;background:linear-gradient(180deg,#FF5B4E,#E8362B);color:#fff;font-weight:900;font-size:13px;
-    border-radius:13px;padding:8px 12px;box-shadow:0 7px 14px rgba(232,54,43,.26);
+    border:none;background:linear-gradient(180deg,#FF5B4E,#E8362B);color:#fff;font-weight:900;font-size:12px;
+    border-radius:11px;padding:6px 11px;box-shadow:0 6px 12px rgba(232,54,43,.26);white-space:nowrap;flex:none;
   }
 
   /* ---------------- routine cards ---------------- */
@@ -236,46 +239,50 @@
   .rcard.pulse{animation:cardPulse .55s ease}
   @keyframes cardPulse{0%{box-shadow:0 0 0 0 rgba(255,203,5,.7)}100%{box-shadow:0 0 0 22px rgba(255,203,5,0)}}
 
-  /* ---------------- today row: academy + homeschool ---------------- */
-  .today-row{display:grid;grid-template-columns:1fr 1fr;gap:13px;align-items:stretch}
-  .today-row .card{padding:16px 18px}
-  .today-row .sec-head{gap:8px;margin-bottom:10px}
-  .today-row h2{font-size:20px}
-  .today-academy{display:flex;flex-wrap:wrap;gap:10px}
+  /* ---------------- home grid: hero | today cards + weather ---------------- */
+  .home-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:stretch;margin-bottom:10px}
+  .home-right{display:flex;flex-direction:column;gap:8px;min-width:0}
+  .card.today-card{padding:9px 12px;border-radius:18px;min-width:0;flex:1 1 auto;display:flex;flex-direction:column}
+  .today-card .sec-head{margin-bottom:6px;gap:6px}
+  .today-card h2{font-size:17px;letter-spacing:-.6px}
+  .today-card .count-pill{font-size:12.5px;padding:3px 9px;border-width:2px}
+  .today-card .link-btn{font-size:12px;padding:2px 3px}
+  .home-right .wx-strip{flex:none;min-height:0;padding:7px 11px}
+  .today-academy{display:flex;flex-wrap:wrap;gap:7px}
   .today-academy .empty-soft{flex:1 1 100%}
   .today-class{
-    flex:1 1 330px;max-width:660px;
-    display:flex;align-items:center;gap:14px;background:#F7FBFF;border:2px solid #DCEBFA;
-    border-radius:18px;padding:15px 17px;
+    flex:1 1 100%;max-width:none;
+    display:flex;align-items:center;gap:10px;background:#F7FBFF;border:2px solid #DCEBFA;
+    border-radius:13px;padding:7px 10px;
   }
   .today-class .t-time{
-    background:#fff;border:2px solid #CDE2F8;color:#2C6BA8;font-weight:900;font-size:16px;
-    border-radius:12px;padding:8px 12px;white-space:nowrap;font-variant-numeric:tabular-nums;
+    background:#fff;border:2px solid #CDE2F8;color:#2C6BA8;font-weight:900;font-size:12.5px;
+    border-radius:9px;padding:4px 8px;white-space:nowrap;font-variant-numeric:tabular-nums;
   }
-  .today-class .t-name{font-size:22px;font-weight:900;letter-spacing:-.5px}
-  .today-class .t-memo{font-size:13.5px;font-weight:800;color:#8A8377;margin-top:2px}
+  .today-class .t-name{font-size:16.5px;font-weight:900;letter-spacing:-.4px;line-height:1.2}
+  .today-class .t-memo{font-size:11.5px;font-weight:800;color:#8A8377;margin-top:1px}
   .today-class .t-body{min-width:0}
   .empty-soft{
-    background:#F8F6F0;border:2px dashed #E4DCCB;border-radius:18px;padding:22px;text-align:center;
-    font-weight:900;color:#8A8377;font-size:16px;line-height:1.5;
+    background:#F8F6F0;border:2px dashed #E4DCCB;border-radius:13px;padding:11px;text-align:center;
+    font-weight:900;color:#8A8377;font-size:13.5px;line-height:1.4;
   }
-  .empty-soft small{font-weight:800;font-size:12px;color:#A79E8B}
+  .empty-soft small{font-weight:800;font-size:11px;color:#A79E8B}
 
   /* ---------------- today's homeschool (home card) ---------------- */
-  .hs-list{display:flex;flex-direction:column;gap:7px}
+  .hs-list{display:flex;flex-direction:column;gap:5px}
   .hs-item{
-    display:flex;align-items:center;gap:10px;width:100%;text-align:left;font-family:inherit;
-    background:#FFFDF6;border:2px solid #F2E8CF;border-radius:14px;padding:7px 11px;
+    display:flex;align-items:center;gap:8px;width:100%;text-align:left;font-family:inherit;
+    background:#FFFDF6;border:2px solid #F2E8CF;border-radius:11px;padding:4px 9px;
     transition:transform .12s ease,background .15s ease,border-color .15s ease;
   }
   .hs-item:active{transform:scale(.98)}
   .hs-item .hs-check{
-    width:29px;height:29px;flex:none;border-radius:50%;border:2.5px solid #DCD4C2;background:#fff;
-    display:flex;align-items:center;justify-content:center;color:transparent;font-size:15px;font-weight:900;
+    width:24px;height:24px;flex:none;border-radius:50%;border:2.5px solid #DCD4C2;background:#fff;
+    display:flex;align-items:center;justify-content:center;color:transparent;font-size:13px;font-weight:900;
   }
-  .hs-item .hs-label{flex:1;font-size:16.5px;font-weight:900;letter-spacing:-.3px;line-height:1.2;word-break:keep-all}
-  .hs-item .hs-ball{font-size:11.5px;font-weight:900;color:#B0A896;white-space:nowrap;display:flex;align-items:center;gap:3px}
-  .hs-item .hs-ball .mini{width:14px;height:14px}
+  .hs-item .hs-label{flex:1;font-size:15.5px;font-weight:900;letter-spacing:-.3px;line-height:1.15;word-break:keep-all}
+  .hs-item .hs-ball{font-size:10.5px;font-weight:900;color:#B0A896;white-space:nowrap;display:flex;align-items:center;gap:3px}
+  .hs-item .hs-ball .mini{width:13px;height:13px}
   .hs-item.done{background:#F4FBF4;border-color:#CBE8CE}
   .hs-item.done .hs-check{background:var(--green);border-color:var(--green);color:#fff}
   .hs-item.done .hs-label{color:#9CB6A0;text-decoration:line-through}
@@ -285,17 +292,17 @@
   /* ---------------- bottom slim strips (weather + affirmation) ---------------- */
   .home-bottom{display:grid;grid-template-columns:1.25fr 1fr;gap:13px;margin-top:13px;align-items:stretch}
   .wx-strip{
-    display:flex;align-items:center;gap:9px;flex-wrap:wrap;
-    min-height:56px;padding:0 14px;
+    display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+    min-height:38px;padding:0 12px;
   }
-  .wx-strip .wico{font-size:22px;line-height:1}
-  .wx-strip .wtemp{font-size:21px;font-weight:900;letter-spacing:-.8px;line-height:1}
-  .wx-strip .wdesc{font-size:12.5px;font-weight:900;color:#6C665C}
-  .wx-strip .wsep{width:1px;height:20px;background:#EDE7D9}
-  .wx-strip .wtip{font-size:12px;font-weight:900;color:#8A8377;white-space:nowrap}
-  .wx-strip .wmeta{font-size:11.5px;font-weight:800;color:#A79E8B;white-space:nowrap}
+  .wx-strip .wico{font-size:18px;line-height:1}
+  .wx-strip .wtemp{font-size:18px;font-weight:900;letter-spacing:-.6px;line-height:1}
+  .wx-strip .wdesc{font-size:11.5px;font-weight:900;color:#6C665C}
+  .wx-strip .wsep{width:1px;height:16px;background:#EDE7D9}
+  .wx-strip .wtip{font-size:11px;font-weight:900;color:#8A8377;white-space:nowrap}
+  .wx-strip .wmeta{font-size:10.5px;font-weight:800;color:#A79E8B;white-space:nowrap}
   .wx-strip .retry{margin-left:auto;flex:none}
-  .badge{font-size:11px;font-weight:900;border-radius:999px;padding:5px 9px;background:#F1EFE8;color:#5D574B;white-space:nowrap}
+  .badge{font-size:10px;font-weight:900;border-radius:999px;padding:4px 8px;background:#F1EFE8;color:#5D574B;white-space:nowrap}
   .badge.good{background:#E6F6E8;color:#2F7A3C}
   .badge.moderate{background:#FFF3DE;color:#9A6B12}
   .badge.bad{background:#FFEADC;color:#B4551F}
@@ -305,15 +312,22 @@
   .skel{background:linear-gradient(90deg,#F4F0E6 25%,#FAF7F0 50%,#F4F0E6 75%);background-size:200% 100%;animation:sk 1.3s linear infinite;border-radius:16px}
   @keyframes sk{from{background-position:200% 0}to{background-position:-200% 0}}
 
-  /* affirmation strip */
+  /* affirmation strip (top) */
   .affirm-strip{
-    display:flex;align-items:center;gap:11px;min-height:56px;padding:0 18px;
+    display:flex;align-items:center;gap:9px;min-height:38px;padding:0 13px;margin-bottom:9px;overflow:hidden;
     background:linear-gradient(100deg,#FFF3CF 0%,#FFE9E6 55%,#E9F2FF 100%);
-    border:2px solid #FFE0A8;border-radius:19px;
+    border:2px solid #FFE0A8;border-radius:15px;
   }
-  .affirm-strip .a-ico{font-size:22px;flex:none}
-  .affirm-strip .a-text{font-size:14.5px;font-weight:900;letter-spacing:-.3px;line-height:1.35}
-  .affirm-strip .a-sub{margin-left:auto;font-size:11px;font-weight:800;color:#9A8B72;white-space:nowrap}
+  .affirm-strip .a-ico{font-size:17px;flex:none}
+  .affirm-strip .a-tag{
+    font-size:10.5px;font-weight:900;color:#8A6B12;background:#FFF3BF;border:1.5px solid #FFE08A;
+    border-radius:999px;padding:2px 8px;flex:none;white-space:nowrap;
+  }
+  .affirm-strip .a-text{
+    font-size:13.5px;font-weight:900;letter-spacing:-.3px;line-height:1.3;min-width:0;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .affirm-strip .a-sub{margin-left:auto;font-size:10.5px;font-weight:800;color:#9A8B72;white-space:nowrap;flex:none}
 
   /* ---------------- academy / study (shared) ---------------- */
   .week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:9px}
@@ -531,66 +545,60 @@
   @media (max-width:1180px){
     .week-grid{grid-template-columns:repeat(4,1fr)}
     .form-grid{grid-template-columns:1fr 1fr}
-    .routine-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
-    .rcard{padding:8px 8px 9px;border-radius:19px;gap:7px}
-    .rcard .illu{aspect-ratio:1/1;border-radius:14px}
-    .rcard .r-title{font-size:14.5px;letter-spacing:-.5px;line-height:1.2}
-    .rcard .cta{font-size:11px;padding:7px 4px;gap:3px}
-    .rcard .cta .mini{width:14px;height:14px}
-    .rcard .step{width:27px;height:27px;font-size:14px;border-width:2.5px;top:7px;left:7px}
-    .rcard .stamp{width:30px;height:30px;font-size:18px;border-width:2.5px;top:8px;right:8px}
+    .routine-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}
+    .rcard{padding:6px 6px 7px;border-radius:14px;gap:4px}
+    .rcard .illu{aspect-ratio:4/3;border-radius:9px}
+    .rcard .r-title{font-size:12px;letter-spacing:-.4px}
+    .rcard .cta{font-size:9.5px;padding:5px 2px}
+    .rcard .cta .mini{width:11px;height:11px}
+    .rcard .step{width:20px;height:20px;font-size:10.5px;top:4px;left:4px}
+    .rcard .stamp{width:21px;height:21px;font-size:12px;top:5px;right:5px}
+    .hero-pika{width:54px;height:54px}
+    .hero-count{font-size:clamp(22px,2.6vw,28px)}
+    .home-grid{gap:9px}
+    .today-card h2{font-size:16px}
   }
   @media (max-width:1000px){
-    .today-row{grid-template-columns:1fr}
-  }
-  @media (max-width:900px){
-    .routine-grid{grid-template-columns:repeat(3,1fr);gap:12px}
-    .rcard{padding:12px}
-    .rcard .illu{aspect-ratio:4/3}
-    .rcard .r-title{font-size:17px}
-    .rcard .cta{font-size:12.5px;padding:9px 6px}
-    .rcard .step{width:34px;height:34px;font-size:17px;top:10px;left:10px}
-    .rcard .stamp{width:38px;height:38px;font-size:22px;top:10px;right:10px}
-  }
-  @media (max-width:1000px){
-    .hero{grid-template-columns:auto 1fr;gap:16px}
-    .hero-side{grid-column:1 / -1;flex-direction:row;flex-wrap:wrap;min-width:0}
-    .hero-side .stat-pill,.hero-gacha{flex:1;min-width:130px;justify-content:center}
-    .home-bottom{grid-template-columns:1fr}
+    .home-grid{grid-template-columns:1fr}
+    .hero{grid-template-columns:auto minmax(0,1fr)}
     .affirm-strip .a-sub{display:none}
     .dex-hero{grid-template-columns:1fr}
     .dex-stats{justify-content:flex-start}
     .gacha-row{grid-template-columns:1fr;max-width:none}
   }
-  @media (max-width:720px){
-    .board{padding:12px 12px 48px}
-    .topbar-inner{padding:8px 12px;gap:8px}
-    .brand-title{font-size:17px}
-    .brand-sub{font-size:11px}
-    .tab{font-size:13px;padding:10px 12px;min-height:44px}
-    .top-tools{margin-left:0;width:100%}
-    .tool-btn{flex:1;justify-content:center;min-height:42px}
-    .hero{padding:10px 12px;gap:10px}
-    .hero-pika{width:58px;height:58px}
-    .hero-clock{font-size:16px}
-    .hero-name{font-size:17px}
-    .hero-meta{font-size:11px}
-    .hero-count{font-size:clamp(21px,4.6vw,26px)}
-    .hs-item .hs-label{font-size:15px}
-    .routine-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  @media (max-width:900px){
+    .routine-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .rcard{padding:8px}
     .rcard .illu{aspect-ratio:4/3}
-    .rcard .r-title{font-size:16px}
-    .rcard .cta{font-size:11.5px;padding:9px 4px}
+    .rcard .r-title{font-size:14px}
+    .rcard .cta{font-size:11px;padding:6px 4px}
+    .rcard .step{width:24px;height:24px;font-size:12px;top:6px;left:6px}
+    .rcard .stamp{width:26px;height:26px;font-size:14px;top:6px;right:6px}
+  }
+  @media (max-width:720px){
+    .board{padding:8px 10px 16px}
+    .topbar-inner{padding:6px 10px;gap:8px}
+    .brand-title{font-size:16px}
+    .brand-sub{font-size:10px}
+    .tab{font-size:12.5px;padding:7px 10px;min-height:36px}
+    .top-tools{margin-left:0;width:100%}
+    .tool-btn{flex:1;justify-content:center;min-height:36px}
+    .hero{padding:9px 11px;gap:6px 8px}
+    .hero-pika{width:48px;height:48px}
+    .hero-clock{font-size:15px}
+    .hero-name{font-size:16px}
+    .hero-meta{font-size:10.5px}
+    .hero-count{font-size:clamp(19px,4.6vw,24px)}
+    .hs-item .hs-label{font-size:14.5px}
+    .routine-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    .rcard .r-title{font-size:14px}
     .wx-strip .wsep{display:none}
     .wx-strip .wtip{white-space:normal}
     .week-grid{grid-template-columns:1fr 1fr}
     .form-grid{grid-template-columns:1fr}
-    .today-class .t-name{font-size:17px}
-    .day-tab{min-width:56px;padding:8px 9px}
+    .today-class .t-name{font-size:16px}
+    .day-tab{min-width:56px;padding:7px 8px}
     .day-tab small{font-size:9px}
-  }
-  @media (min-width:1500px){
-    .rcard .illu{aspect-ratio:5/4}
   }
 </style>
 </head>
@@ -632,6 +640,15 @@
   <!-- ================= DASHBOARD ================= -->
   <section class="panel active" id="panel-home">
 
+    <!-- 오늘의 확언 (상단 얇은 띠) -->
+    <div class="affirm-strip">
+      <span class="a-ico">✨</span>
+      <span class="a-tag">오늘의 확언</span>
+      <span class="a-text" id="affirmText">—</span>
+      <span class="a-sub">엄마가 응원한대!</span>
+    </div>
+
+    <div class="home-grid">
     <!-- hero -->
     <section class="hero">
       <div class="hero-pika">
@@ -711,7 +728,36 @@
       </div>
     </section>
 
-    <!-- 6 routine cards -->
+      <!-- 오른쪽 절반: 오늘의 학원 + 오늘의 홈스쿨 + 날씨 -->
+      <div class="home-right">
+        <div class="card today-card">
+          <div class="sec-head">
+            <h2>🏫 오늘의 학원 스케줄</h2>
+            <div class="spacer"></div>
+            <button class="link-btn" type="button" data-act="goto" data-tab="academy">전체 보기 →</button>
+            <button class="link-btn" type="button" data-act="academy-add">+ 학원 추가</button>
+          </div>
+          <div id="todayAcademy" class="today-academy"></div>
+        </div>
+
+        <div class="card today-card">
+          <div class="sec-head">
+            <h2>📚 오늘의 홈스쿨</h2>
+            <span class="count-pill" id="homeHsCount">0/0</span>
+            <div class="spacer"></div>
+            <button class="link-btn" type="button" data-act="hs-add">+ 홈스쿨 추가</button>
+            <button class="link-btn" type="button" data-act="goto" data-tab="study">전체 보기 →</button>
+          </div>
+          <div id="homeHomeschool" class="hs-list"></div>
+        </div>
+
+        <div class="card wx-strip" id="weatherBody">
+          <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 아침 루틴 (맨 아래) -->
     <section class="routine-wrap">
       <div class="sec-head">
         <h2>🎒 아침 루틴 6단계</h2>
@@ -722,43 +768,6 @@
       </div>
       <div class="routine-grid" id="routineGrid"></div>
     </section>
-
-    <!-- today: academy + homeschool -->
-    <div class="today-row">
-      <div class="card">
-        <div class="sec-head">
-          <h2>🏫 오늘의 학원 스케줄</h2>
-          <span class="hint">오늘 하루 일정</span>
-          <div class="spacer"></div>
-          <button class="link-btn" type="button" data-act="goto" data-tab="academy">전체 보기 →</button>
-          <button class="btn btn-yellow" style="padding:8px 12px;font-size:13px;min-height:38px" type="button" data-act="academy-add">+ 학원 추가</button>
-        </div>
-        <div id="todayAcademy" class="today-academy"></div>
-      </div>
-
-      <div class="card">
-        <div class="sec-head">
-          <h2>📚 오늘의 홈스쿨</h2>
-          <span class="count-pill" id="homeHsCount">0/0</span>
-          <div class="spacer"></div>
-          <button class="link-btn" type="button" data-act="hs-add">+ 홈스쿨 추가</button>
-          <button class="link-btn" type="button" data-act="goto" data-tab="study">전체 보기 →</button>
-        </div>
-        <div id="homeHomeschool" class="hs-list"></div>
-      </div>
-    </div>
-
-    <!-- slim strips: weather · affirmation -->
-    <div class="home-bottom">
-      <div class="card wx-strip" id="weatherBody">
-        <span class="skel" style="height:20px;width:100%;border-radius:10px"></span>
-      </div>
-      <div class="affirm-strip">
-        <span class="a-ico">✨</span>
-        <span class="a-text" id="affirmText">—</span>
-        <span class="a-sub">엄마가 응원한대!</span>
-      </div>
-    </div>
   </section>
 
   <!-- ================= ACADEMY ================= -->
