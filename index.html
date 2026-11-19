@@ -195,9 +195,9 @@
 
   /* ---------------- routine cards ---------------- */
   .routine-wrap{margin-bottom:14px}
-  .routine-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  .routine-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
   .rcard{
-    position:relative;display:flex;flex-direction:column;gap:10px;text-align:left;
+    position:relative;display:flex;flex-direction:column;gap:10px;text-align:left;min-width:0;
     background:#fff;border:3px solid #EFE6D2;border-radius:28px;padding:14px 14px 13px;
     box-shadow:var(--shadow);transition:transform .14s ease,box-shadow .18s ease,border-color .18s ease,background .18s ease;
     min-height:0;
@@ -212,6 +212,7 @@
   }
   .rcard .illu{
     aspect-ratio:5/4;border-radius:20px;overflow:hidden;background:#FFF9EE;display:flex;align-items:center;justify-content:center;
+    width:100%;min-width:0;
   }
   .rcard .illu img{width:100%;height:100%;object-fit:cover;object-position:center 28%;display:block}
   .rcard .illu .emoji{font-size:70px;line-height:1}
@@ -236,7 +237,7 @@
   @keyframes cardPulse{0%{box-shadow:0 0 0 0 rgba(255,203,5,.7)}100%{box-shadow:0 0 0 22px rgba(255,203,5,0)}}
 
   /* ---------------- today row: academy + homeschool ---------------- */
-  .today-row{display:grid;grid-template-columns:1fr 1fr;gap:13px;align-items:start}
+  .today-row{display:grid;grid-template-columns:1fr 1fr;gap:13px;align-items:stretch}
   .today-row .card{padding:16px 18px}
   .today-row .sec-head{gap:8px;margin-bottom:10px}
   .today-row h2{font-size:20px}
@@ -492,7 +493,7 @@
   @media (max-width:1180px){
     .week-grid{grid-template-columns:repeat(4,1fr)}
     .form-grid{grid-template-columns:1fr 1fr}
-    .routine-grid{grid-template-columns:repeat(6,1fr);gap:8px}
+    .routine-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
     .rcard{padding:8px 8px 9px;border-radius:19px;gap:7px}
     .rcard .illu{aspect-ratio:1/1;border-radius:14px}
     .rcard .r-title{font-size:14.5px;letter-spacing:-.5px;line-height:1.2}
