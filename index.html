@@ -467,14 +467,27 @@
   @media (max-width:1180px){
     .week-grid{grid-template-columns:repeat(4,1fr)}
     .form-grid{grid-template-columns:1fr 1fr}
+    .routine-grid{grid-template-columns:repeat(5,1fr);gap:10px}
+    .rcard{padding:10px 10px 11px;border-radius:22px}
+    .rcard .illu{aspect-ratio:1/1;border-radius:16px}
+    .rcard .r-title{font-size:15.5px}
+    .rcard .cta{font-size:11.5px;padding:8px 4px}
+    .rcard .step{width:30px;height:30px;font-size:15px;top:8px;left:8px}
+    .rcard .stamp{width:34px;height:34px;font-size:20px;top:9px;right:9px}
+  }
+  @media (max-width:900px){
     .routine-grid{grid-template-columns:repeat(3,1fr);gap:12px}
+    .rcard{padding:12px}
     .rcard .illu{aspect-ratio:4/3}
+    .rcard .r-title{font-size:17px}
+    .rcard .cta{font-size:12.5px;padding:9px 6px}
+    .rcard .step{width:34px;height:34px;font-size:17px;top:10px;left:10px}
+    .rcard .stamp{width:38px;height:38px;font-size:22px;top:10px;right:10px}
   }
   @media (max-width:1000px){
     .hero{grid-template-columns:auto 1fr;gap:16px}
     .hero-side{grid-column:1 / -1;flex-direction:row;flex-wrap:wrap;min-width:0}
     .hero-side .stat-pill,.hero-gacha{flex:1;min-width:130px;justify-content:center}
-    .routine-grid{grid-template-columns:repeat(3,1fr)}
     .home-bottom{grid-template-columns:1fr}
     .affirm-strip .a-sub{display:none}
     .dex-hero{grid-template-columns:1fr}
