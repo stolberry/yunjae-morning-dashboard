@@ -98,7 +98,7 @@
   .tool-btn.on{background:#EAF7EC;border-color:#BFE3C6;color:#2F7A3C}
 
   /* ---------------- layout ---------------- */
-  .board{max-width:1420px;width:100%;margin:0 auto;padding:9px 16px 12px;flex:1 1 auto;display:flex;flex-direction:column;min-height:0}
+  .board{max-width:1480px;width:100%;margin:0 auto;padding:9px 16px 12px;flex:1 1 auto;display:flex;flex-direction:column;min-height:0}
   .panel{display:none}
   .panel.active{display:block;animation:fadeIn .25s ease;flex:1 1 auto;min-height:0}
   /* 홈 화면은 태블릿 한 화면에 맞추기: 남는 높이는 루틴 위 여백으로 */
@@ -132,42 +132,55 @@
   .btn-ghost{background:#F3EEE1;color:#6C665C}
   .link-btn{border:none;background:none;color:var(--blue);font-weight:900;font-size:13px;padding:6px}
 
-  /* ---------------- hero ---------------- */
+  /* ---------------- hero (왼쪽 절반, 세로 구성) ---------------- */
   .hero{
-    display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 10px;align-items:center;align-content:center;
+    display:flex;flex-direction:column;gap:6px;justify-content:flex-start;
     background:
       radial-gradient(520px 240px at 0% 0%, #FFF3B8 0%, rgba(255,243,184,0) 70%),
       linear-gradient(120deg,#FFFBE6 0%,#FFFFFF 52%,#EDF6FF 100%);
     border:3px solid #FFE07A;box-shadow:0 10px 24px rgba(214,180,40,.16);
-    border-radius:22px;padding:10px 14px;margin-bottom:0;position:relative;overflow:hidden;
-    min-width:0;
+    border-radius:22px;padding:12px 16px;position:relative;overflow:hidden;min-width:0;
   }
   .hero::after{
     content:"";position:absolute;right:-60px;top:-70px;width:240px;height:240px;border-radius:50%;
     background:radial-gradient(circle,rgba(255,203,5,.22),rgba(255,203,5,0) 70%);pointer-events:none;
   }
-  .hero-pika{width:60px;height:60px;flex:none;animation:pikaBob 2.6s ease-in-out infinite}
-  @keyframes pikaBob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(2deg)}}
-  .hero-main{min-width:0}
-  .hero-top{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
-  .hero-name{font-size:19px;font-weight:900;letter-spacing:-.5px}
-  .hero-meta{font-size:12px;font-weight:900;color:#8A6B12;background:#FFF3BF;border-radius:999px;padding:3px 10px}
-  .hero-clock{
-    margin-left:auto;font-size:19px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.3px;
-    color:#3A3428;
+  .hero-datetime{display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+  .dt-date{
+    font-size:13px;font-weight:900;color:#7A5B00;background:#FFF3BF;border:1.5px solid #FFE08A;
+    border-radius:999px;padding:3px 10px;white-space:nowrap;letter-spacing:-.3px;
   }
-  .hero-date{font-size:11px;font-weight:800;color:var(--muted);width:100%;margin-top:0}
+  .dt-clock{
+    margin-left:auto;font-size:19px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.4px;
+    color:#fff;background:#3A3428;border-radius:999px;padding:4px 12px;white-space:nowrap;
+    box-shadow:0 4px 10px rgba(58,52,40,.18);
+  }
+  .hero-top{display:flex;align-items:center;gap:10px;position:relative;z-index:1}
+  .hero-pika{width:54px;height:54px;flex:none;animation:pikaBob 2.6s ease-in-out infinite}
+  @keyframes pikaBob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(2deg)}}
+  .hero-id{flex:1;min-width:0}
+  .hero-name{font-size:20px;font-weight:900;letter-spacing:-.6px;line-height:1.1}
+  .hero-meta{
+    display:inline-block;margin-top:3px;font-size:11px;font-weight:900;color:#8A6B12;
+    background:#FFF3BF;border:1.5px solid #FFE08A;border-radius:999px;padding:2px 9px;white-space:nowrap;
+  }
+  .hero-date{font-size:11px;font-weight:800;color:var(--muted);margin-top:3px}
+  .hero-clock{
+    margin-left:auto;font-size:20px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.5px;
+    color:#3A3428;flex:none;
+  }
+  .hero-mid{display:flex;flex-direction:column;gap:4px;margin:auto 0;min-width:0}
   .hero-count{
-    font-size:clamp(25px,2.5vw,33px);font-weight:900;letter-spacing:-1.2px;line-height:1.15;
-    color:#2B2A26;margin:2px 0 1px;
+    font-size:clamp(24px,2.35vw,34px);font-weight:900;letter-spacing:-1.3px;line-height:1.12;
+    color:#2B2A26;margin:2px 0 0;
   }
   .hero-count.done{color:#2F7A3C}
   .hero-count.urgent{color:#D93A2B;animation:pulseUrgent 1s ease-in-out infinite}
   @keyframes pulseUrgent{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
-  .hero-status{font-size:13px;font-weight:900;color:#7A6A46}
-  .hero-progress{margin-top:6px;position:relative;padding-right:5px}
+  .hero-status{font-size:12.5px;font-weight:900;color:#7A6A46}
+  .hero-progress{position:relative;padding-right:5px;margin-top:3px}
   .hp-track{
-    height:13px;border-radius:999px;background:#EFEADC;border:2px solid #E2DBC8;
+    height:14px;border-radius:999px;background:#EFEADC;border:2px solid #E2DBC8;
     position:relative;overflow:visible;
   }
   .hp-fill{
@@ -176,27 +189,26 @@
   }
   .hp-runner{
     position:absolute;top:50%;left:0;transform:translate(-50%,-56%);
-    width:27px;height:27px;transition:left .8s cubic-bezier(.3,.9,.3,1);pointer-events:none;
+    width:28px;height:28px;transition:left .8s cubic-bezier(.3,.9,.3,1);pointer-events:none;
     filter:drop-shadow(0 2px 3px rgba(0,0,0,.16));
   }
   .hp-runner.run{animation:runnerHop .7s ease-in-out infinite}
   @keyframes runnerHop{0%,100%{transform:translate(-50%,-56%)}50%{transform:translate(-50%,-64%)}}
   .hp-labels{display:flex;justify-content:space-between;font-size:10px;font-weight:900;color:#A79E8B;margin-top:2px}
 
-  .hero-side{grid-column:1 / -1;display:flex;flex-direction:row;gap:6px;min-width:0}
-  .hero-side .stat-pill{flex:1 1 0;min-width:0;padding:5px 9px}
-  .hero-side .mini{width:16px;height:16px}
+  .hero-side{display:flex;gap:7px;min-width:0;margin-top:4px}
+  .hero-side .stat-pill{flex:1 1 0;min-width:0;padding:6px 10px}
   .stat-pill{
     display:flex;align-items:center;gap:5px;background:#fff;border:2px solid #F0E7D2;
-    border-radius:11px;padding:5px 9px;
+    border-radius:12px;padding:6px 10px;
   }
-  .stat-pill .stat-k{font-size:10.5px;font-weight:900;color:var(--muted);white-space:nowrap}
-  .stat-pill .stat-v{margin-left:auto;font-size:15px;font-weight:900;letter-spacing:-.4px;white-space:nowrap}
+  .stat-pill .stat-k{font-size:11px;font-weight:900;color:var(--muted);white-space:nowrap}
+  .stat-pill .stat-v{margin-left:auto;font-size:16px;font-weight:900;letter-spacing:-.4px;white-space:nowrap}
   .stat-pill.balls{background:#FFF6F5;border-color:#FFD7D2}
   .stat-pill .mini{width:16px;height:16px;flex:none}
   .hero-gacha{
-    border:none;background:linear-gradient(180deg,#FF5B4E,#E8362B);color:#fff;font-weight:900;font-size:12px;
-    border-radius:11px;padding:6px 11px;box-shadow:0 6px 12px rgba(232,54,43,.26);white-space:nowrap;flex:none;
+    border:none;background:linear-gradient(180deg,#FF5B4E,#E8362B);color:#fff;font-weight:900;font-size:12.5px;
+    border-radius:12px;padding:7px 12px;box-shadow:0 6px 12px rgba(232,54,43,.26);white-space:nowrap;flex:none;
   }
 
   /* ---------------- routine cards ---------------- */
@@ -245,56 +257,90 @@
   .rcard.pulse{animation:cardPulse .55s ease}
   @keyframes cardPulse{0%{box-shadow:0 0 0 0 rgba(255,203,5,.7)}100%{box-shadow:0 0 0 22px rgba(255,203,5,0)}}
 
-  /* ---------------- home grid: hero | today cards + weather ---------------- */
-  .home-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:stretch;margin:auto 0;flex:0 0 auto;min-height:0}
-  .home-right{display:flex;flex-direction:column;gap:8px;min-width:0;justify-content:center}
-  .card.today-card{padding:9px 12px;border-radius:18px;min-width:0;flex:0 0 auto;display:flex;flex-direction:column}
-  .today-card .sec-head{margin-bottom:6px;gap:6px}
-  .today-card h2{font-size:17px;letter-spacing:-.6px}
-  .today-card .count-pill{font-size:12.5px;padding:3px 9px;border-width:2px}
-  .today-card .link-btn{font-size:12px;padding:2px 3px}
-  .home-right .wx-strip{flex:none;min-height:0;padding:6px 10px;flex-wrap:nowrap;overflow:hidden;white-space:nowrap;gap:6px}
-  .home-right .wx-strip .badge + .badge{display:none}
-  .today-academy{display:flex;flex-wrap:wrap;gap:7px}
-  .today-academy .empty-soft{flex:1 1 100%}
+  /* ---------------- home grid: 등교 | 학원 | 공부 + 날씨 ---------------- */
+  .home-grid{
+    display:grid;gap:10px;flex:1 1 auto;min-height:0;
+    grid-template-columns:1.34fr 1fr 1fr;
+    grid-template-rows:minmax(0,1fr) auto;
+    grid-template-areas:"hero acad study" "hero wx wx";
+  }
+  .home-grid > .hero{grid-area:hero}
+  .home-grid > .acad-card{grid-area:acad}
+  .home-grid > .study-card{grid-area:study}
+  .home-grid > #weatherBody{grid-area:wx}
+  .card.today-card{padding:10px 13px;border-radius:20px;min-width:0;display:flex;flex-direction:column;overflow:hidden}
+  .today-card .sec-head{margin-bottom:7px;gap:6px;flex:none}
+  .today-card h2{font-size:18px;letter-spacing:-.6px}
+  .today-card .count-pill{font-size:13px;padding:3px 10px;border-width:2px}
+  .today-card .link-btn{font-size:12.5px;padding:2px 2px}
+  .home-grid > #weatherBody{min-height:0;padding:8px 12px;flex-wrap:nowrap;overflow:hidden;white-space:nowrap;gap:7px}
+  .home-grid > #weatherBody .badge + .badge{display:none}
+
+  /* 학원 카드 */
+  .today-academy{display:flex;flex-direction:column;gap:8px;flex:1 1 auto;min-height:0}
+  .today-academy .today-class{flex:1 1 auto;min-height:58px}
   .today-class{
-    flex:1 1 100%;max-width:none;
-    display:flex;align-items:center;gap:10px;background:#F7FBFF;border:2px solid #DCEBFA;
-    border-radius:13px;padding:7px 10px;
+    display:flex;align-items:center;gap:11px;background:#F7FBFF;border:2px solid #DCEBFA;
+    border-radius:16px;padding:10px 12px;min-width:0;max-width:none;
   }
-  .today-class .t-time{
-    background:#fff;border:2px solid #CDE2F8;color:#2C6BA8;font-weight:900;font-size:12.5px;
-    border-radius:9px;padding:4px 8px;white-space:nowrap;font-variant-numeric:tabular-nums;
+  .today-class .ac-ico{
+    width:44px;height:44px;flex:none;border-radius:13px;background:#fff;border:2px solid #DCEBFA;
+    display:flex;align-items:center;justify-content:center;
   }
-  .today-class .t-name{font-size:16.5px;font-weight:900;letter-spacing:-.4px;line-height:1.2}
-  .today-class .t-memo{font-size:11.5px;font-weight:800;color:#8A8377;margin-top:1px}
-  .today-class .t-body{min-width:0}
+  .today-class .ac-ico svg{width:30px;height:30px;display:block}
+  .today-class .t-body{min-width:0;flex:1}
+  .today-class .t-name{font-size:19px;font-weight:900;letter-spacing:-.5px;line-height:1.2;word-break:keep-all}
+  .today-class .t-time{font-size:12.5px;font-weight:900;color:#2C6BA8;margin-top:2px;font-variant-numeric:tabular-nums}
+  .today-class .t-memo{font-size:11.5px;font-weight:800;color:#8A8377;margin-top:2px}
   .empty-soft{
     background:#F8F6F0;border:2px dashed #E4DCCB;border-radius:13px;padding:11px;text-align:center;
     font-weight:900;color:#8A8377;font-size:13.5px;line-height:1.4;
   }
   .empty-soft small{font-weight:800;font-size:11px;color:#A79E8B}
 
-  /* ---------------- today's homeschool (home card) ---------------- */
-  .hs-list{display:flex;flex-direction:column;gap:5px}
-  .hs-item{
-    display:flex;align-items:center;gap:8px;width:100%;text-align:left;font-family:inherit;
-    background:#FFFDF6;border:2px solid #F2E8CF;border-radius:10px;padding:2px 8px;
-    transition:transform .12s ease,background .15s ease,border-color .15s ease;
+  /* 학원 없는 날 */
+  .acad-empty{
+    flex:1 1 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
+    background:linear-gradient(180deg,#FFFDF2,#F6FBFF);border:2px dashed #D8E7F7;border-radius:16px;
+    padding:12px;text-align:center;min-height:0;
   }
-  .hs-item:active{transform:scale(.98)}
-  .hs-item .hs-check{
-    width:22px;height:22px;flex:none;border-radius:50%;border:2px solid #DCD4C2;background:#fff;
-    display:flex;align-items:center;justify-content:center;color:transparent;font-size:12px;font-weight:900;
+  .acad-empty .acad-ico{width:62px;height:62px;display:flex;align-items:center;justify-content:center}
+  .acad-empty .acad-ico svg{width:100%;height:100%}
+  .acad-empty .acad-txt{font-size:16px;font-weight:900;color:#3F6E9A;letter-spacing:-.4px;line-height:1.3;word-break:keep-all}
+  .acad-empty .acad-txt small{display:block;font-size:11.5px;font-weight:800;color:#8FA7BD;margin-top:3px}
+  .acad-empty .btn{font-size:12.5px;padding:8px 13px;min-height:38px;border-radius:12px}
+
+  /* ---------------- 공부 타일 (home card) ---------------- */
+  .hs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;grid-auto-rows:1fr;flex:1 1 auto;min-height:0}
+  .hs-tile{
+    display:flex;align-items:center;gap:9px;width:100%;text-align:left;font-family:inherit;height:100%;min-height:56px;
+    background:linear-gradient(180deg,#FFFEFA,#FFF8E6);border:2px solid #F2E8CF;border-radius:16px;padding:8px 10px;
+    transition:transform .12s ease,background .15s ease,border-color .15s ease,box-shadow .15s ease;min-width:0;
   }
-  .hs-item .hs-label{flex:1;font-size:15.5px;font-weight:900;letter-spacing:-.3px;line-height:1.15;word-break:keep-all}
-  .hs-item .hs-ball{font-size:10.5px;font-weight:900;color:#B0A896;white-space:nowrap;display:flex;align-items:center;gap:3px}
-  .hs-item .hs-ball .mini{width:13px;height:13px}
-  .hs-item.done{background:#F4FBF4;border-color:#CBE8CE}
-  .hs-item.done .hs-check{background:var(--green);border-color:var(--green);color:#fff}
-  .hs-item.done .hs-label{color:#9CB6A0;text-decoration:line-through}
-  .hs-item.done .hs-ball{color:#4E9A5C}
-  .hs-empty{background:#F8F6F0;border:2px dashed #E4DCCB;border-radius:16px;padding:16px;text-align:center;font-weight:900;color:#8A8377;font-size:14.5px}
+  .hs-tile:active{transform:scale(.98)}
+  .hs-tile .hs-ico{
+    width:42px;height:42px;flex:none;border-radius:13px;background:#fff;border:2px solid #F0E6D0;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .hs-tile .hs-ico svg{width:29px;height:29px;display:block}
+  .hs-tile .hs-tile-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+  .hs-tile .hs-label{font-size:15.5px;font-weight:900;letter-spacing:-.35px;line-height:1.15;word-break:keep-all}
+  .hs-tile .hs-state{font-size:10.5px;font-weight:900;color:#B0A896;display:flex;align-items:center;gap:3px}
+  .hs-tile .hs-state .mini{width:12px;height:12px;flex:none}
+  .hs-tile .hs-check{
+    width:24px;height:24px;flex:none;border-radius:50%;border:2.5px solid #DCD4C2;background:#fff;
+    display:flex;align-items:center;justify-content:center;color:transparent;font-size:13px;font-weight:900;
+  }
+  .hs-tile.done{background:linear-gradient(180deg,#F7FDF7,#EEF9EF);border-color:#A9DCAF;box-shadow:0 6px 14px rgba(63,163,77,.12)}
+  .hs-tile.done .hs-check{background:var(--green);border-color:var(--green);color:#fff}
+  .hs-tile.done .hs-label{color:#4E9A5C;text-decoration:line-through}
+  .hs-tile.done .hs-state{color:#4E9A5C}
+  .hs-empty{
+    grid-column:1 / -1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    background:linear-gradient(180deg,#FFFDF2,#F7FBFF);border:2px dashed #E4DCCB;border-radius:16px;
+    padding:14px;text-align:center;font-weight:900;color:#8A8377;font-size:14.5px;
+  }
+  .hs-empty svg{width:52px;height:52px;display:block}
 
   /* ---------------- bottom slim strips (weather + affirmation) ---------------- */
   .home-bottom{display:grid;grid-template-columns:1.25fr 1fr;gap:13px;margin-top:13px;align-items:stretch}
@@ -560,18 +606,30 @@
     .rcard .cta .mini{width:11px;height:11px}
     .rcard .step{width:20px;height:20px;font-size:10.5px;top:4px;left:4px}
     .rcard .stamp{width:21px;height:21px;font-size:12px;top:5px;right:5px}
-    .hero-pika{width:54px;height:54px}
-    .hero-count{font-size:clamp(22px,2.6vw,28px)}
-    .home-grid{gap:9px}
+    .hero-pika{width:50px;height:50px}
+    .hero-count{font-size:clamp(21px,2.3vw,28px)}
+    .home-grid{gap:9px;grid-template-columns:1.25fr 1fr 1fr}
     .today-card h2{font-size:16px}
+    .today-class .t-name{font-size:17px}
+    .hs-tile .hs-label{font-size:14px}
+    .hs-tile .hs-ico{width:36px;height:36px}
+    .hs-tile .hs-ico svg{width:25px;height:25px}
+  }
+  @media (max-width:1080px){
+    .home-grid{
+      grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+      grid-template-rows:auto minmax(0,1fr) auto;
+      grid-template-areas:"hero acad" "hero study" "hero wx";
+    }
   }
   @media (max-width:1000px){
-    .home-grid{grid-template-columns:1fr}
-    .hero{grid-template-columns:auto minmax(0,1fr)}
     .affirm-strip .a-sub{display:none}
     .dex-hero{grid-template-columns:1fr}
     .dex-stats{justify-content:flex-start}
     .gacha-row{grid-template-columns:1fr;max-width:none}
+  }
+  @media (max-width:860px){
+    .home-grid{grid-template-columns:1fr;grid-template-rows:auto;grid-template-areas:"hero" "acad" "study" "wx"}
   }
   @media (max-width:900px){
     .routine-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
@@ -606,6 +664,60 @@
     .today-class .t-name{font-size:16px}
     .day-tab{min-width:56px;padding:7px 8px}
     .day-tab small{font-size:9px}
+  }
+
+  /* 넓은 태블릿(갤럭시탭 S8 울트라 등)에서는 화면에 맞게 크게 */
+  @media (min-width:1400px){
+    .brand-title{font-size:19px}
+    .tab{font-size:15px;padding:9px 15px;min-height:44px}
+    .tool-btn{min-height:44px;font-size:13.5px}
+    .affirm-strip{min-height:44px}
+    .affirm-strip .a-text{font-size:15px}
+    .affirm-strip .a-tag{font-size:11.5px}
+    .hero{padding:14px 20px;gap:7px}
+    .hero-pika{width:62px;height:62px}
+    .hero-name{font-size:23px}
+    .hero-meta{font-size:12px}
+    .hero-date{font-size:12px}
+    .hero-clock{font-size:23px}
+    .dt-date{font-size:15px;padding:4px 13px}
+    .dt-clock{font-size:23px;padding:5px 15px}
+    .hero-count{font-size:36px}
+    .hero-status{font-size:14px}
+    .hp-track{height:16px}
+    .hp-runner{width:32px;height:32px}
+    .hp-labels{font-size:11px}
+    .stat-pill .stat-k{font-size:12.5px}
+    .stat-pill .stat-v{font-size:18px}
+    .hero-gacha{font-size:14px;padding:9px 15px}
+    .today-card{padding:12px 16px;border-radius:22px}
+    .today-card h2{font-size:20px}
+    .today-card .count-pill{font-size:14px;padding:4px 11px}
+    .today-card .link-btn{font-size:13.5px}
+    .today-class{padding:12px 14px;gap:13px}
+    .today-class .ac-ico{width:52px;height:52px;border-radius:15px}
+    .today-class .ac-ico svg{width:36px;height:36px}
+    .today-class .t-name{font-size:22px}
+    .today-class .t-time{font-size:14px}
+    .today-class .t-memo{font-size:12.5px}
+    .hs-grid{gap:10px}
+    .hs-tile{padding:10px 12px;border-radius:18px;min-height:72px}
+    .hs-tile .hs-ico{width:50px;height:50px;border-radius:15px}
+    .hs-tile .hs-ico svg{width:34px;height:34px}
+    .hs-tile .hs-label{font-size:17.5px}
+    .hs-tile .hs-state{font-size:11.5px}
+    .hs-tile .hs-check{width:27px;height:27px;font-size:15px}
+    .hs-empty{font-size:16px}
+    .home-grid{gap:12px}
+    .routine-grid{gap:11px}
+    .routine-wrap .sec-head h2{font-size:20px}
+    .rcard{padding:9px 10px 10px;border-radius:18px;gap:6px}
+    .rcard .illu{max-height:152px;border-radius:13px}
+    .rcard .r-title{font-size:15px}
+    .rcard .cta{font-size:11.5px;padding:6px 3px}
+    .rcard .step{width:25px;height:25px;font-size:13px}
+    .rcard .stamp{width:27px;height:27px;font-size:15px}
+    .foot{font-size:10.5px}
   }
 </style>
 </head>
@@ -656,10 +768,16 @@
     </div>
 
     <div class="home-grid">
-    <!-- hero -->
+    <!-- 등교 시간 (왼쪽 절반) -->
     <section class="hero">
-      <div class="hero-pika">
-        <svg viewBox="0 0 120 120" width="100%" height="100%" role="img" aria-label="피카츄">
+      <div class="hero-datetime">
+        <span class="dt-date" id="clockDate">불러오는 중…</span>
+        <span class="dt-clock" id="clockTime">--:--</span>
+      </div>
+
+      <div class="hero-top">
+        <div class="hero-pika">
+          <svg viewBox="0 0 120 120" width="100%" height="100%" role="img" aria-label="피카츄">
           <g transform="rotate(-26 40 34)">
             <ellipse cx="40" cy="32" rx="12" ry="26" fill="#FFD93B" stroke="#4A3B1A" stroke-width="3"/>
             <path d="M29 19 Q40 2 51 19 Z" fill="#4A3B1A"/>
@@ -678,23 +796,22 @@
           <ellipse cx="60" cy="72" rx="3.2" ry="2.4" fill="#2E2A25"/>
           <path d="M52 80 Q56 86 60 80.5 Q64 86 68 80" fill="none" stroke="#2E2A25" stroke-width="2.8" stroke-linecap="round"/>
         </svg>
+        </div>
+        <div class="hero-id">
+          <div class="hero-name">윤재</div>
+          <div class="hero-meta">07:00 시작 · 08:15 출발</div>
+        </div>
       </div>
 
-      <div class="hero-main">
-        <div class="hero-top">
-          <span class="hero-name">윤재</span>
-          <span class="hero-meta">07:00 시작 · 학교 출발 08:15</span>
-          <span class="hero-clock" id="clockTime">--:--</span>
-        </div>
-        <div class="hero-date" id="clockDate">불러오는 중…</div>
-
+      <div class="hero-mid">
         <div class="hero-count" id="countdownText">--</div>
         <div class="hero-status" id="heroStatus">오늘도 힘차게 시작해요!</div>
+      </div>
 
-        <div class="hero-progress">
-          <div class="hp-track">
-            <div class="hp-fill" id="dayProgress"></div>
-            <div class="hp-runner" id="runner">
+      <div class="hero-progress">
+        <div class="hp-track">
+          <div class="hp-fill" id="dayProgress"></div>
+          <div class="hp-runner" id="runner">
               <svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true">
                 <g transform="rotate(-26 40 34)">
                   <ellipse cx="40" cy="32" rx="12" ry="26" fill="#FFD93B" stroke="#4A3B1A" stroke-width="4"/>
@@ -710,9 +827,8 @@
                 <path d="M52 80 Q56 86 60 80.5 Q64 86 68 80" fill="none" stroke="#2E2A25" stroke-width="3" stroke-linecap="round"/>
               </svg>
             </div>
-          </div>
-          <div class="hp-labels"><span>07:00 준비 시작</span><span>08:15 학교 출발 ⚡</span></div>
         </div>
+        <div class="hp-labels"><span>07:00 준비 시작</span><span>08:15 학교 출발 ⚡</span></div>
       </div>
 
       <div class="hero-side">
@@ -735,32 +851,29 @@
       </div>
     </section>
 
-      <!-- 오른쪽 절반: 오늘의 학원 + 오늘의 공부 + 날씨 -->
-      <div class="home-right">
-        <div class="card today-card">
-          <div class="sec-head">
-            <h2>🏫 오늘의 학원 스케줄</h2>
-            <div class="spacer"></div>
-            <button class="link-btn" type="button" data-act="goto" data-tab="academy">전체 보기 →</button>
-            <button class="link-btn" type="button" data-act="academy-add">+ 학원 추가</button>
-          </div>
-          <div id="todayAcademy" class="today-academy"></div>
+      <div class="card today-card acad-card">
+        <div class="sec-head">
+          <h2>🏫 오늘의 학원 스케줄</h2>
+          <div class="spacer"></div>
+          <button class="link-btn" type="button" data-act="goto" data-tab="academy">전체 보기 →</button>
+          <button class="link-btn" type="button" data-act="academy-add">+ 학원 추가</button>
         </div>
+        <div id="todayAcademy" class="today-academy"></div>
+      </div>
 
-        <div class="card today-card">
-          <div class="sec-head">
-            <h2>📚 오늘의 공부</h2>
-            <span class="count-pill" id="homeHsCount">0/0</span>
-            <div class="spacer"></div>
-            <button class="link-btn" type="button" data-act="hs-add">+ 공부 추가</button>
-            <button class="link-btn" type="button" data-act="goto" data-tab="study">전체 보기 →</button>
-          </div>
-          <div id="homeHomeschool" class="hs-list"></div>
+      <div class="card today-card study-card">
+        <div class="sec-head">
+          <h2>📚 오늘의 공부</h2>
+          <span class="count-pill" id="homeHsCount">0/0</span>
+          <div class="spacer"></div>
+          <button class="link-btn" type="button" data-act="hs-add">+ 공부 추가</button>
+          <button class="link-btn" type="button" data-act="goto" data-tab="study">전체 보기 →</button>
         </div>
+        <div id="homeHomeschool" class="hs-grid"></div>
+      </div>
 
-        <div class="card wx-strip" id="weatherBody">
-          <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
-        </div>
+      <div class="card wx-strip" id="weatherBody">
+        <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
       </div>
     </div>
 
@@ -1462,8 +1575,9 @@
   /* ======================= 시계 / 카운트다운 ======================= */
   function tickClock() {
     var now = new Date();
-    $('clockTime').textContent = pad2(now.getHours()) + ':' + pad2(now.getMinutes()) + ':' + pad2(now.getSeconds());
-    $('clockDate').textContent = prettyDate(now);
+    var hh = now.getHours();
+    $('clockTime').textContent = (hh < 12 ? '오전' : '오후') + ' ' + ((hh % 12) || 12) + ':' + pad2(now.getMinutes()) + ':' + pad2(now.getSeconds());
+    $('clockDate').textContent = (now.getMonth() + 1) + '월 ' + now.getDate() + '일 (' + DAY_KO[now.getDay()] + ')';
 
     var key = todayKey();
     if (lastDateKey !== key) {
@@ -1946,15 +2060,20 @@
     var dow = new Date().getDay();
     var list = classesFor(dow);
     if (!list.length) {
-      box.innerHTML = '<div class="empty-soft">오늘은 학원 일정이 없어요 🎉<br><small>“+ 학원 추가”로 일정을 넣을 수 있어요</small></div>';
+      box.innerHTML = '<div class="acad-empty">'
+        + '<span class="acad-ico">' + svgBag() + '</span>'
+        + '<span class="acad-txt">오늘은 학원 쉬는 날! 🎉<small>가방 정리하고 내일 준비물을 챙겨 봐요</small></span>'
+        + '<button class="btn btn-yellow" type="button" data-act="academy-add">+ 학원 추가</button>'
+        + '</div>';
       return;
     }
     var html = '';
     for (var i = 0; i < list.length; i++) {
       var a = list[i];
       html += '<div class="today-class">'
-        + '<span class="t-time">' + esc(timeLabel(a)) + '</span>'
+        + '<span class="ac-ico">' + svgSchool() + '</span>'
         + '<div class="t-body"><div class="t-name">' + esc(a.name) + '</div>'
+        + '<div class="t-time">🕘 ' + esc(timeLabel(a)) + '</div>'
         + (a.memo ? '<div class="t-memo">🎒 ' + esc(a.memo) + '</div>' : '')
         + '</div></div>';
     }
@@ -2073,6 +2192,80 @@
     }
   }
 
+  /* ======================= 아이콘 그림 (SVG) ======================= */
+  function svgSchool() {
+    return '<svg viewBox="0 0 48 48" aria-hidden="true">'
+      + '<path d="M24 5 44 13v4H4v-4z" fill="#8ED3F4" stroke="#3E8FC4" stroke-width="2.2" stroke-linejoin="round"/>'
+      + '<rect x="10" y="19" width="28" height="20" rx="3" fill="#EAF6FF" stroke="#3E8FC4" stroke-width="2.2"/>'
+      + '<rect x="20" y="27" width="8" height="12" rx="1.6" fill="#3E8FC4"/>'
+      + '<rect x="13" y="23" width="5" height="5" rx="1.2" fill="#9CD2F0"/>'
+      + '<rect x="30" y="23" width="5" height="5" rx="1.2" fill="#9CD2F0"/>'
+      + '<circle cx="24" cy="9" r="2" fill="#FFD93B"/>'
+      + '</svg>';
+  }
+  function svgBag() {
+    return '<svg viewBox="0 0 64 64" aria-hidden="true">'
+      + '<path d="M24 20v-4a8 8 0 0 1 16 0v4" fill="none" stroke="#8FA7BD" stroke-width="3.4" stroke-linecap="round"/>'
+      + '<rect x="12" y="18" width="40" height="32" rx="9" fill="#EAF3FF" stroke="#5A90D6" stroke-width="3"/>'
+      + '<rect x="13" y="29" width="38" height="6" fill="#5A90D6" opacity=".22"/>'
+      + '<rect x="26" y="33" width="12" height="9" rx="2.6" fill="#FFD93B" stroke="#E0A94A" stroke-width="2.2"/>'
+      + '<circle cx="21" cy="44" r="2.4" fill="#9CC0F0"/><circle cx="43" cy="44" r="2.4" fill="#9CC0F0"/>'
+      + '</svg>';
+  }
+  function svgHomework() {
+    return '<svg viewBox="0 0 48 48" aria-hidden="true">'
+      + '<rect x="9" y="7" width="25" height="33" rx="4" fill="#FFF6DA" stroke="#E2B24A" stroke-width="2.2"/>'
+      + '<path d="M15 16h13M15 23h13M15 30h8" stroke="#DDBC79" stroke-width="2.4" stroke-linecap="round"/>'
+      + '<path d="M33 13l6 6-13 13-7 1 1-7z" fill="#8ED3F4" stroke="#3E8FC4" stroke-width="2" stroke-linejoin="round"/>'
+      + '<path d="M33 14l2 2" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>'
+      + '</svg>';
+  }
+  function svgMath() {
+    return '<svg viewBox="0 0 48 48" aria-hidden="true">'
+      + '<rect x="4" y="11" width="40" height="26" rx="5" fill="#EAF6FF" stroke="#63A8DD" stroke-width="2.2"/>'
+      + '<path d="M4 21h40M4 29h40" stroke="#AED3EE" stroke-width="2"/>'
+      + '<circle cx="14" cy="16.5" r="3.2" fill="#F6A23B"/><circle cx="24" cy="16.5" r="3.2" fill="#E8705E"/><circle cx="34" cy="16.5" r="3.2" fill="#7EC96B"/>'
+      + '<circle cx="12" cy="24.5" r="3.2" fill="#8FA8F0"/><circle cx="22" cy="24.5" r="3.2" fill="#F6A23B"/><circle cx="31" cy="24.5" r="3.2" fill="#E8705E"/>'
+      + '<circle cx="18" cy="32.5" r="3.2" fill="#7EC96B"/><circle cx="27" cy="32.5" r="3.2" fill="#8FA8F0"/>'
+      + '</svg>';
+  }
+  function svgVideo() {
+    return '<svg viewBox="0 0 48 48" aria-hidden="true">'
+      + '<rect x="4" y="11" width="27" height="21" rx="4" fill="#EAF3FF" stroke="#5A90D6" stroke-width="2.2"/>'
+      + '<path d="M15 17l8 4.5-8 4.5z" fill="#5A90D6"/>'
+      + '<rect x="30" y="19" width="14" height="17" rx="3.5" fill="#FFF4E0" stroke="#E0A94A" stroke-width="2.2"/>'
+      + '<text x="37" y="32" font-size="7.5" font-weight="700" text-anchor="middle" fill="#C98B2E" font-family="sans-serif">ABC</text>'
+      + '<path d="M9 36h18" stroke="#9CC0E8" stroke-width="2.4" stroke-linecap="round"/>'
+      + '</svg>';
+  }
+  function svgPiano() {
+    return '<svg viewBox="0 0 48 48" aria-hidden="true">'
+      + '<rect x="3" y="16" width="34" height="20" rx="4" fill="#FFFDF6" stroke="#B99A6A" stroke-width="2.2"/>'
+      + '<path d="M12 16v20M21 16v20M30 16v20" stroke="#E6D9C0" stroke-width="2"/>'
+      + '<rect x="8" y="16" width="5" height="11" rx="1.5" fill="#4A443A"/>'
+      + '<rect x="17" y="16" width="5" height="11" rx="1.5" fill="#4A443A"/>'
+      + '<rect x="26" y="16" width="5" height="11" rx="1.5" fill="#4A443A"/>'
+      + '<circle cx="38" cy="12" r="3.2" fill="#F0A0C0"/><path d="M41 9V3" stroke="#F0A0C0" stroke-width="2.2" stroke-linecap="round"/>'
+      + '<circle cx="44" cy="19" r="2.4" fill="#9CD2F0"/>'
+      + '</svg>';
+  }
+  function svgBook() {
+    return '<svg viewBox="0 0 48 48" aria-hidden="true">'
+      + '<path d="M7 12c6-2 12-1 17 2 5-3 11-4 17-2v23c-6-2-12-1-17 2-5-3-11-4-17-2z" fill="#FFF6DA" stroke="#D9AE55" stroke-width="2.2" stroke-linejoin="round"/>'
+      + '<path d="M24 14v23" stroke="#D9AE55" stroke-width="2.2"/>'
+      + '<path d="M24 5l1.7 3.6 3.9.5-2.9 2.7.7 3.9-3.4-1.9-3.4 1.9.7-3.9-2.9-2.7 3.9-.5z" fill="#FFC93C"/>'
+      + '</svg>';
+  }
+
+  function studyIcon(label) {
+    var s = String(label || '');
+    if (s.indexOf('피아노') !== -1 || s.indexOf('음악') !== -1) return svgPiano();
+    if (s.indexOf('영어') !== -1 || s.indexOf('화상') !== -1 || s.indexOf('리틀팍스') !== -1) return svgVideo();
+    if (s.indexOf('사고력') !== -1 || s.indexOf('수학') !== -1 || s.indexOf('연산') !== -1 || s.indexOf('원리셈') !== -1 || s.indexOf('따풀') !== -1) return svgMath();
+    if (s.indexOf('숙제') !== -1 || s.indexOf('받아쓰기') !== -1 || s.indexOf('일기') !== -1 || s.indexOf('문제집') !== -1) return svgHomework();
+    return svgBook();
+  }
+
   /* 홈 대시보드의 “오늘의 공부” */
   function renderHomeHomeschool() {
     var box = $('homeHomeschool');
@@ -2085,17 +2278,20 @@
     if (pill) pill.textContent = doneIds.length + '/' + tasks.length;
 
     if (!tasks.length) {
-      box.innerHTML = '<div class="hs-empty">오늘은 공부할 게 없어요 🎉</div>';
+      box.innerHTML = '<div class="hs-empty">' + svgBook()
+        + '<span>오늘은 공부 숙제가 없어요</span>'
+        + '<span style="font-size:12px;font-weight:800;color:#A79E8B">“+ 공부 추가”로 넣을 수 있어요</span></div>';
       return;
     }
     var html = '';
     for (var i = 0; i < tasks.length; i++) {
       var t = tasks[i];
       var done = doneIds.indexOf(t.id) !== -1;
-      html += '<button class="hs-item' + (done ? ' done' : '') + '" type="button" data-act="h-toggle" data-id="' + esc(t.id) + '" aria-pressed="' + done + '">'
+      html += '<button class="hs-tile' + (done ? ' done' : '') + '" type="button" data-act="h-toggle" data-id="' + esc(t.id) + '" aria-pressed="' + done + '">'
+        + '<span class="hs-ico">' + studyIcon(t.label) + '</span>'
+        + '<span class="hs-tile-body"><span class="hs-label">' + esc(t.label) + '</span>'
+        + '<span class="hs-state">' + (done ? '완료했어요 ✓' : miniBallSvg() + ' 눌러서 +1') + '</span></span>'
         + '<span class="hs-check">✓</span>'
-        + '<span class="hs-label">' + esc(t.label) + '</span>'
-        + '<span class="hs-ball">' + (done ? '완료' : miniBallSvg() + ' +1') + '</span>'
         + '</button>';
     }
     box.innerHTML = html;
