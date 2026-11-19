@@ -400,16 +400,22 @@
   }
   .dex-hero h2{font-size:26px}
   .dex-hero p{margin:8px 0 14px;font-size:14px;font-weight:800;color:#8A8377;line-height:1.5}
+  .gacha-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:760px;margin-top:2px}
   .gacha-btn{
-    display:inline-flex;align-items:center;gap:16px;border:none;border-radius:22px;
+    display:flex;align-items:center;gap:11px;border:none;border-radius:20px;text-align:left;
     background:linear-gradient(180deg,#FF5F52,#DE2A1F);color:#fff;
-    padding:16px 26px 16px 18px;box-shadow:0 14px 28px rgba(222,42,31,.32);
-    transition:transform .12s ease,box-shadow .2s ease;
+    padding:11px 13px 11px 11px;box-shadow:0 10px 20px rgba(222,42,31,.28);
+    transition:transform .12s ease,box-shadow .2s ease,background .18s ease,color .18s ease;
   }
   .gacha-btn:active{transform:scale(.97)}
-  .gacha-btn .gball{width:62px;height:62px;flex:none}
-  .gacha-btn .gacha-txt{display:flex;flex-direction:column;align-items:flex-start;gap:3px;font-size:23px;font-weight:900;letter-spacing:-.7px}
-  .gacha-btn .gacha-txt small{font-size:13px;font-weight:900;opacity:.92;letter-spacing:0}
+  .gacha-btn .gball{width:44px;height:44px;flex:none}
+  .gacha-btn .gacha-txt{display:flex;flex-direction:column;align-items:flex-start;gap:2px;font-size:18px;font-weight:900;letter-spacing:-.5px;line-height:1.12;min-width:0}
+  .gacha-btn .gacha-txt small{font-size:11px;font-weight:900;opacity:.95;letter-spacing:0;line-height:1.3}
+  .gacha-btn.normal{background:linear-gradient(180deg,#FF5F52,#DE2A1F)}
+  .gacha-btn.super{background:linear-gradient(180deg,#5AA0EA,#2C6BA8);box-shadow:0 10px 20px rgba(44,107,168,.28)}
+  .gacha-btn.master{background:linear-gradient(180deg,#9B6BEA,#5B2CA8);box-shadow:0 10px 20px rgba(91,44,168,.3)}
+  .gacha-btn.locked{background:#E9E3D6;color:#9A9184;box-shadow:none;cursor:default}
+  .gacha-btn.locked .gball{filter:grayscale(1) opacity(.5)}
   .gacha-btn.rolling .gball{animation:ballShake .38s ease-in-out infinite}
   @keyframes ballShake{0%,100%{transform:rotate(-13deg)}50%{transform:rotate(13deg)}}
   .dex-stats{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
@@ -417,6 +423,18 @@
   .dex-stat b{display:block;font-size:26px;font-weight:900;letter-spacing:-1px;line-height:1.1}
   .dex-stat span{font-size:11px;font-weight:900;color:var(--muted)}
   .dex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:11px}
+  .dex-filters{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 12px}
+  .dex-filter{
+    border:2px solid #EFE8D8;background:#fff;color:#7C7466;font-weight:900;font-size:13px;
+    border-radius:999px;padding:7px 13px;min-height:40px;display:inline-flex;align-items:center;gap:5px;
+  }
+  .dex-filter small{font-size:10.5px;font-weight:900;opacity:.75}
+  .dex-filter.on{background:var(--yellow);border-color:var(--yellow-deep);color:#463400}
+  .dex-filter.on small{opacity:.85}
+  .tier-chip{
+    display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;
+    border-radius:999px;padding:2px 7px;line-height:1.35;white-space:nowrap;
+  }
   .dex-tile{
     background:#FAF8F2;border:2px solid #EFE8D8;border-radius:18px;padding:9px 8px 10px;text-align:center;
     position:relative;transition:transform .12s ease,box-shadow .16s ease;
@@ -429,11 +447,31 @@
   .dex-tile .no{font-size:10.5px;font-weight:900;color:#B0A896;margin-top:2px;font-variant-numeric:tabular-nums}
   .dex-tile .nm{font-size:13.5px;font-weight:900;color:#4A443A;letter-spacing:-.3px}
   .dex-tile.uncaught .nm{color:#C0B7A3}
+  .dex-tile .tier{margin-top:3px}
+  .dex-tile.legend{background:linear-gradient(180deg,#FFFBEA,#FFF6D4);border-color:#E7C24A;box-shadow:0 6px 16px rgba(214,180,40,.22)}
+  .dex-tile.legend.caught{background:linear-gradient(180deg,#FFF8DA,#FFFFFF);border-color:#E0B22F;box-shadow:0 8px 20px rgba(214,180,40,.32)}
+  .dex-tile.mega{background:linear-gradient(180deg,#F9F4FF,#F1E7FF);border-color:#B79BFF;box-shadow:0 6px 16px rgba(122,63,201,.2)}
+  .dex-tile.mega.caught{background:linear-gradient(180deg,#F3EAFF,#FFFFFF);border-color:#9B6BEA;box-shadow:0 8px 20px rgba(122,63,201,.3)}
+  .dex-tile.legend .nm{color:#7A5B00}
+  .dex-tile.mega .nm{color:#5B2CA8}
+  .dex-tile.legend .dim img.sil,.dex-tile.mega .dim img.sil{filter:brightness(0) opacity(.22)}
   .dex-tile .cnt{
     position:absolute;top:7px;right:7px;background:var(--yellow);color:#463400;border-radius:999px;
     font-size:10.5px;font-weight:900;padding:2px 7px;border:2px solid #fff;
   }
   .dex-tile .new{position:absolute;top:7px;left:7px;background:var(--red);color:#fff;border-radius:999px;font-size:9.5px;font-weight:900;padding:2px 6px}
+
+  /* ---------------- evolve (pokedex detail) ---------------- */
+  .evo-box{
+    margin:8px 0 10px;background:linear-gradient(120deg,#F6F1FF,#FFF9E3);border:2px solid #E4D6FF;
+    border-radius:18px;padding:12px;
+  }
+  .evo-title{font-size:13.5px;font-weight:900;color:#5B2CA8;text-align:center;margin-bottom:8px}
+  .evo-row{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;margin-bottom:7px}
+  .evo-row .evo-name{font-size:14.5px;font-weight:900;letter-spacing:-.3px}
+  .evo-row .btn{font-size:12px;padding:8px 11px;min-height:38px;border-radius:12px}
+  .evo-row .btn:disabled{background:#EDE7DA;color:#A79E8B}
+  .evo-need{font-size:11px;font-weight:900;color:#A79E8B;background:#F4EFE4;border-radius:999px;padding:6px 10px}
 
   /* ---------------- modals ---------------- */
   .modal{
@@ -522,6 +560,7 @@
     .affirm-strip .a-sub{display:none}
     .dex-hero{grid-template-columns:1fr}
     .dex-stats{justify-content:flex-start}
+    .gacha-row{grid-template-columns:1fr;max-width:none}
   }
   @media (max-width:720px){
     .board{padding:12px 12px 48px}
@@ -804,25 +843,54 @@
     <section class="card dex-hero">
       <div>
         <h2>🔴 몬스터볼 뽑기</h2>
-        <p>아침 루틴과 홈스쿨을 완료해서 몬스터볼을 모아 보세요!<br>몬스터볼 하나로 포켓몬 한 마리를 만날 수 있어요.</p>
-        <button class="gacha-btn" id="gachaBtn" data-act="gacha" type="button">
-          <span class="gball">
-            <svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true">
-              <defs><clipPath id="gballClip"><circle cx="50" cy="50" r="46"/></clipPath></defs>
-              <circle cx="50" cy="50" r="46" fill="#fff" stroke="#2E2A25" stroke-width="5"/>
-              <g clip-path="url(#gballClip)"><rect x="0" y="0" width="100" height="50" fill="#EE1515"/></g>
-              <rect x="2" y="44" width="96" height="12" fill="#2E2A25"/>
-              <circle cx="50" cy="50" r="15" fill="#fff" stroke="#2E2A25" stroke-width="5"/>
-              <circle cx="50" cy="50" r="6" fill="#EE1515"/>
-              <ellipse cx="35" cy="30" rx="9" ry="6" fill="#fff" opacity=".45" transform="rotate(-25 35 30)"/>
-            </svg>
-          </span>
-          <span class="gacha-txt">몬스터볼 뽑기!<small>보유 <b class="js-ball-count">0</b>개</small></span>
-        </button>
+        <p>아침 루틴 6개를 다 하면 몬스터볼 6개! 홈스쿨까지 하면 하루에 10개 넘게 모을 수 있어요.<br>모아서 뽑기를 도전해 보세요. <b>마스터 뽑기는 전설·메가진화 100% 확정!</b></p>
+        <div class="gacha-row">
+          <button class="gacha-btn normal" type="button" data-act="gacha" data-tier="normal" data-cost="6">
+            <span class="gball">
+              <svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true">
+                <defs><clipPath id="gb1"><circle cx="50" cy="50" r="46"/></clipPath></defs>
+                <circle cx="50" cy="50" r="46" fill="#fff" stroke="#2E2A25" stroke-width="5"/>
+                <g clip-path="url(#gb1)"><rect x="0" y="0" width="100" height="50" fill="#EE1515"/></g>
+                <rect x="2" y="44" width="96" height="12" fill="#2E2A25"/>
+                <circle cx="50" cy="50" r="15" fill="#fff" stroke="#2E2A25" stroke-width="5"/>
+                <circle cx="50" cy="50" r="6" fill="#EE1515"/>
+              </svg>
+            </span>
+            <span class="gacha-txt">일반 뽑기<small>볼 6개 · <b class="js-gacha-state">6개 필요</b></small></span>
+          </button>
+
+          <button class="gacha-btn super" type="button" data-act="gacha" data-tier="super" data-cost="12">
+            <span class="gball">
+              <svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true">
+                <defs><clipPath id="gb2"><circle cx="50" cy="50" r="46"/></clipPath></defs>
+                <circle cx="50" cy="50" r="46" fill="#fff" stroke="#2E2A25" stroke-width="5"/>
+                <g clip-path="url(#gb2)"><rect x="0" y="0" width="100" height="50" fill="#3D7DCA"/></g>
+                <rect x="2" y="44" width="96" height="12" fill="#2E2A25"/>
+                <circle cx="50" cy="50" r="15" fill="#fff" stroke="#2E2A25" stroke-width="5"/>
+                <circle cx="50" cy="50" r="6" fill="#3D7DCA"/>
+              </svg>
+            </span>
+            <span class="gacha-txt">슈퍼 뽑기<small>볼 12개 · <b class="js-gacha-state">12개 필요</b></small></span>
+          </button>
+
+          <button class="gacha-btn master" type="button" data-act="gacha" data-tier="master" data-cost="20">
+            <span class="gball">
+              <svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true">
+                <defs><clipPath id="gb3"><circle cx="50" cy="50" r="46"/></clipPath></defs>
+                <circle cx="50" cy="50" r="46" fill="#fff" stroke="#2E2A25" stroke-width="5"/>
+                <g clip-path="url(#gb3)"><rect x="0" y="0" width="100" height="50" fill="#7A3FC9"/></g>
+                <rect x="2" y="44" width="96" height="12" fill="#2E2A25"/>
+                <circle cx="50" cy="50" r="15" fill="#fff" stroke="#2E2A25" stroke-width="5"/>
+                <circle cx="50" cy="50" r="6" fill="#7A3FC9"/>
+              </svg>
+            </span>
+            <span class="gacha-txt">마스터 뽑기<small>볼 20개 · <b class="js-gacha-state">20개 필요</b></small></span>
+          </button>
+        </div>
       </div>
       <div class="dex-stats">
         <div class="dex-stat"><b class="js-dex-caught">0</b><span>만난 포켓몬</span></div>
-        <div class="dex-stat"><b>36</b><span>도감 전체</span></div>
+        <div class="dex-stat"><b class="js-dex-total">60</b><span>도감 전체</span></div>
         <div class="dex-stat"><b class="js-ball-count">0</b><span>보유 몬스터볼</span></div>
       </div>
     </section>
@@ -832,6 +900,7 @@
         <h2>📖 포켓몬 도감</h2>
         <span class="sec-sub" id="dexProgressText">아직 만난 포켓몬이 없어요</span>
       </div>
+      <div class="dex-filters" id="dexFilters"></div>
       <div class="dex-grid" id="dexGrid"></div>
     </div>
   </section>
@@ -938,52 +1007,109 @@
     '악': '#705746', '강철': '#A8A8C0', '페어리': '#D685AD'
   };
 
-  /* 36마리 (아이가 좋아하는 포켓몬) */
+  /* 60마리: 일반 · 진화 · 전설 · 메가진화 (아이가 좋아하는 포켓몬) */
   var POOL = [
-    { id: 1, name: '이상해씨', types: ['풀', '독'], desc: '등에 씨앗이 있어요. 씨앗과 함께 햇빛을 받으며 자라요.' },
-    { id: 3, name: '이상해꽃', types: ['풀', '독'], desc: '등의 꽃이 활짝 피었어요. 꽃에서 달콤한 향기가 나요.' },
-    { id: 4, name: '파이리', types: ['불꽃'], desc: '꼬리 끝에 불꽃이 타고 있어요. 기분이 좋으면 불꽃이 활활!' },
-    { id: 6, name: '리자몽', types: ['불꽃', '비행'], desc: '하늘을 나는 불꽃 드래곤이에요. 입에서 뜨거운 불을 뿜어요.' },
-    { id: 7, name: '꼬부기', types: ['물'], desc: '등껍질에 물을 저장해요. 목이 마르면 등껍질에서 물을 마셔요.' },
-    { id: 9, name: '거북왕', types: ['물'], desc: '등에 물 대포 두 개가 달려 있어요. 아주 정확하게 물을 쏘아요.' },
-    { id: 25, name: '피카츄', types: ['전기'], desc: '뺨에서 전기를 지직지직 내뿜어요. 윤재처럼 웃는 얼굴이 매력!' },
-    { id: 39, name: '푸린', types: ['노말', '페어리'], desc: '노래를 부르면 모두 잠이 들어요. 그래서 조금 위험한 노래예요!' },
-    { id: 52, name: '나옹', types: ['노말'], desc: '반짝이는 동전을 좋아해요. 반짝이는 걸 보면 눈이 반짝반짝!' },
-    { id: 54, name: '고라파덕', types: ['물'], desc: '머리가 아프면 이상한 힘을 써요. 그러다 머리를 자꾸 잊어버려요.' },
-    { id: 94, name: '팬텀', types: ['유령', '독'], desc: '그림자 속에 숨는 포켓몬이에요. 까르르 웃는 소리가 들리면 나타난대요.' },
-    { id: 130, name: '갸라도스', types: ['물', '비행'], desc: '잉어킹이 진화하면 이렇게 강해져요! 무섭게 생겼지만 마음은 다정해요.' },
-    { id: 131, name: '라프라스', types: ['물', '얼음'], desc: '등에 사람을 태우고 바다를 건너요. 노래를 아주 좋아해요.' },
-    { id: 132, name: '메타몽', types: ['노말'], desc: '모든 포켓몬으로 변신할 수 있어요. 웃는 얼굴일 땐 변신이 잘 안 된대요.' },
-    { id: 133, name: '이브이', types: ['노말'], desc: '여러 모습으로 자랄 수 있는 포켓몬이에요. 어떤 친구로 자랄지 두근두근!' },
-    { id: 143, name: '잠만보', types: ['노말'], desc: '하루 대부분을 자요. 자는 사이에도 먹는 걸 꿈꿔요.' },
-    { id: 149, name: '망나뇽', types: ['드래곤', '비행'], desc: '아주 빠른 드래곤이에요. 바다 위를 날아다니며 여행해요.' },
-    { id: 150, name: '뮤츠', types: ['에스퍼'], desc: '유전자로 만들어진 아주 강한 포켓몬이에요. 마음은 조용하고 다정해요.' },
-    { id: 151, name: '뮤', types: ['에스퍼'], desc: '아주 오래전부터 살았다는 신비한 포켓몬이에요. 모든 기술을 배울 수 있어요.' },
-    { id: 152, name: '치코리타', types: ['풀'], desc: '등에 잎이 있어요. 햇빛을 받으면 기분이 좋아져요.' },
-    { id: 155, name: '브케인', types: ['불꽃'], desc: '등에서 불꽃을 뿜어요. 겁이 많지만 용감해지려고 노력해요.' },
-    { id: 158, name: '리아코', types: ['물'], desc: '물을 다루는 악어 포켓몬이에요. 이빨이 아주 튼튼해요.' },
-    { id: 175, name: '토게피', types: ['페어리'], desc: '달걀 껍질 속에 있는 아기 포켓몬이에요. 행운을 가져다준대요.' },
-    { id: 197, name: '블래키', types: ['악'], desc: '달빛이 알록달록한 고양이 포켓몬이에요. 밤에 눈이 반짝반짝 빛나요.' },
-    { id: 282, name: '가디안', types: ['에스퍼', '페어리'], desc: '마음을 읽어서 윤재를 지켜 주는 포켓몬이에요. 아주 다정해요.' },
-    { id: 403, name: '꼬링크', types: ['전기'], desc: '작은 전기 다람쥐 포켓몬이에요. 꼬리에 전기를 모아요.' },
-    { id: 417, name: '파치리스', types: ['전기'], desc: '전기를 모으는 다람쥐 포켓몬이에요. 노는 걸 아주 좋아해요.' },
-    { id: 445, name: '한카리아스', types: ['드래곤', '땅'], desc: '땅을 파고드는 드래곤 포켓몬이에요. 날개로 아주 빠르게 날아요.' },
-    { id: 448, name: '루카리오', types: ['격투', '강철'], desc: '파동을 읽어 상대의 마음을 알아요. 바르고 굳센 마음의 포켓몬!' },
-    { id: 658, name: '개굴닌자', types: ['물', '악'], desc: '물을 수리검으로 만들어 던져요. 닌자처럼 빠르고 조용해요.' },
-    { id: 700, name: '님피아', types: ['페어리'], desc: '이브이가 물가에서 진화한 모습이에요. 기분이 좋으면 물을 뿜어요.' },
-    { id: 778, name: '따라큐', types: ['유령', '페어리'], desc: '버려진 인형에 영혼이 깃들었어요. 혼자 놀기 좋아하는 외로운 친구.' },
-    { id: 815, name: '에이스번', types: ['불꽃'], desc: '불꽃 공을 만들어 차요. 축구를 정말 좋아하는 포켓몬!' },
-    { id: 906, name: '냐오하', types: ['풀'], desc: '귀여운 고양이 풀 포켓몬이에요. 햇빛을 좋아하고 냄새도 잘 맡아요.' },
-    { id: 909, name: '뜨아거', types: ['불꽃'], desc: '머리 위 불꽃이 감정에 따라 커졌다 작아졌다 해요.' },
-    { id: 912, name: '꾸왁스', types: ['물'], desc: '까칠한 머리깃이 멋진 오리 포켓몬이에요. 물을 잘 다뤄요.' }
+    { id: 1, name: '이상해씨', types: ['풀', '독'], tier: '일반', desc: '등에 씨앗이 있어요. 씨앗과 함께 햇빛을 받으며 자라요.' },
+    { id: 2, name: '이상해풀', types: ['풀', '독'], tier: '진화', desc: '이상해씨가 자란 모습이에요. 등에 꽃봉오리가 생겼어요.' },
+    { id: 3, name: '이상해꽃', types: ['풀', '독'], tier: '진화', desc: '등의 꽃이 활짝 피었어요. 꽃에서 달콤한 향기가 나요.' },
+    { id: 4, name: '파이리', types: ['불꽃'], tier: '일반', desc: '꼬리 끝에 불꽃이 타고 있어요. 기분이 좋으면 불꽃이 활활!' },
+    { id: 5, name: '리자드', types: ['불꽃'], tier: '진화', desc: '파이리보다 키가 큰 리자드예요. 꼬리 불꽃이 더 뜨거워요.' },
+    { id: 6, name: '리자몽', types: ['불꽃', '비행'], tier: '진화', desc: '하늘을 나는 불꽃 드래곤이에요. 입에서 뜨거운 불을 뿜어요.' },
+    { id: 7, name: '꼬부기', types: ['물'], tier: '일반', desc: '등껍질에 물을 저장해요. 목이 마르면 등껍질에서 물을 마셔요.' },
+    { id: 8, name: '어니부기', types: ['물'], tier: '진화', desc: '꼬부기가 자라 등껍질이 단단해졌어요. 물을 아주 좋아해요.' },
+    { id: 9, name: '거북왕', types: ['물'], tier: '진화', desc: '등에 물 대포 두 개가 달려 있어요. 아주 정확하게 물을 쏘아요.' },
+    { id: 25, name: '피카츄', types: ['전기'], tier: '일반', desc: '뺨에서 전기를 지직지직 내뿜어요. 윤재처럼 웃는 얼굴이 매력!' },
+    { id: 26, name: '라이츄', types: ['전기'], tier: '진화', desc: '피카츄가 자란 모습이에요. 꼬리에 전기를 잔뜩 모아요.' },
+    { id: 39, name: '푸린', types: ['노말', '페어리'], tier: '일반', desc: '노래를 부르면 모두 잠이 들어요. 그래서 조금 위험한 노래예요!' },
+    { id: 52, name: '나옹', types: ['노말'], tier: '일반', desc: '반짝이는 동전을 좋아해요. 반짝이는 걸 보면 눈이 반짝반짝!' },
+    { id: 54, name: '고라파덕', types: ['물'], tier: '일반', desc: '머리가 아프면 이상한 힘을 써요. 그러다 머리를 자꾸 잊어버려요.' },
+    { id: 94, name: '팬텀', types: ['유령', '독'], tier: '진화', desc: '그림자 속에 숨는 포켓몬이에요. 까르르 웃는 소리가 들리면 나타난대요.' },
+    { id: 130, name: '갸라도스', types: ['물', '비행'], tier: '진화', desc: '잉어킹이 진화하면 이렇게 강해져요! 무섭게 생겼지만 마음은 다정해요.' },
+    { id: 131, name: '라프라스', types: ['물', '얼음'], tier: '일반', desc: '등에 사람을 태우고 바다를 건너요. 노래를 아주 좋아해요.' },
+    { id: 132, name: '메타몽', types: ['노말'], tier: '일반', desc: '모든 포켓몬으로 변신할 수 있어요. 웃는 얼굴일 땐 변신이 잘 안 된대요.' },
+    { id: 133, name: '이브이', types: ['노말'], tier: '일반', desc: '여러 모습으로 자랄 수 있는 포켓몬이에요. 어떤 친구로 자랄지 두근두근!' },
+    { id: 143, name: '잠만보', types: ['노말'], tier: '일반', desc: '하루 대부분을 자요. 자는 사이에도 먹는 걸 꿈꿔요.' },
+    { id: 149, name: '망나뇽', types: ['드래곤', '비행'], tier: '진화', desc: '아주 빠른 드래곤이에요. 바다 위를 날아다니며 여행해요.' },
+    { id: 150, name: '뮤츠', types: ['에스퍼'], tier: '전설', desc: '유전자로 만들어진 아주 강한 전설의 포켓몬이에요. 마음은 조용하고 다정해요.' },
+    { id: 151, name: '뮤', types: ['에스퍼'], tier: '전설', desc: '아주 오래전부터 살았다는 신비한 전설의 포켓몬이에요. 모든 기술을 배울 수 있어요.' },
+    { id: 152, name: '치코리타', types: ['풀'], tier: '일반', desc: '등에 잎이 있어요. 햇빛을 받으면 기분이 좋아져요.' },
+    { id: 155, name: '브케인', types: ['불꽃'], tier: '일반', desc: '등에서 불꽃을 뿜어요. 겁이 많지만 용감해지려고 노력해요.' },
+    { id: 158, name: '리아코', types: ['물'], tier: '일반', desc: '물을 다루는 악어 포켓몬이에요. 이빨이 아주 튼튼해요.' },
+    { id: 175, name: '토게피', types: ['페어리'], tier: '일반', desc: '달걀 껍질 속에 있는 아기 포켓몬이에요. 행운을 가져다준대요.' },
+    { id: 197, name: '블래키', types: ['악'], tier: '진화', desc: '달빛이 알록달록한 고양이 포켓몬이에요. 밤에 눈이 반짝반짝 빛나요.' },
+    { id: 249, name: '루기아', types: ['물', '비행'], tier: '전설', desc: '바다 깊은 곳에 사는 전설의 포켓몬이에요. 날개를 한 번 치면 폭풍이 와요.' },
+    { id: 250, name: '칠색조', types: ['불꽃', '비행'], tier: '전설', desc: '무지개를 타고 날아다니는 전설의 포켓몬이에요. 보면 행운이 온대요.' },
+    { id: 282, name: '가디안', types: ['에스퍼', '페어리'], tier: '진화', desc: '마음을 읽어서 윤재를 지켜 주는 포켓몬이에요. 아주 다정해요.' },
+    { id: 384, name: '레쿠쟈', types: ['드래곤', '비행'], tier: '전설', desc: '하늘을 지키는 전설의 드래곤이에요. 대기권 밖까지 날아가요.' },
+    { id: 403, name: '꼬링크', types: ['전기'], tier: '일반', desc: '작은 전기 다람쥐 포켓몬이에요. 꼬리에 전기를 모아요.' },
+    { id: 417, name: '파치리스', types: ['전기'], tier: '일반', desc: '전기를 모으는 다람쥐 포켓몬이에요. 노는 걸 아주 좋아해요.' },
+    { id: 445, name: '한카리아스', types: ['드래곤', '땅'], tier: '진화', desc: '땅을 파고드는 드래곤 포켓몬이에요. 날개로 아주 빠르게 날아요.' },
+    { id: 448, name: '루카리오', types: ['격투', '강철'], tier: '진화', desc: '파동을 읽어 상대의 마음을 알아요. 바르고 굳센 마음의 포켓몬!' },
+    { id: 483, name: '디아루가', types: ['강철', '드래곤'], tier: '전설', desc: '시간을 다스리는 전설의 포켓몬이에요. 강철처럼 단단해요.' },
+    { id: 484, name: '펄기아', types: ['물', '드래곤'], tier: '전설', desc: '공간을 다스리는 전설의 포켓몬이에요. 물과 드래곤의 힘을 가졌어요.' },
+    { id: 487, name: '기라티나', types: ['유령', '드래곤'], tier: '전설', desc: '그림자 세계를 지키는 전설의 포켓몬이에요. 유령처럼 사라져요.' },
+    { id: 493, name: '아르세우스', types: ['노말'], tier: '전설', desc: '세상을 만들었다는 전설의 포켓몬이에요. 모든 힘을 가졌대요.' },
+    { id: 658, name: '개굴닌자', types: ['물', '악'], tier: '진화', desc: '물을 수리검으로 만들어 던져요. 닌자처럼 빠르고 조용해요.' },
+    { id: 700, name: '님피아', types: ['페어리'], tier: '진화', desc: '이브이가 물가에서 진화한 모습이에요. 기분이 좋으면 물을 뿜어요.' },
+    { id: 778, name: '따라큐', types: ['유령', '페어리'], tier: '일반', desc: '버려진 인형에 영혼이 깃들었어요. 혼자 놀기 좋아하는 외로운 친구.' },
+    { id: 815, name: '에이스번', types: ['불꽃'], tier: '진화', desc: '불꽃 공을 만들어 차요. 축구를 정말 좋아하는 포켓몬!' },
+    { id: 888, name: '자시안', types: ['페어리', '격투'], tier: '전설', desc: '검을 들고 지키는 전설의 포켓몬이에요. 아주 용감해요.' },
+    { id: 906, name: '냐오하', types: ['풀'], tier: '일반', desc: '귀여운 고양이 풀 포켓몬이에요. 햇빛을 좋아하고 냄새도 잘 맡아요.' },
+    { id: 909, name: '뜨아거', types: ['불꽃'], tier: '일반', desc: '머리 위 불꽃이 감정에 따라 커졌다 작아졌다 해요.' },
+    { id: 912, name: '꾸왁스', types: ['물'], tier: '일반', desc: '까칠한 머리깃이 멋진 오리 포켓몬이에요. 물을 잘 다뤄요.' },
+    { id: 1007, name: '코라이돈', types: ['격투', '드래곤'], tier: '전설', desc: '아주 먼 옛날 살았던 전설의 포켓몬이에요. 힘이 아주 세요.' },
+    { id: 1008, name: '미라이돈', types: ['전기', '드래곤'], tier: '전설', desc: '아주 먼 미래에서 온 전설의 포켓몬이에요. 전기를 다뤄요.' },
+    { id: 10033, name: '메가이상해꽃', types: ['풀', '독'], tier: '메가진화', desc: '이상해꽃이 메가진화한 모습이에요. 등에 꽃이 더 크게 피었어요!' },
+    { id: 10034, name: '메가리자몽X', types: ['불꽃', '드래곤'], tier: '메가진화', desc: '리자몽이 메가진화한 모습이에요. 파란 불꽃을 뿜어요!' },
+    { id: 10036, name: '메가거북왕', types: ['물'], tier: '메가진화', desc: '거북왕이 메가진화한 모습이에요. 등에 물 대포가 두 개 더 생겼어요!' },
+    { id: 10038, name: '메가팬텀', types: ['유령', '독'], tier: '메가진화', desc: '팬텀이 메가진화한 모습이에요. 그림자 속에 더 잘 숨어요.' },
+    { id: 10041, name: '메가갸라도스', types: ['물', '악'], tier: '메가진화', desc: '갸라도스가 메가진화한 모습이에요. 몸이 훨씬 강해졌어요!' },
+    { id: 10044, name: '메가뮤츠Y', types: ['에스퍼'], tier: '메가진화', desc: '뮤츠가 메가진화한 모습이에요. 에스퍼의 힘이 폭발해요.' },
+    { id: 10051, name: '메가가디안', types: ['에스퍼', '페어리'], tier: '메가진화', desc: '가디안이 메가진화한 모습이에요. 예쁜 모습에 힘도 아주 세요.' },
+    { id: 10058, name: '메가한카리아스', types: ['드래곤', '땅'], tier: '메가진화', desc: '한카리아스가 메가진화한 모습이에요. 더 빠르고 날카로워졌어요.' },
+    { id: 10059, name: '메가루카리오', types: ['격투', '강철'], tier: '메가진화', desc: '루카리오가 메가진화한 모습이에요. 파동의 힘이 커졌어요.' },
+    { id: 10079, name: '메가레쿠쟈', types: ['드래곤', '비행'], tier: '메가진화', desc: '레쿠쟈가 메가진화한 모습이에요. 하늘을 완전히 지배해요!' }
   ];
   POOL.sort(function (a, b) { return a.id - b.id; });
+
+  var TIER = {
+    '일반': { color: '#6C665C', bg: '#F1EFE8' },
+    '진화': { color: '#2C6BA8', bg: '#E4F0FC' },
+    '전설': { color: '#8A6B12', bg: '#FFF0B8' },
+    '메가진화': { color: '#5B2CA8', bg: '#EEE4FF' }
+  };
+  var TIER_ORDER = ['일반', '진화', '전설', '메가진화'];
+
+  /* 진화 사슬 (기본 → 다음 단계) */
+  var EVO = {
+    1: [2], 2: [3], 3: [10033],
+    4: [5], 5: [6], 6: [10034],
+    7: [8], 8: [9], 9: [10036],
+    25: [26],
+    94: [10038],
+    130: [10041],
+    133: [197, 700],
+    150: [10044],
+    282: [10051],
+    384: [10079],
+    445: [10058],
+    448: [10059]
+  };
+  var EVO_BALLS = 8;   // 몬스터볼 8개로 진화 (아니면 중복 2마리)
+
+  /* 뽑기 3단계: 단계별 확률 */
+  var DRAW = {
+    normal: { cost: 6, name: '일반 뽑기', color: '#E8362B', weights: { '일반': 70, '진화': 30 } },
+    super: { cost: 12, name: '슈퍼 뽑기', color: '#2C6BA8', weights: { '일반': 20, '진화': 55, '전설': 20, '메가진화': 5 } },
+    master: { cost: 20, name: '마스터 뽑기', color: '#6B34B8', weights: { '전설': 50, '메가진화': 50 } }
+  };
 
   var toastTimer = null;
   var selectedDow = new Date().getDay();
   var editingAcademyId = null;
   var lastDateKey = null;
   var rolling = false;
+  var dexFilter = '전체';
 
   /* ======================= 저장소 ======================= */
   var store = {
@@ -1336,11 +1462,15 @@
   /* ======================= 몬스터볼 ======================= */
   function updateBallUI() {
     setAll('.js-ball-count', String(state.balls));
-    var g = $('gachaBtn');
-    if (g) {
-      g.disabled = false;
-      g.setAttribute('aria-label', '몬스터 뽑기, 보유 ' + state.balls + '개');
-    }
+    each('.gacha-btn', function (btn) {
+      var cost = parseInt(btn.getAttribute('data-cost'), 10) || 0;
+      var ok = state.balls >= cost;
+      btn.setAttribute('aria-disabled', ok ? 'false' : 'true');
+      if (ok) { btn.removeAttribute('disabled'); btn.classList.remove('locked'); }
+      else { btn.setAttribute('disabled', 'disabled'); btn.classList.add('locked'); }
+      var st = btn.querySelector('.js-gacha-state');
+      if (st) st.textContent = ok ? '지금 뽑기!' : ((cost - state.balls) + '개 더 모아요');
+    });
   }
 
   function addBalls(n) {
@@ -1368,15 +1498,14 @@
     }
     var doneIds = todayRoutineIds();
     var complete = state.items.length > 0 && doneIds.length === state.items.length;
-    var bonus = false;
+    var justDone = false;
     if (complete && !a.b) {
       a.b = true;
-      addBalls(1);
-      bonus = true;
+      justDone = true;
     }
     saveAwards();
-    if (bonus) {
-      toast('루틴 모두 완료! 몬스터볼 +2 🔴🔴');
+    if (justDone) {
+      toast('아침 루틴 완벽! 몬스터볼 ' + state.items.length + '개를 다 모았어요 🔴');
       SFX.fanfare();
     } else if (got) {
       toast('몬스터볼 +1 🔴');
@@ -2158,102 +2287,217 @@
     return html;
   }
 
-  function caughtCount() {
+  function caughtCount(tier) {
     var n = 0;
-    for (var k in state.dex) {
-      if (Object.prototype.hasOwnProperty.call(state.dex, k) && state.dex[k] > 0) n++;
+    for (var i = 0; i < POOL.length; i++) {
+      if (tier && POOL[i].tier !== tier) continue;
+      if ((state.dex[POOL[i].id] || 0) > 0) n++;
     }
     return n;
   }
+  function tierTotal(tier) {
+    var n = 0;
+    for (var i = 0; i < POOL.length; i++) if (!tier || POOL[i].tier === tier) n++;
+    return n;
+  }
+  function tierChip(tier) {
+    var t = TIER[tier] || TIER['일반'];
+    return '<span class="tier-chip" style="color:' + t.color + ';background:' + t.bg + '">' + esc(tier) + '</span>';
+  }
+
+  function renderDexFilters() {
+    var box = $('dexFilters');
+    if (!box) return;
+    var list = ['전체'].concat(TIER_ORDER);
+    var html = '';
+    for (var i = 0; i < list.length; i++) {
+      var t = list[i];
+      var key = (t === '전체') ? null : t;
+      html += '<button class="dex-filter' + (dexFilter === t ? ' on' : '') + '" type="button" data-act="dex-filter" data-tier="' + esc(t) + '">'
+        + esc(t) + '<small>' + caughtCount(key) + '/' + tierTotal(key) + '</small></button>';
+    }
+    box.innerHTML = html;
+  }
 
   function renderDex() {
+    renderDexFilters();
     var grid = $('dexGrid');
     var html = '';
+    var shown = 0;
     for (var i = 0; i < POOL.length; i++) {
       var p = POOL[i];
+      if (dexFilter !== '전체' && p.tier !== dexFilter) continue;
+      shown++;
       var c = state.dex[p.id] || 0;
+      var cls = 'dex-tile ' + (c > 0 ? 'caught' : 'uncaught');
+      if (p.tier === '전설') cls += ' legend';
+      if (p.tier === '메가진화') cls += ' mega';
       if (c > 0) {
-        html += '<div class="dex-tile caught" data-act="dex-view" data-id="' + p.id + '" role="button" tabindex="0">'
+        html += '<div class="' + cls + '" data-act="dex-view" data-id="' + p.id + '" role="button" tabindex="0">'
           + (c > 1 ? '<span class="cnt">×' + c + '</span>' : '')
           + '<div class="dim"><img src="' + ART + p.id + '.png" alt="' + esc(p.name) + '" loading="lazy" '
           + 'onerror="this.onerror=null;this.src=\'' + SPR + p.id + '.png\'"></div>'
           + '<div class="no">' + dexNo(p.id) + '</div>'
           + '<div class="nm">' + esc(p.name) + '</div>'
+          + '<div class="tier">' + tierChip(p.tier) + '</div>'
           + '</div>';
       } else {
-        html += '<div class="dex-tile uncaught" data-act="dex-view" data-id="' + p.id + '" role="button" tabindex="0">'
+        html += '<div class="' + cls + '" data-act="dex-view" data-id="' + p.id + '" role="button" tabindex="0">'
           + '<div class="dim"><img class="sil" src="' + ART + p.id + '.png" alt="???" loading="lazy" '
           + 'onerror="this.onerror=null;this.src=\'' + SPR + p.id + '.png\'"></div>'
           + '<div class="no">' + dexNo(p.id) + '</div>'
           + '<div class="nm">???</div>'
+          + '<div class="tier">' + tierChip(p.tier) + '</div>'
           + '</div>';
       }
     }
+    if (!shown) html = '<div class="empty-soft" style="grid-column:1/-1">이 등급의 포켓몬이 아직 없어요</div>';
     grid.innerHTML = html;
 
-    var c2 = caughtCount();
+    var c2 = caughtCount(null);
     setAll('.js-dex-caught', String(c2));
+    setAll('.js-dex-total', String(POOL.length));
     var pt = $('dexProgressText');
     if (pt) pt.textContent = c2 === 0 ? '아직 만난 포켓몬이 없어요. 몬스터볼을 뽑아 보세요!'
-      : (c2 === POOL.length ? '도감 완성! 36마리를 모두 만났어요 🎉' : '도감 ' + c2 + ' / ' + POOL.length + ' · 새 친구를 만나 보세요!');
+      : (c2 === POOL.length ? '도감 완성! ' + POOL.length + '마리를 모두 만났어요 🎉' : '도감 ' + c2 + ' / ' + POOL.length + ' · 새 친구를 만나 보세요!');
     updateBallUI();
   }
 
-  function showReveal(p, isNew, count) {
+  function evoSection(p) {
+    var nexts = EVO[p.id] || [];
+    if (!nexts.length) return '';
+    var cnt = state.dex[p.id] || 0;
+    if (!cnt) return '';
+    var html = '<div class="evo-box"><div class="evo-title">✨ ' + esc(p.name) + ' 진화시키기</div>';
+    for (var i = 0; i < nexts.length; i++) {
+      var np = byId(nexts[i]);
+      if (!np) continue;
+      html += '<div class="evo-row">'
+        + '<span class="evo-name">→ ' + esc(np.name) + '</span>'
+        + (cnt >= 2
+          ? '<button class="btn btn-yellow" type="button" data-act="evolve" data-id="' + p.id + '" data-to="' + np.id + '" data-mode="dup">중복 2마리로 진화</button>'
+          : '<span class="evo-need">중복 2마리 필요</span>')
+        + '<button class="btn btn-blue" type="button" data-act="evolve" data-id="' + p.id + '" data-to="' + np.id + '" data-mode="balls"'
+        + (state.balls < EVO_BALLS ? ' disabled' : '') + '>몬스터볼 ' + EVO_BALLS + '개로 진화</button>'
+        + '</div>';
+    }
+    html += '<div style="text-align:center;font-size:11px;font-weight:800;color:#A79E8B">같은 포켓몬을 2마리 모으면 공짜로 진화!</div></div>';
+    return html;
+  }
+
+  function showReveal(p, isNew, count, kind) {
     var body = $('revealBody');
+    var tc = TIER[p.tier] || TIER['일반'];
+    var d = DRAW[kind] || null;
     body.innerHTML = '<div class="modal-head">'
       + '<h3>' + (isNew ? '🎉 새로운 포켓몬!' : '😊 또 만났어요!') + '</h3>'
       + '<button class="modal-close" type="button" data-act="close-reveal">✕</button>'
       + '</div>'
-      + '<div class="reveal-badge' + (isNew ? ' new' : '') + '">' + (isNew ? 'NEW · 도감에 등록!' : '이번이 ' + count + '번째 만남') + '</div>'
+      + '<div class="reveal-badge' + (isNew ? ' new' : '') + '" style="background:' + tc.bg + ';color:' + tc.color + '">'
+      + esc(p.tier) + (isNew ? ' · NEW! 도감에 등록' : ' · ' + count + '번째 만남') + '</div>'
       + '<div class="reveal-img"><img id="revealImg" src="' + ART + p.id + '.png" alt="' + esc(p.name) + '" '
       + 'onerror="this.onerror=null;this.src=\'' + SPR + p.id + '.png\'"></div>'
       + '<div class="reveal-no">' + dexNo(p.id) + '</div>'
       + '<div class="reveal-name">' + esc(p.name) + '</div>'
       + '<div class="types">' + typeBadges(p) + '</div>'
       + '<div class="reveal-desc">' + esc(p.desc) + '</div>'
+      + evoSection(p)
       + '<div class="reveal-actions">'
       + '<button class="btn btn-yellow" type="button" data-act="close-reveal">확인</button>'
-      + '<button class="btn btn-blue" type="button" data-act="gacha">한 번 더! (보유 ' + state.balls + '개)</button>'
+      + (d ? '<button class="btn btn-blue" type="button" data-act="gacha" data-tier="' + kind + '" data-cost="' + d.cost + '">한 번 더! (' + d.name + ' 볼 ' + d.cost + '개)</button>' : '')
       + '</div>';
     $('revealModal').classList.add('show');
   }
 
-  function pull() {
+  function pickPokemon(kind) {
+    var d = DRAW[kind] || DRAW.normal;
+    var w = d.weights, total = 0, t;
+    for (t in w) if (Object.prototype.hasOwnProperty.call(w, t)) total += w[t];
+    var r = Math.random() * total, acc = 0, pickT = '일반';
+    for (t in w) {
+      if (!Object.prototype.hasOwnProperty.call(w, t)) continue;
+      acc += w[t];
+      if (r <= acc) { pickT = t; break; }
+    }
+    var list = [];
+    for (var i = 0; i < POOL.length; i++) if (POOL[i].tier === pickT) list.push(POOL[i]);
+    if (!list.length) list = POOL;
+    return list[Math.floor(Math.random() * list.length)];
+  }
+
+  function pull(kind) {
+    var d = DRAW[kind] || DRAW.normal;
     if (rolling) return;
     SFX.unlock();
-    if (state.balls < 1) {
+    if (state.balls < d.cost) {
       SFX.nope();
-      toast('몬스터볼이 없어요! 루틴과 홈스쿨을 완료해서 모아 보세요 🔴');
+      toast(d.name + '는 몬스터볼 ' + d.cost + '개가 필요해요! ' + (d.cost - state.balls) + '개 더 모아 보세요 🔴');
       return;
     }
     rolling = true;
-    state.balls -= 1;
+    state.balls -= d.cost;
     saveBalls();
     updateBallUI();
 
-    var btn = $('gachaBtn');
-    btn.classList.add('rolling');
+    var btn = document.querySelector('.gacha-btn[data-tier="' + (DRAW[kind] ? kind : 'normal') + '"]');
+    if (btn) btn.classList.add('rolling');
     SFX.shake();
 
     setTimeout(function () {
-      var p = POOL[Math.floor(Math.random() * POOL.length)];
+      var p = pickPokemon(kind);
       var isNew = !state.dex[p.id];
       state.dex[p.id] = (state.dex[p.id] || 0) + 1;
       saveDex();
 
-      btn.classList.remove('rolling');
+      if (btn) btn.classList.remove('rolling');
       $('flash').classList.add('on');
       SFX.reveal();
 
       setTimeout(function () {
         $('flash').classList.remove('on');
         renderDex();
-        showReveal(p, isNew, state.dex[p.id]);
+        showReveal(p, isNew, state.dex[p.id], kind);
         if (isNew) confettiBurst();
         rolling = false;
       }, 190);
     }, 1500);
+  }
+
+  function evolvePokemon(fromId, toId, mode) {
+    var from = byId(fromId), to = byId(toId);
+    if (!from || !to) return;
+    var cnt = state.dex[fromId] || 0;
+    if (!cnt) { SFX.nope(); toast('먼저 ' + from.name + '를 만나야 해요'); return; }
+
+    if (mode === 'dup') {
+      if (cnt < 2) { SFX.nope(); toast(from.name + '가 2마리 있어야 해요!'); return; }
+      state.dex[fromId] = cnt - 1;
+    } else {
+      if (state.balls < EVO_BALLS) {
+        SFX.nope();
+        toast('몬스터볼이 ' + (EVO_BALLS - state.balls) + '개 더 필요해요');
+        return;
+      }
+      state.balls -= EVO_BALLS;
+      saveBalls();
+    }
+
+    var isNew = !state.dex[toId];
+    state.dex[toId] = (state.dex[toId] || 0) + 1;
+    saveDex();
+    SFX.unlock();
+
+    $('flash').classList.add('on');
+    SFX.fanfare();
+
+    setTimeout(function () {
+      $('flash').classList.remove('on');
+      renderDex();
+      updateBallUI();
+      showReveal(to, isNew, state.dex[toId], null);
+      confettiBurst();
+      toast(from.name + ' → ' + to.name + ' 진화 성공! ✨');
+    }, 320);
   }
 
   /* ======================= 전체화면 / 효과음 ======================= */
@@ -2355,7 +2599,14 @@
         loadWeather();
         break;
       case 'gacha':
-        pull();
+        pull(el.getAttribute('data-tier') || 'normal');
+        break;
+      case 'dex-filter':
+        dexFilter = el.getAttribute('data-tier') || '전체';
+        renderDex();
+        break;
+      case 'evolve':
+        evolvePokemon(parseInt(id, 10), parseInt(el.getAttribute('data-to'), 10), el.getAttribute('data-mode'));
         break;
       case 'close-reveal':
         $('revealModal').classList.remove('show');
@@ -2394,7 +2645,6 @@
   document.addEventListener('fullscreenchange', refreshFsBtn);
   document.addEventListener('webkitfullscreenchange', refreshFsBtn);
 
-  $('gachaBtn').addEventListener('click', function () { SFX.unlock(); });
   $('routineAdd').addEventListener('click', addRoutine);
   $('routineInput').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') { e.preventDefault(); addRoutine(); }
