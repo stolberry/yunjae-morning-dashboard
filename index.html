@@ -1957,7 +1957,8 @@
     sound: 'yj_sound_v1',
     msAlerts: 'yj_ms_alerts_v1',
     momPin: 'yj_mom_pin_v1',
-    praises: 'yj_praises_v1'
+    praises: 'yj_praises_v1',
+    studyReading: 'yj_study_migrated_reading_v1'
   };
 
   var W_URL = 'https://api.open-meteo.com/v1/forecast?latitude=36.8428&longitude=127.1394'
@@ -2272,16 +2273,16 @@
     return out;
   }
 
-  /* 공부 주간표: 숙제(월~금) · 그림일기(일) · 빅박스(월수금) · 사고력(화목) · 피아노(매일) */
+  /* 공부 주간표: 원서 낭독·피아노는 매일 · 빅박스(월수금) · 사고력(화목) · 그림일기(일) */
   function newStudyWeek() {
     var out = {};
     for (var dow = 0; dow < 7; dow++) {
       var arr = [];
-      if (dow >= 1 && dow <= 5) arr.push('숙제');
       if (dow === 0) arr.push('그림일기');
       if (dow === 1 || dow === 3 || dow === 5) arr.push('빅박스·화상영어');
       if (dow === 2 || dow === 4) arr.push('사고력수학');
       arr.push('피아노연습');
+      arr.push('원서 낭독');
       out[String(dow)] = arr;
     }
     return out;
@@ -2355,6 +2356,43 @@
       if (next.join(',') !== arr.join(',')) { state.homeschoolDone[d] = next; changed = true; }
     }
     if (changed) store.set(K.hsDone, state.homeschoolDone);
+  }
+
+  /* 한 번만: 요일별 공부표에서 '숙제'를 빼고 '원서 낭독'을 모든 요일에 넣는다.
+     직접 넣은 다른 항목(사고력수학·피아노연습·빅박스 등)은 그대로 둔다. */
+  function migrateStudyReading() {
+    if (store.get(K.studyReading, false) === true) return;
+    var ht = state.homeschoolTasks || {};
+    var key = todayKey();
+    var todayDone = state.homeschoolDone[key] || [];
+    var dropIds = [];
+    for (var d = 0; d < 7; d++) {
+      var arr = ht[String(d)] || [];
+      var next = [], hasRead = false, i;
+      for (i = 0; i < arr.length; i++) {
+        var it = arr[i] || {};
+        if (normLabel(it.label) === normLabel('숙제')) {
+          if (it.id && todayDone.indexOf(it.id) !== -1) dropIds.push(it.id);
+          continue;
+        }
+        if (normLabel(it.label) === normLabel('원서 낭독')) hasRead = true;
+        next.push(it);
+      }
+      if (!hasRead) next.push({ id: uid(), label: '원서 낭독' });
+      ht[String(d)] = next;
+    }
+    state.homeschoolTasks = ht;
+    store.set(K.hsTasks, ht);
+    /* 오늘 체크 기록에 남은 '숙제' id는 정리한다 */
+    if (dropIds.length) {
+      var kept = [];
+      for (var j = 0; j < todayDone.length; j++) {
+        if (dropIds.indexOf(todayDone[j]) === -1) kept.push(todayDone[j]);
+      }
+      state.homeschoolDone[key] = kept;
+      store.set(K.hsDone, state.homeschoolDone);
+    }
+    store.set(K.studyReading, true);
   }
 
   /* 7개 저녁 목록 → 5개 저녁 목록: 이름이 겹치는 항목의 체크를 이어받는다 */
@@ -2485,6 +2523,9 @@
       store.set(K.hsTasks, ht);
     }
     state.homeschoolTasks = ht;
+
+    /* 한 번만: '숙제' 빼고 '원서 낭독' 매일 넣기 */
+    migrateStudyReading();
 
     var balls = store.get(K.balls, 0);
     state.balls = (typeof balls === 'number' && balls >= 0) ? balls : 0;
@@ -4122,8 +4163,20 @@
       + '</svg>';
   }
 
+  function svgReadAloud() {
+    return '<svg viewBox="0 0 48 48" aria-hidden="true">'
+      + '<path d="M5 15c4.6-2 10-1 14 2 4-3 9.4-4 14-2v21c-4.6-2-10-1-14 2-4-3-9.4-4-14-2z" fill="#EAF7FF" stroke="#3E8FC4" stroke-width="2.2" stroke-linejoin="round"/>'
+      + '<path d="M19 17v21" stroke="#3E8FC4" stroke-width="2.2"/>'
+      + '<path d="M8.5 22h7M8.5 27h7M23 22h7M23 27h7" stroke="#9CD2F0" stroke-width="2" stroke-linecap="round"/>'
+      + '<path d="M37 16a7 7 0 0 1 0 10" fill="none" stroke="#F0A0C0" stroke-width="2.3" stroke-linecap="round"/>'
+      + '<path d="M41 11.5a13 13 0 0 1 0 19" fill="none" stroke="#F0A0C0" stroke-width="2.3" stroke-linecap="round"/>'
+      + '<path d="M19 6.5l1.5 3.2 3.5.5-2.6 2.4.6 3.4-3-1.7-3 1.7.6-3.4-2.6-2.4 3.5-.5z" fill="#FFC93C"/>'
+      + '</svg>';
+  }
+
   function studyIcon(label) {
     var s = String(label || '');
+    if (s.indexOf('원서') !== -1 || s.indexOf('낭독') !== -1) return svgReadAloud();
     if (s.indexOf('피아노') !== -1 || s.indexOf('음악') !== -1) return svgPiano();
     if (s.indexOf('그림일기') !== -1 || s.indexOf('미술') !== -1 || s.indexOf('그림') !== -1) return svgDiary();
     if (s.indexOf('영어') !== -1 || s.indexOf('화상') !== -1 || s.indexOf('리틀팍스') !== -1) return svgVideo();
