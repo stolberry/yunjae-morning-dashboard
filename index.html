@@ -289,7 +289,7 @@
 
   /* 학원 카드 */
   .today-academy{display:flex;flex-direction:column;gap:8px;flex:1 1 auto;min-height:0}
-  .today-academy .today-class{flex:1 1 auto;min-height:58px}
+  .today-academy .today-class{flex:1 1 auto;min-height:64px}
   .today-class{
     display:flex;align-items:center;gap:11px;background:#F7FBFF;border:2px solid #DCEBFA;
     border-radius:16px;padding:10px 12px;min-width:0;max-width:none;
@@ -325,7 +325,8 @@
   .acad-empty .btn{font-size:12.5px;padding:8px 13px;min-height:38px;border-radius:12px}
 
   /* ---------------- 공부 타일 (home card) ---------------- */
-  .hs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;grid-auto-rows:1fr;flex:1 1 auto;min-height:0}
+  .hs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;grid-auto-rows:minmax(88px,1fr);flex:0 1 auto;min-height:0;align-content:start}
+  .hs-tile:last-child:nth-child(odd){grid-column:1 / -1}
   .hs-tile{
     position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
     width:100%;text-align:center;font-family:inherit;height:100%;min-height:96px;
@@ -424,7 +425,7 @@
 
   /* 학원 카드 */
   .today-academy{display:flex;flex-direction:column;gap:8px;flex:1 1 auto;min-height:0}
-  .today-academy .today-class{flex:1 1 auto;min-height:58px}
+  .today-academy .today-class{flex:1 1 auto;min-height:64px}
   .today-class{
     display:flex;align-items:center;gap:11px;background:#F7FBFF;border:2px solid #DCEBFA;
     border-radius:16px;padding:10px 12px;min-width:0;max-width:none;
@@ -460,7 +461,8 @@
   .acad-empty .btn{font-size:12.5px;padding:8px 13px;min-height:38px;border-radius:12px}
 
   /* ---------------- 공부 타일 (home card) ---------------- */
-  .hs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;grid-auto-rows:1fr;flex:1 1 auto;min-height:0}
+  .hs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;grid-auto-rows:minmax(88px,1fr);flex:0 1 auto;min-height:0;align-content:start}
+  .hs-tile:last-child:nth-child(odd){grid-column:1 / -1}
   .hs-tile{
     position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
     width:100%;text-align:center;font-family:inherit;height:100%;min-height:96px;
@@ -887,7 +889,7 @@
     .today-class .t-name{font-size:22px}
     .today-class .t-time{font-size:14px}
     .today-class .t-memo{font-size:12.5px}
-    .hs-grid{gap:10px}
+    .hs-grid{gap:10px;grid-auto-rows:104px}
     .hs-tile{border-radius:20px;min-height:110px;gap:8px}
     .hs-tile .hs-ico{width:66px;height:66px;border-radius:19px}
     .hs-tile .hs-ico svg{width:46px;height:46px}
