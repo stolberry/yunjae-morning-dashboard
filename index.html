@@ -289,6 +289,9 @@
   }
   .today-class .ac-ico svg{width:30px;height:30px;display:block}
   .today-class .t-body{min-width:0;flex:1}
+  .today-class.solo{justify-content:center}
+  .today-class.solo .t-body{flex:0 1 auto}
+  .today-class.solo .t-name{font-size:22px}
   .today-class .t-name{font-size:19px;font-weight:900;letter-spacing:-.5px;line-height:1.2;word-break:keep-all}
   .today-class .t-time{font-size:12.5px;font-weight:900;color:#2C6BA8;margin-top:2px;font-variant-numeric:tabular-nums}
   .today-class .t-memo{font-size:11.5px;font-weight:800;color:#8A8377;margin-top:2px}
@@ -313,23 +316,25 @@
   /* ---------------- 공부 타일 (home card) ---------------- */
   .hs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;grid-auto-rows:1fr;flex:1 1 auto;min-height:0}
   .hs-tile{
-    display:flex;align-items:center;gap:9px;width:100%;text-align:left;font-family:inherit;height:100%;min-height:56px;
-    background:linear-gradient(180deg,#FFFEFA,#FFF8E6);border:2px solid #F2E8CF;border-radius:16px;padding:8px 10px;
+    position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    width:100%;text-align:center;font-family:inherit;height:100%;min-height:96px;
+    background:linear-gradient(180deg,#FFFEFA,#FFF7E2);border:2px solid #F2E8CF;border-radius:18px;padding:12px 10px;
     transition:transform .12s ease,background .15s ease,border-color .15s ease,box-shadow .15s ease;min-width:0;
   }
   .hs-tile:active{transform:scale(.98)}
   .hs-tile .hs-ico{
-    width:42px;height:42px;flex:none;border-radius:13px;background:#fff;border:2px solid #F0E6D0;
+    width:56px;height:56px;flex:none;border-radius:16px;background:#fff;border:2px solid #F0E6D0;
     display:flex;align-items:center;justify-content:center;
   }
-  .hs-tile .hs-ico svg{width:29px;height:29px;display:block}
-  .hs-tile .hs-tile-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
-  .hs-tile .hs-label{font-size:15.5px;font-weight:900;letter-spacing:-.35px;line-height:1.15;word-break:keep-all}
-  .hs-tile .hs-state{font-size:10.5px;font-weight:900;color:#B0A896;display:flex;align-items:center;gap:3px}
+  .hs-tile .hs-ico svg{width:38px;height:38px;display:block}
+  .hs-tile .hs-tile-body{flex:none;min-width:0;display:flex;flex-direction:column;gap:2px;align-items:center}
+  .hs-tile .hs-label{font-size:16.5px;font-weight:900;letter-spacing:-.35px;line-height:1.15;word-break:keep-all}
+  .hs-tile .hs-state{font-size:11px;font-weight:900;color:#B0A896;display:flex;align-items:center;gap:3px}
   .hs-tile .hs-state .mini{width:12px;height:12px;flex:none}
   .hs-tile .hs-check{
-    width:24px;height:24px;flex:none;border-radius:50%;border:2.5px solid #DCD4C2;background:#fff;
-    display:flex;align-items:center;justify-content:center;color:transparent;font-size:13px;font-weight:900;
+    position:absolute;top:9px;right:9px;width:26px;height:26px;flex:none;border-radius:50%;
+    border:2.5px solid #DCD4C2;background:#fff;
+    display:flex;align-items:center;justify-content:center;color:transparent;font-size:14px;font-weight:900;
   }
   .hs-tile.done{background:linear-gradient(180deg,#F7FDF7,#EEF9EF);border-color:#A9DCAF;box-shadow:0 6px 14px rgba(63,163,77,.12)}
   .hs-tile.done .hs-check{background:var(--green);border-color:var(--green);color:#fff}
@@ -701,12 +706,12 @@
     .today-class .t-time{font-size:14px}
     .today-class .t-memo{font-size:12.5px}
     .hs-grid{gap:10px}
-    .hs-tile{padding:10px 12px;border-radius:18px;min-height:72px}
-    .hs-tile .hs-ico{width:50px;height:50px;border-radius:15px}
-    .hs-tile .hs-ico svg{width:34px;height:34px}
-    .hs-tile .hs-label{font-size:17.5px}
-    .hs-tile .hs-state{font-size:11.5px}
-    .hs-tile .hs-check{width:27px;height:27px;font-size:15px}
+    .hs-tile{border-radius:20px;min-height:110px;gap:8px}
+    .hs-tile .hs-ico{width:66px;height:66px;border-radius:19px}
+    .hs-tile .hs-ico svg{width:46px;height:46px}
+    .hs-tile .hs-label{font-size:19px}
+    .hs-tile .hs-state{font-size:12px}
+    .hs-tile .hs-check{width:29px;height:29px;font-size:16px;top:11px;right:11px}
     .hs-empty{font-size:16px}
     .home-grid{gap:12px}
     .routine-grid{gap:11px}
@@ -2070,7 +2075,7 @@
     var html = '';
     for (var i = 0; i < list.length; i++) {
       var a = list[i];
-      html += '<div class="today-class">'
+      html += '<div class="today-class' + (list.length === 1 ? ' solo' : '') + '">'
         + '<span class="ac-ico">' + svgSchool() + '</span>'
         + '<div class="t-body"><div class="t-name">' + esc(a.name) + '</div>'
         + '<div class="t-time">🕘 ' + esc(timeLabel(a)) + '</div>'
