@@ -550,14 +550,13 @@
   /* 학원은 많아야 세 곳 — 언제나 세 칸으로 나눠 두고, 하나면 1/3만 차지한다 */
   .acad-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;min-width:0}
   .acad-tile{
-    display:flex;flex-direction:column;gap:2px;min-width:0;align-items:center;text-align:center;
-    background:#F7FBFF;border:1.5px solid #DCEBFA;border-radius:13px;padding:7px 10px 8px;
+    display:flex;flex-direction:column;gap:3px;min-width:0;align-items:center;justify-content:center;text-align:center;
+    background:#F7FBFF;border:1.5px solid #DCEBFA;border-radius:13px;padding:8px 8px 9px;
   }
-  .acad-tile .ac-top{display:flex;align-items:center;justify-content:center;gap:7px;min-width:0;width:100%}
-  .acad-tile .ac-ico{width:26px;height:26px;flex:none;display:flex;align-items:center;justify-content:center}
-  .acad-tile .ac-ico svg{width:24px;height:24px;display:block}
+  .acad-tile .ac-ico{width:28px;height:28px;flex:none;display:flex;align-items:center;justify-content:center;margin-bottom:1px}
+  .acad-tile .ac-ico svg{width:26px;height:26px;display:block}
   .acad-tile .ac-name{
-    flex:0 1 auto;min-width:0;font-size:16px;font-weight:900;letter-spacing:-.5px;color:#1F3E5C;text-align:center;
+    flex:0 1 auto;min-width:0;max-width:100%;font-size:16px;font-weight:900;letter-spacing:-.5px;color:#1F3E5C;text-align:center;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   }
   .acad-tile .ac-memo{
@@ -613,6 +612,37 @@
   .pk-front{
     background:radial-gradient(120% 82% at 50% 12%,#FFF8DE 0%,#FFFCF2 46%,#FFF3D2 100%);
     border:2px solid #EFD79B;box-shadow:0 6px 14px rgba(150,120,40,.10);
+  }
+  /* 포켓몬 카드 앞면: 더블 포일 프레임 + 포켓볼 워터마크 + 아이콘 글로우 */
+  .pk-card .pk-tag{
+    position:absolute;top:4px;left:5px;z-index:4;
+    font-size:8px;font-weight:900;letter-spacing:.4px;line-height:1;font-family:Arial, sans-serif;
+    padding:2px 5px;border-radius:5px;color:#8A5A00;
+    background:rgba(255,255,255,.94);border:1px solid #E9B84A;
+    box-shadow:0 1px 3px rgba(150,110,20,.18);
+  }
+  .pk-card.bonus .pk-tag{color:#4A3F86;border-color:#B9A8EA}
+  .pk-card .pk-wm{position:absolute;inset:0;z-index:0;display:grid;place-items:center;pointer-events:none;opacity:.09}
+  .pk-card .pk-wm svg{width:88%;height:88%;display:block;filter:grayscale(1) contrast(1.05)}
+  .pk-card .pk-ico{
+    position:relative;z-index:2;border-radius:50%;
+    background:radial-gradient(circle at 50% 42%,rgba(255,255,255,.98) 0%,rgba(255,247,220,.7) 52%,rgba(255,247,220,0) 74%);
+    box-shadow:0 0 12px rgba(255,196,60,.35);
+  }
+  .pk-card .pk-name{position:relative;z-index:2}
+  .pk-card.mission .pk-front{
+    background:
+      radial-gradient(78% 52% at 50% 4%, rgba(255,255,255,.98), rgba(255,255,255,0) 62%),
+      linear-gradient(168deg,#FFFDF6 0%,#FFF4D2 52%,#FFE7AE 100%);
+    border:2.5px solid #E9B84A;
+    box-shadow:inset 0 0 0 2px rgba(255,255,255,.92), inset 0 0 0 3.5px rgba(233,184,74,.5), 0 6px 16px rgba(170,130,30,.16);
+  }
+  .pk-card.bonus .pk-front{
+    background:
+      radial-gradient(78% 52% at 50% 4%, rgba(255,255,255,.98), rgba(255,255,255,0) 62%),
+      linear-gradient(168deg,#FFFDF6 0%,#FFF1CE 40%,#E9F0FF 74%,#F1E9FF 100%);
+    border:2.5px solid #EDA94D;
+    box-shadow:inset 0 0 0 2px rgba(255,255,255,.92), inset 0 0 0 3.5px rgba(150,175,235,.45), 0 6px 16px rgba(120,110,160,.16);
   }
   .pk-front::after{
     content:"";position:absolute;inset:-30% -50%;pointer-events:none;opacity:0;
@@ -3962,10 +3992,13 @@
   function pokeCardHtml(o) {
     var done = !!o.done;
     var flipping = done && o.id === justFlippedId;
-    return '<button class="pk-card' + (done ? ' done' : '') + (flipping ? ' flip-in' : '') + '" type="button" data-act="' + o.act + '" data-id="' + esc(o.id) + '"'
+    var theme = o.theme === 'bonus' ? ' bonus' : ' mission';
+    return '<button class="pk-card' + theme + (done ? ' done' : '') + (flipping ? ' flip-in' : '') + '" type="button" data-act="' + o.act + '" data-id="' + esc(o.id) + '"'
       + ' aria-pressed="' + done + '" aria-label="' + esc(o.label) + (done ? ' 완료 취소' : ' 완료하고 몬스터볼 +1') + '">'
       + '<span class="pk-inner">'
       + '<span class="pk-face pk-front">'
+      + (o.tag ? '<span class="pk-tag">' + esc(o.tag) + '</span>' : '')
+      + '<span class="pk-wm" aria-hidden="true">' + pokeBallSvg() + '</span>'
       + '<span class="pk-ico">' + o.ico + '</span>'
       + '<span class="pk-name">' + esc(o.label) + '</span>'
       + '</span>'
@@ -4048,6 +4081,8 @@
         id: it.id,
         label: it.label,
         ico: ico,
+        theme: 'mission',
+        tag: 'MISSION ' + pad2(i + 1),
         done: doneIds.indexOf(it.id) !== -1
       });
     }
@@ -4057,6 +4092,8 @@
       id: 'late',
       label: '지각 안하기',
       ico: svgLate(),
+      theme: 'mission',
+      tag: 'MISSION ' + pad2(items.length + 1),
       done: lateMissionDone()
     });
     box.innerHTML = html;
@@ -4618,8 +4655,8 @@
     for (var i = 0; i < list.length; i++) {
       var a = list[i];
       html += '<div class="acad-tile">'
-        + '<div class="ac-top"><span class="ac-ico">' + svgSchool() + '</span>'
-        + '<span class="ac-name" title="' + esc(a.name) + '">' + esc(a.name) + '</span></div>'
+        + '<span class="ac-ico">' + svgSchool() + '</span>'
+        + '<span class="ac-name" title="' + esc(a.name) + '">' + esc(a.name) + '</span>'
         + (a.memo ? '<span class="ac-memo" title="' + esc(a.memo) + '">🎒 ' + esc(a.memo) + '</span>' : '')
         + '<span class="ac-time">' + esc(timeLabel(a)) + '</span>'
         + '</div>';
@@ -5032,6 +5069,8 @@
             id: b.id,
             label: b.label,
             ico: bonusIconFor(b.label),
+            theme: 'bonus',
+            tag: 'BONUS ' + pad2(i + 1),
             done: done.indexOf(b.id) !== -1
           });
         }
