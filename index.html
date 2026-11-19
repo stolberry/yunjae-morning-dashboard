@@ -299,6 +299,8 @@
   }
   .home-right{display:flex;flex-direction:column;gap:9px;min-width:0;min-height:0}
   .home-right>.today-card{flex:0 0 auto}
+  #homeEvening .home-grid{grid-template-columns:1fr 1.32fr}
+  #homeEvening .home-right>.today-card{flex:1 1 auto}
   .home-right .wx-card .wsep{display:none}
   .right-top{display:grid;grid-template-columns:1fr;gap:9px;flex:none;min-height:0}
   .right-main{display:grid;grid-template-columns:1fr;gap:9px;flex:1 1 auto;min-height:0}
@@ -355,8 +357,6 @@
 
   /* ---------------- 공부 타일 (home card) ---------------- */
   .hs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;grid-auto-rows:minmax(0,1fr);flex:1 1 auto;min-height:0;align-content:stretch}
-  #homeEvening .hs-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-  #homeEvening .hs-tile:last-child:nth-child(odd){grid-column:auto}
   .hs-tile:last-child:nth-child(odd){grid-column:1 / -1}
   .hs-tile{
     position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
@@ -1024,11 +1024,11 @@
     .today-class.solo .t-time{font-size:16.5px}
     .today-class.solo .t-memo{font-size:14px}
     .today-class.solo .t-note{font-size:13.5px}
-    #homeEvening .hs-tile{padding:8px 5px 7px;gap:3px}
-    #homeEvening .hs-tile .hs-ico{width:44px;height:44px;border-radius:13px}
-    #homeEvening .hs-tile .hs-ico svg{width:29px;height:29px}
-    #homeEvening .hs-tile .hs-label{font-size:14px}
-    #homeEvening .hs-tile .hs-cta{font-size:11px;min-height:30px;padding:5px 3px}
+    #homeEvening .hs-tile{padding:11px 10px 10px;gap:6px}
+    #homeEvening .hs-tile .hs-ico{width:64px;height:64px;border-radius:18px}
+    #homeEvening .hs-tile .hs-ico svg{width:43px;height:43px}
+    #homeEvening .hs-tile .hs-label{font-size:18px}
+    #homeEvening .hs-tile .hs-cta{font-size:13px;min-height:38px;padding:7px 4px}
     .hs-grid{gap:9px}
     .hs-tile{border-radius:18px;gap:5px;padding:9px 8px 8px}
     .hs-tile .hs-ico{width:48px;height:48px;border-radius:14px}
@@ -1263,7 +1263,6 @@
 
         <div class="hero-mid">
           <div class="hero-count" id="eveCountdownText">--</div>
-          <div class="hero-status" id="eveStatus">오늘 하루도 수고했어요 🌙</div>
         </div>
 
         <div class="hero-progress">
@@ -1315,14 +1314,6 @@
       </div>
 
         <div class="home-right">
-          <div class="card affirm-card">
-            <div class="af-head"><span class="af-ico">✨</span> 오늘의 확언</div>
-            <p class="af-text js-affirm">—</p>
-            <div class="af-sub">엄마가 응원한대!</div>
-          </div>
-          <div class="card wx-card js-weather">
-            <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
-          </div>
         <div class="card today-card study-card">
           <div class="sec-head">
             <h2>📚 오늘의 공부</h2>
