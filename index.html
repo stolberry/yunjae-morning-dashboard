@@ -254,7 +254,7 @@
   .hero-status{font-size:12.5px;font-weight:900;color:#7A6A46}
   .hero-progress{position:relative;padding-right:5px;margin:auto 0 0}
   .hp-track{
-    height:24px;border-radius:999px;background:#F2EFE4;border:2px solid #E4DDC9;
+    height:30px;border-radius:999px;background:#F2EFE4;border:2px solid #E4DDC9;
     position:relative;overflow:hidden;box-shadow:inset 0 2px 5px rgba(120,108,72,.12);
   }
   .hp-fill{
@@ -292,8 +292,8 @@
   .hp-track.finished .ms-dot{background:#fff;border-color:#3FA34D}
   .hp-track.finished .ms-dot.now{background:#FFCB05;border-color:#B98A00}
   .hp-fill::after{
-    content:"";position:absolute;left:8px;right:8px;top:3px;height:5px;border-radius:999px;
-    background:rgba(255,255,255,.35);
+    content:"";position:absolute;left:10px;right:10px;top:4px;height:7px;border-radius:999px;
+    background:rgba(255,255,255,.38);
   }
   .hp-runner{
     position:absolute;top:50%;left:0;transform:translate(-50%,-56%);z-index:3;
@@ -303,7 +303,7 @@
   .hp-runner.run{animation:runnerHop .7s ease-in-out infinite}
   /* 아침: 리자몽이 진행바 위를 날아간다 (07:10~08:15), 08:15 이후엔 도착한 메가리자몽X */
   .hero-progress>.hp-runner{
-    top:0;width:54px;height:54px;opacity:0;transform:translate(-50%,-78%);
+    top:0;width:54px;height:54px;opacity:0;transform:translate(-50%,-84%);
     transition:left .8s cubic-bezier(.3,.9,.3,1),opacity .3s ease;
     filter:drop-shadow(0 3px 4px rgba(120,60,0,.28));
   }
@@ -317,8 +317,8 @@
   .hero-progress>.hp-runner.mega-run .rn-mega{opacity:1}
   .hero-progress>.hp-runner.run{animation:charFly .9s ease-in-out infinite}
   @keyframes charFly{
-    0%,100%{transform:translate(-50%,-76%) rotate(-3deg)}
-    50%{transform:translate(-50%,-84%) rotate(3deg)}
+    0%,100%{transform:translate(-50%,-82%) rotate(-3deg)}
+    50%{transform:translate(-50%,-90%) rotate(3deg)}
   }
   @keyframes runnerHop{0%,100%{transform:translate(-50%,-56%)}50%{transform:translate(-50%,-64%)}}
   .hp-labels{display:flex;justify-content:space-between;font-size:10px;font-weight:900;color:#A79E8B;margin-top:2px}
@@ -1261,6 +1261,26 @@
   .eve-hero .hero-count.urgent{color:#C24C86}
   .eve-hero .hp-track{background:#EBE7F7;border-color:#DBD4EF}
   .eve-hero .hp-fill{background:linear-gradient(90deg,#BCB2F5 0%,#9189DC 55%,#6B62C0 100%)}
+  /* 아침 진행바: 리자몽의 불꽃 — 달리는 동안 주황·빨강, 08:15 메가진화하면 파란 불꽃 */
+  #homeMorning .hp-fill{
+    background:linear-gradient(90deg,#F59E0B 0%,#EA580C 55%,#EF4444 100%);
+    animation-name:hpGlowFire;
+  }
+  @keyframes hpGlowFire{
+    0%,100%{box-shadow:inset 0 -3px 0 rgba(0,0,0,.08),0 0 12px rgba(245,158,11,.45)}
+    50%{box-shadow:inset 0 -3px 0 rgba(0,0,0,.08),0 0 24px rgba(239,68,68,.8)}
+  }
+  #homeMorning .hp-fill .hp-comet{
+    background:radial-gradient(circle,rgba(255,255,255,.98) 0%,rgba(255,214,120,.9) 26%,rgba(249,115,22,0) 68%);
+  }
+  #homeMorning .hp-track.finished{
+    background:linear-gradient(90deg,#38BDF8 0%,#2563EB 55%,#1D4ED8 100%);
+    border-color:#2563EB;
+    box-shadow:0 0 16px rgba(56,189,248,.5),inset 0 -3px 0 rgba(0,0,0,.14);
+  }
+  #homeMorning .hp-track.finished .hp-fill{background:linear-gradient(90deg,#38BDF8 0%,#2563EB 55%,#1D4ED8 100%)}
+  #homeMorning .hp-track.finished .ms-dot{border-color:#A5D8FF;background:#fff}
+  #homeMorning .hp-track.finished .ms-dot.now{background:#38BDF8;border-color:#1D4ED8}
   .eve-hero .hp-fill .hp-comet{background:radial-gradient(circle,rgba(255,255,255,.98) 0%,rgba(206,192,255,.9) 26%,rgba(140,120,240,0) 68%)}
   .eve-hero .hp-fill{animation-name:hpGlowEve}
   @keyframes hpGlowEve{
@@ -1316,13 +1336,13 @@
   .dt-card.eve .dtc-clock{color:#3B3266}
 
   .ms-dot{
-    position:absolute;top:50%;width:9px;height:9px;border-radius:50%;background:#fff;border:2px solid #BDB5A2;
+    position:absolute;top:50%;width:12px;height:12px;border-radius:50%;background:#fff;border:2.5px solid #BDB5A2;
     transform:translate(-50%,-50%);z-index:2;
   }
   .ms-dot.past{background:#3FA34D;border-color:#2F7A3C}
   .ms-dot.now{background:#FFCB05;border-color:#B98A00;box-shadow:0 0 0 3px rgba(255,203,5,.4)}
   /* 마일스톤 눈금: 시간(위·작게) + 이름(아래) — 한 줄에 깔끔하게 */
-  .ms-labels{position:relative;height:36px;margin-top:7px}
+  .ms-labels{position:relative;height:44px;margin-top:8px}
   .ms{
     position:absolute;top:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:1px;
     line-height:1.12;white-space:nowrap;text-align:center;
@@ -1334,8 +1354,8 @@
   .ms:first-child::before{left:3px}
   .ms:last-child{transform:translateX(-100%);align-items:flex-end;text-align:right}
   .ms:last-child::before{left:auto;right:1px}
-  .ms b{font-size:9.5px;font-weight:800;letter-spacing:.2px;color:#B0A795;font-variant-numeric:tabular-nums}
-  .ms span{font-size:11.5px;font-weight:900;letter-spacing:-.3px;color:#8A8377}
+  .ms b{font-size:12.5px;font-weight:700;letter-spacing:.2px;color:#4B5563;font-variant-numeric:tabular-nums}
+  .ms span{font-size:13.5px;font-weight:800;letter-spacing:-.3px;color:#313A46}
   .ms.past::before{background:#A9DCAF}
   .ms.now::before{background:#FFCB05;box-shadow:0 0 0 2px rgba(255,203,5,.28)}
   .ms.past b{color:#2F7A3C}
@@ -1571,8 +1591,8 @@
     .dtc-ico{font-size:18px}
     .dtc-clock{font-size:40px}
     .clock-ampm{font-size:17px;margin-right:6px;vertical-align:4px}
-    .ms b{font-size:10.5px}
-    .ms span{font-size:11.5px}
+    .ms b{font-size:12.5px}
+    .ms span{font-size:13.5px}
     .ms-now{font-size:12.5px}
     .msb-text{font-size:21px}
     .mode-pill{font-size:15px;padding:8px 17px;min-height:42px}
@@ -1608,7 +1628,7 @@
     .wx-card .wtip{font-size:11.5px}
     .hero-count{font-size:42px}
     .hero-status{font-size:14px}
-    .hp-track{height:28px}
+    .hp-track{height:34px}
     .hp-runner{width:38px;height:38px}
     .hp-labels{font-size:11px}
     .stat-pill .stat-k{font-size:12.5px}
@@ -1722,8 +1742,8 @@
     .clock-ampm{font-size:13px;vertical-align:2px}
     .hero-count{font-size:clamp(22px,2vw,30px)}
     .hero{padding:9px 14px}
-    .hp-track{height:18px}
-    .ms-labels{height:30px}
+    .hp-track{height:22px}
+    .ms-labels{height:34px}
     .ms-foot{margin-top:2px}
     .ms-now{font-size:11px;padding:2px 8px}
     .ms-test{font-size:10px;padding:3px 7px;min-height:24px}
