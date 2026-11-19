@@ -162,7 +162,7 @@
   .hero-top{display:flex;align-items:center;gap:10px;position:relative;z-index:1}
   /* 윤재 옆 포켓몬 배지: 08:15 전 = 리자몽(주황·금빛 불꽃) → 등교 시간 = 메가리자몽X(푸른 불꽃) */
   .hero-pika{
-    position:relative;width:70px;height:70px;flex:none;border-radius:50%;display:grid;place-items:center;
+    position:relative;width:78px;height:78px;flex:none;border-radius:50%;display:grid;place-items:center;
     overflow:hidden;background:#FFF6E2;padding:0;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent;
     box-shadow:0 0 0 2px #FFFFFF,0 0 0 5px #FFA21F,0 0 16px 4px rgba(255,150,30,.5),0 8px 18px rgba(150,80,10,.2);
     animation:pikaBob 2.6s ease-in-out infinite;
@@ -187,8 +187,8 @@
     -webkit-user-drag:none;pointer-events:none;
     transition:opacity .45s ease,transform .5s cubic-bezier(.25,1.4,.4,1);
   }
-  .hero-pika .evo-char{opacity:1;transform:scale(.98)}
-  .hero-pika .evo-mega{opacity:0;transform:scale(1.24)}
+  .hero-pika .evo-char{opacity:1;transform:scale(1.06)}
+  .hero-pika .evo-mega{opacity:0;transform:scale(1.3)}
   .hero-pika .evo-flame{position:absolute;inset:0;z-index:2;display:none;place-items:center}
   .hero-pika .evo-flame svg{width:54%;height:54%;display:block;filter:drop-shadow(0 2px 3px rgba(150,70,0,.25))}
   /* 07:10~08:15: 리자몽은 막대 위에서 달리고, 배지에는 불꽃 문장만 */
@@ -303,7 +303,7 @@
   .hp-runner.run{animation:runnerHop .7s ease-in-out infinite}
   /* 아침: 리자몽이 진행바 위를 날아간다 (07:10~08:15), 08:15 이후엔 도착한 메가리자몽X */
   .hero-progress>.hp-runner{
-    top:0;width:54px;height:54px;opacity:0;transform:translate(-50%,-84%);
+    top:0;width:60px;height:60px;opacity:0;transform:translate(-50%,-84%);
     transition:left .8s cubic-bezier(.3,.9,.3,1),opacity .3s ease;
     filter:drop-shadow(0 3px 4px rgba(120,60,0,.28));
   }
@@ -1395,6 +1395,26 @@
     border-radius:999px;padding:4px 9px;min-height:26px;white-space:nowrap;
   }
   .ms-test:active{background:#F3EEE1}
+  .hero-btns{display:flex;align-items:center;gap:5px;justify-content:flex-end;flex:none}
+
+  /* ---------------- ⚙️ 타임바 · 알림 편집 ---------------- */
+  .ms-card{max-width:580px}
+  .ms-hint{font-size:11.5px;font-weight:800;color:#8A8377;margin:0 0 10px;line-height:1.5;word-break:keep-all}
+  .ms-edit-list{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+  .ms-row{background:#FDFBF6;border:2px solid #EFE8D8;border-radius:16px;padding:8px 9px;display:flex;flex-direction:column;gap:6px}
+  .ms-row-top{display:flex;align-items:center;gap:6px}
+  .ms-row input[type=time]{width:106px;flex:none;border:2px solid #E8E0CD;border-radius:11px;padding:0 8px;font-size:15px;font-weight:900;background:#fff;min-height:44px;font-variant-numeric:tabular-nums;color:#3A3428}
+  .ms-row .ms-name{flex:1;min-width:0;border:2px solid #E8E0CD;border-radius:11px;padding:0 10px;font-size:15px;font-weight:800;background:#fff;min-height:44px;color:#3A3428}
+  .ms-row .ms-msg{width:100%;border:2px dashed #E8E0CD;border-radius:11px;padding:0 10px;font-size:12.5px;font-weight:700;background:#fff;min-height:38px;color:#5F594D}
+  .ms-row input:focus{outline:none;border-color:var(--yellow);background:#fff}
+  .ms-on{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:900;color:#A09684;border:2px solid #E8E0CD;border-radius:11px;padding:0 7px;background:#fff;flex:none;min-height:44px;cursor:pointer;white-space:nowrap}
+  .ms-on input{width:17px;height:17px;accent-color:#3FA34D;margin:0}
+  .ms-on.on{color:#2F7A3C;border-color:#A9DCAF;background:#F2FBF3}
+  .ms-del{border:none;background:#F6EFE6;color:#9A9184;width:38px;height:44px;border-radius:11px;font-weight:900;font-size:15px;flex:none}
+  .ms-add-row{display:flex;gap:8px;margin-bottom:4px}
+  .ms-add-row .btn{flex:1;font-size:13px;min-height:46px;padding:10px 8px}
+  .ms-card .form-actions .btn{min-height:52px}
+  .ms-notify-btn{display:none;width:100%;border:2px solid #FFE08A;background:#FFF6D8;color:#8A6B12;font-weight:900;font-size:12.5px;border-radius:12px;padding:9px 10px;min-height:42px;margin:0 0 10px}
 
   .ms-banner{
     position:fixed;left:50%;top:74px;transform:translateX(-50%) translateY(-16px);z-index:100;
@@ -1533,8 +1553,8 @@
     .rcard .cta .mini{width:13px;height:13px}
     .rcard .step{width:20px;height:20px;font-size:10.5px;top:4px;left:4px}
     .rcard .stamp{width:21px;height:21px;font-size:12px;top:5px;right:5px}
-    .hero-pika{width:56px;height:56px}
-    .hero-pika.mega{width:56px;height:56px}
+    .hero-pika{width:64px;height:64px}
+    .hero-pika.mega{width:64px;height:64px}
     .hero-count{font-size:clamp(21px,2.3vw,28px)}
     .dt-clock{font-size:25px}
     .home-grid{gap:9px;grid-template-columns:1.95fr 1fr}
@@ -1582,8 +1602,8 @@
     .top-tools{margin-left:0;width:100%}
     .tool-btn{flex:1;justify-content:center;min-height:36px}
     .hero{padding:9px 11px;gap:6px 8px}
-    .hero-pika{width:50px;height:50px}
-    .hero-pika.mega{width:50px;height:50px}
+    .hero-pika{width:58px;height:58px}
+    .hero-pika.mega{width:58px;height:58px}
     .hero-name{font-size:16px}
     .hero-meta{font-size:10.5px}
     .hero-count{font-size:clamp(19px,4.6vw,24px)}
@@ -1623,7 +1643,8 @@
     .tab{font-size:15px;padding:9px 15px;min-height:44px}
     .tool-btn{min-height:44px;font-size:13.5px}
     .hero{padding:11px 16px;gap:5px}
-    .hero-pika{width:70px;height:70px}
+    .hero-pika{width:88px;height:88px}
+    .hero-progress>.hp-runner{width:68px;height:68px}
     .hero-name{font-size:23px}
     .hero-meta{font-size:12px}
     .hero-date{font-size:12px}
@@ -1872,31 +1893,23 @@
           </div>
           <div class="hero-status-box">
             <div class="hero-count" id="countdownText">--</div>
-            <button class="ms-test" type="button" data-act="ms-test">🔔 알림 테스트</button>
+            <div class="hero-btns">
+              <button class="ms-test" type="button" data-act="ms-test">🔔 알림 테스트</button>
+              <button class="ms-test ms-edit-btn" type="button" data-act="ms-open" data-mode="morning">⚙️ 타임바 편집</button>
+            </div>
           </div>
         </div>
 
         <div class="hero-progress">
           <div class="hp-track">
             <div class="hp-fill" id="dayProgress"><span class="hp-comet" aria-hidden="true"></span></div>
-            <span class="ms-dot" data-ms="0700" style="left:0%"></span>
-            <span class="ms-dot" data-ms="0710" style="left:13.333%"></span>
-            <span class="ms-dot" data-ms="0730" style="left:40%"></span>
-            <span class="ms-dot" data-ms="0745" style="left:60%"></span>
-            <span class="ms-dot" data-ms="0815" style="left:100%"></span>
           </div>
           <!-- 07:10~08:15 리자몽이 막대 앞쪽 끝을 달린다 / 08:15 이후에는 도착한 메가리자몽X -->
           <div class="hp-runner" id="runner" aria-hidden="true">
             <img class="rn-char" src="assets/charizard-6.png" alt="" draggable="false">
             <img class="rn-mega" src="assets/mega-charizard-x-10034.png" alt="" draggable="false">
           </div>
-          <div class="ms-labels">
-            <span class="ms" data-ms="0700" style="left:0%"><b>7:00</b><span>기상</span></span>
-            <span class="ms" data-ms="0710" style="left:13.333%"><b>7:10</b><span>식사</span></span>
-            <span class="ms" data-ms="0730" style="left:40%"><b>7:30</b><span>양치</span></span>
-            <span class="ms" data-ms="0745" style="left:60%"><b>7:45</b><span>원리셈</span></span>
-            <span class="ms" data-ms="0815" style="left:100%"><b>8:15</b><span>등교</span></span>
-          </div>
+          <div class="ms-labels"></div>
         </div>
 
         <div class="hero-weekend-note">☀️ 오늘은 학교 없이 느긋한 주말 아침! 좋아하는 걸 마음껏 해 봐요</div>
@@ -1993,31 +2006,23 @@
           </div>
           <div class="hero-status-box">
             <div class="hero-count" id="eveCountdownText">--</div>
-            <button class="ms-test" type="button" data-act="ms-test-eve">🔔 알림 테스트</button>
+            <div class="hero-btns">
+              <button class="ms-test" type="button" data-act="ms-test-eve">🔔 알림 테스트</button>
+              <button class="ms-test ms-edit-btn" type="button" data-act="ms-open" data-mode="evening">⚙️ 타임바 편집</button>
+            </div>
           </div>
         </div>
 
         <div class="hero-progress">
           <div class="hp-track">
             <div class="hp-fill" id="eveProgress"><span class="hp-comet" aria-hidden="true"></span></div>
-            <span class="ms-dot" style="left:0%"></span>
-            <span class="ms-dot" style="left:14.286%"></span>
-            <span class="ms-dot" style="left:28.571%"></span>
-            <span class="ms-dot" style="left:71.429%"></span>
-            <span class="ms-dot" style="left:100%"></span>
           </div>
           <!-- 17:30~19:59 메가리자몽X가 달리고, 20:00부터는 잠만보가 취침을 향해 -->
           <div class="hp-runner" id="eveRunner" aria-hidden="true">
             <img class="rn-mega" src="assets/mega-charizard-x-10034.png" alt="" draggable="false">
             <img class="rn-snor" src="assets/snorlax-143.png" alt="" draggable="false">
           </div>
-          <div class="ms-labels">
-            <span class="ms" style="left:0%"><b>5:30</b><span>샤워</span></span>
-            <span class="ms" style="left:14.286%"><b>6:00</b><span>식사</span></span>
-            <span class="ms" style="left:28.571%"><b>6:30</b><span>숙제</span></span>
-            <span class="ms" style="left:71.429%"><b>8:00</b><span>정리·양치</span></span>
-            <span class="ms" style="left:100%"><b>9:00</b><span>취침</span></span>
-          </div>
+          <div class="ms-labels"></div>
         </div>
 
         <div class="hero-side">
@@ -2284,6 +2289,31 @@
   체크 기록·학원 스케줄·포켓몬 도감은 이 브라우저에만 저장돼요 (매일 아침·저녁 루틴 새로 시작)
 </footer>
 
+<!-- ⚙️ 타임바 · 알림 편집 modal -->
+<div class="modal" id="msModal">
+  <div class="modal-card ms-card">
+    <div class="modal-head">
+      <h3>⚙️ 타임바 편집</h3>
+      <button class="modal-close" type="button" data-act="ms-close" aria-label="닫기">✕</button>
+    </div>
+    <div class="list-tabs" role="tablist">
+      <button class="list-tab on" type="button" data-act="ms-mode" data-mode="morning">🌅 아침 타임바</button>
+      <button class="list-tab" type="button" data-act="ms-mode" data-mode="evening">🌙 저녁 타임바</button>
+    </div>
+    <p class="ms-hint" id="msHint">시간과 이름을 바꾸고, 구간마다 알림을 켜고 끌 수 있어요. 알림 문구를 비우면 "7:10 식사 시간이에요"처럼 자동으로 읽어 줘요.</p>
+    <button class="ms-notify-btn" id="msNotifyBtn" type="button" data-act="ms-notify">🔔 기기 알림 켜기</button>
+    <div class="ms-edit-list" id="msEditList"></div>
+    <div class="ms-add-row">
+      <button class="btn btn-ghost" type="button" data-act="ms-add">+ 구간 추가</button>
+      <button class="btn btn-ghost" type="button" data-act="ms-default">기본값 복원</button>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-ghost" type="button" data-act="ms-close">취소</button>
+      <button class="btn btn-yellow" type="button" data-act="ms-save">저장</button>
+    </div>
+  </div>
+</div>
+
 <!-- routine edit modal -->
 <div class="modal" id="routineModal">
   <div class="modal-card">
@@ -2415,7 +2445,7 @@
 
   /* ======================= 상수 ======================= */
   var SCHOOL_H = 8, SCHOOL_M = 15;
-  var PREP_H = 7;
+  var PREP_H = 7, PREP_M = 0;
   var DAY_KO = ['일', '월', '화', '수', '목', '금', '토'];
   var ORDER = [1, 2, 3, 4, 5, 6, 0];
   var ART = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/';
@@ -2441,6 +2471,8 @@
     stoneAwards: 'yj_stone_awards_v1',
     sound: 'yj_sound_v1',
     msAlerts: 'yj_ms_alerts_v1',
+    msMorning: 'yj_morning_milestones_v1',
+    msEvening: 'yj_evening_milestones_v1',
     momPin: 'yj_mom_pin_v1',
     praises: 'yj_praises_v1',
     studyReading: 'yj_study_migrated_reading_v1',
@@ -3313,26 +3345,163 @@
     window.scrollTo(0, 0);
   }
 
-  /* ======================= 등교 · 저녁 마일스톤 알림 ======================= */
-  var MS = [
-    { key: '0700', h: 7, m: 0, name: '기상', emoji: '☀️' },
-    { key: '0710', h: 7, m: 10, name: '아침식사', emoji: '🍚' },
-    { key: '0730', h: 7, m: 30, name: '양치', emoji: '🪥' },
-    { key: '0745', h: 7, m: 45, name: '원리셈', emoji: '✏️' },
-    { key: '0815', h: 8, m: 15, name: '등교', emoji: '🎒' }
+  /* ======================= 등교 · 저녁 마일스톤(타임바) ======================= */
+  var MS_MORNING_DEFAULT = [
+    { t: '07:00', name: '기상', emoji: '☀️', on: true, msg: '' },
+    { t: '07:10', name: '식사', emoji: '🍚', on: true, msg: '' },
+    { t: '07:30', name: '양치', emoji: '🪥', on: true, msg: '' },
+    { t: '07:45', name: '원리셈', emoji: '✏️', on: true, msg: '' },
+    { t: '08:15', name: '등교', emoji: '🎒', on: true, msg: '' }
   ];
-  var MS_EVE = [
-    { key: '1730', h: 17, m: 30, name: '샤워', emoji: '🚿' },
-    { key: '1800', h: 18, m: 0, name: '저녁식사', emoji: '🍚' },
-    { key: '1830', h: 18, m: 30, name: '숙제', emoji: '✏️' },
-    { key: '2000', h: 20, m: 0, name: '가방정리·양치', emoji: '🎒' },
-    { key: '2100', h: 21, m: 0, name: '취침', emoji: '🌙' }
+  var MS_EVENING_DEFAULT = [
+    { t: '17:30', name: '샤워', emoji: '🚿', on: true, msg: '' },
+    { t: '18:00', name: '식사', emoji: '🍚', on: true, msg: '' },
+    { t: '18:30', name: '숙제', emoji: '✏️', on: true, msg: '' },
+    { t: '20:00', name: '정리·양치', emoji: '🎒', on: true, msg: '' },
+    { t: '21:00', name: '취침', emoji: '🌙', on: true, msg: '' }
   ];
+  var MS = [], MS_EVE = [];
   var msBannerTimer = null;
   var msFired = {};
 
-  function msLabel(ms) { return ms.h + ':' + pad2(ms.m); }
-  function msMinutes(ms) { return ms.h * 60 + ms.m; }
+  function msCopy(list) {
+    var out = [];
+    for (var i = 0; i < list.length; i++) {
+      out.push({ t: list[i].t, name: list[i].name, emoji: list[i].emoji, on: list[i].on !== false, msg: list[i].msg || '' });
+    }
+    return out;
+  }
+  function msHm(t) {
+    var m = /^(\d{1,2}):(\d{2})$/.exec(String(t == null ? '' : t).trim());
+    if (!m) return null;
+    var h = parseInt(m[1], 10), mi = parseInt(m[2], 10);
+    if (isNaN(h) || isNaN(mi) || h > 23 || mi > 59) return null;
+    return { h: h, m: mi };
+  }
+  function msMinOf(t) { var hm = msHm(t); return hm ? hm.h * 60 + hm.m : -1; }
+  function msLabel(ms) {
+    var hm = msHm(ms.t) || { h: 0, m: 0 };
+    return hm.h + ':' + pad2(hm.m);
+  }
+  /* 저장된 값을 읽어 시간순으로 정리한다 (2개 미만이면 기본값) */
+  function msNormalize(raw, defaults) {
+    var out = [], i, hm, it;
+    if (raw && raw.length) {
+      for (i = 0; i < raw.length; i++) {
+        it = raw[i] || {};
+        hm = msHm(it.t);
+        if (!hm) continue;
+        out.push({
+          t: pad2(hm.h) + ':' + pad2(hm.m),
+          name: String(it.name == null ? '' : it.name).trim().slice(0, 14) || ('구간 ' + (out.length + 1)),
+          emoji: String(it.emoji || '⏰'),
+          on: it.on !== false,
+          msg: String(it.msg == null ? '' : it.msg).slice(0, 60)
+        });
+      }
+      out.sort(function (a, b) { return msMinOf(a.t) - msMinOf(b.t); });
+    }
+    if (out.length < 2) return msCopy(defaults);
+    return out;
+  }
+
+  function msLoad() {
+    MS = msNormalize(store.get(K.msMorning, null), MS_MORNING_DEFAULT);
+    MS_EVE = msNormalize(store.get(K.msEvening, null), MS_EVENING_DEFAULT);
+    syncMilestoneTimes();
+  }
+  function msSave() {
+    store.set(K.msMorning, MS);
+    store.set(K.msEvening, MS_EVE);
+  }
+
+  /* 첫 구간 = 시작, 마지막 구간 = 등교/취침. 카운트다운·모드 전환·연출 시각도 여기서 맞춘다 */
+  function syncMilestoneTimes() {
+    if (!MS.length || !MS_EVE.length) return;
+    var a = msMinOf(MS[0].t), b = msMinOf(MS[MS.length - 1].t);
+    PREP_H = Math.floor(a / 60); PREP_M = a % 60;
+    SCHOOL_H = Math.floor(b / 60); SCHOOL_M = b % 60;
+    var e0 = msMinOf(MS_EVE[0].t), e1 = msMinOf(MS_EVE[MS_EVE.length - 1].t);
+    EVE_H = Math.floor(e0 / 60); EVE_M = e0 % 60;
+    BED_H = Math.floor(e1 / 60); BED_M = e1 % 60;
+    MODE_SWITCH_MIN = e0;
+    RUN_START_MIN = MS.length > 1 ? msMinOf(MS[1].t) : a;          /* 리자몽이 막대 위로 올라오는 시각 */
+    SLEEPY_MIN = MS_EVE.length > 1 ? msMinOf(MS_EVE[MS_EVE.length - 2].t) : e1;  /* 잠만보로 바뀌는 시각 */
+  }
+
+  /* ---------- 히어로 타임바(점·눈금) 그리기 ---------- */
+  function msPctFor(list, idx) {
+    if (idx <= 0) return 0;
+    if (idx >= list.length - 1) return 100;
+    var a = msMinOf(list[0].t), b = msMinOf(list[list.length - 1].t);
+    if (b <= a) return (idx / (list.length - 1)) * 100;
+    return ((msMinOf(list[idx].t) - a) / (b - a)) * 100;
+  }
+  /* 눈금 글씨가 겹치면 시간을 감추고, 그래도 겹치면 살짝 밀어 둔다 */
+  function spreadMsLabels(box) {
+    var els = box.querySelectorAll('.ms');
+    if (!els.length) return;
+    var W = box.clientWidth;
+    if (!W) return;
+    var last = els.length - 1, prevRight = -9999;
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      el.classList.remove('tight');
+      el.style.marginLeft = '';
+      var w = el.offsetWidth;
+      var center = parseFloat(el.style.left || '0') / 100 * W;
+      var x0 = i === 0 ? 0 : (i === last ? W - w : center - w / 2);
+      if (x0 < prevRight + 6) {
+        el.classList.add('tight');
+        w = el.offsetWidth;
+        x0 = i === 0 ? 0 : (i === last ? W - w : center - w / 2);
+      }
+      if (x0 < prevRight + 6) {
+        var shift = (prevRight + 6) - x0;
+        el.style.marginLeft = shift.toFixed(1) + 'px';
+        x0 += shift;
+      }
+      prevRight = x0 + w;
+    }
+  }
+  function renderMsStrip(rootSel, list) {
+    var root = document.querySelector(rootSel);
+    if (!root || !list.length) return;
+    var track = root.querySelector('.hp-track');
+    var box = root.querySelector('.ms-labels');
+    if (!track || !box) return;
+    var oldDots = track.querySelectorAll('.ms-dot');
+    var d, i;
+    for (d = 0; d < oldDots.length; d++) track.removeChild(oldDots[d]);
+    var html = '';
+    for (i = 0; i < list.length; i++) {
+      var pct = msPctFor(list, i).toFixed(3) + '%';
+      var dot = document.createElement('span');
+      dot.className = 'ms-dot';
+      dot.style.left = pct;
+      track.appendChild(dot);
+      html += '<span class="ms" data-mi="' + i + '" style="left:' + pct + '">'
+        + '<b>' + msLabel(list[i]) + '</b><span>' + esc(list[i].name) + '</span></span>';
+    }
+    box.innerHTML = html;
+    spreadMsLabels(box);
+  }
+  function renderTimeline() {
+    renderMsStrip('#homeMorning .hero-progress', MS);
+    renderMsStrip('#homeEvening .hero-progress', MS_EVE);
+    applyHeroMeta();
+    updateMilestones(new Date());
+  }
+  /* 히어로 부제: 07:00 시작 · 08:15 출발 / 17:30 시작 · 21:00 취침 */
+  function applyHeroMeta() {
+    if (!MS.length || !MS_EVE.length) return;
+    var now = new Date();
+    var wk = (now.getDay() === 0 || now.getDay() === 6);
+    var m = document.querySelector('#homeMorning .hero-meta');
+    if (m) m.textContent = wk ? '☀️ 주말 아침' : (msLabel(MS[0]) + ' 시작 · ' + msLabel(MS[MS.length - 1]) + ' 출발');
+    var e = document.querySelector('#homeEvening .hero-meta');
+    if (e) e.textContent = msLabel(MS_EVE[0]) + ' 시작 · ' + msLabel(MS_EVE[MS_EVE.length - 1]) + ' 취침';
+  }
 
   function msAlertStore() {
     var v = store.get(K.msAlerts, null);
@@ -3361,7 +3530,7 @@
     var root = document.querySelector(rootSel);
     if (!root) return;
     var idx = -1, i;
-    for (i = 0; i < list.length; i++) if (mins >= msMinutes(list[i])) idx = i;
+    for (i = 0; i < list.length; i++) if (mins >= msMinOf(list[i].t)) idx = i;
 
     var labels = root.querySelectorAll('.ms');
     for (i = 0; i < labels.length; i++) {
@@ -3388,49 +3557,234 @@
     }
   }
 
+  function msDoneText(list) {
+    var last = list[list.length - 1];
+    return msLabel(last) + ' ' + last.name + ' 완료! 오늘도 화이팅 ' + (last.emoji || '🎒');
+  }
+  function msEveDoneText(list) {
+    var last = list[list.length - 1];
+    return msLabel(last) + ' ' + last.name + ' 시간! 오늘도 수고했어요 ' + (last.emoji || '🌙');
+  }
+
   function updateMilestones(now) {
     var mins = now.getHours() * 60 + now.getMinutes();
-    updateMsGroup(MS, '#homeMorning .hero-progress', mins, '08:15 등교 완료! 오늘도 화이팅 🎒');
-    updateMsGroup(MS_EVE, '#homeEvening .hero-progress', mins, '21:00 취침 시간! 오늘도 수고했어요 🌙');
+    if (MS.length) updateMsGroup(MS, '#homeMorning .hero-progress', mins, msDoneText(MS));
+    if (MS_EVE.length) updateMsGroup(MS_EVE, '#homeEvening .hero-progress', mins, msEveDoneText(MS_EVE));
+  }
+
+  /* ---------- 알림: 화면 배너 + 소리·음성 + 기기 알림 ---------- */
+  function msBannerText(ms) {
+    var m = String(ms.msg || '').trim();
+    if (m) return m;
+    return msLabel(ms) + ' ' + ms.name + ' 시간이에요! ' + (ms.emoji || '');
+  }
+  function msSpeechText(ms) {
+    var m = String(ms.msg || '').trim();
+    if (m) return m;
+    var hm = msHm(ms.t) || { h: 0, m: 0 };
+    var h12 = hm.h % 12; if (!h12) h12 = 12;
+    return (hm.h < 12 ? '오전 ' : '오후 ') + h12 + '시' + (hm.m ? ' ' + hm.m + '분' : '') + ', ' + ms.name + ' 시간이에요';
+  }
+  function msSpeak(text) {
+    try {
+      if (!('speechSynthesis' in window) || !text) return;
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = 'ko-KR';
+      u.rate = 0.94;
+      u.pitch = 1.06;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
+    } catch (e) { /* 음성 미지원 기기 */ }
+  }
+  function msNotify(text) {
+    try {
+      if (!('Notification' in window) || Notification.permission !== 'granted') return;
+      var title = '⏰ 윤재 루틴';
+      if (navigator.serviceWorker && navigator.serviceWorker.ready) {
+        navigator.serviceWorker.ready.then(function (reg) {
+          if (reg && reg.showNotification) reg.showNotification(title, { body: text, tag: 'yj-ms', renotify: true });
+          else new Notification(title, { body: text });
+        }).catch(function () { try { new Notification(title, { body: text }); } catch (e2) {} });
+        return;
+      }
+      new Notification(title, { body: text });
+    } catch (e) { /* 기기 알림 미지원 */ }
+  }
+  function refreshMsNotifyBtn() {
+    var b = $('msNotifyBtn');
+    if (!b) return;
+    var ok = ('Notification' in window);
+    if (!ok || Notification.permission === 'granted') { b.style.display = 'none'; return; }
+    b.style.display = '';
+    b.textContent = Notification.permission === 'denied' ? '🔕 기기 알림이 꺼져 있어요 (브라우저 설정)' : '🔔 기기 알림 켜기';
+  }
+  function askMsNotify() {
+    if (!('Notification' in window)) { toast('이 브라우저는 기기 알림을 지원하지 않아요'); return; }
+    try {
+      Notification.requestPermission().then(function () {
+        refreshMsNotifyBtn();
+        if (Notification.permission === 'granted') toast('기기 알림을 켰어요 🔔');
+      });
+    } catch (e) {
+      try {
+        Notification.requestPermission(function () { refreshMsNotifyBtn(); });
+      } catch (e2) { toast('기기 알림을 켤 수 없어요'); }
+    }
   }
 
   function fireMilestone(ms, isTest) {
-    showMsBanner((isTest ? '🔔 알림 테스트 · ' : '⏰ ') + msLabel(ms) + ' ' + ms.name + ' 시간이에요! ' + ms.emoji);
-    if (soundOn) { SFX.unlock(); SFX.chime(); }
+    var text = msBannerText(ms);
+    showMsBanner((isTest ? '🔔 알림 테스트 · ' : '⏰ ') + text);
+    if (soundOn) { SFX.unlock(); SFX.chime(); msSpeak(msSpeechText(ms)); }
+    if (!isTest) msNotify(text);
   }
 
   function checkListAlert(list, now) {
     var cur = now.getHours() * 60 + now.getMinutes();
     for (var i = 0; i < list.length; i++) {
-      if (msMinutes(list[i]) !== cur) continue;
-      var id = todayKey() + ':' + list[i].key;
-      if (msFired[id]) return;
+      var ms = list[i];
+      if (msMinOf(ms.t) !== cur) continue;
+      if (ms.on === false) continue;          /* 알림 꺼짐 */
+      var id = todayKey() + ':' + ms.t;
+      if (msFired[id]) continue;
       var st = msAlertStore();
-      if (st.done[list[i].key]) { msFired[id] = true; return; }
+      if (st.done[ms.t]) { msFired[id] = true; continue; }
       msFired[id] = true;
-      st.done[list[i].key] = true;
+      st.done[ms.t] = true;
       store.set(K.msAlerts, st);
-      fireMilestone(list[i], false);
+      fireMilestone(ms, false);
       return;
     }
   }
 
-  /* 정각(07:00·07:10·07:30·07:45·08:15 / 17:30·18:00·18:30·20:00·21:00)에 하루 한 번만 */
+  /* 등록된 시각이 되면 하루 한 번만 */
   function checkMilestoneAlert(now) {
     checkListAlert(MS, now);
     checkListAlert(MS_EVE, now);
   }
 
   function testMilestone(list) {
+    if (!list.length) return;
     var now = new Date();
     var mins = now.getHours() * 60 + now.getMinutes();
     var pick = list[list.length - 1];
-    for (var i = 0; i < list.length; i++) if (mins < msMinutes(list[i])) { pick = list[i]; break; }
+    for (var i = 0; i < list.length; i++) if (mins < msMinOf(list[i].t)) { pick = list[i]; break; }
     fireMilestone(pick, true);
   }
 
+  /* ======================= ⚙️ 타임바 편집 ======================= */
+  var msEditMode = 'morning';
+  var msDraft = [];
+
+  function msDefaults(mode) { return mode === 'evening' ? MS_EVENING_DEFAULT : MS_MORNING_DEFAULT; }
+  function msCurrent(mode) { return mode === 'evening' ? MS_EVE : MS; }
+
+  function openMsModal(mode) {
+    msEditMode = (mode === 'evening') ? 'evening' : 'morning';
+    msDraft = msCopy(msCurrent(msEditMode));
+    renderMsEditor();
+    refreshMsNotifyBtn();
+    $('msModal').classList.add('show');
+  }
+  function closeMsModal() {
+    $('msModal').classList.remove('show');
+  }
+  function msSetMode(mode) {
+    /* 지금까지 고친 내용은 버리고 모드만 바꾼다 */
+    msEditMode = (mode === 'evening') ? 'evening' : 'morning';
+    msDraft = msCopy(msCurrent(msEditMode));
+    renderMsEditor();
+  }
+  function renderMsEditor() {
+    each('#msModal .list-tab', function (b) {
+      var on = b.getAttribute('data-mode') === msEditMode;
+      if (on) b.classList.add('on'); else b.classList.remove('on');
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    var html = '';
+    for (var i = 0; i < msDraft.length; i++) {
+      var m = msDraft[i];
+      var on = m.on !== false;
+      html += '<div class="ms-row" data-i="' + i + '" data-emoji="' + esc(m.emoji || '⏰') + '">'
+        + '<div class="ms-row-top">'
+        + '<input class="ms-time" type="time" step="300" value="' + esc(m.t) + '" aria-label="시간">'
+        + '<input class="ms-name" type="text" maxlength="14" value="' + esc(m.name) + '" placeholder="이름 (예: 양치)" aria-label="이름">'
+        + '<label class="ms-on' + (on ? ' on' : '') + '"><input class="ms-on-box" type="checkbox"' + (on ? ' checked' : '') + '>알림</label>'
+        + '<button class="ms-del" type="button" data-act="ms-del" data-i="' + i + '" aria-label="이 구간 삭제">✕</button>'
+        + '</div>'
+        + '<input class="ms-msg" type="text" maxlength="60" value="' + esc(m.msg || '') + '" placeholder="알림 문구 (비우면 자동으로 읽어 줘요)" aria-label="알림 문구">'
+        + '</div>';
+    }
+    $('msEditList').innerHTML = html;
+    var hint = $('msHint');
+    if (hint) {
+      hint.textContent = (msEditMode === 'evening' ? '저녁' : '아침') + ' 타임바의 첫 구간이 시작, 마지막 구간이 '
+        + (msEditMode === 'evening' ? '취침' : '등교') + ' 시각이 돼요. 시간·이름을 바꾸고 구간마다 알림을 켜고 끌 수 있어요.'
+        + ' 알림 문구를 비우면 "7:10 식사 시간이에요"처럼 자동으로 읽어 줘요.';
+    }
+  }
+  function readMsEditor() {
+    var rows = document.querySelectorAll('#msEditList .ms-row');
+    var out = [];
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i];
+      var elTime = r.querySelector('.ms-time');
+      var elName = r.querySelector('.ms-name');
+      var elMsg = r.querySelector('.ms-msg');
+      var elOn = r.querySelector('.ms-on-box');
+      out.push({
+        t: elTime ? elTime.value : '',
+        name: elName ? elName.value : '',
+        emoji: r.getAttribute('data-emoji') || '⏰',
+        on: elOn ? elOn.checked : true,
+        msg: elMsg ? elMsg.value : ''
+      });
+    }
+    return out;
+  }
+  function msAddRow() {
+    msDraft = readMsEditor();
+    var lastT = msDraft.length ? msMinOf(msDraft[msDraft.length - 1].t) : 7 * 60;
+    var t = (lastT >= 0 ? Math.min(lastT + 10, 23 * 60 + 50) : 8 * 60);
+    msDraft.push({ t: pad2(Math.floor(t / 60)) + ':' + pad2(t % 60), name: '새 구간', emoji: '⏰', on: true, msg: '' });
+    renderMsEditor();
+    var list = $('msEditList');
+    if (list.lastElementChild) {
+      list.lastElementChild.scrollIntoView({ block: 'nearest' });
+      var nm = list.lastElementChild.querySelector('.ms-name');
+      if (nm) { nm.focus(); nm.select(); }
+    }
+  }
+  function msDeleteRow(i) {
+    msDraft = readMsEditor();
+    if (msDraft.length <= 2) { toast('구간은 시작·마지막 2개는 남겨 주세요'); return; }
+    if (i < 0 || i >= msDraft.length) return;
+    msDraft.splice(i, 1);
+    renderMsEditor();
+  }
+  function msResetDefault() {
+    msDraft = msCopy(msDefaults(msEditMode));
+    renderMsEditor();
+    toast('기본값으로 되돌렸어요. 저장을 누르면 적용돼요');
+  }
+  function saveMsEditor() {
+    var raw = readMsEditor();
+    for (var r = 0; r < raw.length; r++) {
+      if (!msHm(raw[r].t)) { toast('시간을 다시 확인해 주세요 (' + (r + 1) + '번째 구간)'); return; }
+    }
+    var list = msNormalize(raw, msDefaults(msEditMode));
+    if (msEditMode === 'evening') MS_EVE = list; else MS = list;
+    msSave();
+    msDraft = msCopy(list);
+    syncMilestoneTimes();
+    renderTimeline();
+    tickClock();
+    closeMsModal();
+    toast(msEditMode === 'evening' ? '저녁 타임바를 저장했어요 🌙' : '아침 타임바를 저장했어요 ☀️');
+  }
+
   /* ======================= 아침 · 저녁 모드 ======================= */
-  var MODE_SWITCH_MIN = 17 * 60 + 30;   /* 17:30 부터 저녁 모드 */
+  var MODE_SWITCH_MIN = 17 * 60 + 30;   /* 17:30 부터 저녁 모드 (저녁 첫 구간에 맞춰 갱신) */
   var EVE_H = 17, EVE_M = 30;
   var BED_H = 21, BED_M = 0;
   var homeMode = 'morning';
@@ -3452,6 +3806,7 @@
     });
     renderRoutine();
     tickClock();
+    renderTimeline();   /* 숨겨 둔 화면은 폭을 몰라서, 보이는 화면에서 눈금 폭을 다시 계산 */
   }
 
   /* manual=true 이면 이번 화면에서는 자동 전환이 끼어들지 않는다 */
@@ -3466,7 +3821,8 @@
   var heroRealRest = false;    /* 07:10~08:15: 리자몽은 막대 위, 배지는 불꽃 문장 */
   var heroPreviewing = false;  /* 배지·알림 테스트로 잠깐 보여주는 중 */
   var evoPreviewTimer = null, evoFlashTimer = null;
-  var RUN_START_MIN = 7 * 60 + 10;   /* 07:10 — 리자몽이 막대 위로 올라간다 */
+  var RUN_START_MIN = 7 * 60 + 10;   /* 리자몽이 막대 위로 올라가는 시각 (둘째 구간) */
+  var SLEEPY_MIN = 20 * 60;          /* 잠만보로 바뀌는 시각 (마지막 바로 앞 구간) */
 
   function applyHeroState(mega, rest, animate) {
     var b = $('heroEvo');
@@ -3545,11 +3901,11 @@
     var heroEl = document.querySelector('#homeMorning .hero');
     if (heroEl) heroEl.classList.toggle('weekend', wkHero);
     var metaEl = document.querySelector('#homeMorning .hero-meta');
-    if (metaEl) metaEl.textContent = wkHero ? '☀️ 주말 아침' : '07:00 시작 · 08:15 출발';
+    if (metaEl) metaEl.textContent = wkHero ? '☀️ 주말 아침' : (msLabel(MS[0]) + ' 시작 · ' + msLabel(MS[MS.length - 1]) + ' 출발');
 
     /* 아침: 등교까지 */
     var target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), SCHOOL_H, SCHOOL_M, 0);
-    var start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), PREP_H, 0, 0);
+    var start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), PREP_H, PREP_M, 0);
     var left = target - now;
     var txt = $('countdownText');
     if (txt) {
@@ -3566,7 +3922,7 @@
         else txt.textContent = s2 + '초 남았어요!';
         if (left <= 10 * 60000) txt.classList.add('urgent');
       } else {
-        txt.textContent = '등교 완료! 오늘도 화이팅!';
+        txt.textContent = msLabel(MS[MS.length - 1]) + ' ' + MS[MS.length - 1].name + ' 완료! 오늘도 화이팅!';
         txt.classList.add('done');
       }
     }
@@ -3607,7 +3963,7 @@
     if (eTxt) {
       eTxt.classList.remove('urgent', 'done');
       if (now < eveStart) {
-        eTxt.textContent = '17:30부터 시작해요 🌙';
+        eTxt.textContent = msLabel(MS_EVE[0]) + '부터 시작해요 🌙';
         pct2 = 0;
       } else if (bed - now > 0) {
         var hl = Math.floor((bed - now) / 3600000);
@@ -3616,7 +3972,7 @@
         pct2 = ((now - eveStart) / (bed - eveStart)) * 100;
         if (bed - now <= 10 * 60000) eTxt.classList.add('urgent');
       } else {
-        eTxt.textContent = '21:00 취침 시간! 오늘도 수고했어요 🌙';
+        eTxt.textContent = msLabel(MS_EVE[MS_EVE.length - 1]) + ' ' + MS_EVE[MS_EVE.length - 1].name + ' 시간! 오늘도 수고했어요 🌙';
         eTxt.classList.add('done');
         pct2 = 100;
       }
@@ -3629,7 +3985,7 @@
     if (er) {
       var eveMins = now.getHours() * 60 + now.getMinutes();
       var eveOn = (now >= eveStart);
-      var sleepy = (eveMins >= 20 * 60);
+      var sleepy = (eveMins >= SLEEPY_MIN);
       er.style.left = (now >= bed ? 97 : pct2).toFixed(1) + '%';
       er.classList.toggle('on', eveOn && !sleepy);
       er.classList.toggle('sleepy', eveOn && sleepy);
@@ -6187,6 +6543,30 @@
         testMilestone(MS);
         evoPreview(3);
         break;
+      case 'ms-open':
+        openMsModal(el.getAttribute('data-mode'));
+        break;
+      case 'ms-mode':
+        msSetMode(el.getAttribute('data-mode'));
+        break;
+      case 'ms-add':
+        msAddRow();
+        break;
+      case 'ms-del':
+        msDeleteRow(parseInt(el.getAttribute('data-i'), 10));
+        break;
+      case 'ms-default':
+        msResetDefault();
+        break;
+      case 'ms-save':
+        saveMsEditor();
+        break;
+      case 'ms-close':
+        closeMsModal();
+        break;
+      case 'ms-notify':
+        askMsNotify();
+        break;
       case 'late-toggle':
         toggleLateMission();
         break;
@@ -6381,6 +6761,7 @@
       $('revealModal').classList.remove('show');
       if ($('praiseModal').classList.contains('show')) closePraiseModal();
       if ($('pinModal').classList.contains('show')) closePinModal();
+      if ($('msModal').classList.contains('show')) closeMsModal();
       if (pendingYes) closeConfirm();
     }
   });
@@ -6428,6 +6809,17 @@
   $('pinModal').addEventListener('click', function (e) {
     if (e.target === this) closePinModal();
   });
+  $('msModal').addEventListener('click', function (e) {
+    if (e.target === this) closeMsModal();
+  });
+  $('msEditList').addEventListener('change', function (e) {
+    var t = e.target;
+    if (t && t.classList && t.classList.contains('ms-on-box')) {
+      var lb = t.parentNode;
+      if (lb && lb.classList) { if (t.checked) lb.classList.add('on'); else lb.classList.remove('on'); }
+    }
+    msDraft = readMsEditor();
+  });
 
   /* 엄마 비밀번호 입력: 숫자 4자리만 */
   ['praisePin', 'praisePin2', 'pinOne', 'pinCur', 'pinNew', 'pinNew2'].forEach(function (pid) {
@@ -6460,6 +6852,7 @@
   /* ======================= 시작 ======================= */
   function init() {
     loadState();
+    msLoad();
     migrateAwardToday();
     fillAcDayChecks();
     selectedDow = new Date().getDay();
@@ -6487,6 +6880,8 @@
 
     setInterval(tickClock, 1000);
     setInterval(loadWeather, 10 * 60 * 1000);
+    window.addEventListener('resize', function () { renderTimeline(); });
+    window.addEventListener('orientationchange', function () { setTimeout(renderTimeline, 260); });
 
     if ('serviceWorker' in navigator && location.protocol === 'https:') {
       navigator.serviceWorker.register('sw.js').catch(function () {});
