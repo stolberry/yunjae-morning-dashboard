@@ -3161,16 +3161,16 @@
       if (b) b.classList.add('burst');
       $('flash').classList.add('on');
       SFX.reveal();
-    }, 6000);
+    }, 30000);
 
     csLater(function () {
       $('flash').classList.remove('on');
       stage.innerHTML = pokeMarkup(p, isNew ? 'NEW! 도감에 등록' : d.name + ' 성공');
       SFX.fanfare();
       confettiBurst();
-    }, 7500);
+    }, 31000);
 
-    csLater(function () { csSkip(); }, 20000);
+    csLater(function () { csSkip(); }, 90000);
 
     csDone = function () {
       renderDex();
