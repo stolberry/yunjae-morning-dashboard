@@ -576,6 +576,12 @@
     flex:1;border:2px solid #EFE8D8;border-radius:12px;padding:10px 12px;font-size:16px;font-weight:800;background:#FDFBF6;min-height:46px;
   }
   .edit-row input:focus{outline:none;border-color:var(--yellow);background:#fff}
+  .reset-row{margin-top:14px;padding-top:12px;border-top:1.5px dashed #EDE5D5;text-align:center}
+  .reset-btn{
+    border:1.5px solid #E7DFCF;background:#FBF8F1;color:#9A9184;font-weight:800;font-size:11.5px;
+    border-radius:10px;padding:8px 12px;min-height:38px;width:100%;
+  }
+  .reset-btn:active{background:#F3EEE1}
   .edit-row .mv{border:2px solid #EFE8D8;background:#fff;border-radius:10px;width:38px;height:44px;font-weight:900;color:#8A8377}
 
   .confirm-card{max-width:380px;text-align:center;padding:20px 18px 18px}
@@ -1086,6 +1092,9 @@
     </div>
     <div class="form-actions">
       <button class="btn btn-blue" type="button" data-act="close-routine-edit">완료</button>
+    </div>
+    <div class="reset-row">
+      <button class="reset-btn" type="button" data-act="reset-test">🔄 테스트 기록 초기화 (볼·도감·오늘 체크 0으로)</button>
     </div>
   </div>
 </div>
@@ -1984,6 +1993,37 @@
     renderRoutine();
     syncPerfectDay();
     tickClock();
+  }
+
+  /* 테스트 기록 초기화 (엄마용) */
+  function resetTestData() {
+    if (!window.confirm('볼·도감·진화의 돌·오늘 체크를 모두 0으로 되돌릴까요?\n\n루틴 목록과 요일별 공부표는 그대로 남아요.')) return;
+    var key = todayKey();
+    state.balls = 0;
+    state.dex = {};
+    state.stones = 0;
+    state.perfectDays = [];
+    state.stoneAwards = [];
+    state.routineDone[key] = [];
+    state.homeschoolDone[key] = [];
+    state.awards[key] = { r: [], b: false, s: [] };
+    saveBalls();
+    saveDex();
+    saveStones();
+    savePerfect();
+    saveStoneAwards();
+    store.set(K.routineDone, state.routineDone);
+    store.set(K.hsDone, state.homeschoolDone);
+    saveAwards();
+    updateBallUI();
+    updateStoneUI();
+    renderRoutine();
+    renderTodayAcademy();
+    renderHomeHomeschool();
+    renderStudy();
+    renderDex();
+    closeRoutineEdit();
+    toast('기록을 깨끗하게 비웠어요 ✨');
   }
 
   /* ======================= 루틴 편집 모달 ======================= */
@@ -3105,6 +3145,9 @@
         break;
       case 'confirm-no':
         closeConfirm();
+        break;
+      case 'reset-test':
+        resetTestData();
         break;
       case 'dex-view': {
         var pid = parseInt(id, 10);
