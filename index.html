@@ -1318,7 +1318,7 @@
         <div class="hero-side">
           <div class="stat-pill">
             <span class="stat-k">아침 루틴</span>
-            <span class="stat-v js-routine-count">0/6</span>
+            <span class="stat-v js-routine-count">0/5</span>
           </div>
           <div class="stat-pill balls">
             <svg class="mini" viewBox="0 0 100 100" aria-hidden="true">
@@ -1363,7 +1363,7 @@
         <div class="sec-head">
           <h2>🎒 아침 루틴 5단계</h2>
           <span class="sec-sub">카드를 눌러 체크! 5개를 모두 하면 몬스터볼 +1 · 원리셈·따풀은 오른쪽 ‘아침 공부’에서 +1</span>
-          <span class="count-pill js-routine-count">0/6</span>
+          <span class="count-pill js-routine-count">0/5</span>
           <span class="streak-chip js-streak-chip">🔥 0일</span>
           <div class="spacer"></div>
           <button class="ghost-btn" type="button" data-act="open-routine-edit">⚙️ 루틴 편집</button>
@@ -2196,7 +2196,7 @@
     var aw = store.get(K.awards, {});
     state.awards = (aw && typeof aw === 'object') ? aw : {};
 
-    /* 아침 루틴: 6단계 기본값. 직접 고친 목록은 그대로 살리고,
+    /* 아침 루틴: 기본 6개(생활 5 + 원리셈·따풀). 직접 고친 목록은 그대로 살리고,
        옛 기본값(4개·5개)이면 새 6개로 올리면서 체크 기록을 옮긴다. */
     var items = store.get(K.items, null);
     if (!(items && items.length && items[0] && items[0].id)) {
@@ -2272,7 +2272,7 @@
   function saveStones() { store.set(K.stones, state.stones); }
   function saveStoneAwards() { store.set(K.stoneAwards, state.stoneAwards); }
 
-  /* 100% 완벽한 날: 아침 6/6 + 저녁 5/5 + 오늘의 공부 모두 */
+  /* 100% 완벽한 날: 아침 5/5 + 원리셈·따풀 + 저녁 5/5 + 오늘의 공부 모두 */
   function todayPerfect() {
     if (!state.items.length || !state.eveningItems.length) return false;
     var doneIds = todayRoutineIds(), i;
