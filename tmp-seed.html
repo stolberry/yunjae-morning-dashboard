@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<title>seed</title>
+</head>
+<body style="font:16px sans-serif;padding:24px">
+<p id="out">…</p>
+<script>
+  // 임시 검증 페이지: 무한다이노(#890)를 도감에 등록해 그림·이름을 확인한다.
+  var done = [];
+  try {
+    localStorage.setItem('yj_dex_v1', JSON.stringify({ '890': 1 }));
+    done.push('yj_dex_v1');
+  } catch (e) { done.push('error:' + e.message); }
+  document.getElementById('out').innerHTML = 'seeded: ' + done.join(', ') + '<br><a href="./index.html">도감 열기</a>';
+</script>
+</body>
+</html>
