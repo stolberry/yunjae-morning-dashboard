@@ -1487,6 +1487,19 @@
   /* 실제 태블릿(주소·상태 표시줄 포함): 보이는 높이가 짧아도 잘리지 않게 */
   @media (max-height:900px){
     .routine-wrap{flex:0 6 auto}
+    /* 짧은 화면: 퀘스트 카드·보너스 칸을 한 단계 줄인다 */
+    #homeMorning .quest-card{padding:7px 10px 8px}
+    .quest-badge{font-size:12px;padding:4px 10px}
+    .quest-ico{width:54px;height:54px;border-radius:16px}
+    .quest-ico svg{width:40px;height:40px}
+    .quest-title{font-size:20px}
+    .quest-line{font-size:12px;margin-top:2px}
+    .quest-btn{min-height:48px;font-size:16px;padding:9px 12px}
+    #homeEvening .bonus-tile{gap:4px;padding:5px 5px 6px}
+    #homeEvening .bonus-tile .bt-ico{width:42px;height:42px;border-radius:12px}
+    #homeEvening .bonus-tile .bt-ico svg{width:31px;height:31px}
+    #homeEvening .bonus-tile .bt-label{font-size:14.5px}
+    #homeEvening .bonus-tile .bt-cta{min-height:30px;font-size:11.5px}
     #homeEvening .study-card{padding:4px 7px 5px}
     #homeEvening .study-card .hs-grid{grid-auto-rows:41px;gap:4px}
     #homeEvening .study-card .hs-row{padding:5px 8px;gap:7px;border-radius:12px}
