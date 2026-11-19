@@ -567,6 +567,83 @@
   .evo-row .btn:disabled{background:#EDE7DA;color:#A79E8B}
   .evo-need{font-size:11px;font-weight:900;color:#A79E8B;background:#F4EFE4;border-radius:999px;padding:6px 10px}
 
+  /* ---------------- cutscene (뽑기 · 진화) ---------------- */
+  .cutscene{
+    position:fixed;inset:0;z-index:110;display:none;align-items:center;justify-content:center;overflow:hidden;
+    background:radial-gradient(circle at 50% 42%, #2b2760 0%, #141034 52%, #06050d 100%);
+  }
+  .cutscene.show{display:flex;animation:csFade .3s ease}
+  @keyframes csFade{from{opacity:0}to{opacity:1}}
+  .cutscene::before{
+    content:"";position:absolute;inset:-25%;pointer-events:none;opacity:.9;
+    background-image:
+      radial-gradient(2.4px 2.4px at 12% 22%, #fff, transparent),
+      radial-gradient(2px 2px at 68% 14%, #fff, transparent),
+      radial-gradient(2.6px 2.6px at 82% 62%, #fff, transparent),
+      radial-gradient(1.8px 1.8px at 32% 74%, #fff, transparent),
+      radial-gradient(2px 2px at 54% 46%, #ffe9a8, transparent),
+      radial-gradient(1.6px 1.6px at 8% 58%, #fff, transparent),
+      radial-gradient(2.2px 2.2px at 92% 28%, #cfe4ff, transparent),
+      radial-gradient(1.8px 1.8px at 42% 8%, #fff, transparent);
+    animation:csTwinkle 2.6s ease-in-out infinite alternate;
+  }
+  @keyframes csTwinkle{from{opacity:.45;transform:scale(.99)}to{opacity:1;transform:scale(1.02)}}
+  .cutscene::after{
+    content:"";position:absolute;width:190vmax;height:190vmax;pointer-events:none;opacity:.35;
+    background:conic-gradient(from 0deg, rgba(255,255,255,.16) 0 5deg, transparent 5deg 26deg);
+    animation:csSpin 14s linear infinite;
+  }
+  @keyframes csSpin{to{transform:rotate(360deg)}}
+  .cs-stage{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding:20px}
+  .cs-hint{position:absolute;bottom:16px;left:0;right:0;text-align:center;font-size:11.5px;font-weight:800;color:rgba(255,255,255,.45);z-index:3}
+
+  .cs-ball{width:min(30vmin,240px);height:min(30vmin,240px);filter:drop-shadow(0 0 46px rgba(255,255,255,.35));animation:csShake .5s ease-in-out infinite}
+  .cs-ball.burst{animation:csBurst .45s ease-out forwards}
+  @keyframes csShake{
+    0%,100%{transform:rotate(-11deg) scale(1)}
+    25%{transform:rotate(9deg) scale(1.03)}
+    50%{transform:rotate(-6deg) scale(.98)}
+    75%{transform:rotate(12deg) scale(1.05)}
+  }
+  @keyframes csBurst{0%{transform:scale(1);opacity:1}100%{transform:scale(2.2);opacity:0}}
+
+  .cs-poke{display:flex;flex-direction:column;align-items:center;gap:8px;animation:csPop .55s cubic-bezier(.2,1.35,.4,1)}
+  .cs-poke img{
+    width:min(48vmin,430px);height:auto;display:block;
+    filter:drop-shadow(0 0 26px rgba(255,255,255,.45));
+    animation:csFloat 3.2s ease-in-out infinite;
+  }
+  .cs-poke.legend img{filter:drop-shadow(0 0 44px rgba(255,205,60,.95)) drop-shadow(0 0 90px rgba(255,190,40,.55))}
+  .cs-poke.mega img{filter:drop-shadow(0 0 46px rgba(170,110,255,.95)) drop-shadow(0 0 96px rgba(140,80,255,.6))}
+  @keyframes csFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-14px) scale(1.03)}}
+  @keyframes csPop{0%{transform:scale(.3);opacity:0}65%{transform:scale(1.08);opacity:1}100%{transform:scale(1)}}
+  .cs-name{
+    font-size:clamp(26px,4vw,46px);font-weight:900;color:#fff;letter-spacing:-1.4px;line-height:1.1;
+    text-shadow:0 6px 24px rgba(0,0,0,.55);
+  }
+  .cs-tier{font-size:13px;font-weight:900;border-radius:999px;padding:4px 14px;border:2px solid rgba(255,255,255,.5)}
+  .cs-badge{font-size:12.5px;font-weight:900;color:#FFE9A8;letter-spacing:.4px}
+
+  .cs-evo{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px}
+  .cs-evo-img img{
+    width:min(42vmin,360px);height:auto;display:block;
+    animation:csCharge 0.9s ease-in-out infinite alternate;
+  }
+  .cs-evo.charge .cs-evo-img img{animation:csCharge .35s ease-in-out infinite alternate}
+  @keyframes csCharge{
+    0%{filter:brightness(1) drop-shadow(0 0 16px rgba(255,255,255,.5));transform:scale(1)}
+    100%{filter:brightness(2.4) drop-shadow(0 0 60px rgba(255,255,255,.95));transform:scale(1.04)}
+  }
+  .cs-stone{font-size:clamp(30px,5vw,58px);animation:csStone 1.1s linear infinite;text-shadow:0 0 30px rgba(180,150,255,.95)}
+  @keyframes csStone{0%{transform:rotateY(0) translateY(0)}50%{transform:rotateY(180deg) translateY(-10px)}100%{transform:rotateY(360deg) translateY(0)}}
+  .cs-evo .cs-label{font-size:15px;font-weight:900;color:#D9CCFF;letter-spacing:-.3px}
+
+  /* 살아있는 느낌 */
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+  .dex-tile.legend .dim img,.dex-tile.mega .dim img{animation:floaty 3.4s ease-in-out infinite}
+  .reveal-img img{animation:csFloat 3s ease-in-out infinite}
+  .flash{z-index:112}
+
   /* ---------------- modals ---------------- */
   .modal{
     position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;
@@ -636,6 +713,22 @@
   .foot{text-align:center;font-size:10px;font-weight:800;color:#AEA694;line-height:1.45;padding:0 16px 4px}
 
   /* ---------------- responsive ---------------- */
+  @media (max-width:1399px){
+    .hero-count{font-size:clamp(24px,2.2vw,30px)}
+    .dt-clock{font-size:26px}
+    .hs-grid{grid-auto-rows:minmax(78px,1fr)}
+    .hs-tile .hs-ico{width:44px;height:44px;border-radius:14px}
+    .hs-tile .hs-ico svg{width:30px;height:30px}
+    .hs-tile .hs-label{font-size:15px}
+    .hs-tile .hs-state{font-size:10.5px}
+    .rcard .illu{min-height:88px;max-height:150px}
+    .rcard .r-title{font-size:14.5px}
+    .rcard .cta{font-size:12px;min-height:36px}
+    .af-text{font-size:13.5px}
+    .today-class.solo .ac-ico{width:46px;height:46px}
+    .today-class.solo .ac-ico svg{width:30px;height:30px}
+    .today-class.solo .t-name{font-size:18px}
+  }
   @media (max-width:1180px){
     .week-grid{grid-template-columns:repeat(4,1fr)}
     .form-grid{grid-template-columns:1fr 1fr}
@@ -1140,6 +1233,10 @@
   <div class="modal-card reveal-card" id="revealBody"></div>
 </div>
 
+<div class="cutscene" id="cutscene">
+  <div class="cs-stage" id="csStage"></div>
+  <div class="cs-hint">화면을 누르면 바로 넘어가요</div>
+</div>
 <div class="flash" id="flash"></div>
 <div class="toast" id="toast"></div>
 
@@ -2990,6 +3087,119 @@
     $('revealModal').classList.add('show');
   }
 
+  /* ======================= 컷신 (뽑기 · 진화) ======================= */
+  var csTimers = [], csDone = null;
+
+  function csClear() {
+    for (var i = 0; i < csTimers.length; i++) clearTimeout(csTimers[i]);
+    csTimers = [];
+  }
+  function csLater(fn, ms) { csTimers.push(setTimeout(fn, ms)); }
+  function csOpen(cls) {
+    csClear();
+    var el = $('cutscene');
+    $('csStage').innerHTML = '';
+    el.className = 'cutscene show' + (cls ? ' ' + cls : '');
+    return $('csStage');
+  }
+  function csClose() {
+    csClear();
+    var el = $('cutscene');
+    el.className = 'cutscene';
+    $('csStage').innerHTML = '';
+    $('flash').classList.remove('on');
+  }
+  function csSkip() {
+    if (!csDone) return;
+    var fn = csDone;
+    csDone = null;
+    csClose();
+    fn();
+  }
+
+  function ballSvgCut(color) {
+    return '<svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true">'
+      + '<defs><clipPath id="csBallClip"><circle cx="50" cy="50" r="46"/></clipPath></defs>'
+      + '<circle cx="50" cy="50" r="46" fill="#fff" stroke="#2E2A25" stroke-width="4"/>'
+      + '<g clip-path="url(#csBallClip)"><rect x="0" y="0" width="100" height="50" fill="' + color + '"/></g>'
+      + '<rect x="2" y="44" width="96" height="12" fill="#2E2A25"/>'
+      + '<circle cx="50" cy="50" r="15" fill="#fff" stroke="#2E2A25" stroke-width="4"/>'
+      + '<circle cx="50" cy="50" r="6" fill="' + color + '"/></svg>';
+  }
+  function pokeMarkup(p, extra) {
+    var tc = TIER[p.tier] || TIER['일반'];
+    var cls = (p.tier === '전설') ? ' legend' : (p.tier === '메가진화' ? ' mega' : '');
+    return '<div class="cs-poke' + cls + '">'
+      + '<img src="' + ART + p.id + '.png" alt="' + esc(p.name) + '" '
+      + 'onerror="this.onerror=null;this.src=\'' + SPR + p.id + '.png\'">'
+      + (extra ? '<div class="cs-badge">' + extra + '</div>' : '')
+      + '<div class="cs-name">' + esc(p.name) + '</div>'
+      + '<div class="cs-tier" style="background:' + tc.bg + ';color:' + tc.color + '">' + esc(p.tier) + '</div>'
+      + '</div>';
+  }
+
+  function runGachaCutscene(kind, p, isNew, count, done) {
+    var d = DRAW[kind] || DRAW.normal;
+    var stage = csOpen('gacha');
+    stage.innerHTML = '<div class="cs-ball">' + ballSvgCut(d.color) + '</div>';
+    SFX.shake();
+
+    csLater(function () {
+      var b = stage.querySelector('.cs-ball');
+      if (b) b.classList.add('burst');
+      $('flash').classList.add('on');
+      SFX.reveal();
+    }, 1450);
+
+    csLater(function () {
+      $('flash').classList.remove('on');
+      stage.innerHTML = pokeMarkup(p, isNew ? 'NEW! 도감에 등록' : d.name + ' 성공');
+      SFX.fanfare();
+      confettiBurst();
+    }, 1780);
+
+    csLater(function () { csSkip(); }, 3900);
+
+    csDone = function () {
+      renderDex();
+      done();
+    };
+  }
+
+  function runEvoCutscene(from, to, isNew, count, done) {
+    var stage = csOpen('evo');
+    stage.innerHTML = '<div class="cs-evo">'
+      + '<div class="cs-evo-img"><img src="' + ART + from.id + '.png" alt="' + esc(from.name) + '" '
+      + 'onerror="this.onerror=null;this.src=\'' + SPR + from.id + '.png\'"></div>'
+      + '<div class="cs-label">' + esc(from.name) + ' 진화 중…</div>'
+      + '<div class="cs-stone">💎</div>'
+      + '</div>';
+    SFX.shake();
+    csLater(function () {
+      var e = stage.querySelector('.cs-evo');
+      if (e) e.classList.add('charge');
+      SFX.step();
+    }, 420);
+    csLater(function () {
+      $('flash').classList.add('on');
+      SFX.reveal();
+    }, 1550);
+    csLater(function () {
+      $('flash').classList.remove('on');
+      stage.innerHTML = pokeMarkup(to, (to.tier === '메가진화' ? '메가진화 성공!' : '진화 성공!') + (isNew ? ' · NEW' : ''));
+      SFX.fanfare();
+      confettiBurst();
+    }, 1900);
+    csLater(function () { csSkip(); }, 4100);
+
+    csDone = function () {
+      renderDex();
+      updateBallUI();
+      updateStoneUI();
+      done();
+    };
+  }
+
   function pickPokemon(kind) {
     var d = DRAW[kind] || DRAW.normal;
     var w = d.weights, total = 0, t;
@@ -3031,17 +3241,12 @@
       saveDex();
 
       if (btn) btn.classList.remove('rolling');
-      $('flash').classList.add('on');
-      SFX.reveal();
-
-      setTimeout(function () {
-        $('flash').classList.remove('on');
-        renderDex();
+      rolling = false;
+      renderDex();
+      runGachaCutscene(kind, p, isNew, state.dex[p.id], function () {
         showReveal(p, isNew, state.dex[p.id], kind);
-        if (isNew) confettiBurst();
-        rolling = false;
-      }, 190);
-    }, 1500);
+      });
+    }, 900);
   }
 
   function evolvePokemon(fromId, toId, mode, cost) {
@@ -3063,19 +3268,12 @@
     state.dex[toId] = (state.dex[toId] || 0) + 1;
     saveDex();
     SFX.unlock();
+    $('revealModal').classList.remove('show');
 
-    $('flash').classList.add('on');
-    SFX.fanfare();
-
-    setTimeout(function () {
-      $('flash').classList.remove('on');
-      renderDex();
-      updateBallUI();
-      updateStoneUI();
+    runEvoCutscene(from, to, isNew, state.dex[toId], function () {
       showReveal(to, isNew, state.dex[toId], null);
-      confettiBurst();
       toast(from.name + ' → ' + to.name + ' 진화 성공! ✨');
-    }, 320);
+    });
   }
 
   /* ======================= 전체화면 / 효과음 ======================= */
@@ -3255,6 +3453,7 @@
   $('confirmModal').addEventListener('click', function (e) {
     if (e.target === this) closeConfirm();
   });
+  $('cutscene').addEventListener('click', function () { csSkip(); });
   $('routineModal').addEventListener('click', function (e) {
     if (e.target === this) closeRoutineEdit();
   });
