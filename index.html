@@ -603,8 +603,16 @@
     display:flex;align-items:center;justify-content:center;color:transparent;font-size:18px;font-weight:900;
   }
   .list .item.done .check{background:var(--green);border-color:var(--green);color:#fff}
-  .list .item-label{flex:1;font-size:18px;font-weight:900;letter-spacing:-.3px;cursor:pointer}
+  .list .item-label{flex:1;font-size:18px;font-weight:900;letter-spacing:-.3px;cursor:pointer;word-break:keep-all}
   .list .item.done .item-label{color:#9CB6A0;text-decoration:line-through}
+  .list .item-actions{display:flex;align-items:center;gap:5px;flex:none}
+  .list .item .mv{
+    width:44px;height:44px;border:2px solid #EFE8D8;background:#fff;border-radius:12px;
+    font-size:19px;font-weight:900;line-height:1;color:#8A8377;display:flex;align-items:center;justify-content:center;
+    touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  }
+  .list .item .mv:active{background:#FFF6DA;border-color:var(--yellow-deep);color:#463400}
+  .list .item .mv[disabled]{opacity:.32;background:#F7F4EC;color:#B5AC99;border-color:#F0EADA}
   .list .empty{background:#F8F6F0;border:2px dashed #E4DCCB;border-radius:16px;padding:20px;text-align:center;font-weight:900;color:#8A8377}
   .inline-input{border:2px solid var(--yellow);border-radius:10px;padding:6px 9px;font-size:17px;font-weight:900;flex:1;background:#fff}
 
@@ -1110,6 +1118,10 @@
     .today-class .t-name{font-size:16px}
     .day-tab{min-width:56px;padding:7px 8px}
     .day-tab small{font-size:9px}
+    .list .item{padding:8px 9px;gap:8px}
+    .list .item-label{font-size:16.5px;min-width:0}
+    .list .item-actions{gap:3px}
+    .list .item .mv{width:38px;height:38px;font-size:17px;border-radius:10px}
   }
 
   /* 넓은 태블릿(갤럭시탭 S8 울트라 등)에서는 화면에 맞게 크게 */
@@ -3554,6 +3566,10 @@
           + 'aria-pressed="' + done + '" aria-label="' + esc(t.label) + ' 체크"><span class="tick">✓</span></button>'
           + '<span class="item-label" data-act="s-toggle" data-id="' + esc(t.id) + '">' + esc(t.label) + '</span>'
           + '<span class="item-actions">'
+          + '<button class="mv" type="button" data-act="s-move" data-id="' + esc(t.id) + '" data-dir="-1"'
+          + ' aria-label="' + esc(t.label) + ' 위로 옮기기"' + (i === 0 ? ' disabled' : '') + '>↑</button>'
+          + '<button class="mv" type="button" data-act="s-move" data-id="' + esc(t.id) + '" data-dir="1"'
+          + ' aria-label="' + esc(t.label) + ' 아래로 옮기기"' + (i === tasks.length - 1 ? ' disabled' : '') + '>↓</button>'
           + '<button class="icon-btn" type="button" data-act="s-edit" data-id="' + esc(t.id) + '" aria-label="수정">✏️</button>'
           + '<button class="icon-btn" type="button" data-act="s-del" data-id="' + esc(t.id) + '" aria-label="삭제">🗑️</button>'
           + '</span></li>';
@@ -3771,6 +3787,24 @@
     renderStudy();
     renderHomeHomeschool();
     input.focus();
+  }
+
+  function moveStudyItem(id, dir) {
+    var k = String(selectedDow);
+    var tasks = (state.homeschoolTasks[k] || []).slice();
+    var idx = -1, i;
+    for (i = 0; i < tasks.length; i++) if (tasks[i].id === id) idx = i;
+    if (idx < 0) return;
+    var to = idx + dir;
+    if (to < 0 || to >= tasks.length) return;
+    var tmp = tasks[idx];
+    tasks[idx] = tasks[to];
+    tasks[to] = tmp;
+    state.homeschoolTasks[k] = tasks;
+    store.set(K.hsTasks, state.homeschoolTasks);
+    renderStudy();
+    renderHomeHomeschool();
+    try { SFX.step(); } catch (e) {}
   }
 
   function deleteStudy(id) {
@@ -4388,6 +4422,9 @@
         li = el.closest ? el.closest('li') : null;
         labelEl = li ? li.querySelector('.item-label') : null;
         if (labelEl) inlineEdit(labelEl, function (v) { renameStudy(id, v); });
+        break;
+      case 's-move':
+        moveStudyItem(id, parseInt(el.getAttribute('data-dir'), 10));
         break;
       case 's-del':
         deleteStudy(id);
