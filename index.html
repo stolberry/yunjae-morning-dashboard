@@ -298,7 +298,7 @@
   /* ---------------- home grid: 등교 | 학원 | 공부 ---------------- */
   .home-grid{
     display:grid;gap:10px;flex:1 1 auto;min-height:0;
-    grid-template-columns:2.05fr 1fr;
+    grid-template-columns:1.52fr 1fr;
     grid-template-rows:minmax(0,1fr);
   }
   .home-right{display:flex;flex-direction:column;gap:9px;min-width:0;min-height:0}
@@ -315,10 +315,13 @@
   .today-card .link-btn{font-size:12px;padding:2px 2px}
 
   /* 학원 카드 */
-  .today-academy{display:flex;flex-direction:column;gap:7px;flex:1 1 auto;min-height:0}
-  .today-academy.multi{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;align-content:stretch}
-  .today-academy.multi .today-class{min-height:0}
-  .today-academy .today-class{flex:1 1 auto;min-height:56px}
+  .today-academy{display:flex;flex-direction:column;justify-content:center;gap:9px;flex:1 1 auto;min-height:0}
+  .today-academy .today-class{flex:0 0 auto;min-height:52px}
+  .today-class.line{gap:12px}
+  .today-class .t-line{display:flex;align-items:baseline;gap:7px;min-width:0;flex:1;white-space:nowrap;overflow:hidden}
+  .today-class .t-dot{font-size:14px;font-weight:900;color:#A9C1D8;flex:none}
+  .today-class .t-name{overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .today-class .t-time{flex:none}
   .today-class{
     display:flex;align-items:center;gap:10px;background:#F7FBFF;border:2px solid #DCEBFA;
     border-radius:15px;padding:8px 11px;min-width:0;max-width:none;
@@ -341,6 +344,7 @@
   .today-class.solo .t-time{font-size:13px}
   .today-class.solo .t-memo{font-size:11.5px}
   .today-class .t-note{font-size:11.5px;font-weight:900;color:#5F86B8;margin-top:2px}
+  .solo-note{text-align:center;font-size:12px;font-weight:900;color:#5F86B8}
   .empty-soft{
     background:#F8F6F0;border:2px dashed #E4DCCB;border-radius:13px;padding:11px;text-align:center;
     font-weight:900;color:#8A8377;font-size:13.5px;line-height:1.4;
@@ -1028,6 +1032,12 @@
     .today-class.solo .t-time{font-size:16.5px}
     .today-class.solo .t-memo{font-size:14px}
     .today-class.solo .t-note{font-size:13.5px}
+    .today-class.line{padding:14px 17px;gap:15px}
+    .today-class.line .t-time{font-size:17px}
+    .today-class.line .t-name{font-size:23px}
+    .today-class .t-dot{font-size:16px}
+    .solo-note{font-size:13px;margin-top:2px}
+    .today-academy{gap:11px}
     #homeEvening .hs-tile{padding:11px 10px 10px;gap:6px}
     #homeEvening .hs-tile .hs-ico{width:64px;height:64px;border-radius:18px}
     #homeEvening .hs-tile .hs-ico svg{width:43px;height:43px}
@@ -1227,7 +1237,7 @@
       <section class="routine-wrap">
         <div class="sec-head">
           <h2>🎒 아침 루틴 6단계</h2>
-          <span class="sec-sub">1~5번은 체크만! 5개를 다 하면 몬스터볼 +1 · 원리셈·따풀은 따로 +1</span>
+          <span class="sec-sub">카드를 눌러 체크! 5개를 모두 하면 몬스터볼 +1 · 원리셈·따풀은 따로 +1</span>
           <span class="count-pill js-routine-count">0/6</span>
           <span class="streak-chip js-streak-chip">🔥 0일</span>
           <div class="spacer"></div>
@@ -1336,7 +1346,7 @@
       <section class="routine-wrap eve">
         <div class="sec-head">
           <h2>🌙 저녁 루틴 5단계</h2>
-          <span class="sec-sub">체크만! 5개를 모두 하면 몬스터볼 +1</span>
+          <span class="sec-sub">카드를 눌러 체크! 5개를 모두 하면 몬스터볼 +1</span>
           <span class="count-pill js-evening-count">0/5</span>
           <span class="streak-chip js-streak-chip">🔥 0일</span>
           <div class="spacer"></div>
@@ -1868,7 +1878,8 @@
     perfectDays: [], stones: 0, stoneAwards: []
   };
 
-  var DEFAULT6 = ['세수·로션', '유산균·물 마시기', '아침먹으면서 영어영상', '용변·양치', '옷입고 양말신기', '원리셈·따풀'];
+  var DEFAULT6 = ['세수·로션', '유산균·물 마시기', '아침식사·영어영상', '용변·양치', '옷입고 양말신기', '원리셈·따풀'];
+  var OLD_ENGLISH_LABEL = '아침먹으면서 영어영상';
   var DEFAULT5 = ['세수·로션', '유산균·물 마시기', '아침먹으면서 영어영상', '용변·양치', '옷입고 양말신기'];
   var DEFAULT_EVENING = ['샤워', '저녁식사', '숙제·공부', '양치·가방정리', '독서'];
   var DEFAULT_EVENING_OLD7 = ['샤워', '저녁식사', '숙제', '공부', '독서', '양치', '가방정리'];
@@ -2083,6 +2094,15 @@
       }
       store.set(K.items, items);
     }
+    /* '아침먹으면서 영어영상' → '아침식사·영어영상' (체크 기록은 그대로) */
+    var renamed = false;
+    for (var ri = 0; ri < items.length; ri++) {
+      if (normLabel(items[ri] && items[ri].label) === normLabel(OLD_ENGLISH_LABEL)) {
+        items[ri].label = '아침식사·영어영상';
+        renamed = true;
+      }
+    }
+    if (renamed) store.set(K.items, items);
     state.items = items;
 
     /* 저녁 루틴: 5단계 기본값 (예전 7단계 기본값이면 자동으로 올린다) */
@@ -2702,8 +2722,7 @@
     var ill = illuFor(it.label);
     var single = !isEvening && isMathRoutine(it.label);
     var cta = done ? '완료! ✓' : (single ? '눌러서 완료 ' + miniBallSvg() + ' +1' : '눌러서 체크');
-    var badge = (!isEvening && !single && bundleCount)
-      ? '<span class="rb-badge">' + bundleCount + '개 다 하면 🔴+1</span>' : '';
+    var badge = '';
     return '<button class="rcard' + (isEvening ? ' ev' : '') + (done ? ' done' : '') + '" type="button" '
       + 'data-act="' + (isEvening ? 'e-toggle' : 'r-toggle') + '" data-id="' + esc(it.id) + '" aria-pressed="' + done + '">'
       + '<span class="step">' + (idx + 1) + '</span>'
@@ -3228,7 +3247,7 @@
     var box = $('todayAcademy');
     var dow = new Date().getDay();
     var list = classesFor(dow);
-    box.className = 'today-academy' + (list.length > 1 ? ' multi' : '');
+    box.className = 'today-academy';
     if (!list.length) {
       box.innerHTML = '<div class="acad-empty">'
         + '<span class="acad-ico">' + svgBag() + '</span>'
@@ -3240,14 +3259,13 @@
     var html = '';
     for (var i = 0; i < list.length; i++) {
       var a = list[i];
-      html += '<div class="today-class' + (list.length === 1 ? ' solo' : '') + '">'
+      html += '<div class="today-class line' + (list.length === 1 ? ' solo' : '') + '">'
         + '<span class="ac-ico">' + svgSchool() + '</span>'
-        + '<div class="t-body"><div class="t-name">' + esc(a.name) + '</div>'
-        + '<div class="t-time">🕘 ' + esc(timeLabel(a)) + '</div>'
-        + (a.memo ? '<div class="t-memo">🎒 ' + esc(a.memo) + '</div>' : '')
-        + (list.length === 1 ? '<div class="t-note">오늘도 즐겁게 다녀와요! 🌈</div>' : '')
-        + '</div></div>';
+        + '<div class="t-line"><span class="t-time">' + esc(timeLabel(a)) + '</span>'
+        + '<span class="t-dot">·</span><span class="t-name">' + esc(a.name) + '</span></div>'
+        + '</div>';
     }
+    if (list.length === 1) html += '<div class="t-note solo-note">오늘도 즐겁게 다녀와요! 🌈</div>';
     box.innerHTML = html;
   }
 
