@@ -247,7 +247,7 @@
   .hero-count.urgent{color:#D93A2B;animation:pulseUrgent 1s ease-in-out infinite}
   @keyframes pulseUrgent{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
   .hero-status{font-size:12.5px;font-weight:900;color:#7A6A46}
-  .hero-progress{position:relative;padding-right:5px;margin-top:3px}
+  .hero-progress{position:relative;padding-right:5px;margin:auto 0 0}
   .hp-track{
     height:24px;border-radius:999px;background:#F2EFE4;border:2px solid #E4DDC9;
     position:relative;overflow:hidden;box-shadow:inset 0 2px 5px rgba(120,108,72,.12);
@@ -1622,7 +1622,7 @@
   /* 아침: 상단 두 줄이 남는 높이를 나눠 갖는다 — 아침·저녁 히어로의 아래 줄(hero-side)을 같은 높이에 맞춤 */
   @media (min-width:1400px) and (min-height:901px){
     #homeMorning .home-grid{flex:1 1 auto}
-    #homeMorning .hero{justify-content:space-between;gap:8px}
+    #homeMorning .hero{justify-content:flex-start;gap:8px}
     #homeMorning .dt-wx,#homeEvening .dt-wx{min-height:56px}
     .routine-grid,.routine-grid.eve5{gap:11px}
   }
