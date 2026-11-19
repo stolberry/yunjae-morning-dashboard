@@ -556,6 +556,15 @@
   .acad-row .ac-time{flex:none;font-size:14.5px;font-weight:700;color:#24507C;font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:-.2px}
   .today-academy .acad-row{flex:0 0 auto}
 
+  /* 하루 일정(📌) 칸과 목록 */
+  .acad-tile.once{background:#FFF7F3;border-color:#FFD9CF}
+  .acad-tile.once .ac-name{color:#9A3B26}
+  .once-list{margin-top:12px}
+  .once-list .oc-when{flex:none;font-size:12.5px;font-weight:900;color:#B24B32;white-space:nowrap}
+  .once-list .oc-time{flex:none;font-size:12.5px;font-weight:800;color:#8A8377;white-space:nowrap}
+  .once-list .item.past{opacity:.5}
+  .once-list .item.today{background:#FFFBF0;border-color:#FFE08A}
+
   /* 학원 칸: 시간순으로 가로로 — 위 이름+준비물, 아래 시간 */
   /* 학원은 많아야 세 곳 — 언제나 세 칸으로 나눠 두고, 하나면 1/3만 차지한다 */
   .acad-tiles{display:flex;flex-wrap:wrap;justify-content:space-evenly;gap:8px 0;min-width:0}
@@ -1813,7 +1822,7 @@
 
     <nav class="tabs" aria-label="메뉴">
       <button class="tab active" data-act="tab" data-tab="home" type="button">🏠 대시보드</button>
-      <button class="tab" data-act="tab" data-tab="academy" type="button">🏫 학원 스케줄</button>
+      <button class="tab" data-act="tab" data-tab="academy" type="button">📅 스케줄</button>
       <button class="tab" data-act="tab" data-tab="study" type="button">✅ 할 일</button>
       <button class="tab" data-act="tab" data-tab="dex" type="button">🔴 포켓몬 도감 <span class="badge js-ball-count">0</span></button>
       <button class="tab" data-act="tab" data-tab="praise" type="button">🌟 칭찬 <span class="badge praise-badge js-praise-count">0</span></button>
@@ -1916,10 +1925,10 @@
         <div class="home-right">
         <div class="card today-card acad-card">
           <div class="sec-head">
-            <h2>🏫 오늘의 학원 스케줄</h2>
+            <h2>📅 오늘의 스케줄</h2>
             <div class="spacer"></div>
             <button class="link-btn" type="button" data-act="goto" data-tab="academy">전체 보기 →</button>
-            <button class="link-btn" type="button" data-act="academy-add">+ 학원 추가</button>
+            <button class="link-btn" type="button" data-act="academy-add">+ 일정 추가</button>
           </div>
           <div id="todayAcademy" class="today-academy"></div>
         </div>
@@ -2076,22 +2085,22 @@
   <section class="panel" id="panel-academy">
     <div class="card" style="margin-bottom:16px">
       <div class="sec-head">
-        <h2>🏫 이번 주 학원 스케줄</h2>
+        <h2>📅 이번 주 스케줄</h2>
         <span class="hint">월요일부터 일요일까지</span>
         <div class="spacer"></div>
-        <button class="btn btn-yellow" type="button" data-act="ac-new">+ 학원 추가</button>
+        <button class="btn btn-yellow" type="button" data-act="ac-new">+ 일정 추가</button>
       </div>
       <div class="week-grid" id="weekGrid"></div>
     </div>
 
     <div class="card" id="academyFormCard">
       <div class="sec-head">
-        <h2 id="academyFormTitle">➕ 학원 추가</h2>
+        <h2 id="academyFormTitle">➕ 일정 추가</h2>
         <span class="hint">요일을 여러 개 선택할 수 있어요</span>
       </div>
       <div class="form-grid">
         <div class="field">
-          <label for="acName">학원 이름</label>
+          <label for="acName">일정 이름</label>
           <input id="acName" type="text" placeholder="예: 수학 학원" autocomplete="off">
         </div>
         <div class="field">
@@ -2123,6 +2132,41 @@
         <button class="chip-btn" data-act="preset" data-name="피아노" type="button">피아노</button>
         <button class="chip-btn" data-act="preset" data-name="미술 학원" type="button">미술</button>
       </div>
+    </div>
+
+    <div class="card" id="onceCard" style="margin-top:16px">
+      <div class="sec-head">
+        <h2>📌 하루 일정</h2>
+        <span class="hint">그날만 있는 별도 일정 (치과·발표회·소풍 등)</span>
+        <div class="spacer"></div>
+        <span class="count-pill" id="onceCount">0개</span>
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label for="onceDate">날짜</label>
+          <input id="onceDate" type="date">
+        </div>
+        <div class="field">
+          <label for="onceName">일정 이름</label>
+          <input id="onceName" type="text" placeholder="예: 치과" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="onceStart">시작 시간</label>
+          <input id="onceStart" type="time" value="15:00">
+        </div>
+        <div class="field">
+          <label for="onceEnd">끝나는 시간 (선택)</label>
+          <input id="onceEnd" type="time">
+        </div>
+        <div class="field full">
+          <label for="onceMemo">준비물 / 메모 (선택)</label>
+          <input id="onceMemo" type="text" placeholder="예: 보험카드, 물병" autocomplete="off">
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-blue" id="onceSave" type="button">추가</button>
+      </div>
+      <ul class="list once-list" id="onceList"></ul>
     </div>
   </section>
 
@@ -2385,6 +2429,7 @@
     itemsV1: 'yj_routine_items_v1',
     routineDone: 'yj_routine_done_v1',
     academies: 'yj_academies_v1',
+    once: 'yj_once_schedules_v1',
     hsTasks: 'yj_homeschool_tasks_v1',
     hsDone: 'yj_homeschool_done_v1',
     weather: 'yj_weather_cache_v1',
@@ -2677,7 +2722,7 @@
     items: [], eveningItems: [], routineDone: {}, eveningDone: {}, academies: [],
     homeschoolTasks: {}, homeschoolDone: {}, bonusDone: {}, bonusItems: [],
     balls: 0, dex: {}, dexCosts: {}, awards: {},
-    perfectDays: [], stones: 0, stoneAwards: [],
+    perfectDays: [], stones: 0, stoneAwards: [], academies: [], once: [],
     missionDone: {},
     momPin: '', praises: []
   };
@@ -3008,6 +3053,18 @@
     }
     state.eveningItems = eve;
     state.academies = store.get(K.academies, null) || [];
+    /* 하루 일정(날짜가 정해진 별도 스케줄) — 60일 지난 기록은 자동으로 정리 */
+    var once = store.get(K.once, null);
+    state.once = (once && typeof once.slice === 'function') ? once : [];
+    var cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 60);
+    var cutIso = dateKey(cutoff);
+    var kept = [];
+    for (var oi = 0; oi < state.once.length; oi++) {
+      var oe = state.once[oi];
+      if (oe && oe.date && oe.name && oe.date >= cutIso) kept.push(oe);
+    }
+    if (kept.length !== state.once.length) { state.once = kept; store.set(K.once, kept); }
+    else state.once = kept;
 
     /* 공부 주간표 */
     state.homeschoolDone = store.get(K.hsDone, {}) || {};
@@ -3249,7 +3306,7 @@
       if (tabs[j].getAttribute('data-tab') === name) tabs[j].classList.add('active');
       else tabs[j].classList.remove('active');
     }
-    if (name === 'academy') renderWeek();
+    if (name === 'academy') { renderWeek(); renderOnce(); }
     if (name === 'study') renderStudy();
     if (name === 'dex') renderDex();
     if (name === 'praise') renderPraise();
@@ -4678,13 +4735,14 @@
   function renderTodayAcademy() {
     var box = $('todayAcademy');
     var dow = new Date().getDay();
-    var list = classesFor(dow);
+    var list = classesFor(dow).concat(onceFor(todayKey()));
+    list.sort(function (a, b) { return minutesOf(a.start) - minutesOf(b.start); });
     box.className = 'today-academy';
     if (!list.length) {
       box.innerHTML = '<div class="acad-empty">'
         + '<span class="acad-ico">' + svgBag() + '</span>'
-        + '<span class="acad-txt">오늘은 학원 쉬는 날! 🎉<small>가방 정리하고 내일 준비물을 챙겨 봐요</small></span>'
-        + '<button class="btn btn-yellow" type="button" data-act="academy-add">+ 학원 추가</button>'
+        + '<span class="acad-txt">오늘은 스케줄이 없어요! 🎉<small>가방 정리하고 내일 준비물을 챙겨 봐요</small></span>'
+        + '<button class="btn btn-yellow" type="button" data-act="academy-add">+ 일정 추가</button>'
         + '</div>';
       return;
     }
@@ -4692,8 +4750,8 @@
     var html = '<div class="acad-tiles">';
     for (var i = 0; i < list.length; i++) {
       var a = list[i];
-      html += '<div class="acad-tile">'
-        + '<span class="ac-ico">' + svgSchool() + '</span>'
+      html += '<div class="acad-tile' + (a.once ? ' once' : '') + '">'
+        + '<span class="ac-ico">' + (a.once ? svgPin() : svgSchool()) + '</span>'
         + '<span class="ac-name" title="' + esc(a.name) + '">' + esc(a.name) + '</span>'
         + (a.memo ? '<span class="ac-memo" title="' + esc(a.memo) + '">🎒 ' + esc(a.memo) + '</span>' : '')
         + '<span class="ac-time">' + esc(timeLabel(a)) + '</span>'
@@ -4703,6 +4761,78 @@
     box.innerHTML = html;
     var tiles = box.querySelector('.acad-tiles');
     if (tiles) tiles.style.justifyContent = list.length >= 4 ? 'space-between' : 'space-evenly';
+  }
+
+  /* ======================= 📌 하루 일정(별도 스케줄) ======================= */
+  function onceFor(iso) {
+    var out = [];
+    for (var i = 0; i < state.once.length; i++) if (state.once[i].date === iso) out.push(state.once[i]);
+    return out;
+  }
+  function saveOnce() { store.set(K.once, state.once); }
+
+  function renderOnce() {
+    var list = $('onceList');
+    if (!list) return;
+    var dateInput = $('onceDate');
+    if (dateInput && !dateInput.value) dateInput.value = todayKey();
+    var arr = state.once.slice().sort(function (a, b) {
+      if (a.date !== b.date) return a.date < b.date ? -1 : 1;
+      return minutesOf(a.start) - minutesOf(b.start);
+    });
+    var today = todayKey();
+    var html = '';
+    if (!arr.length) {
+      html = '<li class="empty">아직 하루 일정이 없어요.<br><small>위에서 날짜를 골라 추가해 보세요!</small></li>';
+    } else {
+      for (var i = 0; i < arr.length; i++) {
+        var o = arr[i];
+        var d = o.date.split('-');
+        var when = (parseInt(d[1], 10)) + '/' + (parseInt(d[2], 10));
+        var past = o.date < today;
+        html += '<li class="item' + (past ? ' past' : '') + (o.date === today ? ' today' : '') + '">'
+          + '<span class="oc-when">📌 ' + when + '</span>'
+          + '<span class="item-label">' + esc(o.name)
+          + (o.memo ? ' <small style="font-weight:800;color:#8A8377">🎒 ' + esc(o.memo) + '</small>' : '') + '</span>'
+          + '<span class="oc-time">' + esc(timeLabel(o)) + '</span>'
+          + '<button class="icon-btn" type="button" data-act="once-del" data-id="' + esc(o.id) + '" aria-label="' + esc(o.name) + ' 삭제">🗑️</button>'
+          + '</li>';
+      }
+    }
+    list.innerHTML = html;
+    var cnt = $('onceCount');
+    if (cnt) cnt.textContent = arr.length + '개';
+  }
+
+  function addOnce() {
+    var name = $('onceName').value.trim();
+    var date = $('onceDate').value || todayKey();
+    if (!name) { $('onceName').focus(); toast('일정 이름을 적어 주세요'); return; }
+    state.once.push({
+      id: uid(), date: date, name: name,
+      start: $('onceStart').value || '',
+      end: $('onceEnd').value || '',
+      memo: $('onceMemo').value.trim()
+    });
+    saveOnce();
+    $('onceName').value = ''; $('onceMemo').value = ''; $('onceEnd').value = '';
+    renderOnce();
+    renderTodayAcademy();
+    toast(date === todayKey() ? '오늘 일정에 넣었어요 📌' : '하루 일정을 추가했어요 📌');
+  }
+
+  function deleteOnce(id) {
+    var o = null, i;
+    for (i = 0; i < state.once.length; i++) if (state.once[i].id === id) o = state.once[i];
+    if (!o) return;
+    if (!window.confirm('“' + o.name + '” 일정을 삭제할까요?')) return;
+    var next = [];
+    for (i = 0; i < state.once.length; i++) if (state.once[i].id !== id) next.push(state.once[i]);
+    state.once = next;
+    saveOnce();
+    renderOnce();
+    renderTodayAcademy();
+    toast('삭제했어요');
   }
 
   function renderWeek() {
@@ -4829,6 +4959,12 @@
   }
 
   /* ======================= 아이콘 그림 (SVG) ======================= */
+  function svgPin() {
+    return '<svg viewBox="0 0 48 48" aria-hidden="true">'
+      + '<path d="M24 6c7 0 12 5 12 11 0 8-12 22-12 22S12 25 12 17C12 11 17 6 24 6z" fill="#FFB4A2" stroke="#E2624B" stroke-width="2.2" stroke-linejoin="round"/>'
+      + '<circle cx="24" cy="17" r="4.6" fill="#FFF6F2" stroke="#E2624B" stroke-width="2"/>'
+      + '</svg>';
+  }
   function svgSchool() {
     return '<svg viewBox="0 0 48 48" aria-hidden="true">'
       + '<path d="M24 5 44 13v4H4v-4z" fill="#8ED3F4" stroke="#3E8FC4" stroke-width="2.2" stroke-linejoin="round"/>'
@@ -6052,6 +6188,12 @@
       case 'late-toggle':
         toggleLateMission();
         break;
+      case 'once-add':
+        addOnce();
+        break;
+      case 'once-del':
+        deleteOnce(id);
+        break;
       case 'evo-preview':
         evoPreview(3);
         break;
@@ -6257,6 +6399,10 @@
     if (e.key === 'Enter') { e.preventDefault(); addBonus(); }
   });
   $('acSave').addEventListener('click', saveAcademy);
+  $('onceSave').addEventListener('click', addOnce);
+  $('onceName').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') { e.preventDefault(); addOnce(); }
+  });
   $('acCancel').addEventListener('click', function () {
     resetAcademyForm();
     toast('취소했어요');
@@ -6326,6 +6472,7 @@
     renderBonusStudy();
     renderBonusManage();
     renderWeek();
+    renderOnce();
     renderStudy();
     renderAffirm();
     renderDex();
