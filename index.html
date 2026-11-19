@@ -1415,9 +1415,9 @@
 
   /* 뽑기 3단계: 단계별 확률 */
   var DRAW = {
-    normal: { cost: 3, name: '일반 뽑기', color: '#E8362B', weights: { '일반': 70, '진화': 30 } },
-    super: { cost: 25, name: '슈퍼 뽑기', color: '#2C6BA8', weights: { '일반': 20, '진화': 55, '전설': 20, '메가진화': 5 } },
-    master: { cost: 50, name: '마스터 뽑기', color: '#6B34B8', weights: { '전설': 50, '메가진화': 50 } }
+    normal: { cost: 0, name: '일반 뽑기', color: '#E8362B', weights: { '일반': 70, '진화': 30 } },
+    super: { cost: 0, name: '슈퍼 뽑기', color: '#2C6BA8', weights: { '일반': 20, '진화': 55, '전설': 20, '메가진화': 5 } },
+    master: { cost: 0, name: '마스터 뽑기', color: '#6B34B8', weights: { '전설': 50, '메가진화': 50 } }
   };
 
   var toastTimer = null;
@@ -3161,16 +3161,16 @@
       if (b) b.classList.add('burst');
       $('flash').classList.add('on');
       SFX.reveal();
-    }, 1450);
+    }, 6000);
 
     csLater(function () {
       $('flash').classList.remove('on');
       stage.innerHTML = pokeMarkup(p, isNew ? 'NEW! 도감에 등록' : d.name + ' 성공');
       SFX.fanfare();
       confettiBurst();
-    }, 1780);
+    }, 7500);
 
-    csLater(function () { csSkip(); }, 3900);
+    csLater(function () { csSkip(); }, 20000);
 
     csDone = function () {
       renderDex();
