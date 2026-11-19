@@ -357,7 +357,7 @@
     gap:9px 12px;
   }
   /* 아침 오른쪽: 학원(자기 높이) + 아침 공부(남는 높이) — 절대 겹치지 않게 그리드로 */
-  #homeMorning .home-right{display:grid;grid-template-rows:auto minmax(0,1fr);gap:9px;min-width:0;min-height:0}
+  #homeMorning .home-right{display:grid;grid-template-rows:auto auto;align-content:start;gap:9px;min-width:0;min-height:0}
   #homeMorning .morning-left{display:flex;flex-direction:column;gap:9px;min-width:0;min-height:0}
   #homeMorning .dt-wx{display:grid;grid-template-columns:0.88fr 1.12fr;gap:10px;flex:0 0 auto;align-items:stretch;min-width:0}
   #homeMorning .morning-left>.hero{flex:1 1 auto;min-height:0}
@@ -492,7 +492,7 @@
   #homeMorning .quest-card{padding:7px 10px 9px;display:flex;flex-direction:column;min-height:0}
   .quest-card .js-morning-math{
     display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;
-    flex:1 1 auto;min-height:0;grid-auto-rows:minmax(0,1fr);
+    flex:0 0 auto;height:176px;min-height:0;grid-auto-rows:minmax(0,1fr);
   }
   .pk-card{
     position:relative;display:block;width:100%;height:100%;min-height:0;padding:0;border:none;background:none;
@@ -547,12 +547,14 @@
     100%{transform:scale(1) translateY(0);opacity:1}
   }
   /* 아침 공부 카드는 두 장이라 조금 크게 */
-  .quest-card .pk-ico{width:50px;height:50px}
-  .quest-card .pk-ico svg{width:44px;height:44px}
-  .quest-card .pk-name{font-size:20px;letter-spacing:-.7px}
-  .quest-card .pk-hint{font-size:11.5px}
-  .quest-card .pk-ball{width:54px;height:54px}
-  .quest-card .pk-done{font-size:17px}
+  .quest-card .pk-face{gap:6px}
+  .quest-card .pk-ico{width:62px;height:62px}
+  .quest-card .pk-ico svg{width:52px;height:52px}
+  .quest-card .pk-name{font-size:23px;letter-spacing:-.8px}
+  .quest-card .pk-hint{font-size:12px;color:#B08A2A}
+  .quest-card .pk-ball{width:64px;height:64px}
+  .quest-card .pk-done{font-size:19px}
+  .quest-card .pk-gain{font-size:12.5px;padding:2px 10px}
   /* 아침 홈: 학원 스케줄은 납작하게 (아침 공부 카드에 높이를 넘긴다) */
   #homeMorning .acad-card{padding:6px 10px 7px;flex:0 0 auto;min-height:0}
   #homeMorning .acad-card .sec-head{margin-bottom:5px}
