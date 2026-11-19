@@ -60,6 +60,7 @@
 - `assets/routine-*.png` — 아침 루틴 그림
 - `assets/mega-charizard-x-10034.png` — 메가리자몽X (배지·막대 결승점)
 - `assets/charizard-6.png` — 리자몽 (배지·07:10부터 막대 위에서 달림)
+- `assets/snorlax-143.png` — 잠만보 (저녁 20:00부터 진행바에서 취침을 향해)
 - `assets/evening-*.png` — 저녁 루틴 그림 (양치는 `routine-brush.png` 재사용)
 - `assets/icon-*.png`, `manifest.json`, `sw.js` — 홈 화면에 추가(PWA)용
 - 검색엔진에는 노출되지 않도록 `noindex,nofollow` 설정

@@ -316,6 +316,16 @@
   .hero-progress>.hp-runner.mega-run{opacity:1;filter:drop-shadow(0 0 12px rgba(90,190,255,.95))}
   .hero-progress>.hp-runner.mega-run .rn-mega{opacity:1}
   .hero-progress>.hp-runner.run{animation:charFly .9s ease-in-out infinite}
+  /* 저녁: 17:30부터 메가리자몽X, 20:00부터 잠만보 */
+  #homeEvening .hero-progress>.hp-runner{filter:drop-shadow(0 3px 5px rgba(70,58,140,.3))}
+  #homeEvening .hero-progress>.hp-runner.on .rn-mega{opacity:1}
+  #homeEvening .hero-progress>.hp-runner.sleepy .rn-snor{opacity:1}
+  #homeEvening .hero-progress>.hp-runner.sleepy{filter:drop-shadow(0 3px 6px rgba(70,58,140,.32))}
+  #homeEvening .hero-progress>.hp-runner.sleepy.run{animation:snoozeBob 1.6s ease-in-out infinite}
+  @keyframes snoozeBob{
+    0%,100%{transform:translate(-50%,-82%) rotate(-2deg)}
+    50%{transform:translate(-50%,-86%) rotate(2deg)}
+  }
   @keyframes charFly{
     0%,100%{transform:translate(-50%,-82%) rotate(-3deg)}
     50%{transform:translate(-50%,-90%) rotate(3deg)}
@@ -1983,11 +1993,12 @@
             <span class="ms-dot" style="left:28.571%"></span>
             <span class="ms-dot" style="left:71.429%"></span>
             <span class="ms-dot" style="left:100%"></span>
-            <div class="hp-runner" id="eveRunner">
-              <svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true">
-                <path d="M80 20a42 42 0 1 0 0 80 34 34 0 1 1 0-80Z" fill="#FFE79C" stroke="#D9B85C" stroke-width="5" stroke-linejoin="round"/>
-              </svg>
-            </div>
+          </div>
+          <!-- 17:30~19:59 메가리자몽X가 달리고, 20:00부터는 잠만보가 취침을 향해 -->
+          <div class="hp-runner" id="eveRunner" aria-hidden="true">
+            <img class="rn-mega" src="assets/mega-charizard-x-10034.png" alt="" draggable="false">
+            <img class="rn-snor" src="assets/snorlax-143.png" alt="" draggable="false">
+          </div>
           </div>
           <div class="ms-labels">
             <span class="ms" style="left:0%"><b>5:30</b><span>샤워</span></span>
@@ -3557,8 +3568,13 @@
     var ep = $('eveProgress'); if (ep) ep.style.width = (100 - pct2).toFixed(1) + '%';
     var er = $('eveRunner');
     if (er) {
-      er.style.left = pct2.toFixed(1) + '%';
-      if (pct2 > 0 && pct2 < 100) er.classList.add('run'); else er.classList.remove('run');
+      var eveMins = now.getHours() * 60 + now.getMinutes();
+      var eveOn = (now >= eveStart);
+      var sleepy = (eveMins >= 20 * 60);
+      er.style.left = (now >= bed ? 97 : pct2).toFixed(1) + '%';
+      er.classList.toggle('on', eveOn && !sleepy);
+      er.classList.toggle('sleepy', eveOn && sleepy);
+      er.classList.toggle('run', eveOn && now < bed);
     }
     var es = $('eveStatus');
     if (es) {
