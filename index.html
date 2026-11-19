@@ -229,7 +229,7 @@
   }
 
   /* ---------------- routine cards ---------------- */
-  .routine-wrap{margin-bottom:0;display:flex;flex-direction:column;flex:0 4 auto;min-height:0}
+  .routine-wrap{margin-bottom:0;display:flex;flex-direction:column;flex:0 0 auto;min-height:0}
   .routine-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;flex:1 1 auto;min-height:0;align-items:stretch}
   .rcard{
     position:relative;display:flex;flex-direction:column;gap:5px;text-align:left;min-width:0;height:100%;
@@ -910,7 +910,7 @@
   /* 실제 태블릿(주소·상태 표시줄 포함): 보이는 높이가 짧아도 잘리지 않게 */
   @media (max-height:900px){
     .routine-wrap{flex:0 6 auto}
-    .rcard .illu{min-height:0;max-height:none}
+    .rcard .illu{flex:1 1 auto;height:auto;min-height:0;max-height:none}
     .rcard{gap:4px}
     .rcard .r-title{font-size:15px;padding:0 18px}
     .rcard .cta{min-height:36px;font-size:12.5px}
@@ -941,7 +941,7 @@
     .hs-tile .hs-ico svg{width:26px;height:26px}
     .hs-tile .hs-label{font-size:14px}
     .hs-tile .hs-cta{font-size:10.5px;min-height:29px;padding:5px 4px}
-    .rcard .illu{min-height:0;max-height:290px}
+    .rcard .illu{flex:0 0 auto;height:230px;max-height:none}
     .rcard .r-title{font-size:14.5px}
     .rcard .cta{font-size:13px;min-height:42px}
     .af-text{font-size:13.5px}
@@ -1108,7 +1108,7 @@
     .routine-grid{gap:11px}
     .routine-wrap .sec-head h2{font-size:20px}
     .rcard{padding:9px 10px 10px;border-radius:18px;gap:6px}
-    .rcard .illu{border-radius:13px;min-height:0;max-height:320px}
+    .rcard .illu{border-radius:13px;flex:0 0 auto;height:270px;max-height:none}
     .rcard .r-title{font-size:17.5px}
     .rcard .cta{font-size:14.5px;padding:10px 6px;min-height:46px}
     .rcard .cta .mini{width:17px;height:17px}
