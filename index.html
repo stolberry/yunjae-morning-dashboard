@@ -270,22 +270,25 @@
     border:2px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.12);
   }
   .rcard .illu{
-    aspect-ratio:1/1;flex:0 0 auto;min-height:0;max-height:none;border-radius:11px;overflow:hidden;background:#FFF9EE;
-    display:flex;align-items:center;justify-content:center;width:100%;min-width:0;margin-top:auto;
+    flex:1 1 auto;min-height:0;max-height:none;border-radius:11px;overflow:hidden;background:#FFF9EE;
+    display:flex;align-items:center;justify-content:center;width:100%;min-width:0;margin-top:2px;
   }
   .rcard .illu img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
   .rcard .illu .emoji{font-size:44px;line-height:1}
+  /* 제목과 체크 알약을 한 줄에 */
+  .rcard .rtop{display:flex;align-items:center;gap:6px;width:100%;min-width:0;flex:0 0 auto}
   .rcard .r-title{
-    font-size:15.5px;font-weight:900;letter-spacing:-.5px;padding:0 24px;text-align:center;line-height:1.12;word-break:keep-all;
-    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px;
+    flex:1 1 auto;min-width:0;font-size:15.5px;font-weight:900;letter-spacing:-.55px;padding:0 0 0 25px;
+    text-align:left;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   }
+  .rcard.done .r-title{color:#7F9A83}
   .rcard .cta{
-    display:flex;align-items:center;justify-content:center;gap:4px;
-    background:linear-gradient(180deg,#FFF1C8,#FFE08C);color:#7A4E00;font-weight:900;font-size:13px;
-    border:1.5px solid #F3D477;border-radius:999px;padding:8px 5px;min-height:40px;text-align:center;margin-top:4px;letter-spacing:-.3px;
-    box-shadow:0 3px 8px rgba(214,180,40,.18);
+    display:flex;align-items:center;justify-content:center;gap:3px;flex:none;
+    background:linear-gradient(180deg,#FFF1C8,#FFE08C);color:#7A4E00;font-weight:900;font-size:11.5px;
+    border:1.5px solid #F3D477;border-radius:999px;padding:3px 9px;min-height:26px;text-align:center;
+    letter-spacing:-.3px;box-shadow:0 3px 8px rgba(214,180,40,.18);white-space:nowrap;
   }
-  .rcard .cta .mini{width:15px;height:15px;flex:none}
+  .rcard .cta .mini{width:13px;height:13px;flex:none}
   .rcard.done{background:linear-gradient(180deg,#FFFCE9 0%,#FFFFFF 72%);border-color:#FFD84D;box-shadow:0 8px 18px rgba(255,203,5,.24)}
   .rcard.done .cta{background:#E4F7E6;color:#2F7A3C;border-color:#BFE3C6;box-shadow:none}
   .rcard.done .illu{background:#FFFDF3}
@@ -353,6 +356,8 @@
     grid-template-rows:minmax(0,1fr);
     gap:9px 12px;
   }
+  /* 아침 오른쪽: 학원(자기 높이) + 아침 공부(남는 높이) — 절대 겹치지 않게 그리드로 */
+  #homeMorning .home-right{display:grid;grid-template-rows:auto minmax(0,1fr);gap:9px;min-width:0;min-height:0}
   #homeMorning .morning-left{display:flex;flex-direction:column;gap:9px;min-width:0;min-height:0}
   #homeMorning .dt-wx{display:grid;grid-template-columns:1fr 1.05fr;gap:10px;flex:0 0 auto;align-items:stretch;min-width:0}
   #homeMorning .morning-left>.hero{flex:1 1 auto;min-height:0}
@@ -442,6 +447,30 @@
   .acad-row .ac-time{flex:none;font-size:14.5px;font-weight:700;color:#24507C;font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:-.2px}
   .today-academy .acad-row{flex:0 0 auto}
 
+  /* 학원 칸: 시간순으로 가로로 — 위 이름+준비물, 아래 시간 */
+  .acad-tiles{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:7px;min-width:0}
+  .acad-tile{
+    display:flex;flex-direction:column;gap:2px;min-width:0;
+    background:#F7FBFF;border:1.5px solid #DCEBFA;border-radius:13px;padding:7px 10px 8px;
+  }
+  .acad-tile .ac-top{display:flex;align-items:center;gap:7px;min-width:0}
+  .acad-tile .ac-ico{width:26px;height:26px;flex:none;display:flex;align-items:center;justify-content:center}
+  .acad-tile .ac-ico svg{width:24px;height:24px;display:block}
+  .acad-tile .ac-name{
+    flex:1 1 auto;min-width:0;font-size:16px;font-weight:900;letter-spacing:-.5px;color:#1F3E5C;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .acad-tile .ac-memo{
+    align-self:flex-start;max-width:100%;font-size:10.5px;font-weight:900;color:#2C6BA8;
+    background:#EAF3FF;border:1.5px solid #D3E6FA;border-radius:999px;padding:1px 7px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.3px;
+  }
+  .acad-tile .ac-time{
+    margin-top:1px;font-size:14.5px;font-weight:700;color:#24507C;
+    font-variant-numeric:tabular-nums;letter-spacing:-.2px;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis;
+  }
+
   /* 학원 없는 날 */
   .acad-empty{
     flex:0 0 auto;display:flex;align-items:center;gap:11px;
@@ -456,61 +485,76 @@
   .acad-empty .acad-txt small{display:block;font-size:11px;font-weight:800;color:#8FA7BD;margin-top:2px}
   .acad-empty .btn{flex:none;font-size:12px;padding:7px 11px;min-height:34px;border-radius:11px}
 
-  /* ---------------- ⚔️ 아침 특별 퀘스트 (원리셈·따풀) ---------------- */
-  .math-card{flex:0 0 auto}
-  #homeMorning .quest-card{
-    padding:10px 12px 12px;border-color:#F0CB6E;
-    background:linear-gradient(158deg,#FFFDF4 0%,#FFF5D6 46%,#FFEDBC 100%);
-    box-shadow:0 12px 26px rgba(212,160,40,.16);
-    display:flex;flex-direction:column;justify-content:center;min-height:0;
+  /* ---------------- 포켓몬 카드 뒤집기 (아침 원리셈·따풀 / 저녁 ⚡ 보너스) ---------------- */
+  .math-card{flex:0 0 auto;min-height:0}
+  #homeMorning .quest-card{padding:7px 10px 9px;display:flex;flex-direction:column;min-height:0}
+  .quest-card .js-morning-math{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;
+    flex:1 1 auto;min-height:0;grid-auto-rows:minmax(0,1fr);
   }
-  .quest-head{display:flex;align-items:center;gap:8px;flex:none;margin-bottom:7px}
-  .quest-badge{
-    display:inline-flex;align-items:center;gap:5px;
-    background:linear-gradient(180deg,#FFD84D 0%,#F3B400 100%);color:#4A3400;
-    border:2px solid #E0A400;border-radius:999px;padding:5px 13px;
-    font-size:13.5px;font-weight:900;letter-spacing:-.3px;
-    box-shadow:0 4px 10px rgba(220,160,0,.22);
+  .pk-card{
+    position:relative;display:block;width:100%;height:100%;min-height:0;padding:0;border:none;background:none;
+    perspective:800px;-webkit-tap-highlight-color:transparent;
   }
-  .quest-head .link-btn{font-size:12px;color:#9A7312}
-  .quest-hero{display:flex;align-items:center;gap:12px;min-width:0;flex:none}
-  .quest-ico{
-    width:70px;height:70px;flex:none;border-radius:21px;background:#fff;border:2px solid #F3DA98;
-    display:flex;align-items:center;justify-content:center;box-shadow:0 8px 16px rgba(200,150,20,.16);
+  .pk-inner{
+    position:relative;display:block;width:100%;height:100%;
+    transform-style:preserve-3d;-webkit-transform-style:preserve-3d;
+    transition:transform .52s cubic-bezier(.2,.85,.25,1);
   }
-  .quest-ico svg{width:51px;height:51px;display:block}
-  .quest-txt{min-width:0}
-  .quest-title{font-size:25px;font-weight:900;letter-spacing:-.9px;color:#5C3E00;line-height:1.1}
-  .quest-line{font-size:13px;font-weight:900;color:#A8791B;margin-top:4px;letter-spacing:-.3px}
-  .quest-card .js-morning-math{display:flex;flex-direction:column;gap:7px;margin-top:9px;flex:0 0 auto;min-height:0}
-  .quest-btn{
-    display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
-    background:linear-gradient(180deg,#FFC93C 0%,#F2A400 100%);color:#3F2B00;
-    border:2px solid #DE9A00;border-radius:17px;padding:13px 14px;min-height:60px;
-    font-family:inherit;font-size:18px;font-weight:900;letter-spacing:-.5px;
-    box-shadow:0 8px 18px rgba(219,152,0,.30);
-    transition:transform .12s ease,box-shadow .15s ease;
+  .pk-card.done .pk-inner{transform:rotateY(180deg)}
+  .pk-face{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+    border-radius:14px;overflow:hidden;padding:6px;
+    backface-visibility:hidden;-webkit-backface-visibility:hidden;
   }
-  .quest-btn:active{transform:scale(.985);box-shadow:0 4px 10px rgba(219,152,0,.24)}
-  .quest-btn .qb-txt{flex:0 1 auto;min-width:0}
-  .quest-btn .qb-cta{
-    display:inline-flex;align-items:center;justify-content:center;gap:4px;flex:none;
-    background:rgba(255,255,255,.94);color:#8A4B00;border:2px solid rgba(255,255,255,.96);
-    border-radius:999px;padding:3px 11px;min-height:28px;font-size:13.5px;font-weight:900;
+  .pk-front{
+    background:radial-gradient(120% 82% at 50% 12%,#FFF8DE 0%,#FFFCF2 46%,#FFF3D2 100%);
+    border:2px solid #EFD79B;box-shadow:0 6px 14px rgba(150,120,40,.10);
   }
-  .quest-btn .qb-cta .mini{width:16px;height:16px}
-  .quest-btn.done{
-    background:linear-gradient(180deg,#EAF8EA 0%,#D6F0D9 100%);color:#2F7A3C;
-    border-color:#A9DCAF;box-shadow:0 8px 18px rgba(60,140,70,.16);
+  .pk-front::after{
+    content:"";position:absolute;inset:-30% -50%;pointer-events:none;opacity:0;
+    background:linear-gradient(115deg,rgba(255,255,255,0) 44%,rgba(255,255,255,.85) 50%,rgba(255,255,255,0) 56%);
+    animation:pkShine 2.8s ease-in-out infinite;
   }
-  .quest-btn.done .qb-cta{background:#fff;color:#2F7A3C;border-color:#CFEBD3}
-  /* 아침 홈: 학원 스케줄은 납작하게 (퀘스트 카드에 높이를 넘긴다) */
-  #homeMorning .acad-card{padding:6px 11px 7px;flex:0 0 auto}
-  #homeMorning .acad-card .sec-head{margin-bottom:4px}
+  @keyframes pkShine{0%,62%{opacity:0;transform:translateX(-55%)}72%{opacity:.9}86%,100%{opacity:0;transform:translateX(55%)}}
+  .pk-back{
+    transform:rotateY(180deg);
+    background:radial-gradient(120% 82% at 50% 10%,#FFF7CF 0%,#FFEFA8 52%,#FFE08C 100%);
+    border:2px solid #FFCB2E;box-shadow:0 8px 18px rgba(255,190,20,.28);
+  }
+  .pk-ico{width:38px;height:38px;flex:none;display:flex;align-items:center;justify-content:center}
+  .pk-ico svg{width:34px;height:34px;display:block}
+  .pk-name{
+    flex:0 1 auto;min-width:0;font-size:16px;font-weight:900;color:#3F2B00;letter-spacing:-.55px;
+    line-height:1.14;text-align:center;word-break:keep-all;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .pk-hint{font-size:10.5px;font-weight:900;color:#A98428;letter-spacing:-.3px;white-space:nowrap}
+  .pk-ball{width:46px;height:46px;flex:none;display:flex;align-items:center;justify-content:center}
+  .pk-ball svg{width:100%;height:100%;display:block}
+  .pk-done{font-size:15px;font-weight:900;color:#2F7A3C;letter-spacing:-.5px}
+  .pk-gain{
+    font-size:11.5px;font-weight:900;color:#8A4B00;background:#fff;border:1.5px solid #F3D477;
+    border-radius:999px;padding:2px 9px;letter-spacing:-.3px;
+  }
+  .pk-card.justdone .pk-ball{animation:pkPop .7s cubic-bezier(.2,1.6,.35,1) both}
+  @keyframes pkPop{
+    0%{transform:scale(.2) translateY(16px);opacity:0}
+    55%{transform:scale(1.24) translateY(-8px);opacity:1}
+    78%{transform:scale(.95) translateY(3px)}
+    100%{transform:scale(1) translateY(0);opacity:1}
+  }
+  /* 아침 공부 카드는 두 장이라 조금 크게 */
+  .quest-card .pk-ico{width:50px;height:50px}
+  .quest-card .pk-ico svg{width:44px;height:44px}
+  .quest-card .pk-name{font-size:20px;letter-spacing:-.7px}
+  .quest-card .pk-hint{font-size:11.5px}
+  .quest-card .pk-ball{width:54px;height:54px}
+  .quest-card .pk-done{font-size:17px}
+  /* 아침 홈: 학원 스케줄은 납작하게 (아침 공부 카드에 높이를 넘긴다) */
+  #homeMorning .acad-card{padding:6px 10px 7px;flex:0 0 auto;min-height:0}
+  #homeMorning .acad-card .sec-head{margin-bottom:5px}
   #homeMorning .acad-card .today-academy{gap:5px}
-  #homeMorning .acad-card .acad-row{min-height:44px;padding:6px 12px;gap:11px}
-  #homeMorning .acad-card .acad-row .ac-ico{width:38px;height:38px;border-radius:11px}
-  #homeMorning .acad-card .acad-row .ac-ico svg{width:26px;height:26px}
 
   /* ---------------- 공부 타일 (home card) ---------------- */
   .hs-grid{display:flex;flex-direction:column;justify-content:center;gap:8px;flex:1 1 auto;min-height:0}
@@ -541,81 +585,67 @@
   /* ---------------- 저녁 오른쪽: 오늘의 공부(위) + ⚡ 보너스 공부(아래) --------------
      오늘의 공부는 한 줄에 하나씩(넣은 순서 그대로) 크게, 보너스 공부는 네 과목을 한 줄로.
      완료 버튼은 ‘🔴+1 / ✓ 완료’ 알약으로 짧게 — 남는 가로 폭은 전부 이름에 준다. */
-  #homeEvening .study-card{padding:5px 9px 6px;display:flex;flex-direction:column;min-height:0;flex:0 0 auto}
-  #homeEvening .study-card .sec-head{margin-bottom:3px;gap:6px}
+  #homeEvening .study-card{padding:7px 9px 8px;display:flex;flex-direction:column;min-height:0;flex:1 1 auto}
+  #homeEvening .study-card .sec-head{margin-bottom:5px;gap:6px}
   #homeEvening .study-card .count-pill{font-size:12.5px;padding:2px 9px}
-  /* 오늘의 공부는 세 줄까지만 차지하고, 남는 높이는 보너스 공부에 넘긴다 */
+  /* 오늘의 공부: 아이콘·이름 위, 🔴+1 아래 — 최대 세 장 가로로 */
   #homeEvening .study-card .hs-grid{
-    display:grid;grid-template-columns:1fr;grid-auto-rows:48px;gap:5px;flex:0 0 auto;min-height:0;
-    max-height:154px;
-    align-content:safe center;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;
+    display:grid;gap:6px;flex:1 1 auto;min-height:0;align-content:stretch;
+    overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;
   }
   #homeEvening .study-card .hs-grid::-webkit-scrollbar{width:8px}
   #homeEvening .study-card .hs-grid::-webkit-scrollbar-track{background:transparent}
   #homeEvening .study-card .hs-grid::-webkit-scrollbar-thumb{background:#E6DCC4;border-radius:999px}
-  #homeEvening .study-card .hs-row{padding:6px 10px;gap:9px;border-radius:14px;border-width:1.5px;min-height:0}
-  #homeEvening .study-card .hs-row .hs-ico{width:36px;height:36px;border-radius:11px;border-width:1.5px}
-  #homeEvening .study-card .hs-row .hs-ico svg{width:29px;height:29px}
-  #homeEvening .study-card .hs-row .hs-label{font-size:16.5px;line-height:1.15;font-weight:900;letter-spacing:-.5px;color:#241F19}
-  #homeEvening .study-card .hs-row .hs-cta{font-size:12.5px;padding:4px 11px;min-height:30px;gap:3px;letter-spacing:-.2px}
-  #homeEvening .study-card .hs-row .hs-cta .mini{width:16px;height:16px}
-  #homeEvening .study-card .hs-empty{grid-column:1 / -1}
+  #homeEvening .study-card .hs-empty{grid-column:1 / -1;align-self:center}
 
-  #homeEvening .home-right>.bonus-card{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
-  #homeEvening .bonus-card{padding:8px 10px;background:linear-gradient(180deg,#FFFBEC 0%,#FFFFFF 62%);border-color:#F3E3B4}
-  #homeEvening .bonus-card .sec-head{margin-bottom:4px;gap:6px}
-  #homeEvening .bonus-card h2{color:#7A5B00}
-  #homeEvening .bonus-card .count-pill{font-size:12.5px;padding:2px 9px;background:#FFF4CF;border-color:#EFD996;color:#8A6B12}
-  #homeEvening .bonus-foot{flex:none;margin-top:4px;font-size:11px;font-weight:900;color:#A08A4A;letter-spacing:-.3px;text-align:center}
-  #homeEvening .bonus-sub{font-size:11px;font-weight:900;color:#A08A4A;letter-spacing:-.3px;white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
-  /* ⚡ 보너스 공부: 네 과목을 한 줄로 나란히 — 아이콘+이름을 위에, 몬스터볼 버튼을 그 아래 */
-  .bonus-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;flex:1 1 auto;min-height:0}
-  .bonus-tile{
-    display:flex;flex-wrap:wrap;align-items:center;align-content:center;gap:3px 5px;width:100%;min-width:0;
-    background:#FFFFFF;border:1.5px dashed #EBD9A8;border-radius:12px;padding:5px 5px 6px;
-    box-shadow:0 4px 12px rgba(160,140,80,.08);font-family:inherit;text-align:left;
+  /* 오늘의 공부 칸 (네모 겹침 없이 한 장) */
+  .study-tile{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+    width:100%;height:100%;min-width:0;min-height:0;padding:6px 5px;font-family:inherit;text-align:center;
+    background:#fff;border:1.5px solid #E9E1CF;border-radius:14px;
+    box-shadow:0 4px 10px rgba(120,108,72,.07);
     transition:transform .12s ease,background .15s ease,border-color .15s ease;
   }
-  .bonus-tile:active{transform:scale(.98)}
-  .bonus-tile .bt-ico{
-    width:32px;height:32px;flex:none;border-radius:10px;background:#FFF9EA;border:1.5px solid #F2E3BF;
-    display:flex;align-items:center;justify-content:center;
+  .study-tile:active{transform:scale(.98)}
+  .study-tile .st-ico{width:36px;height:36px;flex:none;display:flex;align-items:center;justify-content:center}
+  .study-tile .st-ico svg{width:32px;height:32px;display:block}
+  .study-tile .st-label{
+    flex:0 1 auto;min-width:0;font-size:14.5px;font-weight:900;color:#241F19;letter-spacing:-.5px;line-height:1.15;
+    word-break:keep-all;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
   }
-  .bonus-tile .bt-ico svg{width:26px;height:26px;display:block}
-  .bonus-tile .bt-label{flex:1 1 0;min-width:0;font-size:16.5px;font-weight:900;color:#241F19;letter-spacing:-.5px;line-height:1.12;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .bonus-tile .bt-cta{
-    flex:0 0 100%;display:flex;align-items:center;justify-content:center;gap:3px;white-space:nowrap;
+  .study-tile .st-cta{
+    width:100%;flex:none;display:flex;align-items:center;justify-content:center;gap:3px;
     background:#FFF1C8;color:#7A4E00;border:1.5px solid #F3D477;border-radius:999px;
-    padding:3px 4px;min-height:26px;font-size:12px;font-weight:900;letter-spacing:-.3px;
+    padding:3px 6px;min-height:27px;font-size:11.5px;font-weight:900;letter-spacing:-.3px;white-space:nowrap;
   }
-  .bonus-tile .bt-cta .mini{width:15px;height:15px;flex:none}
-  .bonus-tile.done{background:linear-gradient(180deg,#FFFCE9,#FFF7DC);border-style:solid;border-color:#FFD84D;box-shadow:0 8px 18px rgba(255,203,5,.18)}
-  .bonus-tile.done .bt-ico{background:#F6FDF6;border-color:#CFEBD3}
-  .bonus-tile.done .bt-label{color:#3F7A4A}
-  .bonus-tile.done .bt-cta{background:#E4F7E6;color:#2F7A3C;border-color:#BFE3C6}
-  /* 저녁 홈: 오늘의 공부가 비켜준 높이에 보너스 컴을 균형 있게 — 아이콘 위·이름 아래·🔴+1 아래 */
-  #homeEvening .bonus-grid{flex:1 1 auto;min-height:0;align-content:center}
-  #homeEvening .bonus-tile{
-    flex-direction:column;flex-wrap:nowrap;align-items:center;justify-content:center;
-    text-align:center;gap:3px;padding:5px 6px;border-radius:13px;
+  .study-tile .st-cta .mini{width:13px;height:13px;flex:none}
+  .study-tile.done{background:linear-gradient(180deg,#FFFCE9,#FFF8DF);border-color:#FFD84D}
+  .study-tile.done .st-label{color:#3F7A4A}
+  .study-tile.done .st-cta{background:#E4F7E6;color:#2F7A3C;border-color:#BFE3C6}
+
+  #homeEvening .home-right>.bonus-card{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
+  #homeEvening .bonus-card{padding:7px 10px 8px;background:linear-gradient(180deg,#FFFBEC 0%,#FFFFFF 62%);border-color:#F3E3B4}
+  #homeEvening .bonus-card .sec-head{margin-bottom:5px;gap:6px;flex-wrap:nowrap;min-width:0}
+  #homeEvening .bonus-card h2{color:#7A5B00;flex:none}
+  #homeEvening .bonus-card .count-pill{font-size:12.5px;padding:2px 9px;background:#FFF4CF;border-color:#EFD996;color:#8A6B12;flex:none}
+  #homeEvening .bonus-sub{
+    flex:1 1 auto;min-width:0;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    font-size:11px;font-weight:900;color:#A08A4A;letter-spacing:-.3px;
   }
-  #homeEvening .bonus-tile .bt-ico{
-    width:34px;height:34px;border-radius:10px;background:transparent;border:none;box-shadow:none;
-  }
-  #homeEvening .bonus-tile .bt-ico svg{width:31px;height:31px}
-  #homeEvening .bonus-tile .bt-label{
-    flex:0 0 auto;width:100%;font-size:15px;line-height:1.1;letter-spacing:-.5px;
-    white-space:normal;overflow:visible;text-overflow:clip;word-break:keep-all;
-  }
-  #homeEvening .bonus-tile .bt-cta{width:100%;flex:0 0 auto;font-size:11.5px;min-height:26px;padding:3px 5px;border-radius:999px}
-  #homeEvening .bonus-tile .bt-cta .mini{width:14px;height:14px}
-  /* 다섯 개부터는 두 줄로 접혀도 카드 안에 들어오게 한 단계 작게 */
+  /* ⚡ 보너스: 포켓몬 카드 네 장을 한 줄로 (뒤집으면 몬스터볼) */
+  .bonus-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;flex:1 1 auto;min-height:0;grid-auto-rows:minmax(0,1fr)}
+  #homeEvening .bonus-grid{flex:1 1 auto;min-height:0;align-content:stretch}
+  .bonus-grid .bonus-empty{grid-column:1 / -1;text-align:center;font-size:12.5px;font-weight:900;color:#A08A4A;padding:12px 6px;line-height:1.4;align-self:center}
+  /* 다섯 장부터는 세 칸씩 접혀도 카드 안에 들어오게 한 단계 작게 */
   #homeEvening .bonus-grid.bonus-grid-many{align-content:stretch}
-  #homeEvening .bonus-grid.bonus-grid-many .bonus-tile{padding:3px 5px;gap:2px}
-  #homeEvening .bonus-grid.bonus-grid-many .bonus-tile .bt-ico{width:26px;height:26px}
-  #homeEvening .bonus-grid.bonus-grid-many .bonus-tile .bt-ico svg{width:24px;height:24px}
-  #homeEvening .bonus-grid.bonus-grid-many .bonus-tile .bt-label{font-size:13.5px}
-  #homeEvening .bonus-grid.bonus-grid-many .bonus-tile .bt-cta{min-height:22px;font-size:10.5px}
+  #homeEvening .bonus-grid.bonus-grid-many .pk-face{gap:1px;padding:3px}
+  #homeEvening .bonus-grid.bonus-grid-many .pk-ico{width:24px;height:24px}
+  #homeEvening .bonus-grid.bonus-grid-many .pk-ico svg{width:22px;height:22px}
+  #homeEvening .bonus-grid.bonus-grid-many .pk-name{font-size:12px;-webkit-line-clamp:1}
+  #homeEvening .bonus-grid.bonus-grid-many .pk-hint{display:none}
+  #homeEvening .bonus-grid.bonus-grid-many .pk-ball{width:28px;height:28px}
+  #homeEvening .bonus-grid.bonus-grid-many .pk-done{font-size:11.5px}
+  #homeEvening .bonus-grid.bonus-grid-many .pk-gain{font-size:10px;padding:1px 6px}
   .hs-tile:last-child:nth-child(odd){grid-column:1 / -1}
   .hs-tile{
     position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
@@ -1548,6 +1578,29 @@
     .ms-test{font-size:10px;padding:3px 7px;min-height:24px}
   }
 
+  /* ---- 루틴 카드: 제목 + 작은 체크 알약이 한 줄 (모든 화면 폭 공통) ---- */
+  .rcard{display:flex;flex-direction:column;gap:5px;padding:7px 8px 8px;min-height:0}
+  .rcard .rtop{gap:6px}
+  .rcard .r-title{
+    font-size:16px;padding-left:30px;text-align:left;display:block;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .rcard .cta{font-size:12px;min-height:27px;padding:4px 9px;margin-top:0;box-shadow:0 2px 6px rgba(214,180,40,.14)}
+  .rcard .cta .mini{width:13px;height:13px}
+  .rcard .illu{margin-top:2px}
+  /* 짧은 화면에서는 포켓몬 카드·오늘의 공부 칸을 한 단계 작게 */
+  @media (max-height:900px){
+    .quest-card .pk-ico{width:40px;height:40px}
+    .quest-card .pk-ico svg{width:34px;height:34px}
+    .quest-card .pk-name{font-size:17px}
+    .quest-card .pk-ball{width:44px;height:44px}
+    .pk-name{font-size:14.5px}
+    .pk-ico{width:32px;height:32px}
+    .pk-ico svg{width:28px;height:28px}
+    .study-tile .st-ico{width:30px;height:30px}
+    .study-tile .st-ico svg{width:27px;height:27px}
+    .study-tile .st-label{font-size:13.5px}
+  }
 </style>
 </head>
 <body>
@@ -1692,17 +1745,11 @@
           <div id="todayAcademy" class="today-academy"></div>
         </div>
         <div class="card today-card math-card quest-card" id="morningMathCard">
-          <div class="quest-head">
-            <span class="quest-badge">⚔️ 아침 특별 퀘스트</span>
+          <div class="sec-head">
+            <h2>✏️ 아침 공부</h2>
+            <span class="sec-sub">등교 전에 풀면 몬스터볼 +1</span>
             <div class="spacer"></div>
             <button class="link-btn" type="button" data-act="goto" data-tab="study">공부 탭 →</button>
-          </div>
-          <div class="quest-hero">
-            <span class="quest-ico" id="questIco" aria-hidden="true"></span>
-            <div class="quest-txt">
-              <div class="quest-title" id="questTitle">원리셈·따풀</div>
-              <div class="quest-line">등교 전에 풀면 몬스터볼 +1!</div>
-            </div>
           </div>
           <div class="js-morning-math" id="morningMath"></div>
         </div>
@@ -1714,7 +1761,7 @@
       <section class="routine-wrap">
         <div class="sec-head">
           <h2>🎒 아침 루틴 5단계</h2>
-          <span class="sec-sub">카드를 눌러 체크! 5개를 모두 하면 몬스터볼 +1 · 원리셈·따풀은 오른쪽 ‘⚔️ 아침 특별 퀘스트’에서 +1</span>
+          <span class="sec-sub">카드를 눌러 체크! 5개를 모두 하면 몬스터볼 +1 · 원리셈·따풀은 오른쪽 ‘✏️ 아침 공부’ 카드에서 +1</span>
           <span class="count-pill js-routine-count">0/5</span>
           <span class="streak-chip js-streak-chip">🔥 0일</span>
           <div class="spacer"></div>
@@ -1823,9 +1870,9 @@
           <div class="sec-head">
             <h2>⚡ 보너스</h2>
             <span class="count-pill js-bonus-count">0/4</span>
+            <span class="bonus-sub">하고 싶을 때 도전! · 🔴+1</span>
           </div>
           <div class="bonus-grid js-bonus-grid"></div>
-          <div class="bonus-foot">하고 싶을 때 도전! · 완료마다 🔴 +1</div>
         </div>
         </div>
 
@@ -2497,6 +2544,20 @@
     return out;
   }
 
+  /* '원리셈·따풀' 한 항목을 '원리셈' + '따풀' 두 장의 카드로 나눈다 (id 하나는 유지) */
+  function splitMathItems() {
+    var arr = state.items || [], out = [], changed = false, i;
+    for (i = 0; i < arr.length; i++) {
+      var it = arr[i], lbl = String((it && it.label) || '');
+      if (lbl.indexOf('원리셈') !== -1 && lbl.indexOf('따풀') !== -1) {
+        out.push({ id: it.id, label: '원리셈' });
+        out.push({ id: uid(), label: '따풀' });
+        changed = true;
+      } else out.push(it);
+    }
+    if (changed) { state.items = out; store.set(K.items, out); }
+  }
+
   function defaultEveningItems() {
     var out = [];
     for (var i = 0; i < DEFAULT_EVENING.length; i++) out.push({ id: uid(), label: DEFAULT_EVENING[i] });
@@ -2747,6 +2808,7 @@
     }
     if (renamed) store.set(K.items, items);
     state.items = items;
+    splitMathItems();
 
     /* 저녁 루틴: 5단계 기본값 (예전 7단계 기본값이면 자동으로 올린다) */
     var eve = store.get(K.eveningItems, null);
@@ -3658,18 +3720,55 @@
       + '<circle cx="50" cy="50" r="5" fill="#EE1515"/></svg>';
   }
 
+  /* 포켓몬 카드 뒤집기: 앞면(아이콘·이름) → 누르면 확인 → 뒤집혀 몬스터볼이 톡 */
+  function pokeBallSvg() {
+    return '<svg viewBox="0 0 100 100" aria-hidden="true">'
+      + '<circle cx="50" cy="50" r="45" fill="#fff" stroke="#2E2A25" stroke-width="6"/>'
+      + '<path d="M5 50 A45 45 0 0 1 95 50 Z" fill="#EE1515"/>'
+      + '<rect x="3" y="44" width="94" height="12" fill="#2E2A25"/>'
+      + '<circle cx="50" cy="50" r="16" fill="#fff" stroke="#2E2A25" stroke-width="6"/>'
+      + '<circle cx="50" cy="50" r="6" fill="#EE1515"/>'
+      + '<circle cx="34" cy="30" r="6" fill="#fff" opacity=".55"/>'
+      + '</svg>';
+  }
+
+  function pokeCardHtml(o) {
+    var done = !!o.done;
+    return '<button class="pk-card' + (done ? ' done' : '') + '" type="button" data-act="' + o.act + '" data-id="' + esc(o.id) + '"'
+      + ' aria-pressed="' + done + '" aria-label="' + esc(o.label) + (done ? ' 완료 취소' : ' 완료하고 몬스터볼 +1') + '">'
+      + '<span class="pk-inner">'
+      + '<span class="pk-face pk-front">'
+      + '<span class="pk-ico">' + o.ico + '</span>'
+      + '<span class="pk-name">' + esc(o.label) + '</span>'
+      + '<span class="pk-hint">' + (o.hint || '눌러서 완료') + '</span>'
+      + '</span>'
+      + '<span class="pk-face pk-back">'
+      + '<span class="pk-ball">' + pokeBallSvg() + '</span>'
+      + '<span class="pk-done">완료! ✓</span>'
+      + '<span class="pk-gain">🔴 +1</span>'
+      + '</span>'
+      + '</span></button>';
+  }
+
+  /* 방금 뒤집힌 카드만 몬스터볼이 톡 튀어나오게 */
+  function flashPoke(id) {
+    var el = document.querySelector('.pk-card[data-id="' + id + '"]');
+    if (!el) return;
+    el.classList.add('justdone');
+    setTimeout(function () { el.classList.remove('justdone'); }, 1000);
+  }
+
   function routineCardHtml(it, idx, done, isEvening, bundleCount) {
     var ill = illuFor(it.label);
     var single = !isEvening && isMathRoutine(it.label);
-    var cta = done ? '완료! ✓' : (single ? '눌러서 완료 ' + miniBallSvg() + ' +1' : '눌러서 체크');
-    var badge = '';
+    var cta = done ? '✓ 완료' : (single ? '체크 ' + miniBallSvg() + '+1' : '체크');
     return '<button class="rcard' + (isEvening ? ' ev' : '') + (done ? ' done' : '') + '" type="button" '
       + 'data-act="' + (isEvening ? 'e-toggle' : 'r-toggle') + '" data-id="' + esc(it.id) + '" aria-pressed="' + done + '">'
       + '<span class="step">' + (idx + 1) + '</span>'
-      + '<span class="stamp">✓</span>'
+      + '<span class="rtop">'
       + '<span class="r-title">' + esc(it.label) + '</span>'
-      + badge
       + '<span class="cta">' + cta + '</span>'
+      + '</span>'
       + '<span class="illu">'
       + (ill.img
         ? '<img src="' + esc(ill.img) + '" alt="' + esc(it.label) + ' 그림" loading="' + (idx < 4 ? 'eager' : 'lazy') + '">'
@@ -3704,7 +3803,7 @@
     setAll('.js-routine-count', doneCount + '/' + bundleCount);
   }
 
-  /* ⚔️ 아침 특별 퀘스트(원리셈·따풀): 큰 퀘스트 버튼 */
+  /* ✏️ 아침 공부(원리셈 / 따풀): 두 장의 포켓몬 카드 — 누르면 뒤집혀 몬스터볼 +1 */
   function renderMorningMath() {
     var box = $('morningMath'), card = $('morningMathCard');
     if (!box || !card) return;
@@ -3712,26 +3811,20 @@
     if (!items.length) { card.style.display = 'none'; box.innerHTML = ''; return; }
     card.style.display = '';
 
-    var ico = $('questIco');
-    if (ico) ico.innerHTML = svgMath();
-    var title = $('questTitle');
-    if (title) title.textContent = (items.length === 1) ? items[0].label : '원리셈·따풀';
-
     var doneIds = todayRoutineIds();
-    var multi = items.length > 1;
     var html = '';
     for (var i = 0; i < items.length; i++) {
-      var it = items[i], done = doneIds.indexOf(it.id) !== -1;
-      var txt = done
-        ? (multi ? esc(it.label) + ' 완료!' : '오늘 퀘스트 완료!')
-        : (multi ? esc(it.label) + ' 완료하기' : '퀘스트 완료하고 몬스터볼 +1');
-      html += '<button class="quest-btn' + (done ? ' done' : '') + '" type="button" data-act="r-toggle" data-id="' + esc(it.id) + '" aria-pressed="' + done + '"'
-        + ' aria-label="' + esc(it.label) + (done ? ' 완료 취소' : ' 완료하고 몬스터볼 +1') + '">'
-        + '<span class="qb-txt">' + txt + '</span>'
-        + '<span class="qb-cta">' + (done ? '🏅' : miniBallSvg() + ' +1') + '</span>'
-        + '</button>';
+      var it = items[i];
+      html += pokeCardHtml({
+        act: 'r-toggle',
+        id: it.id,
+        label: it.label,
+        ico: svgMath(),
+        done: doneIds.indexOf(it.id) !== -1
+      });
     }
     box.innerHTML = html;
+    box.style.gridTemplateColumns = 'repeat(' + Math.min(Math.max(items.length, 1), 2) + ',minmax(0,1fr))';
   }
 
   function renderEveningRoutine() {
@@ -3792,6 +3885,7 @@
       card.classList.add('pulse');
       setTimeout(function () { if (card) card.classList.remove('pulse'); }, 600);
     }
+    if (isSingle) flashPoke(id);
     SFX.step();
     if (isSingle) grantMorningItem(id);
     syncPerfectDay();
@@ -3937,7 +4031,7 @@
     var hint = $('editHint');
     if (hint) hint.textContent = editListName === 'evening'
       ? '저녁 루틴이에요. 5개를 추천해요! (5개를 모두 체크하면 몬스터볼 +1)'
-      : '아침 루틴이에요. 5개를 추천해요! 1~5번은 5개를 모두 체크하면 몬스터볼 +1, 원리셈·따풀은 오른쪽 ‘⚔️ 아침 특별 퀘스트’ 카드에서 +1';
+      : '아침 루틴이에요. 5개를 추천해요! 1~5번은 5개를 모두 체크하면 몬스터볼 +1, 원리셈·따풀은 오른쪽 ‘✏️ 아침 공부’ 카드에서 +1';
     var input = $('routineInput');
     if (input) input.placeholder = editListName === 'evening'
       ? '저녁 루틴 추가 (예: 내일 준비물 챙기기)' : '루틴 추가 (예: 물 한 잔 마시기)';
@@ -4238,16 +4332,18 @@
         + '</div>';
       return;
     }
-    var html = '';
+    /* 시간이 이른 순서대로 가로로 나란히 — 위에 이름·준비물, 아래에 시간 */
+    var html = '<div class="acad-tiles" style="grid-template-columns:repeat(' + list.length + ',minmax(0,1fr))">';
     for (var i = 0; i < list.length; i++) {
       var a = list[i];
-      html += '<div class="acad-row">'
-        + '<span class="ac-ico">' + svgSchool() + '</span>'
-        + '<span class="ac-name">' + esc(a.name) + '</span>'
+      html += '<div class="acad-tile">'
+        + '<div class="ac-top"><span class="ac-ico">' + svgSchool() + '</span>'
+        + '<span class="ac-name" title="' + esc(a.name) + '">' + esc(a.name) + '</span></div>'
         + (a.memo ? '<span class="ac-memo" title="' + esc(a.memo) + '">🎒 ' + esc(a.memo) + '</span>' : '')
         + '<span class="ac-time">' + esc(timeLabel(a)) + '</span>'
         + '</div>';
     }
+    html += '</div>';
     box.innerHTML = html;
   }
 
@@ -4540,15 +4636,19 @@
       for (var i = 0; i < tasks.length; i++) {
         var t = tasks[i];
         var done = doneIds.indexOf(t.id) !== -1;
-        html += '<button class="hs-row' + (done ? ' done' : '') + '" type="button" data-act="h-toggle" data-id="' + esc(t.id) + '" aria-pressed="' + done + '"'
+        html += '<button class="study-tile' + (done ? ' done' : '') + '" type="button" data-act="h-toggle" data-id="' + esc(t.id) + '" aria-pressed="' + done + '"'
           + ' aria-label="' + esc(t.label) + (done ? ' 완료 취소' : ' 완료하고 몬스터볼 +1') + '">'
-          + '<span class="hs-ico">' + studyIcon(t.label) + '</span>'
-          + '<span class="hs-label">' + esc(t.label) + '</span>'
-          + '<span class="hs-cta">' + (done ? '✓ 완료' : miniBallSvg() + '+1') + '</span>'
+          + '<span class="st-ico">' + studyIcon(t.label) + '</span>'
+          + '<span class="st-label">' + esc(t.label) + '</span>'
+          + '<span class="st-cta">' + (done ? '✓ 완료' : miniBallSvg() + '+1') + '</span>'
           + '</button>';
       }
     }
-    for (var j = 0; j < boxes.length; j++) boxes[j].innerHTML = html;
+    var cols = Math.min(Math.max(tasks.length, 1), 3);
+    for (var j = 0; j < boxes.length; j++) {
+      boxes[j].innerHTML = html;
+      boxes[j].style.gridTemplateColumns = 'repeat(' + cols + ',minmax(0,1fr))';
+    }
   }
 
   /* ======================= ⚡ 보너스 공부 ======================= */
@@ -4605,7 +4705,7 @@
 
     if (grid) {
       var n = items.length;
-      /* 네 칸까지는 한 줄로, 다섯 칸부터는 세 칸씩 접어서 이름이 잘리지 않게 */
+      /* 네 장까지는 한 줄로, 다섯 장부터는 세 칸씩 접어서 이름이 잘리지 않게 */
       var cols = n <= 4 ? Math.max(n, 1) : 3;
       grid.style.gridTemplateColumns = 'repeat(' + cols + ',minmax(0,1fr))';
       if (n > 4) grid.classList.add('bonus-grid-many');
@@ -4617,13 +4717,13 @@
       } else {
         for (i = 0; i < n; i++) {
           var b = items[i];
-          var isDone = done.indexOf(b.id) !== -1;
-          html += '<button class="bonus-tile' + (isDone ? ' done' : '') + '" type="button" data-act="b-toggle" data-id="' + esc(b.id) + '" aria-pressed="' + isDone + '"'
-            + ' aria-label="' + esc(b.label) + (isDone ? ' 완료 취소' : ' 완료하고 몬스터볼 +1') + '">'
-            + '<span class="bt-ico">' + bonusIconFor(b.label) + '</span>'
-            + '<span class="bt-label">' + esc(b.label) + '</span>'
-            + '<span class="bt-cta">' + (isDone ? '✓ 완료' : miniBallSvg() + '+1') + '</span>'
-            + '</button>';
+          html += pokeCardHtml({
+            act: 'b-toggle',
+            id: b.id,
+            label: b.label,
+            ico: bonusIconFor(b.label),
+            done: done.indexOf(b.id) !== -1
+          });
         }
       }
       grid.innerHTML = html;
@@ -4692,6 +4792,7 @@
       addBalls(1);
     }
     renderBonusStudy();
+    flashPoke(id);
     SFX.ball();
     toast('보너스 완료! 몬스터볼 +1 🔴');
     var items = bonusList();
