@@ -344,30 +344,34 @@
   .hs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;grid-auto-rows:minmax(88px,1fr);flex:0 1 auto;min-height:0;align-content:start}
   .hs-tile:last-child:nth-child(odd){grid-column:1 / -1}
   .hs-tile{
-    position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-    width:100%;text-align:center;font-family:inherit;height:100%;min-height:96px;
-    background:linear-gradient(180deg,#FFFEFA,#FFF7E2);border:2px solid #F2E8CF;border-radius:18px;padding:12px 10px;
-    transition:transform .12s ease,background .15s ease,border-color .15s ease,box-shadow .15s ease;min-width:0;
+    position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    width:100%;text-align:center;font-family:inherit;height:100%;min-height:104px;
+    background:#fff;border:2px solid #EFE6D2;border-radius:16px;padding:9px 8px 8px;min-width:0;
+    box-shadow:0 6px 16px rgba(120,108,72,.08);
+    transition:transform .12s ease,background .15s ease,border-color .15s ease,box-shadow .15s ease;
   }
-  .hs-tile:active{transform:scale(.98)}
+  .hs-tile:active{transform:scale(.97)}
   .hs-tile .hs-ico{
-    width:56px;height:56px;flex:none;border-radius:16px;background:#fff;border:2px solid #F0E6D0;
+    width:50px;height:50px;flex:none;border-radius:14px;background:#FFF9EE;border:2px solid #F2E7D2;
     display:flex;align-items:center;justify-content:center;
   }
-  .hs-tile .hs-ico svg{width:38px;height:38px;display:block}
-  .hs-tile .hs-tile-body{flex:none;min-width:0;display:flex;flex-direction:column;gap:2px;align-items:center}
-  .hs-tile .hs-label{font-size:16.5px;font-weight:900;letter-spacing:-.35px;line-height:1.15;word-break:keep-all}
-  .hs-tile .hs-state{font-size:11px;font-weight:900;color:#B0A896;display:flex;align-items:center;gap:3px}
-  .hs-tile .hs-state .mini{width:12px;height:12px;flex:none}
-  .hs-tile .hs-check{
-    position:absolute;top:9px;right:9px;width:26px;height:26px;flex:none;border-radius:50%;
-    border:2.5px solid #DCD4C2;background:#fff;
-    display:flex;align-items:center;justify-content:center;color:transparent;font-size:14px;font-weight:900;
+  .hs-tile .hs-ico svg{width:33px;height:33px;display:block}
+  .hs-tile .hs-label{font-size:15.5px;font-weight:900;letter-spacing:-.4px;line-height:1.12;word-break:keep-all;padding:0 1px}
+  .hs-tile .hs-cta{
+    display:flex;align-items:center;justify-content:center;gap:4px;width:100%;margin-top:auto;
+    background:#FFF3D6;color:#8A6B12;font-weight:900;font-size:11.5px;letter-spacing:-.3px;
+    border-radius:999px;padding:7px 5px;min-height:34px;text-align:center;
   }
-  .hs-tile.done{background:linear-gradient(180deg,#F7FDF7,#EEF9EF);border-color:#A9DCAF;box-shadow:0 6px 14px rgba(63,163,77,.12)}
-  .hs-tile.done .hs-check{background:var(--green);border-color:var(--green);color:#fff}
-  .hs-tile.done .hs-label{color:#4E9A5C;text-decoration:line-through}
-  .hs-tile.done .hs-state{color:#4E9A5C}
+  .hs-tile .hs-cta .mini{width:14px;height:14px;flex:none}
+  .hs-tile .hs-stamp{
+    position:absolute;top:7px;right:7px;width:22px;height:22px;border-radius:50%;background:var(--green);
+    color:#fff;font-size:12.5px;font-weight:900;display:none;align-items:center;justify-content:center;
+    border:2px solid #fff;box-shadow:0 4px 10px rgba(63,163,77,.28);
+  }
+  .hs-tile.done{background:linear-gradient(180deg,#FFFCE9 0%,#FFFFFF 72%);border-color:#FFD84D;box-shadow:0 8px 18px rgba(255,203,5,.2)}
+  .hs-tile.done .hs-cta{background:#E4F7E6;color:#2F7A3C}
+  .hs-tile.done .hs-ico{background:#F6FDF6;border-color:#CFEBD3}
+  .hs-tile.done .hs-stamp{display:flex;animation:pop .35s ease}
   .hs-empty{
     grid-column:1 / -1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
     background:linear-gradient(180deg,#FFFDF2,#F7FBFF);border:2px dashed #E4DCCB;border-radius:16px;
@@ -719,10 +723,11 @@
     .hero-count{font-size:clamp(24px,2.2vw,30px)}
     .dt-clock{font-size:26px}
     .hs-grid{grid-auto-rows:minmax(78px,1fr)}
-    .hs-tile .hs-ico{width:44px;height:44px;border-radius:14px}
-    .hs-tile .hs-ico svg{width:30px;height:30px}
-    .hs-tile .hs-label{font-size:15px}
-    .hs-tile .hs-state{font-size:10.5px}
+    .hs-tile{min-height:96px;padding:8px 7px 7px}
+    .hs-tile .hs-ico{width:44px;height:44px;border-radius:13px}
+    .hs-tile .hs-ico svg{width:29px;height:29px}
+    .hs-tile .hs-label{font-size:14.5px}
+    .hs-tile .hs-cta{font-size:11px;min-height:32px;padding:6px 4px}
     .rcard .illu{min-height:88px;max-height:150px}
     .rcard .r-title{font-size:14.5px}
     .rcard .cta{font-size:12px;min-height:36px}
@@ -843,12 +848,13 @@
     .today-class .t-time{font-size:14px}
     .today-class .t-memo{font-size:12.5px}
     .hs-grid{gap:10px;grid-auto-rows:104px}
-    .hs-tile{border-radius:20px;min-height:110px;gap:8px}
-    .hs-tile .hs-ico{width:66px;height:66px;border-radius:19px}
-    .hs-tile .hs-ico svg{width:46px;height:46px}
-    .hs-tile .hs-label{font-size:19px}
-    .hs-tile .hs-state{font-size:12px}
-    .hs-tile .hs-check{width:29px;height:29px;font-size:16px;top:11px;right:11px}
+    .hs-tile{border-radius:20px;min-height:124px;gap:7px}
+    .hs-tile .hs-ico{width:62px;height:62px;border-radius:18px}
+    .hs-tile .hs-ico svg{width:42px;height:42px}
+    .hs-tile .hs-label{font-size:18px}
+    .hs-tile .hs-cta{font-size:13px;min-height:40px;padding:9px 6px}
+    .hs-tile .hs-cta .mini{width:16px;height:16px}
+    .hs-tile .hs-stamp{width:26px;height:26px;font-size:14px;top:9px;right:9px}
     .hs-empty{font-size:16px}
     .home-grid{gap:12px}
     .routine-grid{gap:11px}
@@ -2667,10 +2673,10 @@
       var t = tasks[i];
       var done = doneIds.indexOf(t.id) !== -1;
       html += '<button class="hs-tile' + (done ? ' done' : '') + '" type="button" data-act="h-toggle" data-id="' + esc(t.id) + '" aria-pressed="' + done + '">'
+        + '<span class="hs-stamp">✓</span>'
         + '<span class="hs-ico">' + studyIcon(t.label) + '</span>'
-        + '<span class="hs-tile-body"><span class="hs-label">' + esc(t.label) + '</span>'
-        + '<span class="hs-state">' + (done ? '완료했어요 ✓' : miniBallSvg() + ' 눌러서 +1') + '</span></span>'
-        + '<span class="hs-check">✓</span>'
+        + '<span class="hs-label">' + esc(t.label) + '</span>'
+        + '<span class="hs-cta">' + (done ? '완료! ✓' : '눌러서 완료 ' + miniBallSvg() + ' +1') + '</span>'
         + '</button>';
     }
     box.innerHTML = html;
