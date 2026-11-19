@@ -450,7 +450,8 @@
   .today-academy .acad-row{flex:0 0 auto}
 
   /* 학원 칸: 시간순으로 가로로 — 위 이름+준비물, 아래 시간 */
-  .acad-tiles{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:7px;min-width:0}
+  /* 학원은 많아야 세 곳 — 언제나 세 칸으로 나눠 두고, 하나면 1/3만 차지한다 */
+  .acad-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;min-width:0}
   .acad-tile{
     display:flex;flex-direction:column;gap:2px;min-width:0;
     background:#F7FBFF;border:1.5px solid #DCEBFA;border-radius:13px;padding:7px 10px 8px;
@@ -4342,7 +4343,7 @@
       return;
     }
     /* 시간이 이른 순서대로 가로로 나란히 — 위에 이름·준비물, 아래에 시간 */
-    var html = '<div class="acad-tiles" style="grid-template-columns:repeat(' + list.length + ',minmax(0,1fr))">';
+    var html = '<div class="acad-tiles">';
     for (var i = 0; i < list.length; i++) {
       var a = list[i];
       html += '<div class="acad-tile">'
