@@ -4904,10 +4904,10 @@
           + '</button>';
       }
     }
-    var cols = Math.min(Math.max(tasks.length, 1), 3);
     for (var j = 0; j < boxes.length; j++) {
       boxes[j].innerHTML = html;
-      boxes[j].style.gridTemplateColumns = 'repeat(' + cols + ',minmax(0,1fr))';
+      /* 보너스 카드와 같은 네 칸 고정 — 모자란 칸은 비워 두고 늘리지 않음 */
+      boxes[j].style.gridTemplateColumns = 'repeat(4,minmax(0,1fr))';
     }
   }
 
