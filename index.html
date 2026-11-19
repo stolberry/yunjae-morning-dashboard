@@ -112,6 +112,9 @@
   }
   .sec-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
   .sec-sub{font-size:13px;font-weight:800;color:var(--muted)}
+  /* 머리글 안의 작은 몬스터볼 그림 + 1 */
+  .sec-sub .ball-mini{display:inline-block;width:1.35em;height:1.35em;vertical-align:-.3em;margin:0 1px}
+  .sec-sub .ball-mini svg{display:block;width:100%;height:100%}
   .spacer{flex:1}
   .count-pill{
     background:var(--yellow-soft);border:2px solid #FFE58A;color:#7A5B00;
@@ -1970,7 +1973,7 @@
         <div class="card today-card math-card" id="morningMathCard">
           <div class="sec-head">
             <h2>🔥 아침 미션</h2>
-            <span class="sec-sub">카드를 누르면 몬스터볼 +1 · 매일 새로 시작</span>
+            <span class="sec-sub"><span class="gball ball-mini" data-ball="normal" aria-hidden="true"></span> +1</span>
             <div class="spacer"></div>
             <button class="link-btn" type="button" data-act="goto" data-tab="study">할 일 탭 →</button>
           </div>
@@ -1984,7 +1987,7 @@
       <section class="routine-wrap">
         <div class="sec-head">
           <h2>🎒 아침 루틴 5단계</h2>
-          <span class="sec-sub">카드를 눌러 체크! 5개를 모두 하면 몬스터볼 +1 · 원리셈·따풀은 오른쪽 ‘🔥 아침 미션’ 카드에서 +1</span>
+          <span class="sec-sub">5개를 모두 하면 <span class="gball ball-mini" data-ball="normal" aria-hidden="true"></span> +1</span>
           <span class="count-pill js-routine-count">0/5</span>
           <span class="streak-chip js-streak-chip">🔥 0일</span>
           <div class="spacer"></div>
@@ -2098,7 +2101,7 @@
       <section class="routine-wrap eve">
         <div class="sec-head">
           <h2>🌙 저녁 루틴 5단계</h2>
-          <span class="sec-sub">카드를 눌러 체크! 5개를 모두 하면 몬스터볼 +1</span>
+          <span class="sec-sub">5개를 모두 하면 <span class="gball ball-mini" data-ball="normal" aria-hidden="true"></span> +1</span>
           <span class="count-pill js-evening-count">0/5</span>
           <span class="streak-chip js-streak-chip">🔥 0일</span>
           <div class="spacer"></div>
