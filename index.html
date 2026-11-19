@@ -424,9 +424,18 @@
   .affirm-card.eve{flex-direction:row;align-items:center;gap:10px;cursor:pointer}
   .affirm-card.eve:active{filter:brightness(.98)}
   .affirm-card.eve .af-ico{font-size:19px;flex:none;line-height:1}
-  /* 최신 특급칭찬: 한 줄로 고정(길면 말줄임) — 카드 높이는 확언 때와 똑같이 */
-  .affirm-card.eve .af-text{flex:1 1 auto;color:#3B3266;font-size:18px;font-weight:800;letter-spacing:-.5px;line-height:1.25}
-  .affirm-card.eve .js-affirm{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;-webkit-line-clamp:none}
+  /* 최신 특급칭찬: 한 줄 — 자리가 남으면 가운데 정렬, 넘치면 끊김 없이 천천히 흘러가기 */
+  .affirm-card.eve .af-view{flex:1 1 auto;min-width:0;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .affirm-card.eve .af-track{display:flex;align-items:center;gap:0;flex:0 0 auto;white-space:nowrap}
+  .affirm-card.eve .af-text{
+    display:block;flex:0 0 auto;white-space:nowrap;color:#3B3266;font-size:18px;font-weight:800;letter-spacing:-.5px;line-height:1.25;
+    -webkit-line-clamp:none;
+  }
+  .affirm-card.eve .af-view.is-scroll{justify-content:flex-start}
+  .affirm-card.eve .af-view.is-scroll .af-track{
+    gap:var(--af-gap,64px);animation:afMarquee var(--af-dur,14s) linear infinite;will-change:transform;
+  }
+  @keyframes afMarquee{from{transform:translateX(0)}to{transform:translateX(var(--af-shift,0px))}}
   .affirm-card.eve .af-when{
     flex:none;font-size:10.5px;font-weight:900;color:#5B4B9A;background:#fff;border:1.5px solid #D9D0F7;
     border-radius:999px;padding:2px 7px;letter-spacing:-.2px;line-height:1.2;
@@ -1993,7 +2002,7 @@
       </div>
       <div class="affirm-card eve" data-act="goto" data-tab="praise" role="button" tabindex="0" aria-label="특급칭찬 보기">
         <span class="af-ico" aria-hidden="true">🌟</span>
-        <p class="af-text js-affirm">불러오는 중…</p>
+        <span class="af-view js-affirm"><span class="af-track js-affirm-track"><span class="af-text js-affirm-text">불러오는 중…</span></span></span>
         <span class="af-when js-affirm-when" hidden></span>
       </div>
       </div>
@@ -5910,13 +5919,47 @@
   function renderAffirm() {
     var latest = (state.praises && state.praises.length) ? state.praises[0] : null;
     var txt = latest
-      ? ('특급칭찬 · “' + latest.text + '”')
+      ? ('“' + latest.text + '”')
       : '“오늘도 엄마가 윤재의 특급칭찬을 응원하고 있어요!”';
-    setAll('.js-affirm', txt);
+    each('.js-affirm', function (view) {
+      var txtEl = view.querySelector('.js-affirm-text');
+      if (txtEl) txtEl.textContent = txt;
+      var card = view.parentNode;
+      if (card && card.setAttribute) card.setAttribute('aria-label', '특급칭찬 보기: ' + txt);
+    });
     var when = latest ? praiseWhen(latest) : '';
     each('.js-affirm-when', function (el) {
       if (when) { el.textContent = when; el.hidden = false; }
       else { el.textContent = ''; el.hidden = true; }
+    });
+    fitAffirmMarquee();
+    setTimeout(fitAffirmMarquee, 80);
+  }
+
+  /* 자리가 남으면 그대로(가운데), 넘치면 같은 문장을 한 번 더 이어 붙여 끊김 없이 흘려보낸다 */
+  function fitAffirmMarquee() {
+    each('.js-affirm', function (view) {
+      var track = view.querySelector('.js-affirm-track');
+      var txtEl = view.querySelector('.js-affirm-text');
+      if (!track || !txtEl) return;
+      var old = track.querySelector('.af-dup');
+      if (old) track.removeChild(old);
+      view.classList.remove('is-scroll');
+      var avail = view.clientWidth;
+      var textW = Math.ceil(txtEl.getBoundingClientRect().width);
+      if (!avail || !textW || textW <= avail) return;   // 들어가면 애니메이션 없이 그대로
+      var gap = 64;
+      var dup = txtEl.cloneNode(true);
+      dup.className = 'af-text af-dup';
+      dup.setAttribute('aria-hidden', 'true');
+      track.appendChild(dup);
+      var shift = textW + gap;                          // 사본이 제자리에 오는 거리 = 한 바퀴
+      var secs = Math.max(9, Math.min(26, shift / 34)); // 너무 빠르지 않게
+      track.style.setProperty('--af-gap', gap + 'px');
+      track.style.setProperty('--af-shift', '-' + shift + 'px');
+      track.style.setProperty('--af-dur', secs.toFixed(1) + 's');
+      void track.offsetWidth;
+      view.classList.add('is-scroll');
     });
   }
 
@@ -6902,8 +6945,8 @@
 
     setInterval(tickClock, 1000);
     setInterval(loadWeather, 10 * 60 * 1000);
-    window.addEventListener('resize', function () { renderTimeline(); });
-    window.addEventListener('orientationchange', function () { setTimeout(renderTimeline, 260); });
+    window.addEventListener('resize', function () { renderTimeline(); fitAffirmMarquee(); });
+    window.addEventListener('orientationchange', function () { setTimeout(function () { renderTimeline(); fitAffirmMarquee(); }, 260); });
 
     if ('serviceWorker' in navigator && location.protocol === 'https:') {
       navigator.serviceWorker.register('sw.js').catch(function () {});
