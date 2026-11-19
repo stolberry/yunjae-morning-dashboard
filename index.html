@@ -140,7 +140,7 @@
       radial-gradient(520px 240px at 0% 0%, #FFF3B8 0%, rgba(255,243,184,0) 70%),
       linear-gradient(120deg,#FFFBE6 0%,#FFFFFF 52%,#EDF6FF 100%);
     border:3px solid #FFE07A;box-shadow:0 10px 24px rgba(214,180,40,.16);
-    border-radius:22px;padding:12px 16px;position:relative;overflow:hidden;min-width:0;
+    border-radius:22px;padding:9px 14px;position:relative;overflow:hidden;min-width:0;
   }
   .hero::after{
     content:"";position:absolute;right:-60px;top:-70px;width:240px;height:240px;border-radius:50%;
@@ -243,10 +243,10 @@
     border:2px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.12);
   }
   .rcard .illu{
-    aspect-ratio:auto;flex:1 1 auto;min-height:96px;max-height:200px;border-radius:11px;overflow:hidden;background:#FFF9EE;
+    aspect-ratio:auto;flex:1 1 auto;min-height:0;max-height:300px;border-radius:11px;overflow:hidden;background:#FFF9EE;
     display:flex;align-items:center;justify-content:center;width:100%;min-width:0;margin-top:auto;
   }
-  .rcard .illu img{width:100%;height:100%;object-fit:cover;object-position:center 28%;display:block}
+  .rcard .illu img{width:100%;height:100%;object-fit:contain;object-position:center;display:block}
   .rcard .illu .emoji{font-size:44px;line-height:1}
   .rcard .r-title{
     font-size:15.5px;font-weight:900;letter-spacing:-.5px;padding:0 24px;text-align:center;line-height:1.12;word-break:keep-all;
@@ -275,7 +275,7 @@
   /* ---------------- top strip: 확언 | 날씨 ---------------- */
   .top-strip{display:grid;grid-template-columns:1.6fr 1fr;gap:10px;flex:none;margin-bottom:9px}
   .affirm-card{
-    padding:8px 14px;border-radius:18px;display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;
+    padding:6px 12px;border-radius:18px;display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;
     background:linear-gradient(120deg,#FFF6D6 0%,#FFEDE9 55%,#EAF3FF 100%);
     border:2px solid #FFE0A8;
   }
@@ -287,7 +287,7 @@
   }
   .af-sub{display:none}
   .wx-card{
-    padding:8px 34px 8px 12px;border-radius:18px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;
+    padding:6px 34px 6px 10px;border-radius:18px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 7px;
     align-content:center;overflow:hidden;min-width:0;position:relative;
   }
   .wx-card>.retry{position:absolute;top:7px;right:7px;padding:4px 7px;font-size:10.5px;min-height:0}
@@ -310,14 +310,14 @@
   .home-right .wx-card .wsep{display:none}
   .right-top{display:grid;grid-template-columns:1fr;gap:9px;flex:none;min-height:0}
   .right-main{display:grid;grid-template-columns:1fr;gap:9px;flex:1 1 auto;min-height:0}
-  .card.today-card{padding:9px 12px;border-radius:18px;min-width:0;display:flex;flex-direction:column;overflow:hidden}
+  .card.today-card{padding:7px 11px;border-radius:18px;min-width:0;display:flex;flex-direction:column;overflow:hidden}
   .today-card .sec-head{margin-bottom:6px;gap:6px;flex:none}
   .today-card h2{font-size:17px;letter-spacing:-.6px}
   .today-card .count-pill{font-size:12.5px;padding:3px 9px;border-width:2px}
   .today-card .link-btn{font-size:12px;padding:2px 2px}
 
   /* 학원 카드 */
-  .today-academy{display:flex;flex-direction:column;justify-content:center;gap:9px;flex:1 1 auto;min-height:0}
+  .today-academy{display:flex;flex-direction:column;justify-content:center;gap:7px;flex:1 1 auto;min-height:0}
   .today-academy .today-class{flex:0 0 auto;min-height:52px}
   .today-class.line{gap:12px}
   .today-class .t-line{display:flex;align-items:baseline;gap:7px;min-width:0;flex:1;white-space:nowrap;overflow:hidden}
@@ -369,7 +369,7 @@
   .hs-grid{display:flex;flex-direction:column;justify-content:center;gap:8px;flex:1 1 auto;min-height:0}
   .hs-row{
     display:flex;align-items:center;gap:12px;width:100%;flex:0 0 auto;text-align:left;
-    background:#fff;border:2px solid #EFE6D2;border-radius:16px;padding:9px 14px;
+    background:#fff;border:2px solid #EFE6D2;border-radius:16px;padding:8px 12px;
     box-shadow:0 6px 16px rgba(120,108,72,.08);
     transition:transform .12s ease,background .15s ease,border-color .15s ease;
   }
@@ -851,12 +851,12 @@
   .left-col{display:flex;flex-direction:column;gap:9px;min-width:0;min-height:0}
   .left-col .hero{flex:1 1 auto;min-height:0}
   .dt-card{
-    display:flex;align-items:center;gap:12px;padding:8px 16px;border-radius:18px;flex:none;
+    display:flex;align-items:center;gap:12px;padding:6px 14px;border-radius:18px;flex:none;
     background:linear-gradient(120deg,#FFFFFF 0%,#FFF8E2 100%);border:2px solid #FFE08A;box-shadow:var(--shadow);
   }
   .dtc-date{display:flex;align-items:center;gap:7px;font-size:15px;font-weight:900;color:#5F594D;letter-spacing:-.3px;white-space:nowrap}
   .dtc-ico{font-size:16px;line-height:1}
-  .dtc-clock{margin-left:auto;font-size:38px;font-weight:900;letter-spacing:-1.8px;color:#3A3428;font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.05}
+  .dtc-clock{margin-left:auto;font-size:34px;font-weight:900;letter-spacing:-1.8px;color:#3A3428;font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.05}
   .clock-ampm{font-size:15px;font-weight:700;letter-spacing:-.2px;margin-right:5px;opacity:.72;vertical-align:3px}
   .dt-card.eve{background:linear-gradient(120deg,#FFFFFF 0%,#F2EEFF 100%);border-color:#D3CAF6}
   .dt-card.eve .dtc-date{color:#544A8C}
@@ -938,7 +938,7 @@
     .hs-tile .hs-ico svg{width:26px;height:26px}
     .hs-tile .hs-label{font-size:14px}
     .hs-tile .hs-cta{font-size:10.5px;min-height:29px;padding:5px 4px}
-    .rcard .illu{min-height:90px;max-height:156px}
+    .rcard .illu{min-height:0;max-height:260px}
     .rcard .r-title{font-size:14.5px}
     .rcard .cta{font-size:13px;min-height:42px}
     .af-text{font-size:13.5px}
@@ -1024,10 +1024,10 @@
   /* 넓은 태블릿(갤럭시탭 S8 울트라 등)에서는 화면에 맞게 크게 */
   @media (min-width:1400px){
     .brand-title{font-size:19px}
-    .dt-card{padding:9px 20px;border-radius:20px}
+    .dt-card{padding:7px 18px;border-radius:20px}
     .dtc-date{font-size:16.5px}
     .dtc-ico{font-size:18px}
-    .dtc-clock{font-size:44px}
+    .dtc-clock{font-size:40px}
     .clock-ampm{font-size:17px;margin-right:6px;vertical-align:4px}
     .ms b{font-size:10.5px}
     .ms span{font-size:11.5px}
@@ -1038,7 +1038,7 @@
     .rcard .rb-badge{font-size:11px}
     .tab{font-size:15px;padding:9px 15px;min-height:44px}
     .tool-btn{min-height:44px;font-size:13.5px}
-    .hero{padding:14px 20px;gap:7px}
+    .hero{padding:11px 16px;gap:5px}
     .hero-pika{width:62px;height:62px}
     .hero-name{font-size:23px}
     .hero-meta{font-size:12px}
@@ -1048,7 +1048,7 @@
     .dt-clock{font-size:36px}
     .dt-clock .dt-ico{font-size:21px}
     .dt-date{font-size:13.5px}
-    .affirm-card{padding:14px 18px}
+    .affirm-card{padding:9px 14px}
     .af-head{font-size:13px}
     .af-text{font-size:17px}
     .af-sub{font-size:11.5px}
@@ -1064,7 +1064,7 @@
     .stat-pill .stat-k{font-size:12.5px}
     .stat-pill .stat-v{font-size:18px}
     .hero-gacha{font-size:14px;padding:9px 15px}
-    .today-card{padding:12px 16px;border-radius:22px}
+    .today-card{padding:9px 13px;border-radius:22px}
     .today-card h2{font-size:20px}
     .today-card .count-pill{font-size:14px;padding:4px 11px}
     .today-card .link-btn{font-size:13.5px}
@@ -1105,7 +1105,7 @@
     .routine-grid{gap:11px}
     .routine-wrap .sec-head h2{font-size:20px}
     .rcard{padding:9px 10px 10px;border-radius:18px;gap:6px}
-    .rcard .illu{border-radius:13px;min-height:130px;max-height:226px}
+    .rcard .illu{border-radius:13px;min-height:0;max-height:300px}
     .rcard .r-title{font-size:17.5px}
     .rcard .cta{font-size:14.5px;padding:10px 6px;min-height:46px}
     .rcard .cta .mini{width:17px;height:17px}
