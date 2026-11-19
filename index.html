@@ -420,7 +420,7 @@
     gap:9px 12px;
   }
   /* 아침 오른쪽: 학원(자기 높이) + 아침 공부(남는 높이) — 절대 겹치지 않게 그리드로 */
-  #homeMorning .home-right{display:grid;grid-template-rows:auto minmax(0,1fr);align-content:stretch;gap:9px;min-width:0;min-height:0}
+  #homeMorning .home-right{display:grid;grid-template-rows:minmax(0,1fr) minmax(0,1fr);align-content:stretch;gap:9px;min-width:0;min-height:0}
   #homeMorning .morning-left{display:flex;flex-direction:column;gap:9px;min-width:0;min-height:0}
   /* 주말 아침: 학교 카운트다운 대신 느긋한 주말 인사 */
   #homeMorning .hero-weekend-note{display:none}
@@ -526,23 +526,23 @@
   /* 학원은 많아야 세 곳 — 언제나 세 칸으로 나눠 두고, 하나면 1/3만 차지한다 */
   .acad-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;min-width:0}
   .acad-tile{
-    display:flex;flex-direction:column;gap:2px;min-width:0;
+    display:flex;flex-direction:column;gap:2px;min-width:0;align-items:center;text-align:center;
     background:#F7FBFF;border:1.5px solid #DCEBFA;border-radius:13px;padding:7px 10px 8px;
   }
-  .acad-tile .ac-top{display:flex;align-items:center;gap:7px;min-width:0}
+  .acad-tile .ac-top{display:flex;align-items:center;justify-content:center;gap:7px;min-width:0;width:100%}
   .acad-tile .ac-ico{width:26px;height:26px;flex:none;display:flex;align-items:center;justify-content:center}
   .acad-tile .ac-ico svg{width:24px;height:24px;display:block}
   .acad-tile .ac-name{
-    flex:1 1 auto;min-width:0;font-size:16px;font-weight:900;letter-spacing:-.5px;color:#1F3E5C;
+    flex:0 1 auto;min-width:0;font-size:16px;font-weight:900;letter-spacing:-.5px;color:#1F3E5C;text-align:center;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   }
   .acad-tile .ac-memo{
-    align-self:flex-start;max-width:100%;font-size:10.5px;font-weight:900;color:#2C6BA8;
+    align-self:center;max-width:100%;font-size:10.5px;font-weight:900;color:#2C6BA8;
     background:#EAF3FF;border:1.5px solid #D3E6FA;border-radius:999px;padding:1px 7px;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.3px;
   }
   .acad-tile .ac-time{
-    margin-top:1px;font-size:14.5px;font-weight:700;color:#24507C;
+    margin-top:1px;font-size:14.5px;font-weight:700;color:#24507C;text-align:center;
     font-variant-numeric:tabular-nums;letter-spacing:-.2px;white-space:nowrap;
     overflow:hidden;text-overflow:ellipsis;
   }
@@ -563,10 +563,10 @@
 
   /* ---------------- 포켓몬 카드 뒤집기 (아침 원리셈·따풀 / 저녁 ⚡ 보너스) ---------------- */
   .math-card{flex:0 0 auto;min-height:0}
-  #homeMorning .quest-card{padding:7px 10px 9px;display:flex;flex-direction:column;min-height:0}
-  .quest-card .js-morning-math{
-    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;
-    flex:1 1 auto;height:auto;min-height:0;max-height:200px;margin:auto 0;grid-auto-rows:minmax(0,1fr);
+  #homeMorning .math-card{padding:8px 10px 9px;display:flex;flex-direction:column;min-height:0}
+  #morningMath{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;
+    flex:1 1 auto;min-height:0;margin-top:2px;grid-auto-rows:minmax(0,1fr);
   }
   .pk-card{
     position:relative;display:block;width:100%;height:100%;min-height:0;padding:0;border:none;background:none;
@@ -632,18 +632,8 @@
     100%{transform:scale(1) translateY(0) rotate(0);opacity:1}
   }
 
-  /* 아침 공부 카드는 두 장이라 조금 크게 */
-  .quest-card .pk-face{gap:8px}
-  .quest-card .pk-ico{width:76px;height:76px}
-  .quest-card .pk-ico svg{width:64px;height:64px}
-  .quest-card .pk-name{font-size:26px;letter-spacing:-.9px}
-  .quest-card .pk-hint{
-    font-size:12.5px;font-weight:900;color:#8A6B12;background:#FFF7DF;border:1.5px solid #F0DC9E;
-    border-radius:999px;padding:4px 13px;letter-spacing:-.3px;
-  }
-  .quest-card .pk-ball{width:64px;height:64px}
-  .quest-card .pk-done{font-size:19px}
-  .quest-card .pk-gain{font-size:12.5px;padding:2px 10px}
+  /* 아침 미션 카드도 저녁 보너스 카드와 같은 컴팩트한 비율 */
+  .mah-hint-note{display:none}
   /* 아침 홈: 학원 스케줄은 납작하게 (아침 공부 카드에 높이를 넘긴다) */
   #homeMorning .acad-card{padding:6px 10px 7px;flex:0 0 auto;min-height:0}
   #homeMorning .acad-card .sec-head{margin-bottom:5px}
@@ -1850,10 +1840,10 @@
           </div>
           <div id="todayAcademy" class="today-academy"></div>
         </div>
-        <div class="card today-card math-card quest-card" id="morningMathCard">
+        <div class="card today-card math-card" id="morningMathCard">
           <div class="sec-head">
-            <h2>✏️ 아침 공부</h2>
-            <span class="sec-sub">등교 전에 풀면 몬스터볼 +1</span>
+            <h2>⚔️ 아침 미션</h2>
+            <span class="sec-sub">카드를 누르면 몬스터볼 +1 · 매일 새로 시작</span>
             <div class="spacer"></div>
             <button class="link-btn" type="button" data-act="goto" data-tab="study">공부 탭 →</button>
           </div>
@@ -1963,7 +1953,7 @@
         <div class="home-right">
         <div class="card today-card study-card">
           <div class="sec-head">
-            <h2>📚 오늘의 공부</h2>
+            <h2>✅ 오늘 꼭 할 일</h2>
             <span class="count-pill js-home-hs-count">0/0</span>
             <div class="spacer"></div>
             <button class="link-btn" type="button" data-act="hs-add">+ 공부 추가</button>
@@ -2328,6 +2318,7 @@
     studyReading: 'yj_study_migrated_reading_v1',
     bonusDone: 'yj_bonus_done_v1',
     bonusItems: 'yj_bonus_items_v1',
+    missionDone: 'yj_morning_mission_done_v1',
     dexCosts: 'yj_dex_costs_v1'
   };
 
@@ -2604,6 +2595,7 @@
     homeschoolTasks: {}, homeschoolDone: {}, bonusDone: {}, bonusItems: [],
     balls: 0, dex: {}, dexCosts: {}, awards: {},
     perfectDays: [], stones: 0, stoneAwards: [],
+    missionDone: {},
     momPin: '', praises: []
   };
 
@@ -2962,6 +2954,10 @@
     var bd = store.get(K.bonusDone, null);
     state.bonusDone = (bd && typeof bd === 'object' && !(typeof bd.slice === 'function')) ? bd : {};
     state.bonusDone = pruneBonusDone(state.bonusDone);
+
+    /* ⚔️ 아침 미션 '지각 안하기' 체크 (날짜별로 새로 시작) */
+    var mdn = store.get(K.missionDone, null);
+    state.missionDone = (mdn && typeof mdn === 'object' && !(typeof mdn.slice === 'function')) ? mdn : {};
 
     /* 한 번만: '숙제' 빼고 '원서 낭독' 매일 넣기 */
     migrateStudyReading();
@@ -4009,7 +4005,6 @@
     var box = $('morningMath'), card = $('morningMathCard');
     if (!box || !card) return;
     var items = morningSingleItems();
-    if (!items.length) { card.style.display = 'none'; box.innerHTML = ''; return; }
     card.style.display = '';
 
     var doneIds = todayRoutineIds();
@@ -4024,8 +4019,59 @@
         done: doneIds.indexOf(it.id) !== -1
       });
     }
+    /* ⏰ 지각 안하기 — 매일 새로 시작하는 세 번째 미션 */
+    html += pokeCardHtml({
+      act: 'late-toggle',
+      id: 'late',
+      label: '지각 안하기',
+      ico: svgLate(),
+      done: lateMissionDone()
+    });
     box.innerHTML = html;
-    box.style.gridTemplateColumns = 'repeat(' + Math.min(Math.max(items.length, 1), 2) + ',minmax(0,1fr))';
+    box.style.gridTemplateColumns = 'repeat(3,minmax(0,1fr))';
+  }
+
+  /* ⚔️ 아침 미션 — ⏰ 지각 안하기 (하루마다 새로) */
+  function lateMissionDone() {
+    var d = state.missionDone[todayKey()];
+    return !!(d && d.indexOf('late') !== -1);
+  }
+  function saveMissionDone() { store.set(K.missionDone, state.missionDone); }
+
+  function toggleLateMission() {
+    if (lateMissionDone()) { unmarkLateMission(); return; }
+    askConfirm('오늘 지각 안 했어요?',
+      '지각하지 않고 등교 준비를 마쳤어요! 네 하고 누르면 몬스터볼 +1 🔴',
+      '네! 안 늦었어요 🔴+1',
+      function () { markLateMission(); });
+  }
+
+  function markLateMission() {
+    var key = todayKey();
+    var arr = state.missionDone[key] || [];
+    if (arr.indexOf('late') === -1) arr.push('late');
+    state.missionDone[key] = arr;
+    saveMissionDone();
+
+    var a = awardBox(key);
+    if (!a.late) { a.late = true; addBalls(1); saveAwards(); }
+    markJustFlipped('late');
+    renderMorningMath();
+    SFX.ball();
+    toast('오늘도 지각 안 했어요! 몬스터볼 +1 🔴');
+  }
+
+  function unmarkLateMission() {
+    var key = todayKey();
+    var arr = state.missionDone[key] || [];
+    var i = arr.indexOf('late');
+    if (i !== -1) arr.splice(i, 1);
+    state.missionDone[key] = arr;
+    saveMissionDone();
+
+    var a = awardBox(key);
+    if (a.late) { a.late = false; addBalls(-1); saveAwards(); toast('볼 하나를 돌려 놓았어요 🔴'); }
+    renderMorningMath();
   }
 
   function renderEveningRoutine() {
@@ -4699,6 +4745,16 @@
       + '<path d="M15 16h13M15 23h13M15 30h8" stroke="#DDBC79" stroke-width="2.4" stroke-linecap="round"/>'
       + '<path d="M33 13l6 6-13 13-7 1 1-7z" fill="#8ED3F4" stroke="#3E8FC4" stroke-width="2" stroke-linejoin="round"/>'
       + '<path d="M33 14l2 2" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>'
+      + '</svg>';
+  }
+  function svgLate() {
+    return '<svg viewBox="0 0 48 48" aria-hidden="true">'
+      + '<path d="M6 30h7M4 37h8M20 8l5 4M28 8l-5 4" stroke="#F2C14E" stroke-width="3" stroke-linecap="round"/>'
+      + '<circle cx="27" cy="27" r="14" fill="#FFF7E0" stroke="#E0A32E" stroke-width="2.4"/>'
+      + '<path d="M18 12l-5-5M36 12l5-5" stroke="#E0A32E" stroke-width="2.6" stroke-linecap="round"/>'
+      + '<path d="M27 19v8l6 4" fill="none" stroke="#C9830F" stroke-width="2.8" stroke-linecap="round"/>'
+      + '<circle cx="27" cy="27" r="2.4" fill="#C9830F"/>'
+      + '<path d="M18 37l-3 4M36 37l3 4" stroke="#E0A32E" stroke-width="2.6" stroke-linecap="round"/>'
       + '</svg>';
   }
   function svgMath() {
@@ -5864,6 +5920,9 @@
       case 'ms-test':
         testMilestone(MS);
         evoPreview(3);
+        break;
+      case 'late-toggle':
+        toggleLateMission();
         break;
       case 'evo-preview':
         evoPreview(3);
