@@ -1,6 +1,6 @@
 /* 윤재 포켓몬 모닝 - 오프라인/홈화면 추가용 서비스워커
    같은 주소의 파일만 캐시하고, 항상 네트워크를 먼저 확인합니다. */
-var CACHE = 'yj-pokemon-morning-v4';
+var CACHE = 'yj-pokemon-morning-v5';
 
 self.addEventListener('install', function () {
   self.skipWaiting();
