@@ -612,6 +612,7 @@
     touch-action:manipulation;-webkit-tap-highlight-color:transparent;
   }
   .list .item-actions .icon-btn{font-size:15px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:9px}
+  .list .item .mv svg{display:block;width:22px;height:22px}
   .list .item .mv:active{background:#FFF6DA;border-color:var(--yellow-deep);color:#463400}
   .list .item .mv[disabled]{opacity:.32;background:#F7F4EC;color:#B5AC99;border-color:#F0EADA}
   .list .empty{background:#F8F6F0;border:2px dashed #E4DCCB;border-radius:16px;padding:20px;text-align:center;font-weight:900;color:#8A8377}
@@ -3543,6 +3544,13 @@
     return out;
   }
 
+  function moveSvg(dir) {
+    var d = dir < 0 ? 'M12 19.5V5M5.5 11.5 12 5l6.5 6.5' : 'M12 4.5V19M5.5 12.5 12 19l6.5-6.5';
+    return '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
+      + '<path d="' + d + '" fill="none" stroke="currentColor" stroke-width="2.6"'
+      + ' stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  }
+
   function renderStudy() {
     renderStudyDayTabs();
     var dow = selectedDow;
@@ -3568,9 +3576,9 @@
           + '<span class="item-label" data-act="s-toggle" data-id="' + esc(t.id) + '">' + esc(t.label) + '</span>'
           + '<span class="item-actions">'
           + '<button class="mv" type="button" data-act="s-move" data-id="' + esc(t.id) + '" data-dir="-1"'
-          + ' aria-label="' + esc(t.label) + ' 위로 옮기기"' + (i === 0 ? ' disabled' : '') + '>↑</button>'
+          + ' aria-label="' + esc(t.label) + ' 위로 옮기기"' + (i === 0 ? ' disabled' : '') + '>' + moveSvg(-1) + '</button>'
           + '<button class="mv" type="button" data-act="s-move" data-id="' + esc(t.id) + '" data-dir="1"'
-          + ' aria-label="' + esc(t.label) + ' 아래로 옮기기"' + (i === tasks.length - 1 ? ' disabled' : '') + '>↓</button>'
+          + ' aria-label="' + esc(t.label) + ' 아래로 옮기기"' + (i === tasks.length - 1 ? ' disabled' : '') + '>' + moveSvg(1) + '</button>'
           + '<button class="icon-btn" type="button" data-act="s-edit" data-id="' + esc(t.id) + '" aria-label="수정">✏️</button>'
           + '<button class="icon-btn" type="button" data-act="s-del" data-id="' + esc(t.id) + '" aria-label="삭제">🗑️</button>'
           + '</span></li>';
