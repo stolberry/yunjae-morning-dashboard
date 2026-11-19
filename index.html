@@ -232,21 +232,21 @@
     border:2px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.12);
   }
   .rcard .illu{
-    aspect-ratio:auto;flex:1 1 auto;min-height:86px;max-height:none;border-radius:11px;overflow:hidden;background:#FFF9EE;
+    aspect-ratio:auto;flex:1 1 auto;min-height:96px;max-height:200px;border-radius:11px;overflow:hidden;background:#FFF9EE;
     display:flex;align-items:center;justify-content:center;width:100%;min-width:0;
   }
   .rcard .illu img{width:100%;height:100%;object-fit:cover;object-position:center 28%;display:block}
   .rcard .illu .emoji{font-size:44px;line-height:1}
   .rcard .r-title{
-    font-size:13px;font-weight:900;letter-spacing:-.4px;padding:0 1px;text-align:center;line-height:1.15;word-break:keep-all;
+    font-size:15.5px;font-weight:900;letter-spacing:-.5px;padding:0 1px;text-align:center;line-height:1.12;word-break:keep-all;
     display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
   }
   .rcard .cta{
-    display:flex;align-items:center;justify-content:center;gap:3px;
-    background:#F5F1E7;color:#7C7466;font-weight:900;font-size:10.5px;
-    border-radius:999px;padding:5px 3px;text-align:center;margin-top:auto;
+    display:flex;align-items:center;justify-content:center;gap:4px;
+    background:#F5F1E7;color:#7C7466;font-weight:900;font-size:12.5px;
+    border-radius:999px;padding:8px 5px;min-height:38px;text-align:center;margin-top:auto;letter-spacing:-.3px;
   }
-  .rcard .cta .mini{width:12px;height:12px;flex:none}
+  .rcard .cta .mini{width:15px;height:15px;flex:none}
   .rcard.done{background:linear-gradient(180deg,#FFFCE9 0%,#FFFFFF 72%);border-color:#FFD84D;box-shadow:0 8px 18px rgba(255,203,5,.24)}
   .rcard.done .cta{background:#E4F7E6;color:#2F7A3C}
   .rcard.done .illu{background:#FFFDF3}
@@ -260,196 +260,66 @@
   .rcard.pulse{animation:cardPulse .55s ease}
   @keyframes cardPulse{0%{box-shadow:0 0 0 0 rgba(255,203,5,.7)}100%{box-shadow:0 0 0 22px rgba(255,203,5,0)}}
 
-  /* ---------------- home grid: 등교 | 학원 | 공부 + 날씨 ---------------- */
-  .home-grid{
-    display:grid;gap:10px;flex:0 0 auto;margin:0 0 4px;min-height:0;
-    grid-template-columns:1.34fr 1fr 1fr;
-    grid-template-rows:minmax(0,1fr) auto;
-    grid-template-areas:"hero acad study" "hero affirm wx";
-  }
-  .home-grid > .hero{grid-area:hero}
-  .home-grid > .acad-card{grid-area:acad}
-  .home-grid > .study-card{grid-area:study}
-  .home-grid > #weatherBody{grid-area:wx}
-  .home-grid > .affirm-card{grid-area:affirm}
-  .card.today-card{padding:10px 13px;border-radius:20px;min-width:0;display:flex;flex-direction:column;overflow:hidden}
-  .today-card .sec-head{margin-bottom:7px;gap:6px;flex:none}
-  .today-card h2{font-size:18px;letter-spacing:-.6px}
-  .today-card .count-pill{font-size:13px;padding:3px 10px;border-width:2px}
-  .today-card .link-btn{font-size:12.5px;padding:2px 2px}
-  .home-grid > #weatherBody{
-    min-height:0;padding:10px 13px;gap:7px 9px;border-radius:20px;
-    align-content:center;overflow:hidden;
-  }
-  .home-grid > #weatherBody .wtemp{font-size:24px;letter-spacing:-1px}
-  .home-grid > #weatherBody .wico{font-size:24px}
-  .home-grid > #weatherBody .wdesc{font-size:12.5px}
-  .home-grid > #weatherBody .wtip{font-size:11.5px;white-space:normal}
-  .home-grid > #weatherBody .badge + .badge{display:inline-flex}
-
-  /* 학원 카드 */
-  .today-academy{display:flex;flex-direction:column;gap:8px;flex:1 1 auto;min-height:0}
-  .today-academy .today-class{flex:1 1 auto;min-height:64px}
-  .today-class{
-    display:flex;align-items:center;gap:11px;background:#F7FBFF;border:2px solid #DCEBFA;
-    border-radius:16px;padding:10px 12px;min-width:0;max-width:none;
-  }
-  .today-class .ac-ico{
-    width:44px;height:44px;flex:none;border-radius:13px;background:#fff;border:2px solid #DCEBFA;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .today-class .ac-ico svg{width:30px;height:30px;display:block}
-  .today-class .t-body{min-width:0;flex:1}
-  .today-class.solo{flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:7px;padding:14px 12px}
-  .today-class.solo .ac-ico{width:64px;height:64px;border-radius:18px}
-  .today-class.solo .ac-ico svg{width:42px;height:42px}
-  .today-class.solo .t-body{flex:0 1 auto}
-  .today-class.solo .t-name{font-size:23px;line-height:1.25}
-  .today-class.solo .t-time{font-size:14px}
-  .today-class.solo .t-memo{font-size:12.5px}
-  .today-class .t-name{font-size:19px;font-weight:900;letter-spacing:-.5px;line-height:1.2;word-break:keep-all}
-  .today-class .t-time{font-size:12.5px;font-weight:900;color:#2C6BA8;margin-top:2px;font-variant-numeric:tabular-nums}
-  .today-class .t-memo{font-size:11.5px;font-weight:800;color:#8A8377;margin-top:2px}
-  .empty-soft{
-    background:#F8F6F0;border:2px dashed #E4DCCB;border-radius:13px;padding:11px;text-align:center;
-    font-weight:900;color:#8A8377;font-size:13.5px;line-height:1.4;
-  }
-  .empty-soft small{font-weight:800;font-size:11px;color:#A79E8B}
-
-  /* 학원 없는 날 */
-  .acad-empty{
-    flex:1 1 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
-    background:linear-gradient(180deg,#FFFDF2,#F6FBFF);border:2px dashed #D8E7F7;border-radius:16px;
-    padding:12px;text-align:center;min-height:0;
-  }
-  .acad-empty .acad-ico{width:62px;height:62px;display:flex;align-items:center;justify-content:center}
-  .acad-empty .acad-ico svg{width:100%;height:100%}
-  .acad-empty .acad-txt{font-size:16px;font-weight:900;color:#3F6E9A;letter-spacing:-.4px;line-height:1.3;word-break:keep-all}
-  .acad-empty .acad-txt small{display:block;font-size:11.5px;font-weight:800;color:#8FA7BD;margin-top:3px}
-  .acad-empty .btn{font-size:12.5px;padding:8px 13px;min-height:38px;border-radius:12px}
-
-  /* ---------------- 공부 타일 (home card) ---------------- */
-  .hs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;grid-auto-rows:minmax(88px,1fr);flex:0 1 auto;min-height:0;align-content:start}
-  .hs-tile:last-child:nth-child(odd){grid-column:1 / -1}
-  .hs-tile{
-    position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-    width:100%;text-align:center;font-family:inherit;height:100%;min-height:96px;
-    background:linear-gradient(180deg,#FFFEFA,#FFF7E2);border:2px solid #F2E8CF;border-radius:18px;padding:12px 10px;
-    transition:transform .12s ease,background .15s ease,border-color .15s ease,box-shadow .15s ease;min-width:0;
-  }
-  .hs-tile:active{transform:scale(.98)}
-  .hs-tile .hs-ico{
-    width:56px;height:56px;flex:none;border-radius:16px;background:#fff;border:2px solid #F0E6D0;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .hs-tile .hs-ico svg{width:38px;height:38px;display:block}
-  .hs-tile .hs-tile-body{flex:none;min-width:0;display:flex;flex-direction:column;gap:2px;align-items:center}
-  .hs-tile .hs-label{font-size:16.5px;font-weight:900;letter-spacing:-.35px;line-height:1.15;word-break:keep-all}
-  .hs-tile .hs-state{font-size:11px;font-weight:900;color:#B0A896;display:flex;align-items:center;gap:3px}
-  .hs-tile .hs-state .mini{width:12px;height:12px;flex:none}
-  .hs-tile .hs-check{
-    position:absolute;top:9px;right:9px;width:26px;height:26px;flex:none;border-radius:50%;
-    border:2.5px solid #DCD4C2;background:#fff;
-    display:flex;align-items:center;justify-content:center;color:transparent;font-size:14px;font-weight:900;
-  }
-  .hs-tile.done{background:linear-gradient(180deg,#F7FDF7,#EEF9EF);border-color:#A9DCAF;box-shadow:0 6px 14px rgba(63,163,77,.12)}
-  .hs-tile.done .hs-check{background:var(--green);border-color:var(--green);color:#fff}
-  .hs-tile.done .hs-label{color:#4E9A5C;text-decoration:line-through}
-  .hs-tile.done .hs-state{color:#4E9A5C}
-  .hs-empty{
-    grid-column:1 / -1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-    background:linear-gradient(180deg,#FFFDF2,#F7FBFF);border:2px dashed #E4DCCB;border-radius:16px;
-    padding:14px;text-align:center;font-weight:900;color:#8A8377;font-size:14.5px;
-  }
-  .hs-empty svg{width:52px;height:52px;display:block}
-
-  /* ---------------- bottom slim strips (weather + affirmation) ---------------- */
-  .home-bottom{display:grid;grid-template-columns:1.25fr 1fr;gap:13px;margin-top:13px;align-items:stretch}
-  .wx-strip{
-    display:flex;align-items:center;gap:7px;flex-wrap:wrap;
-    min-height:38px;padding:0 12px;
-  }
-  .wx-strip .wico{font-size:18px;line-height:1}
-  .wx-strip .wtemp{font-size:18px;font-weight:900;letter-spacing:-.6px;line-height:1}
-  .wx-strip .wdesc{font-size:11.5px;font-weight:900;color:#6C665C}
-  .wx-strip .wsep{width:1px;height:16px;background:#EDE7D9}
-  .wx-strip .wtip{font-size:11px;font-weight:900;color:#8A8377;white-space:nowrap}
-  .wx-strip .wmeta{font-size:10.5px;font-weight:800;color:#A79E8B;white-space:nowrap}
-  .wx-strip .retry{margin-left:auto;flex:none}
-  .badge{font-size:10px;font-weight:900;border-radius:999px;padding:4px 8px;background:#F1EFE8;color:#5D574B;white-space:nowrap}
-  .badge.good{background:#E6F6E8;color:#2F7A3C}
-  .badge.moderate{background:#FFF3DE;color:#9A6B12}
-  .badge.bad{background:#FFEADC;color:#B4551F}
-  .badge.verybad{background:#FBE5E2;color:#A02D20}
-  .retry{border:none;background:#F3EEE1;color:#6C665C;font-weight:900;border-radius:10px;padding:6px 10px;font-size:11px}
-  .wx-error{font-size:13px;font-weight:900;color:#A0522D;text-align:center;padding:12px 4px;line-height:1.6}
-  .skel{background:linear-gradient(90deg,#F4F0E6 25%,#FAF7F0 50%,#F4F0E6 75%);background-size:200% 100%;animation:sk 1.3s linear infinite;border-radius:16px}
-  @keyframes sk{from{background-position:200% 0}to{background-position:-200% 0}}
-
-  /* affirmation card (right column) */
+  /* ---------------- top strip: 확언 | 날씨 ---------------- */
+  .top-strip{display:grid;grid-template-columns:1.6fr 1fr;gap:10px;flex:none;margin-bottom:9px}
   .affirm-card{
-    padding:11px 14px;border-radius:20px;display:flex;flex-direction:column;justify-content:center;gap:5px;
+    padding:8px 14px;border-radius:18px;display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;
     background:linear-gradient(120deg,#FFF6D6 0%,#FFEDE9 55%,#EAF3FF 100%);
     border:2px solid #FFE0A8;
   }
-  .af-head{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:900;color:#8A6B12;letter-spacing:-.3px}
-  .af-head .af-ico{font-size:15px}
+  .af-head{display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:900;color:#8A6B12;letter-spacing:-.3px}
+  .af-head .af-ico{font-size:14px}
   .af-text{
-    margin:0;font-size:15.5px;font-weight:900;letter-spacing:-.4px;line-height:1.35;color:#3F3A2E;
-    word-break:keep-all;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+    margin:0;font-size:14.5px;font-weight:900;letter-spacing:-.4px;line-height:1.3;color:#3F3A2E;
+    word-break:keep-all;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
   }
-  .af-sub{font-size:10.5px;font-weight:800;color:#9A8B72;text-align:right}
+  .af-sub{display:none}
+  .wx-card{
+    padding:8px 12px;border-radius:18px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;
+    align-content:center;overflow:hidden;min-width:0;
+  }
+  .wx-card .wico{font-size:22px}
+  .wx-card .wtemp{font-size:22px;letter-spacing:-.8px}
+  .wx-card .wdesc{font-size:12px}
+  .wx-card .wtip{font-size:11px;white-space:normal}
+  .wx-card .badge + .badge{display:none}
 
-  /* ---------------- home grid: 등교 | 학원 | 공부 + 날씨 ---------------- */
+  /* ---------------- home grid: 등교 | 학원 | 공부 ---------------- */
   .home-grid{
-    display:grid;gap:10px;flex:0 0 auto;margin:0 0 4px;min-height:0;
+    display:grid;gap:10px;flex:none;min-height:0;
     grid-template-columns:1.34fr 1fr 1fr;
-    grid-template-rows:minmax(0,1fr) auto;
-    grid-template-areas:"hero acad study" "hero affirm wx";
+    grid-template-rows:auto;
   }
-  .home-grid > .hero{grid-area:hero}
-  .home-grid > .acad-card{grid-area:acad}
-  .home-grid > .study-card{grid-area:study}
-  .home-grid > #weatherBody{grid-area:wx}
-  .home-grid > .affirm-card{grid-area:affirm}
-  .card.today-card{padding:10px 13px;border-radius:20px;min-width:0;display:flex;flex-direction:column;overflow:hidden}
-  .today-card .sec-head{margin-bottom:7px;gap:6px;flex:none}
-  .today-card h2{font-size:18px;letter-spacing:-.6px}
-  .today-card .count-pill{font-size:13px;padding:3px 10px;border-width:2px}
-  .today-card .link-btn{font-size:12.5px;padding:2px 2px}
-  .home-grid > #weatherBody{
-    min-height:0;padding:10px 13px;gap:7px 9px;border-radius:20px;
-    align-content:center;overflow:hidden;
-  }
-  .home-grid > #weatherBody .wtemp{font-size:24px;letter-spacing:-1px}
-  .home-grid > #weatherBody .wico{font-size:24px}
-  .home-grid > #weatherBody .wdesc{font-size:12.5px}
-  .home-grid > #weatherBody .wtip{font-size:11.5px;white-space:normal}
-  .home-grid > #weatherBody .badge + .badge{display:inline-flex}
+  .home-grid > .hero{grid-area:auto}
+  .card.today-card{padding:9px 12px;border-radius:18px;min-width:0;display:flex;flex-direction:column;overflow:hidden}
+  .today-card .sec-head{margin-bottom:6px;gap:6px;flex:none}
+  .today-card h2{font-size:17px;letter-spacing:-.6px}
+  .today-card .count-pill{font-size:12.5px;padding:3px 9px;border-width:2px}
+  .today-card .link-btn{font-size:12px;padding:2px 2px}
 
   /* 학원 카드 */
-  .today-academy{display:flex;flex-direction:column;gap:8px;flex:1 1 auto;min-height:0}
-  .today-academy .today-class{flex:1 1 auto;min-height:64px}
+  .today-academy{display:flex;flex-direction:column;gap:7px;flex:1 1 auto;min-height:0}
+  .today-academy .today-class{flex:1 1 auto;min-height:56px}
   .today-class{
-    display:flex;align-items:center;gap:11px;background:#F7FBFF;border:2px solid #DCEBFA;
-    border-radius:16px;padding:10px 12px;min-width:0;max-width:none;
+    display:flex;align-items:center;gap:10px;background:#F7FBFF;border:2px solid #DCEBFA;
+    border-radius:15px;padding:8px 11px;min-width:0;max-width:none;
   }
   .today-class .ac-ico{
-    width:44px;height:44px;flex:none;border-radius:13px;background:#fff;border:2px solid #DCEBFA;
+    width:40px;height:40px;flex:none;border-radius:12px;background:#fff;border:2px solid #DCEBFA;
     display:flex;align-items:center;justify-content:center;
   }
-  .today-class .ac-ico svg{width:30px;height:30px;display:block}
+  .today-class .ac-ico svg{width:27px;height:27px;display:block}
   .today-class .t-body{min-width:0;flex:1}
-  .today-class.solo{flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:7px;padding:14px 12px}
-  .today-class.solo .ac-ico{width:64px;height:64px;border-radius:18px}
-  .today-class.solo .ac-ico svg{width:42px;height:42px}
+  .today-class .t-name{font-size:17px;font-weight:900;letter-spacing:-.5px;line-height:1.2;word-break:keep-all}
+  .today-class .t-time{font-size:12px;font-weight:900;color:#2C6BA8;margin-top:1px;font-variant-numeric:tabular-nums}
+  .today-class .t-memo{font-size:11px;font-weight:800;color:#8A8377;margin-top:1px}
+  .today-class.solo{flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:5px;padding:10px}
+  .today-class.solo .ac-ico{width:52px;height:52px;border-radius:15px}
+  .today-class.solo .ac-ico svg{width:34px;height:34px}
   .today-class.solo .t-body{flex:0 1 auto}
-  .today-class.solo .t-name{font-size:23px;line-height:1.25}
-  .today-class.solo .t-time{font-size:14px}
-  .today-class.solo .t-memo{font-size:12.5px}
-  .today-class .t-name{font-size:19px;font-weight:900;letter-spacing:-.5px;line-height:1.2;word-break:keep-all}
-  .today-class .t-time{font-size:12.5px;font-weight:900;color:#2C6BA8;margin-top:2px;font-variant-numeric:tabular-nums}
-  .today-class .t-memo{font-size:11.5px;font-weight:800;color:#8A8377;margin-top:2px}
+  .today-class.solo .t-name{font-size:20px;line-height:1.25}
+  .today-class.solo .t-time{font-size:13px}
+  .today-class.solo .t-memo{font-size:11.5px}
   .empty-soft{
     background:#F8F6F0;border:2px dashed #E4DCCB;border-radius:13px;padding:11px;text-align:center;
     font-weight:900;color:#8A8377;font-size:13.5px;line-height:1.4;
@@ -458,15 +328,15 @@
 
   /* 학원 없는 날 */
   .acad-empty{
-    flex:1 1 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
-    background:linear-gradient(180deg,#FFFDF2,#F6FBFF);border:2px dashed #D8E7F7;border-radius:16px;
-    padding:12px;text-align:center;min-height:0;
+    flex:1 1 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    background:linear-gradient(180deg,#FFFDF2,#F6FBFF);border:2px dashed #D8E7F7;border-radius:15px;
+    padding:10px;text-align:center;min-height:0;
   }
-  .acad-empty .acad-ico{width:62px;height:62px;display:flex;align-items:center;justify-content:center}
+  .acad-empty .acad-ico{width:54px;height:54px;display:flex;align-items:center;justify-content:center}
   .acad-empty .acad-ico svg{width:100%;height:100%}
-  .acad-empty .acad-txt{font-size:16px;font-weight:900;color:#3F6E9A;letter-spacing:-.4px;line-height:1.3;word-break:keep-all}
-  .acad-empty .acad-txt small{display:block;font-size:11.5px;font-weight:800;color:#8FA7BD;margin-top:3px}
-  .acad-empty .btn{font-size:12.5px;padding:8px 13px;min-height:38px;border-radius:12px}
+  .acad-empty .acad-txt{font-size:15px;font-weight:900;color:#3F6E9A;letter-spacing:-.4px;line-height:1.3;word-break:keep-all}
+  .acad-empty .acad-txt small{display:block;font-size:11px;font-weight:800;color:#8FA7BD;margin-top:2px}
+  .acad-empty .btn{font-size:12px;padding:7px 12px;min-height:36px;border-radius:12px}
 
   /* ---------------- 공부 타일 (home card) ---------------- */
   .hs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;grid-auto-rows:minmax(88px,1fr);flex:0 1 auto;min-height:0;align-content:start}
@@ -525,23 +395,6 @@
   .wx-error{font-size:13px;font-weight:900;color:#A0522D;text-align:center;padding:12px 4px;line-height:1.6}
   .skel{background:linear-gradient(90deg,#F4F0E6 25%,#FAF7F0 50%,#F4F0E6 75%);background-size:200% 100%;animation:sk 1.3s linear infinite;border-radius:16px}
   @keyframes sk{from{background-position:200% 0}to{background-position:-200% 0}}
-
-  /* affirmation strip (top) */
-  .affirm-strip{
-    display:flex;align-items:center;gap:9px;min-height:38px;padding:0 13px;margin-bottom:9px;overflow:hidden;
-    background:linear-gradient(100deg,#FFF3CF 0%,#FFE9E6 55%,#E9F2FF 100%);
-    border:2px solid #FFE0A8;border-radius:15px;
-  }
-  .affirm-strip .a-ico{font-size:17px;flex:none}
-  .affirm-strip .a-tag{
-    font-size:10.5px;font-weight:900;color:#8A6B12;background:#FFF3BF;border:1.5px solid #FFE08A;
-    border-radius:999px;padding:2px 8px;flex:none;white-space:nowrap;
-  }
-  .affirm-strip .a-text{
-    font-size:13.5px;font-weight:900;letter-spacing:-.3px;line-height:1.3;min-width:0;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  }
-  .affirm-strip .a-sub{margin-left:auto;font-size:10.5px;font-weight:800;color:#9A8B72;white-space:nowrap;flex:none}
 
   /* ---------------- academy / study (shared) ---------------- */
   .week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:9px}
@@ -786,44 +639,45 @@
   @media (max-width:1180px){
     .week-grid{grid-template-columns:repeat(4,1fr)}
     .form-grid{grid-template-columns:1fr 1fr}
+    .top-strip{grid-template-columns:1.5fr 1fr}
     .routine-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}
     .rcard{padding:6px 6px 7px;border-radius:14px;gap:4px}
-    .rcard .illu{border-radius:9px;min-height:78px}
-    .rcard .r-title{font-size:12px;letter-spacing:-.4px}
-    .rcard .cta{font-size:9.5px;padding:5px 2px}
-    .rcard .cta .mini{width:11px;height:11px}
+    .rcard .illu{min-height:82px;max-height:150px;border-radius:9px}
+    .rcard .r-title{font-size:13.5px;letter-spacing:-.4px}
+    .rcard .cta{font-size:11.5px;padding:7px 3px;min-height:34px}
+    .rcard .cta .mini{width:13px;height:13px}
     .rcard .step{width:20px;height:20px;font-size:10.5px;top:4px;left:4px}
     .rcard .stamp{width:21px;height:21px;font-size:12px;top:5px;right:5px}
     .hero-pika{width:50px;height:50px}
     .hero-count{font-size:clamp(21px,2.3vw,28px)}
+    .dt-clock{font-size:25px}
     .home-grid{gap:9px;grid-template-columns:1.25fr 1fr 1fr}
     .today-card h2{font-size:16px}
-    .today-class .t-name{font-size:17px}
+    .today-class .t-name{font-size:16px}
+    .today-class.solo .t-name{font-size:18px}
     .hs-tile .hs-label{font-size:14px}
-    .hs-tile .hs-ico{width:36px;height:36px}
-    .hs-tile .hs-ico svg{width:25px;height:25px}
+    .hs-tile .hs-ico{width:40px;height:40px}
+    .hs-tile .hs-ico svg{width:27px;height:27px}
   }
   @media (max-width:1080px){
-    .home-grid{
-      grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-      grid-template-rows:auto minmax(0,1fr) auto auto;
-      grid-template-areas:"hero acad" "hero study" "hero affirm" "hero wx";
-    }
+    .home-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto}
+    .home-grid > .hero{grid-row:1 / span 2}
   }
   @media (max-width:1000px){
-    .affirm-strip .a-sub{display:none}
     .dex-hero{grid-template-columns:1fr}
     .dex-stats{justify-content:flex-start}
     .gacha-row{grid-template-columns:1fr;max-width:none}
   }
   @media (max-width:860px){
-    .home-grid{grid-template-columns:1fr;grid-template-rows:auto;grid-template-areas:"hero" "acad" "study" "affirm" "wx"}
+    .home-grid{grid-template-columns:1fr;grid-template-rows:auto}
+    .home-grid > .hero{grid-row:auto}
+    .top-strip{grid-template-columns:1fr}
   }
   @media (max-width:900px){
     .routine-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
     .rcard{padding:8px}
-    .rcard .r-title{font-size:14px}
-    .rcard .cta{font-size:11px;padding:6px 4px}
+    .rcard .r-title{font-size:15px}
+    .rcard .cta{font-size:12px;padding:8px 4px;min-height:36px}
     .rcard .step{width:24px;height:24px;font-size:12px;top:6px;left:6px}
     .rcard .stamp{width:26px;height:26px;font-size:14px;top:6px;right:6px}
   }
@@ -837,15 +691,13 @@
     .tool-btn{flex:1;justify-content:center;min-height:36px}
     .hero{padding:9px 11px;gap:6px 8px}
     .hero-pika{width:48px;height:48px}
-    .hero-clock{font-size:15px}
     .hero-name{font-size:16px}
     .hero-meta{font-size:10.5px}
     .hero-count{font-size:clamp(19px,4.6vw,24px)}
-    .hs-item .hs-label{font-size:14.5px}
+    .dt-clock{font-size:22px}
     .routine-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-    .rcard .r-title{font-size:14px}
-    .wx-strip .wsep{display:none}
-    .wx-strip .wtip{white-space:normal}
+    .rcard .r-title{font-size:15px}
+    .wx-card .wsep{display:none}
     .week-grid{grid-template-columns:1fr 1fr}
     .form-grid{grid-template-columns:1fr}
     .today-class .t-name{font-size:16px}
@@ -858,9 +710,6 @@
     .brand-title{font-size:19px}
     .tab{font-size:15px;padding:9px 15px;min-height:44px}
     .tool-btn{min-height:44px;font-size:13.5px}
-    .affirm-strip{min-height:44px}
-    .affirm-strip .a-text{font-size:15px}
-    .affirm-strip .a-tag{font-size:11.5px}
     .hero{padding:14px 20px;gap:7px}
     .hero-pika{width:62px;height:62px}
     .hero-name{font-size:23px}
@@ -875,10 +724,10 @@
     .af-head{font-size:13px}
     .af-text{font-size:17px}
     .af-sub{font-size:11.5px}
-    .home-grid > #weatherBody .wtemp{font-size:28px}
-    .home-grid > #weatherBody .wico{font-size:28px}
-    .home-grid > #weatherBody .wdesc{font-size:13.5px}
-    .home-grid > #weatherBody .wtip{font-size:12.5px}
+    .wx-card .wtemp{font-size:26px}
+    .wx-card .wico{font-size:26px}
+    .wx-card .wdesc{font-size:12.5px}
+    .wx-card .wtip{font-size:11.5px}
     .hero-count{font-size:36px}
     .hero-status{font-size:14px}
     .hp-track{height:16px}
@@ -909,9 +758,10 @@
     .routine-grid{gap:11px}
     .routine-wrap .sec-head h2{font-size:20px}
     .rcard{padding:9px 10px 10px;border-radius:18px;gap:6px}
-    .rcard .illu{border-radius:13px;min-height:120px}
-    .rcard .r-title{font-size:15px}
-    .rcard .cta{font-size:11.5px;padding:6px 3px}
+    .rcard .illu{border-radius:13px;min-height:120px;max-height:230px}
+    .rcard .r-title{font-size:17.5px}
+    .rcard .cta{font-size:14.5px;padding:10px 6px;min-height:46px}
+    .rcard .cta .mini{width:17px;height:17px}
     .rcard .step{width:25px;height:25px;font-size:13px}
     .rcard .stamp{width:27px;height:27px;font-size:15px}
     .foot{font-size:10.5px}
@@ -955,6 +805,17 @@
 
   <!-- ================= DASHBOARD ================= -->
   <section class="panel active" id="panel-home">
+
+    <div class="top-strip">
+      <div class="card affirm-card">
+        <div class="af-head"><span class="af-ico">✨</span> 오늘의 확언</div>
+        <p class="af-text" id="affirmText">—</p>
+        <div class="af-sub">엄마가 응원한대!</div>
+      </div>
+      <div class="card wx-card" id="weatherBody">
+        <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
+      </div>
+    </div>
 
     <div class="home-grid">
     <!-- 등교 시간 (왼쪽 절반) -->
@@ -1060,15 +921,6 @@
         <div id="homeHomeschool" class="hs-grid"></div>
       </div>
 
-      <div class="card affirm-card">
-        <div class="af-head"><span class="af-ico">✨</span> 오늘의 확언</div>
-        <p class="af-text" id="affirmText">—</p>
-        <div class="af-sub">엄마가 응원한대!</div>
-      </div>
-
-      <div class="card wx-card" id="weatherBody">
-        <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
-      </div>
     </div>
 
     <!-- 아침 루틴 (맨 아래) -->
