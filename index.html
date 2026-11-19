@@ -998,7 +998,7 @@
     <section class="card dex-hero">
       <div>
         <h2>🔴 몬스터볼 뽑기</h2>
-        <p>아침 루틴을 다 하면 몬스터볼 6개, 공부까지 하면 8~9개! 모아서 뽑기에 도전해 보세요.<br>일반 10개 · 슈퍼 18개 · <b>마스터 30개는 전설·메가진화 100% 확정!</b></p>
+        <p>아침 루틴을 다 하면 6개, 공부까지 하면 8~9개! 매일 모아서 뽑기에 도전해 보세요.<br>일반 10개 · 슈퍼 25개 · <b>마스터 50개는 전설·메가진화 100% 확정!</b></p>
         <div class="gacha-row">
           <button class="gacha-btn normal" type="button" data-act="gacha" data-tier="normal" data-cost="10">
             <span class="gball">
@@ -1014,7 +1014,7 @@
             <span class="gacha-txt">일반 뽑기<small>볼 10개 · <b class="js-gacha-state">10개 필요</b></small></span>
           </button>
 
-          <button class="gacha-btn super" type="button" data-act="gacha" data-tier="super" data-cost="18">
+          <button class="gacha-btn super" type="button" data-act="gacha" data-tier="super" data-cost="25">
             <span class="gball">
               <svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true">
                 <defs><clipPath id="gb2"><circle cx="50" cy="50" r="46"/></clipPath></defs>
@@ -1025,10 +1025,10 @@
                 <circle cx="50" cy="50" r="6" fill="#3D7DCA"/>
               </svg>
             </span>
-            <span class="gacha-txt">슈퍼 뽑기<small>볼 18개 · <b class="js-gacha-state">18개 필요</b></small></span>
+            <span class="gacha-txt">슈퍼 뽑기<small>볼 25개 · <b class="js-gacha-state">25개 필요</b></small></span>
           </button>
 
-          <button class="gacha-btn master" type="button" data-act="gacha" data-tier="master" data-cost="30">
+          <button class="gacha-btn master" type="button" data-act="gacha" data-tier="master" data-cost="50">
             <span class="gball">
               <svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true">
                 <defs><clipPath id="gb3"><circle cx="50" cy="50" r="46"/></clipPath></defs>
@@ -1039,7 +1039,7 @@
                 <circle cx="50" cy="50" r="6" fill="#7A3FC9"/>
               </svg>
             </span>
-            <span class="gacha-txt">마스터 뽑기<small>볼 30개 · <b class="js-gacha-state">30개 필요</b></small></span>
+            <span class="gacha-txt">마스터 뽑기<small>볼 50개 · <b class="js-gacha-state">50개 필요</b></small></span>
           </button>
         </div>
         <div class="stone-row">
@@ -1283,8 +1283,8 @@
   /* 뽑기 3단계: 단계별 확률 */
   var DRAW = {
     normal: { cost: 10, name: '일반 뽑기', color: '#E8362B', weights: { '일반': 70, '진화': 30 } },
-    super: { cost: 18, name: '슈퍼 뽑기', color: '#2C6BA8', weights: { '일반': 20, '진화': 55, '전설': 20, '메가진화': 5 } },
-    master: { cost: 30, name: '마스터 뽑기', color: '#6B34B8', weights: { '전설': 50, '메가진화': 50 } }
+    super: { cost: 25, name: '슈퍼 뽑기', color: '#2C6BA8', weights: { '일반': 20, '진화': 55, '전설': 20, '메가진화': 5 } },
+    master: { cost: 50, name: '마스터 뽑기', color: '#6B34B8', weights: { '전설': 50, '메가진화': 50 } }
   };
 
   var toastTimer = null;
