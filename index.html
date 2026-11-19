@@ -189,6 +189,11 @@
   }
   .hero-pika .evo-char{opacity:1;transform:scale(.98)}
   .hero-pika .evo-mega{opacity:0;transform:scale(1.24)}
+  .hero-pika .evo-flame{position:absolute;inset:0;z-index:2;display:none;place-items:center}
+  .hero-pika .evo-flame svg{width:54%;height:54%;display:block;filter:drop-shadow(0 2px 3px rgba(150,70,0,.25))}
+  /* 07:10~08:15: 리자몽은 막대 위에서 달리고, 배지에는 불꽃 문장만 */
+  .hero-pika.rest .evo-char,.hero-pika.rest .evo-mega{opacity:0}
+  .hero-pika.rest .evo-flame{display:grid}
   .hero-pika .evo-burst{
     position:absolute;inset:-8px;border-radius:50%;z-index:3;opacity:0;pointer-events:none;
     background:radial-gradient(circle,rgba(255,255,255,.96) 0%,rgba(130,220,255,.78) 32%,rgba(46,134,224,0) 68%);
@@ -296,6 +301,25 @@
     filter:drop-shadow(0 2px 3px rgba(0,0,0,.18));
   }
   .hp-runner.run{animation:runnerHop .7s ease-in-out infinite}
+  /* 아침: 리자몽이 진행바 위를 날아간다 (07:10~08:15), 08:15 이후엔 도착한 메가리자몽X */
+  .hero-progress>.hp-runner{
+    top:0;width:44px;height:44px;opacity:0;transform:translate(-50%,-74%);
+    transition:left .8s cubic-bezier(.3,.9,.3,1),opacity .3s ease;
+    filter:drop-shadow(0 3px 4px rgba(120,60,0,.28));
+  }
+  .hero-progress>.hp-runner img{
+    position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain;
+    opacity:0;transition:opacity .3s ease;pointer-events:none;-webkit-user-drag:none;
+  }
+  .hero-progress>.hp-runner.on{opacity:1}
+  .hero-progress>.hp-runner.on .rn-char{opacity:1}
+  .hero-progress>.hp-runner.mega-run{opacity:1;filter:drop-shadow(0 0 12px rgba(90,190,255,.95))}
+  .hero-progress>.hp-runner.mega-run .rn-mega{opacity:1}
+  .hero-progress>.hp-runner.run{animation:charFly .9s ease-in-out infinite}
+  @keyframes charFly{
+    0%,100%{transform:translate(-50%,-72%) rotate(-3deg)}
+    50%{transform:translate(-50%,-80%) rotate(3deg)}
+  }
   @keyframes runnerHop{0%,100%{transform:translate(-50%,-56%)}50%{transform:translate(-50%,-64%)}}
   .hp-labels{display:flex;justify-content:space-between;font-size:10px;font-weight:900;color:#A79E8B;margin-top:2px}
 
@@ -1763,6 +1787,9 @@
           <button class="hero-pika" id="heroEvo" type="button" data-act="evo-preview" aria-label="리자몽 · 눌러서 메가진화 미리보기" title="리자몽 · 누르면 메가진화 연출">
             <img class="evo-char" src="assets/charizard-6.png" alt="리자몽" draggable="false">
             <img class="evo-mega" src="assets/mega-charizard-x-10034.png" alt="메가리자몽X" draggable="false">
+            <span class="evo-flame" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M25 5c1 6-5 8-5 14 0 3 2 5 2 8a6 6 0 0 0 12 0c0-4-3-6-3-9 5 3 9 8 9 14a14 14 0 0 1-28 0C12 18 22 14 25 5z" fill="#FF9A1F"/><path d="M25 20c0 4-3 5-3 9a6 6 0 0 0 12 0c0-3-3-4-3-7 3 2 5 5 5 8a10 10 0 0 1-20 0c0-5 5-8 9-10z" fill="#FFD347"/></svg>
+            </span>
             <span class="evo-burst" aria-hidden="true"></span>
           </button>
           <div class="hero-id">
@@ -1783,22 +1810,11 @@
             <span class="ms-dot" data-ms="0730" style="left:40%"></span>
             <span class="ms-dot" data-ms="0745" style="left:60%"></span>
             <span class="ms-dot" data-ms="0815" style="left:100%"></span>
-            <div class="hp-runner" id="runner">
-                <svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true">
-                  <g transform="rotate(-26 40 34)">
-                    <ellipse cx="40" cy="32" rx="12" ry="26" fill="#FFD93B" stroke="#4A3B1A" stroke-width="4"/>
-                    <path d="M29 19 Q40 2 51 19 Z" fill="#4A3B1A"/>
-                  </g>
-                  <g transform="rotate(26 80 34)">
-                    <ellipse cx="80" cy="32" rx="12" ry="26" fill="#FFD93B" stroke="#4A3B1A" stroke-width="4"/>
-                    <path d="M69 19 Q80 2 91 19 Z" fill="#4A3B1A"/>
-                  </g>
-                  <ellipse cx="60" cy="70" rx="41" ry="36" fill="#FFD93B" stroke="#4A3B1A" stroke-width="4"/>
-                  <circle cx="45" cy="62" r="6" fill="#2E2A25"/>
-                  <circle cx="75" cy="62" r="6" fill="#2E2A25"/>
-                  <path d="M52 80 Q56 86 60 80.5 Q64 86 68 80" fill="none" stroke="#2E2A25" stroke-width="3" stroke-linecap="round"/>
-                </svg>
-              </div>
+          </div>
+          <!-- 07:10~08:15 리자몽이 막대 앞쪽 끝을 달린다 / 08:15 이후에는 도착한 메가리자몽X -->
+          <div class="hp-runner" id="runner" aria-hidden="true">
+            <img class="rn-char" src="assets/charizard-6.png" alt="" draggable="false">
+            <img class="rn-mega" src="assets/mega-charizard-x-10034.png" alt="" draggable="false">
           </div>
           <div class="ms-labels">
             <span class="ms" data-ms="0700" style="left:0%"><b>7:00</b><span>기상</span></span>
@@ -3325,18 +3341,21 @@
 
   /* ======================= 리자몽 → 메가리자몽X 진화 ======================= */
   var heroRealMega = false;    /* 지금 시각 기준 진짜 상태 (08:15 지나면 true) */
+  var heroRealRest = false;    /* 07:10~08:15: 리자몽은 막대 위, 배지는 불꽃 문장 */
   var heroPreviewing = false;  /* 배지·알림 테스트로 잠깐 보여주는 중 */
   var evoPreviewTimer = null, evoFlashTimer = null;
+  var RUN_START_MIN = 7 * 60 + 10;   /* 07:10 — 리자몽이 막대 위로 올라간다 */
 
-  function applyHeroMega(on, animate) {
+  function applyHeroState(mega, rest, animate) {
     var b = $('heroEvo');
     if (!b) return;
     var was = b.classList.contains('mega');
-    b.classList.toggle('mega', on);
-    var label = on ? '메가리자몽X' : '리자몽';
+    b.classList.toggle('mega', mega);
+    b.classList.toggle('rest', !mega && !!rest);
+    var label = mega ? '메가리자몽X' : (rest ? '리자몽이 막대 위를 달려요' : '리자몽');
     b.setAttribute('aria-label', label + ' · 눌러서 메가진화 미리보기');
     b.title = label + ' · 누르면 메가진화 연출';
-    if (on && !was && animate !== false) playEvoFlash(b);
+    if (mega && !was && animate !== false) playEvoFlash(b);
   }
 
   function playEvoFlash(b) {
@@ -3350,11 +3369,12 @@
     evoFlashTimer = setTimeout(function () { b.classList.remove('evolving'); }, 1200);
   }
 
-  /* 08:15 전(막대가 다 차기 전)에는 리자몽, 등교 시간이 되면 메가리자몽X */
-  function updateHeroEvolution(pct) {
+  /* 07:00~07:09 리자몽은 배지에, 07:10부터 막대 위를 달리고, 08:15에 메가리자몽X */
+  function updateHeroEvolution(pct, mins) {
     heroRealMega = pct >= 100;
+    heroRealRest = (!heroRealMega && mins >= RUN_START_MIN);
     if (heroPreviewing) return;
-    applyHeroMega(heroRealMega);
+    applyHeroState(heroRealMega, heroRealRest);
   }
 
   /* 🔔 알림 테스트·배지 누르기: 잠깐 메가진화 연출(기본 3초) */
@@ -3362,12 +3382,12 @@
     var b = $('heroEvo');
     if (!b) return;
     heroPreviewing = true;
-    applyHeroMega(true, false);
+    applyHeroState(true, false, false);
     playEvoFlash(b);
     clearTimeout(evoPreviewTimer);
     evoPreviewTimer = setTimeout(function () {
       heroPreviewing = false;
-      applyHeroMega(heroRealMega, false);
+      applyHeroState(heroRealMega, heroRealRest, false);
     }, (sec || 3) * 1000);
   }
 
@@ -3440,14 +3460,21 @@
       if (trk) trk.classList.toggle('finished', left <= 0);
       var dp = $('dayProgress'); if (dp) dp.style.width = remain.toFixed(1) + '%';
       var rn = $('runner');
+      var minsNow = now.getHours() * 60 + now.getMinutes();
       if (rn) {
-        rn.style.left = pct.toFixed(1) + '%';
-        if (remain > 0 && remain < 100) rn.classList.add('run'); else rn.classList.remove('run');
+        var running = (minsNow >= RUN_START_MIN && left > 0);
+        var arrived = (left <= 0);
+        rn.style.left = (arrived ? 97 : pct).toFixed(1) + '%';
+        rn.classList.toggle('on', running);
+        rn.classList.toggle('mega-run', arrived);
+        if (running) rn.classList.add('run'); else rn.classList.remove('run');
       }
       var hs = $('heroStatus'); if (hs) hs.textContent = statusFor(left);
-      updateHeroEvolution(pct);
+      updateHeroEvolution(pct, minsNow);
     } else {
-      updateHeroEvolution(0);
+      var rnW = $('runner');
+      if (rnW) { rnW.classList.remove('on', 'run', 'mega-run'); }
+      updateHeroEvolution(0, now.getHours() * 60 + now.getMinutes());
     }
 
     /* 저녁: 21:00 취침까지 */
@@ -4750,12 +4777,12 @@
   }
   function svgLate() {
     return '<svg viewBox="0 0 48 48" aria-hidden="true">'
-      + '<path d="M6 30h7M4 37h8M20 8l5 4M28 8l-5 4" stroke="#F2C14E" stroke-width="3" stroke-linecap="round"/>'
-      + '<circle cx="27" cy="27" r="14" fill="#FFF7E0" stroke="#E0A32E" stroke-width="2.4"/>'
-      + '<path d="M18 12l-5-5M36 12l5-5" stroke="#E0A32E" stroke-width="2.6" stroke-linecap="round"/>'
-      + '<path d="M27 19v8l6 4" fill="none" stroke="#C9830F" stroke-width="2.8" stroke-linecap="round"/>'
-      + '<circle cx="27" cy="27" r="2.4" fill="#C9830F"/>'
-      + '<path d="M18 37l-3 4M36 37l3 4" stroke="#E0A32E" stroke-width="2.6" stroke-linecap="round"/>'
+      + '<path d="M4 22h7M2 30h8" stroke="#F2C14E" stroke-width="3.2" stroke-linecap="round"/>'
+      + '<path d="M16 12l-6-6M38 12l6-6" stroke="#E0A32E" stroke-width="3" stroke-linecap="round"/>'
+      + '<circle cx="27" cy="27" r="17" fill="#FFF7E0" stroke="#E0A32E" stroke-width="2.6"/>'
+      + '<path d="M27 17v10l7 5" fill="none" stroke="#C9830F" stroke-width="3" stroke-linecap="round"/>'
+      + '<circle cx="27" cy="27" r="2.6" fill="#C9830F"/>'
+      + '<path d="M19 41l-4 5M35 41l4 5" stroke="#E0A32E" stroke-width="2.8" stroke-linecap="round"/>'
       + '</svg>';
   }
   function svgMath() {
