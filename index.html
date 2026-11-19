@@ -491,46 +491,51 @@
   .hs-row.done .hs-ico{background:#F6FDF6;border-color:#CFEBD3}
   .hs-row.done .hs-label{color:#3F7A4A}
 
-  /* ---------------- 저녁 오른쪽: 오늘의 공부(위) + ⚡ 보너스 공부(아래) ---------------- */
+  /* ---------------- 저녁 오른쪽: 오늘의 공부(위) + ⚡ 보너스 공부(아래) --------------
+     항목 이름이 최대한 크게 보이도록 카드 안쪽 여백과 머리말은 좁게,
+     완료 버튼은 ‘🔴+1 / ✓ 완료’ 알약으로 짧게 — 남는 가로 폭은 전부 이름에 준다. */
+  #homeEvening .study-card{padding:4px 8px 5px;display:flex;flex-direction:column;min-height:0}
+  #homeEvening .study-card .sec-head{margin-bottom:2px;gap:5px}
+  #homeEvening .study-card .count-pill{font-size:12px;padding:2px 8px}
   #homeEvening .study-card .hs-grid{
-    display:grid;grid-template-columns:1fr 1fr;gap:7px;
-    justify-content:stretch;align-content:start;align-content:safe center;
-    overflow-y:auto;overscroll-behavior:contain;
+    display:grid;grid-template-columns:1fr 1fr;gap:5px;flex:1 1 auto;min-height:0;max-height:214px;margin:auto 0;
+    grid-auto-rows:minmax(0,1fr);align-content:stretch;overflow:hidden;
   }
-  #homeEvening .study-card .hs-row{padding:4px 9px;gap:8px;border-radius:13px}
-  #homeEvening .study-card .hs-row .hs-ico{width:28px;height:28px;border-radius:9px;border-width:1.5px}
-  #homeEvening .study-card .hs-row .hs-ico svg{width:20px;height:20px}
-  #homeEvening .study-card .hs-row .hs-label{font-size:13.5px;letter-spacing:-.3px}
-  #homeEvening .study-card .hs-row .hs-cta{font-size:10.5px;padding:5px 8px;min-height:26px;gap:3px}
-  #homeEvening .study-card .hs-row .hs-cta .mini{width:12px;height:12px}
+  #homeEvening .study-card .hs-row{padding:5px 8px;gap:7px;border-radius:13px;border-width:1.5px;min-height:0}
+  #homeEvening .study-card .hs-row .hs-ico{width:34px;height:34px;border-radius:10px;border-width:1.5px}
+  #homeEvening .study-card .hs-row .hs-ico svg{width:27px;height:27px}
+  #homeEvening .study-card .hs-row .hs-label{font-size:17px;line-height:1.15;font-weight:900;letter-spacing:-.5px;color:#241F19}
+  #homeEvening .study-card .hs-row .hs-cta{font-size:12.5px;padding:4px 9px;min-height:30px;gap:3px;letter-spacing:-.2px}
+  #homeEvening .study-card .hs-row .hs-cta .mini{width:16px;height:16px}
   #homeEvening .study-card .hs-row:last-child:nth-child(odd){grid-column:1 / -1}
   #homeEvening .study-card .hs-empty{grid-column:1 / -1}
 
   #homeEvening .home-right>.bonus-card{flex:0 0 auto}
-  #homeEvening .bonus-card{background:linear-gradient(180deg,#FFFBEC 0%,#FFFFFF 62%);border-color:#F3E3B4}
+  #homeEvening .bonus-card{padding:4px 8px 5px;background:linear-gradient(180deg,#FFFBEC 0%,#FFFFFF 62%);border-color:#F3E3B4}
+  #homeEvening .bonus-card .sec-head{margin-bottom:2px;gap:5px}
   #homeEvening .bonus-card h2{color:#7A5B00}
-  #homeEvening .bonus-card .count-pill{background:#FFF4CF;border-color:#EFD996;color:#8A6B12}
-  #homeEvening .bonus-sub{font-size:10.5px;font-weight:900;color:#A08A4A;letter-spacing:-.3px;white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
-  .bonus-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;flex:1 1 auto;min-height:0}
+  #homeEvening .bonus-card .count-pill{font-size:12px;padding:2px 8px;background:#FFF4CF;border-color:#EFD996;color:#8A6B12}
+  #homeEvening .bonus-sub{font-size:11px;font-weight:900;color:#A08A4A;letter-spacing:-.3px;white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .bonus-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;flex:1 1 auto;min-height:0}
   .bonus-tile{
-    display:flex;align-items:center;justify-content:flex-start;gap:8px;width:100%;min-width:0;text-align:left;
-    background:#FFFFFF;border:2px dashed #EBD9A8;border-radius:13px;padding:4px 9px;
+    display:flex;align-items:center;justify-content:flex-start;gap:7px;width:100%;min-width:0;text-align:left;
+    background:#FFFFFF;border:1.5px dashed #EBD9A8;border-radius:12px;padding:6px 8px;
     box-shadow:0 4px 12px rgba(160,140,80,.08);font-family:inherit;
     transition:transform .12s ease,background .15s ease,border-color .15s ease;
   }
   .bonus-tile:active{transform:scale(.98)}
   .bonus-tile .bt-ico{
-    width:28px;height:28px;flex:none;border-radius:9px;background:#FFF9EA;border:1.5px solid #F2E3BF;
+    width:32px;height:32px;flex:none;border-radius:10px;background:#FFF9EA;border:1.5px solid #F2E3BF;
     display:flex;align-items:center;justify-content:center;
   }
-  .bonus-tile .bt-ico svg{width:21px;height:21px;display:block}
-  .bonus-tile .bt-label{flex:1;min-width:0;font-size:13.5px;font-weight:900;color:#4A443A;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bonus-tile .bt-ico svg{width:26px;height:26px;display:block}
+  .bonus-tile .bt-label{flex:1;min-width:0;font-size:16px;font-weight:900;color:#241F19;letter-spacing:-.4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .bonus-tile .bt-cta{
     flex:none;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;
     background:#FFF1C8;color:#7A4E00;border:1.5px solid #F3D477;border-radius:999px;
-    padding:4px 7px;font-size:10.5px;font-weight:900;letter-spacing:-.3px;
+    padding:3px 8px;font-size:11.5px;font-weight:900;letter-spacing:-.3px;
   }
-  .bonus-tile .bt-cta .mini{width:12px;height:12px;flex:none}
+  .bonus-tile .bt-cta .mini{width:15px;height:15px;flex:none}
   .bonus-tile.done{background:linear-gradient(180deg,#FFFCE9,#FFF7DC);border-style:solid;border-color:#FFD84D;box-shadow:0 8px 18px rgba(255,203,5,.18)}
   .bonus-tile.done .bt-ico{background:#F6FDF6;border-color:#CFEBD3}
   .bonus-tile.done .bt-label{color:#3F7A4A}
@@ -1384,14 +1389,28 @@
   }
 
   /* 실제 태블릿(주소·상태 표시줄 포함): 보이는 높이가 짧아도 잘리지 않게 */
+  /* 901~919px: 줄 높이가 얼마 안 모자라는 구간 — 아이콘만 살짝 줄여 아래가 잘리지 않게 */
+  @media (min-height:901px) and (max-height:919px){
+    #homeEvening .study-card .hs-row{padding:4px 8px}
+    #homeEvening .study-card .hs-row .hs-ico{width:32px;height:32px}
+    #homeEvening .study-card .hs-row .hs-ico svg{width:26px;height:26px}
+  }
   @media (max-height:900px){
     .routine-wrap{flex:0 6 auto}
-    #homeEvening .bonus-tile{padding:3px 8px}
-    #homeEvening .bonus-tile .bt-ico{width:24px;height:24px;border-radius:8px}
-    #homeEvening .bonus-tile .bt-ico svg{width:18px;height:18px}
-    #homeEvening .study-card .hs-row{padding:3px 9px}
-    #homeEvening .study-card .hs-row .hs-ico{width:26px;height:26px}
-    #homeEvening .study-card .hs-row .hs-ico svg{width:19px;height:19px}
+    #homeEvening .study-card{padding:3px 7px 4px}
+    #homeEvening .study-card .hs-row{padding:4px 7px;gap:6px;border-radius:12px}
+    #homeEvening .study-card .hs-row .hs-ico{width:29px;height:29px;border-radius:9px}
+    #homeEvening .study-card .hs-row .hs-ico svg{width:23px;height:23px}
+    #homeEvening .study-card .hs-row .hs-label{font-size:15.5px}
+    #homeEvening .study-card .hs-row .hs-cta{font-size:11.5px;min-height:26px;padding:3px 7px}
+    #homeEvening .study-card .hs-row .hs-cta .mini{width:14px;height:14px}
+    #homeEvening .bonus-card{padding:3px 7px 4px}
+    #homeEvening .bonus-tile{padding:4px 7px;gap:6px}
+    #homeEvening .bonus-tile .bt-ico{width:28px;height:28px;border-radius:9px}
+    #homeEvening .bonus-tile .bt-ico svg{width:22px;height:22px}
+    #homeEvening .bonus-tile .bt-label{font-size:14.5px}
+    #homeEvening .bonus-tile .bt-cta{font-size:11px;padding:2px 7px}
+    #homeEvening .bonus-tile .bt-cta .mini{width:13px;height:13px}
     .rcard .illu{flex:1 1 auto;height:auto;min-height:0;max-height:none;aspect-ratio:auto}
     .rcard{gap:4px}
     .rcard .r-title{font-size:15px;padding:0 18px}
@@ -4319,10 +4338,11 @@
       for (var i = 0; i < tasks.length; i++) {
         var t = tasks[i];
         var done = doneIds.indexOf(t.id) !== -1;
-        html += '<button class="hs-row' + (done ? ' done' : '') + '" type="button" data-act="h-toggle" data-id="' + esc(t.id) + '" aria-pressed="' + done + '">'
+        html += '<button class="hs-row' + (done ? ' done' : '') + '" type="button" data-act="h-toggle" data-id="' + esc(t.id) + '" aria-pressed="' + done + '"'
+          + ' aria-label="' + esc(t.label) + (done ? ' 완료 취소' : ' 완료하고 몬스터볼 +1') + '">'
           + '<span class="hs-ico">' + studyIcon(t.label) + '</span>'
           + '<span class="hs-label">' + esc(t.label) + '</span>'
-          + '<span class="hs-cta">' + (done ? '완료! ✓' : '눌러서 완료 ' + miniBallSvg() + ' +1') + '</span>'
+          + '<span class="hs-cta">' + (done ? '✓ 완료' : miniBallSvg() + '+1') + '</span>'
           + '</button>';
       }
     }
@@ -4370,10 +4390,11 @@
     for (var i = 0; i < BONUS_STUDY.length; i++) {
       var b = BONUS_STUDY[i];
       var isDone = done.indexOf(b.id) !== -1;
-      html += '<button class="bonus-tile' + (isDone ? ' done' : '') + '" type="button" data-act="b-toggle" data-id="' + esc(b.id) + '" aria-pressed="' + isDone + '">'
+      html += '<button class="bonus-tile' + (isDone ? ' done' : '') + '" type="button" data-act="b-toggle" data-id="' + esc(b.id) + '" aria-pressed="' + isDone + '"'
+        + ' aria-label="' + esc(b.label) + (isDone ? ' 완료 취소' : ' 완료하고 몬스터볼 +1') + '">'
         + '<span class="bt-ico">' + bonusIcon(b.icon) + '</span>'
         + '<span class="bt-label">' + esc(b.label) + '</span>'
-        + '<span class="bt-cta">' + (isDone ? '완료 ✓' : miniBallSvg() + ' +1') + '</span>'
+        + '<span class="bt-cta">' + (isDone ? '✓ 완료' : miniBallSvg() + '+1') + '</span>'
         + '</button>';
     }
     grid.innerHTML = html;
