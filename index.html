@@ -98,7 +98,7 @@
   .tool-btn.on{background:#EAF7EC;border-color:#BFE3C6;color:#2F7A3C}
 
   /* ---------------- layout ---------------- */
-  .board{max-width:1480px;width:100%;margin:0 auto;padding:8px 16px 9px;flex:1 1 auto;display:flex;flex-direction:column;min-height:0}
+  .board{max-width:1480px;width:100%;margin:0 auto;padding:8px 16px 7px;flex:1 1 auto;display:flex;flex-direction:column;min-height:0}
   .panel{display:none}
   .panel.active{display:block;animation:fadeIn .25s ease;flex:1 1 auto;min-height:0}
   /* 홈 화면은 태블릿 한 화면에 맞추기: 남는 높이는 루틴 위 여백으로 */
@@ -796,7 +796,7 @@
     align-self:center;font-size:10.5px;font-weight:900;color:#B3281D;background:#FFF0F0;
     border:1.5px solid #FFD6D6;border-radius:999px;padding:2px 8px;white-space:nowrap;line-height:1.35;
   }
-  .routine-grid.seven{grid-template-columns:repeat(7,minmax(0,1fr))}
+  .routine-grid.eve5{grid-template-columns:repeat(5,minmax(0,1fr))}
   .routine-wrap.eve .sec-head h2{color:#4B3F9C}
   .routine-wrap.eve .count-pill{background:#F1EDFF;border-color:#D9D0F8;color:#54489F}
   .routine-wrap.eve .ghost-btn{border-color:#E3DBF6;color:#655CA8}
@@ -889,9 +889,9 @@
   }
   @media (max-width:1180px){
     .week-grid{grid-template-columns:repeat(4,1fr)}
-    .routine-grid.seven{gap:6px}
-    .routine-grid.seven .r-title{font-size:12.5px}
-    .routine-grid.seven .cta{font-size:11px;padding:6px 2px}
+    .routine-grid.eve5{gap:6px}
+    .routine-grid.eve5 .r-title{font-size:12.5px}
+    .routine-grid.eve5 .cta{font-size:11px;padding:6px 2px}
     .form-grid{grid-template-columns:1fr 1fr}
     .top-strip{grid-template-columns:1.5fr 1fr}
     .routine-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}
@@ -930,7 +930,7 @@
   }
   @media (max-width:900px){
     .routine-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-    .routine-grid.seven{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .routine-grid.eve5{grid-template-columns:repeat(3,minmax(0,1fr))}
     .mode-switch{order:4}
     .mode-pill{padding:6px 10px;font-size:12.5px;min-height:34px}
     .rcard{padding:8px}
@@ -954,7 +954,7 @@
     .hero-count{font-size:clamp(19px,4.6vw,24px)}
     .dt-clock{font-size:22px}
     .routine-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-    .routine-grid.seven{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .routine-grid.eve5{grid-template-columns:repeat(2,minmax(0,1fr))}
     .rcard .r-title{font-size:15px}
     .wx-card .wsep{display:none}
     .week-grid{grid-template-columns:1fr 1fr}
@@ -976,9 +976,9 @@
     .ms-now{font-size:12.5px}
     .msb-text{font-size:21px}
     .mode-pill{font-size:15px;padding:8px 17px;min-height:42px}
-    .routine-grid.seven{gap:9px}
-    .routine-grid.seven .r-title{font-size:15px}
-    .routine-grid.seven .cta{font-size:12px}
+    .routine-grid.eve5{gap:9px}
+    .routine-grid.eve5 .r-title{font-size:15px}
+    .routine-grid.eve5 .cta{font-size:12px}
     .rcard .rb-badge{font-size:11px}
     .tab{font-size:15px;padding:9px 15px;min-height:44px}
     .tool-btn{min-height:44px;font-size:13.5px}
@@ -1262,7 +1262,6 @@
         </div>
 
         <div class="hero-mid">
-          <div class="hero-kicker">🌙 취침까지</div>
           <div class="hero-count" id="eveCountdownText">--</div>
           <div class="hero-status" id="eveStatus">오늘 하루도 수고했어요 🌙</div>
         </div>
@@ -1270,19 +1269,34 @@
         <div class="hero-progress">
           <div class="hp-track">
             <div class="hp-fill" id="eveProgress"></div>
+            <span class="ms-dot" style="left:0%"></span>
+            <span class="ms-dot" style="left:14.286%"></span>
+            <span class="ms-dot" style="left:28.571%"></span>
+            <span class="ms-dot" style="left:71.429%"></span>
+            <span class="ms-dot" style="left:100%"></span>
             <div class="hp-runner" id="eveRunner">
               <svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true">
                 <path d="M80 20a42 42 0 1 0 0 80 34 34 0 1 1 0-80Z" fill="#FFE79C" stroke="#D9B85C" stroke-width="5" stroke-linejoin="round"/>
               </svg>
             </div>
           </div>
-          <div class="hp-labels"><span>17:30 저녁 시작 🌙</span><span>21:00 취침 😴</span></div>
+          <div class="ms-labels">
+            <span class="ms" style="left:0%"><b>17:30</b><span>🚿 샤워</span></span>
+            <span class="ms down" style="left:14.286%"><b>18:00</b><span>🍚 저녁식사</span></span>
+            <span class="ms" style="left:28.571%"><b>18:30</b><span>✏️ 숙제</span></span>
+            <span class="ms down" style="left:71.429%"><b>20:00</b><span>🎒 가방정리·양치</span></span>
+            <span class="ms" style="left:100%"><b>21:00</b><span>🌙 취침</span></span>
+          </div>
+          <div class="ms-foot">
+            <span class="ms-now" id="eveMsNow">오늘 하루도 수고했어요 🌙</span>
+            <button class="ms-test" type="button" data-act="ms-test-eve">🔔 알림 테스트</button>
+          </div>
         </div>
 
         <div class="hero-side">
           <div class="stat-pill">
             <span class="stat-k">저녁 루틴</span>
-            <span class="stat-v js-evening-count">0/7</span>
+            <span class="stat-v js-evening-count">0/5</span>
           </div>
           <div class="stat-pill balls">
             <svg class="mini" viewBox="0 0 100 100" aria-hidden="true">
@@ -1326,14 +1340,14 @@
       <!-- 저녁 루틴 (맨 아래) -->
       <section class="routine-wrap eve">
         <div class="sec-head">
-          <h2>🌙 저녁 루틴 7단계</h2>
-          <span class="sec-sub">체크만! 7개를 모두 하면 몬스터볼 +1</span>
-          <span class="count-pill js-evening-count">0/7</span>
+          <h2>🌙 저녁 루틴 5단계</h2>
+          <span class="sec-sub">체크만! 5개를 모두 하면 몬스터볼 +1</span>
+          <span class="count-pill js-evening-count">0/5</span>
           <span class="streak-chip js-streak-chip">🔥 0일</span>
           <div class="spacer"></div>
           <button class="ghost-btn" type="button" data-act="open-routine-edit">⚙️ 루틴 편집</button>
         </div>
-        <div class="routine-grid seven" id="eveningGrid"></div>
+        <div class="routine-grid eve5" id="eveningGrid"></div>
       </section>
     </div>
   </section>
@@ -1861,7 +1875,8 @@
 
   var DEFAULT6 = ['세수·로션', '유산균·물 마시기', '아침먹으면서 영어영상', '용변·양치', '옷입고 양말신기', '원리셈·따풀'];
   var DEFAULT5 = ['세수·로션', '유산균·물 마시기', '아침먹으면서 영어영상', '용변·양치', '옷입고 양말신기'];
-  var DEFAULT_EVENING = ['샤워', '저녁식사', '숙제', '공부', '독서', '양치', '가방정리'];
+  var DEFAULT_EVENING = ['샤워', '저녁식사', '숙제·공부', '양치·가방정리', '독서'];
+  var DEFAULT_EVENING_OLD7 = ['샤워', '저녁식사', '숙제', '공부', '독서', '양치', '가방정리'];
   var DEFAULT4 = ['세수·로션', '영어영상', '양치', '옷입기'];
 
   function defaultItems() {
@@ -1983,6 +1998,31 @@
     if (changed) store.set(K.hsDone, state.homeschoolDone);
   }
 
+  /* 7개 저녁 목록 → 5개 저녁 목록: 이름이 겹치는 항목의 체크를 이어받는다 */
+  function remapEveningProgress(oldList, newList) {
+    var map = {}, i, j;
+    for (i = 0; i < oldList.length; i++) {
+      var ol = normLabel(oldList[i] && oldList[i].label);
+      if (!ol) continue;
+      for (j = 0; j < newList.length; j++) {
+        var nl = normLabel(newList[j].label);
+        if (nl.indexOf(ol) !== -1 || ol.indexOf(nl) !== -1) { map[oldList[i].id] = newList[j].id; break; }
+      }
+    }
+    var changed = false, d, arr, next, seen, k;
+    for (d in state.eveningDone) {
+      if (!Object.prototype.hasOwnProperty.call(state.eveningDone, d)) continue;
+      arr = state.eveningDone[d] || [];
+      next = []; seen = {};
+      for (i = 0; i < arr.length; i++) {
+        k = map[arr[i]] || arr[i];
+        if (!seen[k]) { seen[k] = true; next.push(k); }
+      }
+      if (next.join(',') !== arr.join(',')) { state.eveningDone[d] = next; changed = true; }
+    }
+    if (changed) store.set(K.eveningDone, state.eveningDone);
+  }
+
   /* 옛 루틴 목록(v4·v5)의 체크 기록을 새 목록 id로 옮기기 (같은 이름끼리) */
   function remapRoutineProgress(oldList, newList) {
     var map = {}, i, j;
@@ -2050,10 +2090,15 @@
     }
     state.items = items;
 
-    /* 저녁 루틴: 7단계 기본값 */
+    /* 저녁 루틴: 5단계 기본값 (예전 7단계 기본값이면 자동으로 올린다) */
     var eve = store.get(K.eveningItems, null);
     if (!(eve && eve.length && eve[0] && eve[0].id)) {
       eve = defaultEveningItems();
+      store.set(K.eveningItems, eve);
+    } else if (isDefaultList(eve, DEFAULT_EVENING_OLD7)) {
+      var freshEve = defaultEveningItems();
+      remapEveningProgress(eve, freshEve);
+      eve = freshEve;
       store.set(K.eveningItems, eve);
     }
     state.eveningItems = eve;
@@ -2091,7 +2136,7 @@
   function saveStones() { store.set(K.stones, state.stones); }
   function saveStoneAwards() { store.set(K.stoneAwards, state.stoneAwards); }
 
-  /* 100% 완벽한 날: 아침 6/6 + 저녁 7/7 + 오늘의 공부 모두 */
+  /* 100% 완벽한 날: 아침 6/6 + 저녁 5/5 + 오늘의 공부 모두 */
   function todayPerfect() {
     if (!state.items.length || !state.eveningItems.length) return false;
     if (todayRoutineIds().length !== state.items.length) return false;
@@ -2226,13 +2271,20 @@
     window.scrollTo(0, 0);
   }
 
-  /* ======================= 등교 마일스톤 · 알림 ======================= */
+  /* ======================= 등교 · 저녁 마일스톤 알림 ======================= */
   var MS = [
     { key: '0700', h: 7, m: 0, name: '기상', emoji: '☀️' },
     { key: '0710', h: 7, m: 10, name: '아침식사', emoji: '🍚' },
     { key: '0730', h: 7, m: 30, name: '양치', emoji: '🪥' },
     { key: '0745', h: 7, m: 45, name: '원리셈', emoji: '✏️' },
     { key: '0815', h: 8, m: 15, name: '등교', emoji: '🎒' }
+  ];
+  var MS_EVE = [
+    { key: '1730', h: 17, m: 30, name: '샤워', emoji: '🚿' },
+    { key: '1800', h: 18, m: 0, name: '저녁식사', emoji: '🍚' },
+    { key: '1830', h: 18, m: 30, name: '숙제', emoji: '✏️' },
+    { key: '2000', h: 20, m: 0, name: '가방정리·양치', emoji: '🎒' },
+    { key: '2100', h: 21, m: 0, name: '취침', emoji: '🌙' }
   ];
   var msBannerTimer = null;
   var msFired = {};
@@ -2263,36 +2315,41 @@
     if (b) b.classList.remove('show');
   }
 
-  function updateMilestones(now) {
-    var mins = now.getHours() * 60 + now.getMinutes();
+  function updateMsGroup(list, rootSel, mins, doneText) {
+    var root = document.querySelector(rootSel);
+    if (!root) return;
     var idx = -1, i;
-    for (i = 0; i < MS.length; i++) if (mins >= msMinutes(MS[i])) idx = i;
+    for (i = 0; i < list.length; i++) if (mins >= msMinutes(list[i])) idx = i;
 
-    each('.ms', function (el) {
-      var pos = -1;
-      for (var j = 0; j < MS.length; j++) if (MS[j].key === el.getAttribute('data-ms')) pos = j;
-      if (idx >= 0 && pos < idx) el.classList.add('past'); else el.classList.remove('past');
-      if (pos === idx) el.classList.add('now'); else el.classList.remove('now');
-    });
-    each('.ms-dot', function (el) {
-      var pos = -1;
-      for (var j = 0; j < MS.length; j++) if (MS[j].key === el.getAttribute('data-ms')) pos = j;
-      if (idx >= 0 && pos < idx) el.classList.add('past'); else el.classList.remove('past');
-      if (pos === idx) el.classList.add('now'); else el.classList.remove('now');
-    });
+    var labels = root.querySelectorAll('.ms');
+    for (i = 0; i < labels.length; i++) {
+      if (idx >= 0 && i < idx) labels[i].classList.add('past'); else labels[i].classList.remove('past');
+      if (i === idx) labels[i].classList.add('now'); else labels[i].classList.remove('now');
+    }
+    var dots = root.querySelectorAll('.ms-dot');
+    for (i = 0; i < dots.length; i++) {
+      if (idx >= 0 && i < idx) dots[i].classList.add('past'); else dots[i].classList.remove('past');
+      if (i === idx) dots[i].classList.add('now'); else dots[i].classList.remove('now');
+    }
 
-    var box = $('msNow');
+    var box = root.querySelector('.ms-now');
     if (!box) return;
     if (idx < 0) {
       box.className = 'ms-now';
-      box.textContent = '곧 07:00 기상 시간이에요 ' + MS[0].emoji;
-    } else if (idx === MS.length - 1) {
+      box.textContent = '곧 ' + msLabel(list[0]) + ' ' + list[0].name + ' 시간이에요 ' + list[0].emoji;
+    } else if (idx === list.length - 1) {
       box.className = 'ms-now done';
-      box.textContent = '08:15 등교 완료! 오늘도 화이팅 ' + MS[MS.length - 1].emoji;
+      box.textContent = doneText;
     } else {
       box.className = 'ms-now';
-      box.textContent = '지금은 ' + msLabel(MS[idx]) + ' ' + MS[idx].name + ' 시간이에요! ' + MS[idx].emoji;
+      box.textContent = '지금은 ' + msLabel(list[idx]) + ' ' + list[idx].name + ' 시간이에요! ' + list[idx].emoji;
     }
+  }
+
+  function updateMilestones(now) {
+    var mins = now.getHours() * 60 + now.getMinutes();
+    updateMsGroup(MS, '#homeMorning .hero-progress', mins, '08:15 등교 완료! 오늘도 화이팅 🎒');
+    updateMsGroup(MS_EVE, '#homeEvening .hero-progress', mins, '21:00 취침 시간! 오늘도 수고했어요 🌙');
   }
 
   function fireMilestone(ms, isTest) {
@@ -2300,28 +2357,33 @@
     if (soundOn) { SFX.unlock(); SFX.chime(); }
   }
 
-  /* 정각(07:00·07:10·07:30·07:45·08:15)에 하루 한 번만 알림 */
-  function checkMilestoneAlert(now) {
+  function checkListAlert(list, now) {
     var cur = now.getHours() * 60 + now.getMinutes();
-    for (var i = 0; i < MS.length; i++) {
-      if (msMinutes(MS[i]) !== cur) continue;
-      var id = todayKey() + ':' + MS[i].key;
+    for (var i = 0; i < list.length; i++) {
+      if (msMinutes(list[i]) !== cur) continue;
+      var id = todayKey() + ':' + list[i].key;
       if (msFired[id]) return;
       var st = msAlertStore();
-      if (st.done[MS[i].key]) { msFired[id] = true; return; }
+      if (st.done[list[i].key]) { msFired[id] = true; return; }
       msFired[id] = true;
-      st.done[MS[i].key] = true;
+      st.done[list[i].key] = true;
       store.set(K.msAlerts, st);
-      fireMilestone(MS[i], false);
+      fireMilestone(list[i], false);
       return;
     }
   }
 
-  function testMilestone() {
+  /* 정각(07:00·07:10·07:30·07:45·08:15 / 17:30·18:00·18:30·20:00·21:00)에 하루 한 번만 */
+  function checkMilestoneAlert(now) {
+    checkListAlert(MS, now);
+    checkListAlert(MS_EVE, now);
+  }
+
+  function testMilestone(list) {
     var now = new Date();
     var mins = now.getHours() * 60 + now.getMinutes();
-    var pick = MS[MS.length - 1];
-    for (var i = 0; i < MS.length; i++) if (mins < msMinutes(MS[i])) { pick = MS[i]; break; }
+    var pick = list[list.length - 1];
+    for (var i = 0; i < list.length; i++) if (mins < msMinutes(list[i])) { pick = list[i]; break; }
     fireMilestone(pick, true);
   }
 
@@ -2511,7 +2573,7 @@
     if (!a.s) a.s = [];
     if (!a.mi) a.mi = [];                 /* 따로 받은 아침 항목(원리셈·따풀) */
     if (a.m1 === undefined) a.m1 = false; /* 아침 5개 묶음 보상 */
-    if (a.e1 === undefined) a.e1 = false; /* 저녁 7개 묶음 보상 */
+    if (a.e1 === undefined) a.e1 = false; /* 저녁 5개 묶음 보상 */
     return a;
   }
 
@@ -2563,7 +2625,7 @@
     syncPerfectDay();
   }
 
-  /* 저녁 7개 모두 체크하면 +1 */
+  /* 저녁 5개 모두 체크하면 +1 */
   function grantEveningBundle(n) {
     var a = awardBox(todayKey());
     if (!a.e1) {
@@ -2609,6 +2671,12 @@
   ];
 
   function illuFor(label) {
+    /* '양치·가방정리'처럼 양치와 가방이 함께 있으면 가방 그림을 쓴다 */
+    if (String(label).indexOf('가방') !== -1) {
+      for (var b = 0; b < ILLUS.length; b++) {
+        if (ILLUS[b].img === 'assets/evening-bag.png') return ILLUS[b];
+      }
+    }
     for (var i = 0; i < ILLUS.length; i++) {
       for (var j = 0; j < ILLUS[i].keys.length; j++) {
         if (String(label).indexOf(ILLUS[i].keys[j]) !== -1) return ILLUS[i];
@@ -2765,7 +2833,7 @@
     tickClock();
   }
 
-  /* ---------- 저녁 루틴 (체크만 · 7개 모두 하면 +1) ---------- */
+  /* ---------- 저녁 루틴 (체크만 · 5개 모두 하면 +1) ---------- */
   function toggleEvening(id) {
     if (eveningDoneIds().indexOf(id) !== -1) { unmarkEvening(id); return; }
     markEvening(id);
@@ -2868,7 +2936,7 @@
     });
     var hint = $('editHint');
     if (hint) hint.textContent = editListName === 'evening'
-      ? '저녁 루틴이에요. 7개를 추천해요! (7개를 모두 체크하면 몬스터볼 +1)'
+      ? '저녁 루틴이에요. 5개를 추천해요! (5개를 모두 체크하면 몬스터볼 +1)'
       : '아침 루틴이에요. 6개를 추천해요! (1~5번은 5개를 다 하면 몬스터볼 +1)';
     var input = $('routineInput');
     if (input) input.placeholder = editListName === 'evening'
@@ -4040,7 +4108,10 @@
         setMode(el.getAttribute('data-mode'), true);
         break;
       case 'ms-test':
-        testMilestone();
+        testMilestone(MS);
+        break;
+      case 'ms-test-eve':
+        testMilestone(MS_EVE);
         break;
       case 'ms-banner-close':
         hideMsBanner();
