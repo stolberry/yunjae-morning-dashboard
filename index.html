@@ -3745,13 +3745,15 @@
     hs.value = p ? String(p.h) : '';
     if (!p) { ms.value = ''; return; }
     var mv = String(p.m);
-    if (ms.value !== mv) {
+    var found = false;
+    for (var i = 0; i < ms.options.length; i++) if (ms.options[i].value === mv) { found = true; break; }
+    if (!found) {
       /* 5분 간격 목록에 없는 분(예: 07:12)은 그 분만 따로 넣어 준다 */
       var o = document.createElement('option');
       o.value = mv; o.textContent = tpPad(p.m) + '분';
       ms.appendChild(o);
-      ms.value = mv;
     }
+    ms.value = mv;
   }
   function tpSync(wrap) {
     if (!wrap || !wrap.querySelector) return;
