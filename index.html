@@ -3825,6 +3825,7 @@
     renderRoutine();
     tickClock();
     renderTimeline();   /* 숨겨 둔 화면은 폭을 몰라서, 보이는 화면에서 눈금 폭을 다시 계산 */
+    fitAffirmMarquee(); /* 숨겨 둔 화면은 폭이 0이라, 보이는 화면에서 다시 재고 흐를지 정한다 */
   }
 
   /* manual=true 이면 이번 화면에서는 자동 전환이 끼어들지 않는다 */
