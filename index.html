@@ -4504,7 +4504,8 @@
 
     if (grid) {
       var n = items.length;
-      var cols = Math.min(Math.max(n, 1), 4);
+      /* 네 칸까지는 한 줄로, 다섯 칸부터는 세 칸씩 접어서 이름이 잘리지 않게 */
+      var cols = n <= 4 ? Math.max(n, 1) : 3;
       grid.style.gridTemplateColumns = 'repeat(' + cols + ',minmax(0,1fr))';
       if (n > 4) grid.classList.add('bonus-grid-many');
       else grid.classList.remove('bonus-grid-many');
