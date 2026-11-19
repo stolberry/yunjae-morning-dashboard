@@ -183,7 +183,7 @@
   }
   .hero-pika.mega img{
     position:relative;z-index:2;width:92%;height:92%;object-fit:contain;
-    transform:scale(1.22);transform-origin:50% 60%;
+    transform:scale(1.14);transform-origin:50% 58%;
     filter:drop-shadow(0 2px 2px rgba(12,36,66,.35));-webkit-user-drag:none;
   }
   .hero-id{flex:1;min-width:0;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
@@ -335,6 +335,21 @@
   #homeEvening .home-grid{grid-template-columns:1.5fr 1fr}
   #homeEvening .home-right>.today-card{flex:1 1 auto}
   .home-right .wx-card .wsep{display:none}
+
+  /* 아침: 1행 날짜·시간 | 날씨, 2행 등교 히어로 | 학원·아침 공부 (6:4) */
+  #homeMorning .home-grid{
+    grid-template-columns:1.5fr 1fr;
+    grid-template-rows:auto minmax(0,1fr);
+    gap:9px 12px;
+  }
+  #homeMorning .home-grid>.dt-card{grid-column:1;grid-row:1}
+  #homeMorning .home-grid>.wx-card{grid-column:2;grid-row:1}
+  #homeMorning .home-grid>.hero{grid-column:1;grid-row:2;min-height:0}
+  #homeMorning .home-grid>.home-right{grid-column:2;grid-row:2}
+  #homeMorning .wx-card .wsep{display:none}
+  #homeMorning .dt-card{padding:5px 16px}
+  #homeMorning .dt-card .dtc-clock{font-size:32px}
+  #homeMorning .dt-card .dtc-date{font-size:15px}
   .right-top{display:grid;grid-template-columns:1fr;gap:9px;flex:none;min-height:0}
   .right-main{display:grid;grid-template-columns:1fr;gap:9px;flex:1 1 auto;min-height:0}
   .card.today-card{padding:7px 11px;border-radius:18px;min-width:0;display:flex;flex-direction:column;overflow:hidden}
@@ -1029,6 +1044,8 @@
   }
   @media (max-width:860px){
     .home-grid{grid-template-columns:1fr;grid-template-rows:auto}
+    #homeMorning .home-grid{grid-template-columns:1fr;grid-template-rows:auto}
+    #homeMorning .home-grid>*{grid-column:1;grid-row:auto}
     .right-top{grid-template-columns:1fr}
     .home-right{display:contents}
   }
@@ -1161,13 +1178,12 @@
     .rcard .stamp{width:27px;height:27px;font-size:15px}
     .foot{font-size:10.5px}
   }
-  /* 아침 상단(히어로·사이드)은 내용 높이에 맞추고, 남는 높이는 루틴 그림에 준다 */
+  /* 아침: 상단 두 줄이 남는 높이를 나눠 갖고, 루틴 카드는 정해진 크기로 */
   @media (min-width:1400px) and (min-height:901px){
-    #homeMorning .home-grid{flex:0 0 auto}
-    #homeMorning .hero{justify-content:center;gap:11px}
-    #homeMorning .routine-wrap{flex:1 1 auto}
-    #homeMorning .routine-grid{flex:1 1 auto}
-    #homeMorning .rcard .illu{flex:1 1 auto;height:auto;max-height:460px}
+    #homeMorning .home-grid{flex:1 1 auto}
+    #homeMorning .hero{justify-content:space-evenly;gap:8px}
+    #homeMorning .routine-wrap{flex:0 0 auto}
+    #homeMorning .rcard .illu{flex:0 0 auto;height:300px;max-height:none}
   }
 
   /* 실제 태블릿(주소·상태 표시줄 포함): 보이는 높이가 짧아도 잘리지 않게 */
@@ -1244,11 +1260,13 @@
     <div class="mode-pane" id="homeMorning">
 
       <div class="home-grid">
-      <!-- 날짜·시간 + 등교 시간 (왼쪽) -->
-      <div class="left-col">
+      <!-- 1행: 날짜·시간 | 오늘 날씨 -->
       <div class="card dt-card">
         <div class="dtc-date"><span class="dtc-ico">📅</span><span class="js-date">불러오는 중…</span></div>
         <div class="dtc-clock js-clock">--:--</div>
+      </div>
+      <div class="card wx-card js-weather">
+        <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
       </div>
       <section class="hero">
         <div class="hero-top">
@@ -1318,12 +1336,8 @@
           <button class="hero-gacha" type="button" data-act="goto" data-tab="dex">도감 가기 →</button>
         </div>
       </section>
-      </div>
 
         <div class="home-right">
-          <div class="card wx-card js-weather">
-            <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
-          </div>
         <div class="card today-card acad-card">
           <div class="sec-head">
             <h2>🏫 오늘의 학원 스케줄</h2>
