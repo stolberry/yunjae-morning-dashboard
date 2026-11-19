@@ -609,6 +609,13 @@
   }
   #homeEvening .bonus-tile .bt-cta{width:100%;flex:0 0 auto;font-size:11.5px;min-height:26px;padding:3px 5px;border-radius:999px}
   #homeEvening .bonus-tile .bt-cta .mini{width:14px;height:14px}
+  /* 다섯 개부터는 두 줄로 접혀도 카드 안에 들어오게 한 단계 작게 */
+  #homeEvening .bonus-grid.bonus-grid-many{align-content:stretch}
+  #homeEvening .bonus-grid.bonus-grid-many .bonus-tile{padding:3px 5px;gap:2px}
+  #homeEvening .bonus-grid.bonus-grid-many .bonus-tile .bt-ico{width:26px;height:26px}
+  #homeEvening .bonus-grid.bonus-grid-many .bonus-tile .bt-ico svg{width:24px;height:24px}
+  #homeEvening .bonus-grid.bonus-grid-many .bonus-tile .bt-label{font-size:13.5px}
+  #homeEvening .bonus-grid.bonus-grid-many .bonus-tile .bt-cta{min-height:22px;font-size:10.5px}
   .hs-tile:last-child:nth-child(odd){grid-column:1 / -1}
   .hs-tile{
     position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
