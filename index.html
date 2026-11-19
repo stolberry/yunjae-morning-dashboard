@@ -160,31 +160,69 @@
   .dt-clock .dt-ico{font-size:17px;line-height:1}
   .dt-date{font-size:12px;font-weight:900;color:#8A6B12;margin-top:2px;white-space:nowrap;letter-spacing:-.3px}
   .hero-top{display:flex;align-items:center;gap:10px;position:relative;z-index:1}
-  .hero-pika{width:54px;height:54px;flex:none;animation:pikaBob 2.6s ease-in-out infinite}
+  /* 윤재 옆 포켓몬 배지: 08:15 전 = 리자몽(주황·금빛 불꽃) → 등교 시간 = 메가리자몽X(푸른 불꽃) */
+  .hero-pika{
+    position:relative;width:70px;height:70px;flex:none;border-radius:50%;display:grid;place-items:center;
+    overflow:hidden;background:#FFF6E2;padding:0;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent;
+    box-shadow:0 0 0 2px #FFFFFF,0 0 0 5px #FFA21F,0 0 16px 4px rgba(255,150,30,.5),0 8px 18px rgba(150,80,10,.2);
+    animation:pikaBob 2.6s ease-in-out infinite;
+  }
   @keyframes pikaBob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(2deg)}}
-  /* 윤재 옆 메가리자몽X 배지 (파란 불꽃 테두리) */
+  .hero-pika:active{filter:brightness(1.06)}
+  .hero-pika::before{
+    content:"";position:absolute;inset:-45%;z-index:0;
+    background:conic-gradient(from 0deg,#FFE49B,#E86A00,#FFE9B0,#FF9A1F,#FFD36B,#C24A00,#FFE49B);
+    animation:megaSpin 9s linear infinite;
+  }
+  @keyframes megaSpin{to{transform:rotate(360deg)}}
+  .hero-pika::after{
+    content:"";position:absolute;inset:3px;border-radius:50%;z-index:1;
+    background:radial-gradient(circle at 50% 30%,#FFFDF7 0%,#FFF1D6 56%,#FFDCA8 100%);
+    box-shadow:inset 0 0 10px rgba(214,120,10,.32);
+    transition:background .45s ease,box-shadow .45s ease;
+  }
+  .hero-pika img{
+    position:absolute;left:0;top:0;z-index:2;width:100%;height:100%;object-fit:contain;
+    transform-origin:50% 58%;filter:drop-shadow(0 2px 2px rgba(90,50,0,.28));
+    -webkit-user-drag:none;pointer-events:none;
+    transition:opacity .45s ease,transform .5s cubic-bezier(.25,1.4,.4,1);
+  }
+  .hero-pika .evo-char{opacity:1;transform:scale(1.04)}
+  .hero-pika .evo-mega{opacity:0;transform:scale(1.24)}
+  .hero-pika .evo-burst{
+    position:absolute;inset:-8px;border-radius:50%;z-index:3;opacity:0;pointer-events:none;
+    background:radial-gradient(circle,rgba(255,255,255,.96) 0%,rgba(130,220,255,.78) 32%,rgba(46,134,224,0) 68%);
+  }
+  /* 메가리자몽X: 푸른 불꽃 테두리 */
   .hero-pika.mega{
-    position:relative;width:70px;height:70px;border-radius:50%;display:grid;place-items:center;
-    overflow:hidden;background:#0C1F38;
+    background:#0C1F38;
     box-shadow:0 0 0 2px #FFFFFF,0 0 0 5px #2E86E0,0 0 15px 4px rgba(72,190,255,.55),0 8px 18px rgba(18,74,140,.28);
     animation:megaFloat 3.4s ease-in-out infinite;
   }
   @keyframes megaFloat{0%,100%{transform:translateY(0) rotate(-1.6deg)}50%{transform:translateY(-4px) rotate(1.6deg)}}
-  .hero-pika.mega::before{
-    content:"";position:absolute;inset:-45%;z-index:0;
-    background:conic-gradient(from 0deg,#6FD3FF,#1C5AA8,#A9ECFF,#2E86E0,#7FE6FF,#1C5AA8,#6FD3FF);
-    animation:megaSpin 8s linear infinite;
-  }
-  @keyframes megaSpin{to{transform:rotate(360deg)}}
+  .hero-pika.mega::before{background:conic-gradient(from 0deg,#6FD3FF,#1C5AA8,#A9ECFF,#2E86E0,#7FE6FF,#1C5AA8,#6FD3FF);animation-duration:8s}
   .hero-pika.mega::after{
-    content:"";position:absolute;inset:3px;border-radius:50%;z-index:1;
     background:radial-gradient(circle at 50% 30%,#F8FDFF 0%,#E2F1FF 56%,#C2DEF9 100%);
     box-shadow:inset 0 0 10px rgba(58,138,208,.38);
   }
-  .hero-pika.mega img{
-    position:relative;z-index:2;width:92%;height:92%;object-fit:contain;
-    transform:scale(1.14);transform-origin:50% 58%;
-    filter:drop-shadow(0 2px 2px rgba(12,36,66,.35));-webkit-user-drag:none;
+  .hero-pika.mega .evo-char{opacity:0;transform:scale(.82)}
+  .hero-pika.mega .evo-mega{opacity:1;transform:scale(1.14)}
+  /* 진화 연출: 반짝 + 부풀었다 줄어드는 플래시 */
+  .hero-pika.evolving{animation:evoPulse 1.15s cubic-bezier(.2,.9,.3,1)}
+  .hero-pika.evolving .evo-burst{animation:evoBurst 1.15s ease-out}
+  .hero-pika.evolving::after{box-shadow:inset 0 0 20px rgba(255,255,255,.95),inset 0 0 12px rgba(120,215,255,.9)}
+  @keyframes evoPulse{
+    0%{transform:scale(1)}
+    16%{transform:scale(1.32) rotate(-6deg)}
+    38%{transform:scale(.92) rotate(5deg)}
+    62%{transform:scale(1.16) rotate(-3deg)}
+    100%{transform:scale(1) rotate(0)}
+  }
+  @keyframes evoBurst{
+    0%{opacity:0;transform:scale(.45)}
+    20%{opacity:1;transform:scale(1.15)}
+    65%{opacity:.4;transform:scale(1.85)}
+    100%{opacity:0;transform:scale(2.3)}
   }
   .hero-id{flex:1;min-width:0;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
   .hero-status-box{margin-left:auto;flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:4px;position:relative;z-index:1}
@@ -219,7 +257,32 @@
     transition:width .8s cubic-bezier(.3,.9,.3,1);
     background:linear-gradient(180deg,#7EE07F 0%,#45CB58 45%,#2AAE45 100%);
     box-shadow:inset 0 -3px 0 rgba(0,0,0,.08),0 0 12px rgba(63,180,80,.35);
+    animation:hpGlow 2.2s ease-in-out infinite;
   }
+  @keyframes hpGlow{
+    0%,100%{box-shadow:inset 0 -3px 0 rgba(0,0,0,.08),0 0 10px rgba(63,180,80,.35)}
+    50%{box-shadow:inset 0 -3px 0 rgba(0,0,0,.08),0 0 20px rgba(70,210,95,.72)}
+  }
+  /* 채워진 트랙 위를 흐르는 에너지 빛 */
+  .hp-fill::before{
+    content:"";position:absolute;inset:0;border-radius:999px;pointer-events:none;z-index:1;
+    background:linear-gradient(100deg,rgba(255,255,255,0) 12%,rgba(255,255,255,.7) 36%,rgba(255,255,255,0) 60%);
+    background-size:250% 100%;background-repeat:no-repeat;
+    animation:hpShimmer 2.6s linear infinite;
+  }
+  @keyframes hpShimmer{0%{background-position:130% 0}100%{background-position:-70% 0}}
+  /* 막대가 줄어드는 앞쪽 끝의 빛(혜성 불꽃) */
+  .hp-fill .hp-comet{
+    position:absolute;left:0;top:50%;width:30px;height:30px;transform:translate(-50%,-50%);z-index:2;
+    border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle,rgba(255,255,255,.98) 0%,rgba(158,255,178,.85) 26%,rgba(90,220,120,0) 68%);
+    animation:cometPulse 1.5s ease-in-out infinite;
+  }
+  @keyframes cometPulse{
+    0%,100%{opacity:.62;transform:translate(-50%,-50%) scale(.82)}
+    50%{opacity:1;transform:translate(-50%,-50%) scale(1.14)}
+  }
+  .hp-track.finished .hp-fill .hp-comet{opacity:0}
   .hp-track.finished{background:linear-gradient(180deg,#EDF9ED,#DFF3E1);border-color:#BFE3C6}
   .hp-track.finished .ms-dot{background:#fff;border-color:#3FA34D}
   .hp-track.finished .ms-dot.now{background:#FFCB05;border-color:#B98A00}
@@ -236,7 +299,7 @@
   @keyframes runnerHop{0%,100%{transform:translate(-50%,-56%)}50%{transform:translate(-50%,-64%)}}
   .hp-labels{display:flex;justify-content:space-between;font-size:10px;font-weight:900;color:#A79E8B;margin-top:2px}
 
-  .hero-side{display:flex;gap:7px;min-width:0;margin-top:4px}
+  .hero-side{display:flex;gap:7px;min-width:0;margin-top:auto}
   .hero-side .stat-pill{flex:0 0 auto;min-width:112px;padding:6px 12px}
   .hero-gacha{margin-left:auto}
   .stat-pill{
@@ -515,6 +578,9 @@
     transition:transform .52s cubic-bezier(.2,.85,.25,1);
   }
   .pk-card.done .pk-inner{transform:rotateY(180deg)}
+  /* 방금 확인한 카드는 0° → 180° 로 실제로 돌아가며 뒤집힌다 */
+  .pk-card.flip-in .pk-inner{animation:flipReveal .65s cubic-bezier(.22,1,.36,1) both}
+  @keyframes flipReveal{0%{transform:rotateY(0deg)}100%{transform:rotateY(180deg)}}
   .pk-face{
     position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
     border-radius:14px;overflow:hidden;padding:6px;
@@ -538,11 +604,19 @@
   .pk-ico{width:38px;height:38px;flex:none;display:flex;align-items:center;justify-content:center}
   .pk-ico svg{width:34px;height:34px;display:block}
   .pk-name{
-    flex:0 1 auto;min-width:0;font-size:16px;font-weight:900;color:#3F2B00;letter-spacing:-.55px;
-    line-height:1.14;text-align:center;word-break:keep-all;
+    flex:0 1 auto;min-width:0;font-size:16.5px;font-weight:900;color:#3F2B00;letter-spacing:-.6px;
+    line-height:1.15;text-align:center;word-break:keep-all;
     display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
   }
-  .pk-hint{font-size:10.5px;font-weight:900;color:#A98428;letter-spacing:-.3px;white-space:nowrap}
+  /* 앞면 오른쪽 위 작은 보상 알약 — 반복되는 안내 문구 대신 */
+  .pk-plus{
+    position:absolute;top:5px;right:5px;z-index:3;display:inline-flex;align-items:center;gap:2px;
+    font-size:10.5px;font-weight:900;color:#8A4B00;background:#fff;border:1.5px solid #F3D477;
+    border-radius:999px;padding:1px 6px;letter-spacing:-.2px;white-space:nowrap;
+    box-shadow:0 2px 6px rgba(214,180,40,.18);
+  }
+  .pk-plus .mini{width:10px;height:10px}
+  .pk-hint{display:none}
   .pk-ball{width:46px;height:46px;flex:none;display:flex;align-items:center;justify-content:center}
   .pk-ball svg{width:100%;height:100%;display:block}
   .pk-done{font-size:15px;font-weight:900;color:#2F7A3C;letter-spacing:-.5px}
@@ -550,18 +624,19 @@
     font-size:11.5px;font-weight:900;color:#8A4B00;background:#fff;border:1.5px solid #F3D477;
     border-radius:999px;padding:2px 9px;letter-spacing:-.3px;
   }
-  .pk-card.justdone .pk-ball{animation:pkPop .7s cubic-bezier(.2,1.6,.35,1) both}
-  @keyframes pkPop{
-    0%{transform:scale(.2) translateY(16px);opacity:0}
-    55%{transform:scale(1.24) translateY(-8px);opacity:1}
-    78%{transform:scale(.95) translateY(3px)}
-    100%{transform:scale(1) translateY(0);opacity:1}
+  .pk-card.flip-in .pk-ball{animation:ballPop .72s .32s cubic-bezier(.22,1.5,.36,1) both}
+  @keyframes ballPop{
+    0%{transform:scale(.15) translateY(16px) rotate(-24deg);opacity:0}
+    55%{transform:scale(1.28) translateY(-9px) rotate(6deg);opacity:1}
+    78%{transform:scale(.94) translateY(2px) rotate(-2deg)}
+    100%{transform:scale(1) translateY(0) rotate(0);opacity:1}
   }
+
   /* 아침 공부 카드는 두 장이라 조금 크게 */
   .quest-card .pk-face{gap:8px}
   .quest-card .pk-ico{width:76px;height:76px}
   .quest-card .pk-ico svg{width:64px;height:64px}
-  .quest-card .pk-name{font-size:24px;letter-spacing:-.8px}
+  .quest-card .pk-name{font-size:26px;letter-spacing:-.9px}
   .quest-card .pk-hint{
     font-size:12.5px;font-weight:900;color:#8A6B12;background:#FFF7DF;border:1.5px solid #F0DC9E;
     border-radius:999px;padding:4px 13px;letter-spacing:-.3px;
@@ -627,10 +702,10 @@
     transition:transform .12s ease,background .15s ease,border-color .15s ease;
   }
   .study-tile:active{transform:scale(.98)}
-  .study-tile .st-ico{width:36px;height:36px;flex:none;display:flex;align-items:center;justify-content:center}
-  .study-tile .st-ico svg{width:32px;height:32px;display:block}
+  .study-tile .st-ico{width:42px;height:42px;flex:none;display:flex;align-items:center;justify-content:center}
+  .study-tile .st-ico svg{width:36px;height:36px;display:block}
   .study-tile .st-label{
-    flex:0 1 auto;min-width:0;font-size:14.5px;font-weight:900;color:#241F19;letter-spacing:-.5px;line-height:1.15;
+    flex:0 1 auto;min-width:0;font-size:18px;font-weight:800;color:#1F1B14;letter-spacing:-.55px;line-height:1.16;
     word-break:keep-all;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
   }
   .study-tile .st-cta{
@@ -1138,6 +1213,12 @@
   .eve-hero .hero-count.urgent{color:#C24C86}
   .eve-hero .hp-track{background:#EBE7F7;border-color:#DBD4EF}
   .eve-hero .hp-fill{background:linear-gradient(90deg,#BCB2F5 0%,#9189DC 55%,#6B62C0 100%)}
+  .eve-hero .hp-fill .hp-comet{background:radial-gradient(circle,rgba(255,255,255,.98) 0%,rgba(206,192,255,.9) 26%,rgba(140,120,240,0) 68%)}
+  .eve-hero .hp-fill{animation-name:hpGlowEve}
+  @keyframes hpGlowEve{
+    0%,100%{box-shadow:inset 0 -3px 0 rgba(0,0,0,.08),0 0 10px rgba(120,105,220,.4)}
+    50%{box-shadow:inset 0 -3px 0 rgba(0,0,0,.08),0 0 20px rgba(150,132,255,.8)}
+  }
   .eve-hero .hp-runner{filter:drop-shadow(0 2px 3px rgba(70,58,140,.22))}
   .eve-hero .hp-labels{color:#9A90B8}
   .eve-hero .stat-pill{border-color:#E5DEF8}
@@ -1362,7 +1443,7 @@
     .rcard .cta .mini{width:13px;height:13px}
     .rcard .step{width:20px;height:20px;font-size:10.5px;top:4px;left:4px}
     .rcard .stamp{width:21px;height:21px;font-size:12px;top:5px;right:5px}
-    .hero-pika{width:50px;height:50px}
+    .hero-pika{width:56px;height:56px}
     .hero-pika.mega{width:56px;height:56px}
     .hero-count{font-size:clamp(21px,2.3vw,28px)}
     .dt-clock{font-size:25px}
@@ -1411,7 +1492,7 @@
     .top-tools{margin-left:0;width:100%}
     .tool-btn{flex:1;justify-content:center;min-height:36px}
     .hero{padding:9px 11px;gap:6px 8px}
-    .hero-pika{width:48px;height:48px}
+    .hero-pika{width:50px;height:50px}
     .hero-pika.mega{width:50px;height:50px}
     .hero-name{font-size:16px}
     .hero-meta{font-size:10.5px}
@@ -1452,7 +1533,7 @@
     .tab{font-size:15px;padding:9px 15px;min-height:44px}
     .tool-btn{min-height:44px;font-size:13.5px}
     .hero{padding:11px 16px;gap:5px}
-    .hero-pika{width:62px;height:62px}
+    .hero-pika{width:70px;height:70px}
     .hero-name{font-size:23px}
     .hero-meta{font-size:12px}
     .hero-date{font-size:12px}
@@ -1538,10 +1619,12 @@
     .rcard .stamp{width:27px;height:27px;font-size:15px}
     .foot{font-size:10.5px}
   }
-  /* 아침: 상단 두 줄이 남는 높이를 나눠 갖는다 */
+  /* 아침: 상단 두 줄이 남는 높이를 나눠 갖는다 — 아침·저녁 히어로의 아래 줄(hero-side)을 같은 높이에 맞춤 */
   @media (min-width:1400px) and (min-height:901px){
     #homeMorning .home-grid{flex:1 1 auto}
-    #homeMorning .hero{justify-content:space-evenly;gap:8px}
+    #homeMorning .hero{justify-content:space-between;gap:8px}
+    #homeMorning .dt-wx,#homeEvening .dt-wx{min-height:56px}
+    .routine-grid,.routine-grid.eve5{gap:11px}
   }
 
   /* 실제 태블릿(주소·상태 표시줄 포함): 보이는 높이가 짧아도 잘리지 않게 */
@@ -1602,11 +1685,11 @@
   .rcard{display:flex;flex-direction:column;gap:5px;padding:7px 8px 8px;min-height:0}
   .rcard .rtop{gap:6px}
   .rcard .r-title{
-    font-size:16px;padding-left:30px;text-align:left;display:block;
+    font-size:16.5px;font-weight:800;color:#241B12;letter-spacing:-.5px;padding-left:30px;text-align:left;display:block;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   }
-  .rcard .cta{font-size:12px;min-height:27px;padding:4px 9px;margin-top:0;box-shadow:0 2px 6px rgba(214,180,40,.14)}
-  .rcard .cta .mini{width:13px;height:13px}
+  .rcard .cta{font-size:13.5px;min-height:30px;padding:5px 11px;margin-top:0;box-shadow:0 2px 6px rgba(214,180,40,.14)}
+  .rcard .cta .mini{width:15px;height:15px}
   .rcard .illu{margin-top:2px}
   /* 짧은 화면에서는 포켓몬 카드·오늘의 공부 칸을 한 단계 작게 */
   @media (max-height:900px){
@@ -1685,9 +1768,11 @@
 
       <section class="hero">
         <div class="hero-top">
-          <div class="hero-pika mega" role="img" aria-label="메가리자몽X">
-            <img src="assets/mega-charizard-x-10034.png" alt="메가리자몽X" draggable="false">
-          </div>
+          <button class="hero-pika" id="heroEvo" type="button" data-act="evo-preview" aria-label="리자몽 · 눌러서 메가진화 미리보기" title="리자몽 · 누르면 메가진화 연출">
+            <img class="evo-char" src="assets/charizard-6.png" alt="리자몽" draggable="false">
+            <img class="evo-mega" src="assets/mega-charizard-x-10034.png" alt="메가리자몽X" draggable="false">
+            <span class="evo-burst" aria-hidden="true"></span>
+          </button>
           <div class="hero-id">
             <div class="hero-name">윤재</div>
             <div class="hero-meta">07:00 시작 · 08:15 출발</div>
@@ -1700,7 +1785,7 @@
 
         <div class="hero-progress">
           <div class="hp-track">
-            <div class="hp-fill" id="dayProgress"></div>
+            <div class="hp-fill" id="dayProgress"><span class="hp-comet" aria-hidden="true"></span></div>
             <span class="ms-dot" data-ms="0700" style="left:0%"></span>
             <span class="ms-dot" data-ms="0710" style="left:13.333%"></span>
             <span class="ms-dot" data-ms="0730" style="left:40%"></span>
@@ -1832,7 +1917,7 @@
 
         <div class="hero-progress">
           <div class="hp-track">
-            <div class="hp-fill" id="eveProgress"></div>
+            <div class="hp-fill" id="eveProgress"><span class="hp-comet" aria-hidden="true"></span></div>
             <span class="ms-dot" style="left:0%"></span>
             <span class="ms-dot" style="left:14.286%"></span>
             <span class="ms-dot" style="left:28.571%"></span>
@@ -2497,6 +2582,10 @@
       shake: function () { for (var i = 0; i < 7; i++) tone(180 + i * 55, i * 0.13, 0.06, 'square', 0.045); },
       reveal: function () { [659, 784, 988, 1319, 1568].forEach(function (f, i) { tone(f, i * 0.09, 0.3, 'triangle', 0.12); }); },
       nope: function () { tone(230, 0, 0.14, 'sawtooth', 0.05); tone(170, 0.12, 0.2, 'sawtooth', 0.045); },
+      evolve: function () {
+        [392, 523, 659, 784, 1047, 1319, 1568].forEach(function (f, i) { tone(f, i * 0.07, 0.22, 'triangle', 0.12); });
+        tone(2093, 0.52, 0.5, 'sine', 0.09);
+      },
       chime: function () { [880, 1108.7, 1318.5].forEach(function (f, i) { tone(f, i * 0.17, 0.6, 'sine', 0.1); }); }
     };
   })();
@@ -3236,6 +3325,54 @@
     if (m !== homeMode || manual) applyMode(m);
   }
 
+  /* ======================= 리자몽 → 메가리자몽X 진화 ======================= */
+  var heroRealMega = false;    /* 지금 시각 기준 진짜 상태 (08:15 지나면 true) */
+  var heroPreviewing = false;  /* 배지·알림 테스트로 잠깐 보여주는 중 */
+  var evoPreviewTimer = null, evoFlashTimer = null;
+
+  function applyHeroMega(on, animate) {
+    var b = $('heroEvo');
+    if (!b) return;
+    var was = b.classList.contains('mega');
+    b.classList.toggle('mega', on);
+    var label = on ? '메가리자몽X' : '리자몽';
+    b.setAttribute('aria-label', label + ' · 눌러서 메가진화 미리보기');
+    b.title = label + ' · 누르면 메가진화 연출';
+    if (on && !was && animate !== false) playEvoFlash(b);
+  }
+
+  function playEvoFlash(b) {
+    b = b || $('heroEvo');
+    if (!b) return;
+    b.classList.remove('evolving');
+    void b.offsetWidth;   /* 애니메이션 다시 시작 */
+    b.classList.add('evolving');
+    if (soundOn) { SFX.unlock(); SFX.evolve(); }
+    clearTimeout(evoFlashTimer);
+    evoFlashTimer = setTimeout(function () { b.classList.remove('evolving'); }, 1200);
+  }
+
+  /* 08:15 전(막대가 다 차기 전)에는 리자몽, 등교 시간이 되면 메가리자몽X */
+  function updateHeroEvolution(pct) {
+    heroRealMega = pct >= 100;
+    if (heroPreviewing) return;
+    applyHeroMega(heroRealMega);
+  }
+
+  /* 🔔 알림 테스트·배지 누르기: 잠깐 메가진화 연출(기본 3초) */
+  function evoPreview(sec) {
+    var b = $('heroEvo');
+    if (!b) return;
+    heroPreviewing = true;
+    applyHeroMega(true, false);
+    playEvoFlash(b);
+    clearTimeout(evoPreviewTimer);
+    evoPreviewTimer = setTimeout(function () {
+      heroPreviewing = false;
+      applyHeroMega(heroRealMega, false);
+    }, (sec || 3) * 1000);
+  }
+
   /* ======================= 시계 / 카운트다운 ======================= */
   function tickClock() {
     var now = new Date();
@@ -3310,6 +3447,9 @@
         if (remain > 0 && remain < 100) rn.classList.add('run'); else rn.classList.remove('run');
       }
       var hs = $('heroStatus'); if (hs) hs.textContent = statusFor(left);
+      updateHeroEvolution(pct);
+    } else {
+      updateHeroEvolution(0);
     }
 
     /* 저녁: 21:00 취침까지 */
@@ -3794,13 +3934,14 @@
 
   function pokeCardHtml(o) {
     var done = !!o.done;
-    return '<button class="pk-card' + (done ? ' done' : '') + '" type="button" data-act="' + o.act + '" data-id="' + esc(o.id) + '"'
+    var flipping = done && o.id === justFlippedId;
+    return '<button class="pk-card' + (done ? ' done' : '') + (flipping ? ' flip-in' : '') + '" type="button" data-act="' + o.act + '" data-id="' + esc(o.id) + '"'
       + ' aria-pressed="' + done + '" aria-label="' + esc(o.label) + (done ? ' 완료 취소' : ' 완료하고 몬스터볼 +1') + '">'
       + '<span class="pk-inner">'
       + '<span class="pk-face pk-front">'
+      + '<span class="pk-plus">🔴 +1</span>'
       + '<span class="pk-ico">' + o.ico + '</span>'
       + '<span class="pk-name">' + esc(o.label) + '</span>'
-      + '<span class="pk-hint">' + (o.hint || '눌러서 완료') + '</span>'
       + '</span>'
       + '<span class="pk-face pk-back">'
       + '<span class="pk-ball">' + pokeBallSvg() + '</span>'
@@ -3810,12 +3951,12 @@
       + '</span></button>';
   }
 
-  /* 방금 뒤집힌 카드만 몬스터볼이 톡 튀어나오게 */
-  function flashPoke(id) {
-    var el = document.querySelector('.pk-card[data-id="' + id + '"]');
-    if (!el) return;
-    el.classList.add('justdone');
-    setTimeout(function () { el.classList.remove('justdone'); }, 1000);
+  /* 방금 확인한 카드만 실제로 0° → 180° 로 돌아가고 몬스터볼이 톡 튀어나오게 */
+  var justFlippedId = null, justFlippedTimer = null;
+  function markJustFlipped(id) {
+    justFlippedId = id;
+    clearTimeout(justFlippedTimer);
+    justFlippedTimer = setTimeout(function () { justFlippedId = null; }, 820);
   }
 
   function routineCardHtml(it, idx, done, isEvening, bundleCount) {
@@ -3939,13 +4080,13 @@
     state.routineDone[key] = arr;
     store.set(K.routineDone, state.routineDone);
 
+    if (isSingle) markJustFlipped(id);
     renderRoutine();
     var card = document.querySelector('.rcard[data-id="' + id + '"]');
     if (card) {
       card.classList.add('pulse');
       setTimeout(function () { if (card) card.classList.remove('pulse'); }, 600);
     }
-    if (isSingle) flashPoke(id);
     SFX.step();
     if (isSingle) grantMorningItem(id);
     syncPerfectDay();
@@ -4853,8 +4994,8 @@
       saveAwards();
       addBalls(1);
     }
+    markJustFlipped(id);
     renderBonusStudy();
-    flashPoke(id);
     SFX.ball();
     toast('보너스 완료! 몬스터볼 +1 🔴');
     var items = bonusList();
@@ -5722,6 +5863,10 @@
         break;
       case 'ms-test':
         testMilestone(MS);
+        evoPreview(3);
+        break;
+      case 'evo-preview':
+        evoPreview(3);
         break;
       case 'ms-test-eve':
         testMilestone(MS_EVE);
