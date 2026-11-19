@@ -286,11 +286,13 @@
 
   /* ---------------- home grid: 등교 | 학원 | 공부 ---------------- */
   .home-grid{
-    display:grid;gap:10px;flex:none;min-height:0;
-    grid-template-columns:1.34fr 1fr 1fr;
-    grid-template-rows:auto;
+    display:grid;gap:10px;flex:1 1 auto;min-height:0;
+    grid-template-columns:0.92fr 1.78fr;
+    grid-template-rows:minmax(0,1fr);
   }
-  .home-grid > .hero{grid-area:auto}
+  .home-right{display:flex;flex-direction:column;gap:9px;min-width:0;min-height:0}
+  .right-top{display:grid;grid-template-columns:1.42fr 1fr;gap:9px;flex:none;min-height:0}
+  .right-main{display:grid;grid-template-columns:1fr 1.06fr;gap:9px;flex:1 1 auto;min-height:0}
   .card.today-card{padding:9px 12px;border-radius:18px;min-width:0;display:flex;flex-direction:column;overflow:hidden}
   .today-card .sec-head{margin-bottom:6px;gap:6px;flex:none}
   .today-card h2{font-size:17px;letter-spacing:-.6px}
@@ -744,7 +746,7 @@
     .hero-pika{width:50px;height:50px}
     .hero-count{font-size:clamp(21px,2.3vw,28px)}
     .dt-clock{font-size:25px}
-    .home-grid{gap:9px;grid-template-columns:1.25fr 1fr 1fr}
+    .home-grid{gap:9px;grid-template-columns:0.9fr 1.8fr}
     .today-card h2{font-size:16px}
     .today-class .t-name{font-size:16px}
     .today-class.solo .t-name{font-size:18px}
@@ -753,8 +755,9 @@
     .hs-tile .hs-ico svg{width:27px;height:27px}
   }
   @media (max-width:1080px){
-    .home-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto}
-    .home-grid > .hero{grid-row:1 / span 2}
+    .home-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr)}
+    .right-top{grid-template-columns:1fr 1fr}
+    .right-main{grid-template-columns:1fr}
   }
   @media (max-width:1000px){
     .dex-hero{grid-template-columns:1fr}
@@ -763,8 +766,8 @@
   }
   @media (max-width:860px){
     .home-grid{grid-template-columns:1fr;grid-template-rows:auto}
-    .home-grid > .hero{grid-row:auto}
-    .top-strip{grid-template-columns:1fr}
+    .right-top{grid-template-columns:1fr}
+    .home-right{display:contents}
   }
   @media (max-width:900px){
     .routine-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
@@ -899,17 +902,6 @@
   <!-- ================= DASHBOARD ================= -->
   <section class="panel active" id="panel-home">
 
-    <div class="top-strip">
-      <div class="card affirm-card">
-        <div class="af-head"><span class="af-ico">✨</span> 오늘의 확언</div>
-        <p class="af-text" id="affirmText">—</p>
-        <div class="af-sub">엄마가 응원한대!</div>
-      </div>
-      <div class="card wx-card" id="weatherBody">
-        <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
-      </div>
-    </div>
-
     <div class="home-grid">
     <!-- 등교 시간 (왼쪽 절반) -->
     <section class="hero">
@@ -993,6 +985,19 @@
       </div>
     </section>
 
+      <div class="home-right">
+        <div class="right-top">
+        <div class="card affirm-card">
+          <div class="af-head"><span class="af-ico">✨</span> 오늘의 확언</div>
+          <p class="af-text" id="affirmText">—</p>
+          <div class="af-sub">엄마가 응원한대!</div>
+        </div>
+        <div class="card wx-card" id="weatherBody">
+          <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
+        </div>
+      
+        </div>
+        <div class="right-main">
       <div class="card today-card acad-card">
         <div class="sec-head">
           <h2>🏫 오늘의 학원 스케줄</h2>
@@ -1012,6 +1017,8 @@
           <button class="link-btn" type="button" data-act="goto" data-tab="study">전체 보기 →</button>
         </div>
         <div id="homeHomeschool" class="hs-grid"></div>
+      </div>
+        </div>
       </div>
 
     </div>
