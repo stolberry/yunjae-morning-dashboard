@@ -336,20 +336,24 @@
   #homeEvening .home-right>.today-card{flex:1 1 auto}
   .home-right .wx-card .wsep{display:none}
 
-  /* 아침: 1행 날짜·시간 | 날씨, 2행 등교 히어로 | 학원·아침 공부 (6:4) */
+  /* 아침: 왼쪽 60% = 위 [날짜·시간 | 날씨], 아래 등교 히어로 / 오른쪽 40% = 학원·아침 공부 (6:4) */
   #homeMorning .home-grid{
     grid-template-columns:1.5fr 1fr;
-    grid-template-rows:auto minmax(0,1fr);
+    grid-template-rows:minmax(0,1fr);
     gap:9px 12px;
   }
-  #homeMorning .home-grid>.dt-card{grid-column:1;grid-row:1}
-  #homeMorning .home-grid>.wx-card{grid-column:2;grid-row:1}
-  #homeMorning .home-grid>.hero{grid-column:1;grid-row:2;min-height:0}
-  #homeMorning .home-grid>.home-right{grid-column:2;grid-row:2}
+  #homeMorning .morning-left{display:flex;flex-direction:column;gap:9px;min-width:0;min-height:0}
+  #homeMorning .dt-wx{display:grid;grid-template-columns:1fr 1.05fr;gap:10px;flex:0 0 auto;align-items:stretch;min-width:0}
+  #homeMorning .morning-left>.hero{flex:1 1 auto;min-height:0}
   #homeMorning .wx-card .wsep{display:none}
   #homeMorning .dt-card{padding:5px 16px}
   #homeMorning .dt-card .dtc-clock{font-size:32px}
   #homeMorning .dt-card .dtc-date{font-size:15px}
+  #homeMorning .dt-wx .wx-card{padding:5px 28px 5px 10px;gap:2px 6px}
+  #homeMorning .dt-wx .wx-card .wico{font-size:20px}
+  #homeMorning .dt-wx .wx-card .wtemp{font-size:20px}
+  #homeMorning .dt-wx .wx-card .wdesc{font-size:11.5px}
+  #homeMorning .dt-wx .wx-card .wtip{font-size:10.5px}
   .right-top{display:grid;grid-template-columns:1fr;gap:9px;flex:none;min-height:0}
   .right-main{display:grid;grid-template-columns:1fr;gap:9px;flex:1 1 auto;min-height:0}
   .card.today-card{padding:7px 11px;border-radius:18px;min-width:0;display:flex;flex-direction:column;overflow:hidden}
@@ -1075,6 +1079,7 @@
     .hero-meta{font-size:10.5px}
     .hero-count{font-size:clamp(19px,4.6vw,24px)}
     .dt-clock{font-size:22px}
+    #homeMorning .dt-wx{grid-template-columns:1fr}
     .routine-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
     .routine-grid.eve5{grid-template-columns:repeat(2,minmax(0,1fr))}
     .rcard .r-title{font-size:15px}
@@ -1258,7 +1263,9 @@
     <div class="mode-pane" id="homeMorning">
 
       <div class="home-grid">
-      <!-- 1행: 날짜·시간 | 오늘 날씨 -->
+      <!-- 왼쪽 60%: 1행 날짜·시간 | 오늘 날씨, 2행 등교 히어로 -->
+      <div class="left-col morning-left">
+      <div class="dt-wx">
       <div class="card dt-card">
         <div class="dtc-date"><span class="dtc-ico">📅</span><span class="js-date">불러오는 중…</span></div>
         <div class="dtc-clock js-clock">--:--</div>
@@ -1266,6 +1273,8 @@
       <div class="card wx-card js-weather">
         <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
       </div>
+      </div>
+
       <section class="hero">
         <div class="hero-top">
           <div class="hero-pika mega" role="img" aria-label="메가리자몽X">
@@ -1334,6 +1343,7 @@
           <button class="hero-gacha" type="button" data-act="goto" data-tab="dex">도감 가기 →</button>
         </div>
       </section>
+      </div><!-- /morning-left -->
 
         <div class="home-right">
         <div class="card today-card acad-card">
