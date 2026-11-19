@@ -37,7 +37,7 @@
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{margin:0;padding:0}
-  body{min-height:100dvh}
+  body.lock-height{height:100vh;height:100dvh;overflow:hidden}
   body{
     display:flex;flex-direction:column;min-height:100vh;
     font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Segoe UI",Roboto,sans-serif;
@@ -2320,6 +2320,7 @@
 
   /* ======================= 탭 ======================= */
   function showTab(name) {
+    document.body.classList.toggle('lock-height', name === 'home');
     var panels = document.querySelectorAll('.panel');
     for (var i = 0; i < panels.length; i++) panels[i].classList.remove('active');
     var p = $('panel-' + name);
@@ -4375,6 +4376,7 @@
     selectedDow = new Date().getDay();
     lastDateKey = null;
     refreshSoundBtn();
+    document.body.classList.add('lock-height');
     homeMode = autoMode();
     applyMode(homeMode);
     renderRoutine();
