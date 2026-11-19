@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<title>test reset</title>
+</head>
+<body style="font:16px sans-serif;padding:24px">
+<p id="out">테스트 기록 정리 중…</p>
+<script>
+  // 테스트용 임시 페이지: 테스트로 만든 엄마 비밀번호·특급칭찬 기록만 지운다.
+  var done = [];
+  try {
+    ['yj_mom_pin_v1', 'yj_praises_v1'].forEach(function (k) {
+      localStorage.removeItem(k);
+      done.push(k);
+    });
+  } catch (e) { done.push('error:' + e.message); }
+  document.getElementById('out').textContent = 'removed: ' + done.join(', ');
+</script>
+</body>
+</html>
