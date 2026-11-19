@@ -490,6 +490,51 @@
   .hs-row.done .hs-cta{background:#E4F7E6;color:#2F7A3C;border-color:#BFE3C6}
   .hs-row.done .hs-ico{background:#F6FDF6;border-color:#CFEBD3}
   .hs-row.done .hs-label{color:#3F7A4A}
+
+  /* ---------------- 저녁 오른쪽: 오늘의 공부(위) + ⚡ 보너스 공부(아래) ---------------- */
+  #homeEvening .study-card .hs-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:7px;
+    justify-content:stretch;align-content:start;align-content:safe center;
+    overflow-y:auto;overscroll-behavior:contain;
+  }
+  #homeEvening .study-card .hs-row{padding:5px 9px;gap:8px;border-radius:13px}
+  #homeEvening .study-card .hs-row .hs-ico{width:28px;height:28px;border-radius:9px;border-width:1.5px}
+  #homeEvening .study-card .hs-row .hs-ico svg{width:20px;height:20px}
+  #homeEvening .study-card .hs-row .hs-label{font-size:13.5px;letter-spacing:-.3px}
+  #homeEvening .study-card .hs-row .hs-cta{font-size:10.5px;padding:5px 8px;min-height:26px;gap:3px}
+  #homeEvening .study-card .hs-row .hs-cta .mini{width:12px;height:12px}
+  #homeEvening .study-card .hs-row:last-child:nth-child(odd){grid-column:1 / -1}
+  #homeEvening .study-card .hs-empty{grid-column:1 / -1}
+
+  #homeEvening .home-right>.bonus-card{flex:0 0 auto}
+  #homeEvening .bonus-card{background:linear-gradient(180deg,#FFFBEC 0%,#FFFFFF 62%);border-color:#F3E3B4}
+  #homeEvening .bonus-card h2{color:#7A5B00}
+  #homeEvening .bonus-card .count-pill{background:#FFF4CF;border-color:#EFD996;color:#8A6B12}
+  #homeEvening .bonus-sub{font-size:10.5px;font-weight:900;color:#A08A4A;letter-spacing:-.3px;white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .bonus-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;flex:1 1 auto;min-height:0}
+  .bonus-tile{
+    display:flex;align-items:center;justify-content:flex-start;gap:8px;width:100%;min-width:0;text-align:left;
+    background:#FFFFFF;border:2px dashed #EBD9A8;border-radius:13px;padding:5px 9px;
+    box-shadow:0 4px 12px rgba(160,140,80,.08);font-family:inherit;
+    transition:transform .12s ease,background .15s ease,border-color .15s ease;
+  }
+  .bonus-tile:active{transform:scale(.98)}
+  .bonus-tile .bt-ico{
+    width:28px;height:28px;flex:none;border-radius:9px;background:#FFF9EA;border:1.5px solid #F2E3BF;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .bonus-tile .bt-ico svg{width:21px;height:21px;display:block}
+  .bonus-tile .bt-label{flex:1;min-width:0;font-size:13.5px;font-weight:900;color:#4A443A;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bonus-tile .bt-cta{
+    flex:none;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;
+    background:#FFF1C8;color:#7A4E00;border:1.5px solid #F3D477;border-radius:999px;
+    padding:4px 7px;font-size:10.5px;font-weight:900;letter-spacing:-.3px;
+  }
+  .bonus-tile .bt-cta .mini{width:12px;height:12px;flex:none}
+  .bonus-tile.done{background:linear-gradient(180deg,#FFFCE9,#FFF7DC);border-style:solid;border-color:#FFD84D;box-shadow:0 8px 18px rgba(255,203,5,.18)}
+  .bonus-tile.done .bt-ico{background:#F6FDF6;border-color:#CFEBD3}
+  .bonus-tile.done .bt-label{color:#3F7A4A}
+  .bonus-tile.done .bt-cta{background:#E4F7E6;color:#2F7A3C;border-color:#BFE3C6}
   .hs-tile:last-child:nth-child(odd){grid-column:1 / -1}
   .hs-tile{
     position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
@@ -1627,6 +1672,16 @@
           </div>
           <div class="js-home-hs hs-grid"></div>
         </div>
+
+        <div class="card today-card bonus-card">
+          <div class="sec-head">
+            <h2>⚡ 보너스 공부</h2>
+            <span class="count-pill js-bonus-count">0/4</span>
+            <div class="spacer"></div>
+            <span class="bonus-sub">하고 싶을 때 도전! · 완료마다 🔴 +1</span>
+          </div>
+          <div class="bonus-grid js-bonus-grid"></div>
+        </div>
         </div>
 
       </div>
@@ -1958,7 +2013,8 @@
     msAlerts: 'yj_ms_alerts_v1',
     momPin: 'yj_mom_pin_v1',
     praises: 'yj_praises_v1',
-    studyReading: 'yj_study_migrated_reading_v1'
+    studyReading: 'yj_study_migrated_reading_v1',
+    bonusDone: 'yj_bonus_done_v1'
   };
 
   var W_URL = 'https://api.open-meteo.com/v1/forecast?latitude=36.8428&longitude=127.1394'
@@ -2000,7 +2056,7 @@
     '악': '#705746', '강철': '#A8A8C0', '페어리': '#D685AD'
   };
 
-  /* 60마리: 일반 · 진화 · 전설 · 메가진화 (아이가 좋아하는 포켓몬) */
+  /* 61마리: 일반 · 진화 · 전설 · 메가진화 (아이가 좋아하는 포켓몬) */
   var POOL = [
     { id: 1, name: '이상해씨', types: ['풀', '독'], tier: '일반', desc: '등에 씨앗이 있어요. 씨앗과 함께 햇빛을 받으며 자라요.' },
     { id: 2, name: '이상해풀', types: ['풀', '독'], tier: '진화', desc: '이상해씨가 자란 모습이에요. 등에 꽃봉오리가 생겼어요.' },
@@ -2047,6 +2103,7 @@
     { id: 778, name: '따라큐', types: ['유령', '페어리'], tier: '일반', desc: '버려진 인형에 영혼이 깃들었어요. 혼자 놀기 좋아하는 외로운 친구.' },
     { id: 815, name: '에이스번', types: ['불꽃'], tier: '진화', desc: '불꽃 공을 만들어 차요. 축구를 정말 좋아하는 포켓몬!' },
     { id: 888, name: '자시안', types: ['페어리', '격투'], tier: '전설', desc: '검을 들고 지키는 전설의 포켓몬이에요. 아주 용감해요.' },
+    { id: 890, name: '무한다이노', types: ['독', '드래곤'], tier: '전설', desc: '거대한 몸에서 끝없이 에너지를 뿜어내는 전설의 포켓몬이에요. 무한히 강해질 수 있대요!' },
     { id: 906, name: '냐오하', types: ['풀'], tier: '일반', desc: '귀여운 고양이 풀 포켓몬이에요. 햇빛을 좋아하고 냄새도 잘 맡아요.' },
     { id: 909, name: '뜨아거', types: ['불꽃'], tier: '일반', desc: '머리 위 불꽃이 감정에 따라 커졌다 작아졌다 해요.' },
     { id: 912, name: '꾸왁스', types: ['물'], tier: '일반', desc: '까칠한 머리깃이 멋진 오리 포켓몬이에요. 물을 잘 다뤄요.' },
@@ -2226,7 +2283,7 @@
   /* ======================= 상태 ======================= */
   var state = {
     items: [], eveningItems: [], routineDone: {}, eveningDone: {}, academies: [],
-    homeschoolTasks: {}, homeschoolDone: {},
+    homeschoolTasks: {}, homeschoolDone: {}, bonusDone: {},
     balls: 0, dex: {}, awards: {},
     perfectDays: [], stones: 0, stoneAwards: [],
     momPin: '', praises: []
@@ -2238,6 +2295,15 @@
   var DEFAULT_EVENING = ['샤워', '저녁식사', '숙제·공부', '양치·가방정리', '독서'];
   var DEFAULT_EVENING_OLD7 = ['샤워', '저녁식사', '숙제', '공부', '독서', '양치', '가방정리'];
   var DEFAULT4 = ['세수·로션', '영어영상', '양치', '옷입기'];
+
+  /* ⚡ 보너스 공부: 하고 싶을 때 도전하는 선택 과목.
+     완료마다 몬스터볼 +1, 100% 완벽한 날·연속 기록 조건에는 들어가지 않아요. */
+  var BONUS_STUDY = [
+    { id: 'bonus-reading', label: '리딩앤 3권', icon: 'reading' },
+    { id: 'bonus-writing', label: '영어 글쓰기', icon: 'writing' },
+    { id: 'bonus-diary', label: '그림일기', icon: 'diary' },
+    { id: 'bonus-report', label: '독후감', icon: 'report' }
+  ];
 
   function defaultItems() {
     var out = [];
@@ -2523,6 +2589,11 @@
       store.set(K.hsTasks, ht);
     }
     state.homeschoolTasks = ht;
+
+    /* ⚡ 보너스 공부(하고 싶을 때만) 체크 기록 */
+    var bd = store.get(K.bonusDone, null);
+    state.bonusDone = (bd && typeof bd === 'object' && !(typeof bd.slice === 'function')) ? bd : {};
+    state.bonusDone = pruneBonusDone(state.bonusDone);
 
     /* 한 번만: '숙제' 빼고 '원서 낭독' 매일 넣기 */
     migrateStudyReading();
@@ -2875,6 +2946,7 @@
         renderRoutine();
         renderTodayAcademy();
         renderHomeHomeschool();
+        renderBonusStudy();
         renderStudy();
         renderAffirm();
         renderDex();
@@ -3608,7 +3680,8 @@
     state.routineDone[key] = [];
     state.eveningDone[key] = [];
     state.homeschoolDone[key] = [];
-    state.awards[key] = { r: [], b: false, s: [], m1: false, mi: [], e1: false };
+    state.bonusDone[key] = [];
+    state.awards[key] = { r: [], b: false, s: [], m1: false, mi: [], e1: false, bs: [] };
     saveBalls();
     saveDex();
     saveStones();
@@ -3618,12 +3691,14 @@
     store.set(K.routineDone, state.routineDone);
     store.set(K.eveningDone, state.eveningDone);
     store.set(K.hsDone, state.homeschoolDone);
+    store.set(K.bonusDone, state.bonusDone);
     saveAwards();
     updateBallUI();
     updateStoneUI();
     renderRoutine();
     renderTodayAcademy();
     renderHomeHomeschool();
+    renderBonusStudy();
     renderStudy();
     renderDex();
     renderPraise();
@@ -4174,6 +4249,39 @@
       + '</svg>';
   }
 
+  /* ⚡ 보너스 공부 아이콘 */
+  function svgBonusReading() {
+    return '<svg viewBox="0 0 48 48" aria-hidden="true">'
+      + '<rect x="8" y="15" width="9" height="24" rx="2.4" fill="#FFD9E2" stroke="#E07A96" stroke-width="2"/>'
+      + '<rect x="19" y="10" width="9" height="29" rx="2.4" fill="#D6E9FF" stroke="#4C86C6" stroke-width="2"/>'
+      + '<rect x="30" y="17" width="9" height="22" rx="2.4" fill="#FFEFB8" stroke="#D9AE55" stroke-width="2"/>'
+      + '<path d="M11 22h3M22 17h3M33 24h3" stroke="#8A8377" stroke-width="1.8" stroke-linecap="round"/>'
+      + '</svg>';
+  }
+  function svgBonusWriting() {
+    return '<svg viewBox="0 0 48 48" aria-hidden="true">'
+      + '<rect x="6" y="8" width="25" height="32" rx="3.4" fill="#FFFFFF" stroke="#9CC0E8" stroke-width="2.2"/>'
+      + '<path d="M11 16h10M11 22h15M11 28h9" stroke="#BFDCF5" stroke-width="2.2" stroke-linecap="round"/>'
+      + '<text x="9" y="37" font-size="8" font-weight="800" fill="#5A90D6" font-family="sans-serif">ABC</text>'
+      + '<path d="M30 13l7 7-14 14-7 1 1-7z" fill="#FFC93C" stroke="#D9AE55" stroke-width="2" stroke-linejoin="round"/>'
+      + '<path d="M30 14.5l2.5 2.5" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>'
+      + '</svg>';
+  }
+  function svgBonusReport() {
+    return '<svg viewBox="0 0 48 48" aria-hidden="true">'
+      + '<path d="M6 13c5.5-2 11-1 15.5 2 4.5-3 10-4 15.5-2v22c-5.5-2-11-1-15.5 2-4.5-3-10-4-15.5-2z" fill="#F4F0FF" stroke="#7A66C4" stroke-width="2.2" stroke-linejoin="round"/>'
+      + '<path d="M21.5 15v22" stroke="#7A66C4" stroke-width="2.2"/>'
+      + '<path d="M10 21h7M10 26h7M26 21h7M26 26h7" stroke="#C6BCE9" stroke-width="2" stroke-linecap="round"/>'
+      + '<path d="M33 28l6 6-10 10-7 1 1-7z" fill="#FFC93C" stroke="#D9AE55" stroke-width="1.9" stroke-linejoin="round"/>'
+      + '</svg>';
+  }
+  function bonusIcon(kind) {
+    if (kind === 'reading') return svgBonusReading();
+    if (kind === 'writing') return svgBonusWriting();
+    if (kind === 'diary') return svgDiary();
+    return svgBonusReport();
+  }
+
   function studyIcon(label) {
     var s = String(label || '');
     if (s.indexOf('원서') !== -1 || s.indexOf('낭독') !== -1) return svgReadAloud();
@@ -4213,6 +4321,112 @@
       }
     }
     for (var j = 0; j < boxes.length; j++) boxes[j].innerHTML = html;
+  }
+
+  /* ======================= ⚡ 보너스 공부 ======================= */
+  function bonusById(id) {
+    for (var i = 0; i < BONUS_STUDY.length; i++) if (BONUS_STUDY[i].id === id) return BONUS_STUDY[i];
+    return null;
+  }
+
+  function saveBonusDone() { store.set(K.bonusDone, state.bonusDone); }
+
+  /* 오래된 날짜 기록은 40일치만 남긴다 */
+  function pruneBonusDone(obj) {
+    var out = {}, keys = [], k;
+    for (k in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, k) && /^\d{4}-\d{2}-\d{2}$/.test(k)) keys.push(k);
+    }
+    keys.sort();
+    keys = keys.slice(-40);
+    for (var i = 0; i < keys.length; i++) {
+      var arr = obj[keys[i]], clean = [];
+      if (arr && typeof arr.slice === 'function') {
+        for (var j = 0; j < arr.length; j++) {
+          if (bonusById(arr[j]) && clean.indexOf(arr[j]) === -1) clean.push(arr[j]);
+        }
+      }
+      if (clean.length) out[keys[i]] = clean;
+    }
+    return out;
+  }
+
+  function bonusDoneIds() {
+    var arr = state.bonusDone[todayKey()];
+    return (arr && typeof arr.slice === 'function') ? arr : [];
+  }
+
+  function renderBonusStudy() {
+    var grid = document.querySelector('.js-bonus-grid');
+    if (!grid) return;
+    var done = bonusDoneIds();
+    var html = '';
+    for (var i = 0; i < BONUS_STUDY.length; i++) {
+      var b = BONUS_STUDY[i];
+      var isDone = done.indexOf(b.id) !== -1;
+      html += '<button class="bonus-tile' + (isDone ? ' done' : '') + '" type="button" data-act="b-toggle" data-id="' + esc(b.id) + '" aria-pressed="' + isDone + '">'
+        + '<span class="bt-ico">' + bonusIcon(b.icon) + '</span>'
+        + '<span class="bt-label">' + esc(b.label) + '</span>'
+        + '<span class="bt-cta">' + (isDone ? '완료 ✓' : miniBallSvg() + ' +1') + '</span>'
+        + '</button>';
+    }
+    grid.innerHTML = html;
+    setAll('.js-bonus-count', done.length + '/' + BONUS_STUDY.length);
+  }
+
+  function toggleBonus(id) {
+    var b = bonusById(id);
+    if (!b) return;
+    var done = bonusDoneIds();
+    if (done.indexOf(id) !== -1) { unmarkBonus(id); return; }
+    askConfirm('“' + b.label + '” 다 했어요?',
+      '보너스 공부예요. 하고 싶을 때만 해요! 네 하고 누르면 몬스터볼 +1 🔴',
+      '네! 다 했어요 🔴+1',
+      function () { markBonus(id); });
+  }
+
+  function markBonus(id) {
+    var key = todayKey();
+    var arr = state.bonusDone[key] || [];
+    if (arr.indexOf(id) === -1) arr.push(id);
+    state.bonusDone[key] = arr;
+    saveBonusDone();
+
+    var a = awardBox(key);
+    if (!a.bs) a.bs = [];
+    if (a.bs.indexOf(id) === -1) {
+      a.bs.push(id);
+      saveAwards();
+      addBalls(1);
+    }
+    renderBonusStudy();
+    SFX.ball();
+    toast('보너스 공부 완료! 몬스터볼 +1 🔴');
+    if (arr.length === BONUS_STUDY.length) {
+      confettiBurst();
+      SFX.fanfare();
+      toast('보너스 공부까지 다 했어요! 오늘은 진짜 최고! ⚡');
+    }
+  }
+
+  function unmarkBonus(id) {
+    var key = todayKey();
+    var arr = state.bonusDone[key] || [];
+    var idx = arr.indexOf(id);
+    if (idx !== -1) arr.splice(idx, 1);
+    state.bonusDone[key] = arr;
+    saveBonusDone();
+
+    var a = awardBox(key);
+    if (!a.bs) a.bs = [];
+    var bi = a.bs.indexOf(id);
+    if (bi !== -1) {
+      a.bs.splice(bi, 1);
+      saveAwards();
+      addBalls(-1);
+      toast('보너스 볼 하나를 돌려 놓았어요 🔴');
+    }
+    renderBonusStudy();
   }
 
   function toggleHomeschool(id, dow) {
@@ -4975,6 +5189,9 @@
       case 'h-toggle':
         toggleHomeschool(id, new Date().getDay());
         break;
+      case 'b-toggle':
+        toggleBonus(id);
+        break;
       case 'hs-add':
         selectedDow = new Date().getDay();
         showTab('study');
@@ -5181,6 +5398,7 @@
     renderRoutine();
     renderTodayAcademy();
     renderHomeHomeschool();
+    renderBonusStudy();
     renderWeek();
     renderStudy();
     renderAffirm();
