@@ -270,10 +270,10 @@
     border:2px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.12);
   }
   .rcard .illu{
-    aspect-ratio:auto;flex:1 1 auto;min-height:0;max-height:300px;border-radius:11px;overflow:hidden;background:#FFF9EE;
+    aspect-ratio:1/1;flex:0 0 auto;min-height:0;max-height:none;border-radius:11px;overflow:hidden;background:#FFF9EE;
     display:flex;align-items:center;justify-content:center;width:100%;min-width:0;margin-top:auto;
   }
-  .rcard .illu img{width:100%;height:100%;object-fit:contain;object-position:center;display:block}
+  .rcard .illu img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
   .rcard .illu .emoji{font-size:44px;line-height:1}
   .rcard .r-title{
     font-size:15.5px;font-weight:900;letter-spacing:-.5px;padding:0 24px;text-align:center;line-height:1.12;word-break:keep-all;
@@ -999,7 +999,7 @@
     .hs-tile .hs-ico svg{width:26px;height:26px}
     .hs-tile .hs-label{font-size:14px}
     .hs-tile .hs-cta{font-size:10.5px;min-height:29px;padding:5px 4px}
-    .rcard .illu{flex:0 0 auto;height:230px;max-height:none}
+    .rcard .illu{flex:0 0 auto}
     .rcard .r-title{font-size:14.5px}
     .rcard .cta{font-size:13px;min-height:42px}
     .af-text{font-size:13.5px}
@@ -1170,7 +1170,7 @@
     .routine-grid{gap:11px}
     .routine-wrap .sec-head h2{font-size:20px}
     .rcard{padding:9px 10px 10px;border-radius:18px;gap:6px}
-    .rcard .illu{border-radius:13px;flex:0 0 auto;height:270px;max-height:none}
+    .rcard .illu{border-radius:13px;flex:0 0 auto}
     .rcard .r-title{font-size:17.5px}
     .rcard .cta{font-size:14.5px;padding:10px 6px;min-height:46px}
     .rcard .cta .mini{width:17px;height:17px}
@@ -1178,18 +1178,16 @@
     .rcard .stamp{width:27px;height:27px;font-size:15px}
     .foot{font-size:10.5px}
   }
-  /* 아침: 상단 두 줄이 남는 높이를 나눠 갖고, 루틴 카드는 정해진 크기로 */
+  /* 아침: 상단 두 줄이 남는 높이를 나눠 갖는다 */
   @media (min-width:1400px) and (min-height:901px){
     #homeMorning .home-grid{flex:1 1 auto}
     #homeMorning .hero{justify-content:space-evenly;gap:8px}
-    #homeMorning .routine-wrap{flex:0 0 auto}
-    #homeMorning .rcard .illu{flex:0 0 auto;height:300px;max-height:none}
   }
 
   /* 실제 태블릿(주소·상태 표시줄 포함): 보이는 높이가 짧아도 잘리지 않게 */
   @media (max-height:900px){
     .routine-wrap{flex:0 6 auto}
-    .rcard .illu{flex:1 1 auto;height:auto;min-height:0;max-height:none}
+    .rcard .illu{flex:0 0 auto;height:auto;min-height:0;max-height:none}
     .rcard{gap:4px}
     .rcard .r-title{font-size:15px;padding:0 18px}
     .rcard .cta{min-height:36px;font-size:12.5px}
