@@ -922,6 +922,14 @@
     background:#FDFBF6;color:var(--ink);min-height:48px;
   }
   .field input:focus{outline:none;border-color:var(--yellow);background:#fff}
+  /* 시·분 고르기(시간 입력) — 태블릿에서 키보드·확인창 없이 두 번 탭이면 끝 */
+  .tp{display:inline-flex;align-items:center;gap:6px;min-width:0}
+  .tp select{
+    border:2px solid #E9E1CF;border-radius:13px;background:#FDFBF6;color:var(--ink);
+    font-size:15px;font-weight:800;min-height:48px;padding:0 6px;min-width:0;
+    font-variant-numeric:tabular-nums;text-align:center;
+  }
+  .tp select:focus,.tp select:active{outline:none;border-color:var(--yellow);background:#fff}
   .day-checks{display:flex;gap:8px;flex-wrap:wrap}
   .day-check{
     border:2px solid #E9E1CF;background:#fff;color:#7C7466;font-weight:900;font-size:14px;
@@ -1429,6 +1437,12 @@
   .ms-row{background:#FDFBF6;border:2px solid #EFE8D8;border-radius:16px;padding:5px 8px;display:flex;flex-direction:column;gap:4px}
   .ms-row-top{display:flex;align-items:center;gap:6px}
   .ms-row input[type=time]{width:142px;flex:none;border:2px solid #E8E0CD;border-radius:11px;padding:0 6px;font-size:14px;font-weight:900;background:#fff;min-height:44px;font-variant-numeric:tabular-nums;color:#3A3428}
+  .ms-row .tp{flex:none;gap:5px}
+  .ms-row .tp select{
+    border:2px solid #E8E0CD;border-radius:11px;background:#fff;color:#3A3428;
+    font-size:14px;font-weight:900;min-height:44px;padding:0 4px;font-variant-numeric:tabular-nums;
+  }
+  .ms-row .tp select:focus,.ms-row .tp select:active{outline:none;border-color:var(--yellow)}
   .ms-row .ms-name{flex:1;min-width:0;border:2px solid #E8E0CD;border-radius:11px;padding:0 10px;font-size:15px;font-weight:800;background:#fff;min-height:44px;color:#3A3428}
   .ms-row .ms-msg{width:100%;border:2px dashed #E8E0CD;border-radius:11px;padding:0 10px;font-size:12.5px;font-weight:700;background:#fff;min-height:34px;color:#5F594D}
   .ms-row input:focus{outline:none;border-color:var(--yellow);background:#fff}
@@ -2135,12 +2149,12 @@
           <input id="acName" type="text" placeholder="예: 수학 학원" autocomplete="off">
         </div>
         <div class="field">
-          <label for="acStart">시작 시간</label>
-          <input id="acStart" type="time" value="16:00">
+          <label>시작 시간</label>
+          <span class="tp" data-tp data-step="5"><select class="tp-h" aria-label="시작 시간 시"></select><select class="tp-m" aria-label="시작 시간 분"></select><input id="acStart" class="tp-val" type="hidden" value="16:00"></span>
         </div>
         <div class="field">
-          <label for="acEnd">끝나는 시간 (선택)</label>
-          <input id="acEnd" type="time" value="17:30">
+          <label>끝나는 시간 (선택)</label>
+          <span class="tp" data-tp data-step="5" data-optional="1"><select class="tp-h" aria-label="끝나는 시간 시"></select><select class="tp-m" aria-label="끝나는 시간 분"></select><input id="acEnd" class="tp-val" type="hidden" value="17:30"></span>
         </div>
         <div class="field">
           <label for="acMemo">메모 / 준비물 (선택)</label>
@@ -2182,12 +2196,12 @@
           <input id="onceName" type="text" placeholder="예: 치과" autocomplete="off">
         </div>
         <div class="field">
-          <label for="onceStart">시작 시간</label>
-          <input id="onceStart" type="time" value="15:00">
+          <label>시작 시간</label>
+          <span class="tp" data-tp data-step="5"><select class="tp-h" aria-label="시작 시간 시"></select><select class="tp-m" aria-label="시작 시간 분"></select><input id="onceStart" class="tp-val" type="hidden" value="15:00"></span>
         </div>
         <div class="field">
-          <label for="onceEnd">끝나는 시간 (선택)</label>
-          <input id="onceEnd" type="time">
+          <label>끝나는 시간 (선택)</label>
+          <span class="tp" data-tp data-step="5" data-optional="1"><select class="tp-h" aria-label="끝나는 시간 시"></select><select class="tp-m" aria-label="끝나는 시간 분"></select><input id="onceEnd" class="tp-val" type="hidden" value=""></span>
         </div>
         <div class="field full">
           <label for="onceMemo">준비물 / 메모 (선택)</label>
@@ -3697,6 +3711,67 @@
     fireMilestone(pick, true);
   }
 
+  /* ======================= 시·분 고르기 (시간 입력) =======================
+     <input type="time"> 은 태블릿에서 시계판·키보드·확인창이 떠서 불편해서,
+     시/분 <select> 두 개로 바꿔 두 번 탭이면 바로 값이 들어가게 한다. */
+  function tpPad(n) { return (n < 10 ? '0' : '') + n; }
+  function tpParts(v) {
+    var m = /^(\d{1,2}):(\d{2})$/.exec(String(v == null ? '' : v).trim());
+    if (!m) return null;
+    var h = parseInt(m[1], 10), mi = parseInt(m[2], 10);
+    if (isNaN(h) || isNaN(mi) || h > 23 || mi > 59) return null;
+    return { h: h, m: mi };
+  }
+  function tpBuild(wrap) {
+    var step = parseInt(wrap.getAttribute('data-step') || '5', 10) || 5;
+    var opt = wrap.getAttribute('data-optional') === '1';
+    var hs = wrap.querySelector('.tp-h'), ms = wrap.querySelector('.tp-m');
+    if (!hs || !ms) return;
+    var hh = opt ? '<option value="">--</option>' : '';
+    var mm = opt ? '<option value="">--</option>' : '';
+    for (var h = 0; h < 24; h++) hh += '<option value="' + h + '">' + tpPad(h) + '시</option>';
+    for (var m = 0; m < 60; m += step) mm += '<option value="' + m + '">' + tpPad(m) + '분</option>';
+    hs.innerHTML = hh;
+    ms.innerHTML = mm;
+  }
+  function setTP(input, value) {
+    if (!input) return;
+    var wrap = input.parentNode;
+    input.value = value ? value : '';
+    if (!wrap || !wrap.querySelector) return;
+    var p = tpParts(value);
+    var hs = wrap.querySelector('.tp-h'), ms = wrap.querySelector('.tp-m');
+    if (!hs || !ms) return;
+    hs.value = p ? String(p.h) : '';
+    if (!p) { ms.value = ''; return; }
+    var mv = String(p.m);
+    if (ms.value !== mv) {
+      /* 5분 간격 목록에 없는 분(예: 07:12)은 그 분만 따로 넣어 준다 */
+      var o = document.createElement('option');
+      o.value = mv; o.textContent = tpPad(p.m) + '분';
+      ms.appendChild(o);
+      ms.value = mv;
+    }
+  }
+  function tpSync(wrap) {
+    if (!wrap || !wrap.querySelector) return;
+    var val = wrap.querySelector('.tp-val');
+    var hs = wrap.querySelector('.tp-h'), ms = wrap.querySelector('.tp-m');
+    if (!val || !hs || !ms) return;
+    if (hs.value === '') { ms.value = ''; val.value = ''; return; }
+    if (ms.value === '') ms.value = '0';
+    val.value = tpPad(parseInt(hs.value, 10)) + ':' + tpPad(parseInt(ms.value, 10));
+  }
+  function initTimePickers(root) {
+    var scope = root || document;
+    var wraps = scope.querySelectorAll('.tp[data-tp]');
+    for (var i = 0; i < wraps.length; i++) {
+      tpBuild(wraps[i]);
+      var v = wraps[i].querySelector('.tp-val');
+      setTP(v, v ? v.value : '');
+    }
+  }
+
   /* ======================= ⚙️ 타임바 편집 ======================= */
   var msEditMode = 'morning';
   var msDraft = [];
@@ -3732,7 +3807,7 @@
       var on = m.on !== false;
       html += '<div class="ms-row" data-i="' + i + '" data-emoji="' + esc(m.emoji || '⏰') + '">'
         + '<div class="ms-row-top">'
-        + '<input class="ms-time" type="time" step="300" value="' + esc(m.t) + '" aria-label="시간">'
+        + '<span class="tp" data-tp data-step="1"><select class="tp-h" aria-label="시간 시"></select><select class="tp-m" aria-label="시간 분"></select><input class="ms-time tp-val" type="hidden" value="' + esc(m.t) + '"></span>'
         + '<input class="ms-name" type="text" maxlength="14" value="' + esc(m.name) + '" placeholder="이름 (예: 양치)" aria-label="이름">'
         + '<label class="ms-on' + (on ? ' on' : '') + '"><input class="ms-on-box" type="checkbox"' + (on ? ' checked' : '') + '>알림</label>'
         + '<button class="ms-del" type="button" data-act="ms-del" data-i="' + i + '" aria-label="이 구간 삭제">✕</button>'
@@ -3741,6 +3816,7 @@
         + '</div>';
     }
     $('msEditList').innerHTML = html;
+    initTimePickers($('msEditList'));
     var hint = $('msHint');
     refreshMsNotifyBtn();
     if (hint) {
@@ -5012,8 +5088,8 @@
     editingAcademyId = null;
     $('academyFormTitle').textContent = '➕ 학원 추가';
     $('acName').value = '';
-    $('acStart').value = '16:00';
-    $('acEnd').value = '17:30';
+    setTP($('acStart'), '16:00');
+    setTP($('acEnd'), '17:30');
     $('acMemo').value = '';
     setAcDays([]);
     $('acSave').textContent = '저장';
@@ -5056,8 +5132,8 @@
     editingAcademyId = id;
     $('academyFormTitle').textContent = '✏️ 학원 수정';
     $('acName').value = a.name;
-    $('acStart').value = a.start || '16:00';
-    $('acEnd').value = a.end || '';
+    setTP($('acStart'), a.start || '16:00');
+    setTP($('acEnd'), a.end || '');
     $('acMemo').value = a.memo || '';
     setAcDays(a.days || []);
     $('acSave').textContent = '수정 저장';
@@ -5117,6 +5193,19 @@
     return s1.txt + ' ~ ' + s2.txt;
   }
 
+  /* 오늘의 스케줄 카드용: 오전/오후 없이 2:30 ~ 3:30 */
+  function timeShort(hhmm) {
+    var m = /^(\d{1,2}):(\d{2})/.exec(String(hhmm || ''));
+    if (!m) return '';
+    var h = parseInt(m[1], 10) % 12;
+    if (h === 0) h = 12;
+    return h + ':' + m[2];
+  }
+  function timeLabelShort(a) {
+    if (!a.start) return '시간 미정';
+    return a.end ? (timeShort(a.start) + ' ~ ' + timeShort(a.end)) : timeShort(a.start);
+  }
+
   function renderTodayAcademy() {
     var box = $('todayAcademy');
     var dow = new Date().getDay();
@@ -5141,7 +5230,7 @@
         + '<span class="ac-ico">' + (a.once ? svgPin() : svgSchool()) + '</span>'
         + '<span class="ac-name" title="' + esc(a.name) + '">' + esc(a.name) + '</span>'
         + (a.memo ? '<span class="ac-memo" title="' + esc(a.memo) + '">🎒 ' + esc(a.memo) + '</span>' : '')
-        + '<span class="ac-time">' + esc(timeLabel(a)) + '</span>'
+        + '<span class="ac-time">' + esc(timeLabelShort(a)) + '</span>'
         + '</div>';
     }
     html += '</div>';
@@ -5202,7 +5291,7 @@
       memo: $('onceMemo').value.trim()
     });
     saveOnce();
-    $('onceName').value = ''; $('onceMemo').value = ''; $('onceEnd').value = '';
+    $('onceName').value = ''; $('onceMemo').value = ''; setTP($('onceEnd'), '');
     renderOnce();
     renderTodayAcademy();
     toast(date === todayKey() ? '오늘 일정에 넣었어요 📌' : '하루 일정을 추가했어요 📌');
@@ -5255,7 +5344,10 @@
     $('acName').value = name;
     if (!selectedAcDays().length) setAcDays([1, 3, 5]);
     $('academyFormCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    setTimeout(function () { $('acStart').focus(); }, 350);
+    setTimeout(function () {
+      var hs = $('acStart') && $('acStart').parentNode ? $('acStart').parentNode.querySelector('.tp-h') : null;
+      (hs || $('acStart')).focus();
+    }, 350);
     toast('요일과 시간을 골라 저장해 주세요');
   }
 
@@ -6947,6 +7039,7 @@
     renderDex();
     renderPraise();
     paintBallIcons();
+    initTimePickers();
     updateBallUI();
     updateStoneUI();
     syncPerfectDay();
@@ -6955,6 +7048,13 @@
     setInterval(tickClock, 1000);
     setInterval(loadWeather, 10 * 60 * 1000);
     window.addEventListener('resize', function () { renderTimeline(); fitAffirmMarquee(); });
+    /* 시·분을 고르면 그 자리에서 바로 HH:MM 으로 들어간다(확인 버튼 없음) */
+    document.addEventListener('change', function (e) {
+      var t = e.target;
+      if (!t || !t.classList) return;
+      if (!t.classList.contains('tp-h') && !t.classList.contains('tp-m')) return;
+      tpSync(t.parentNode);
+    });
     window.addEventListener('orientationchange', function () { setTimeout(function () { renderTimeline(); fitAffirmMarquee(); }, 260); });
 
     if ('serviceWorker' in navigator && location.protocol === 'https:') {
