@@ -459,10 +459,10 @@
   /* ---------------- ⚔️ 아침 특별 퀘스트 (원리셈·따풀) ---------------- */
   .math-card{flex:0 0 auto}
   #homeMorning .quest-card{
-    padding:9px 12px 11px;border-color:#F0CB6E;
+    padding:10px 12px 12px;border-color:#F0CB6E;
     background:linear-gradient(158deg,#FFFDF4 0%,#FFF5D6 46%,#FFEDBC 100%);
     box-shadow:0 12px 26px rgba(212,160,40,.16);
-    display:flex;flex-direction:column;min-height:0;
+    display:flex;flex-direction:column;justify-content:center;min-height:0;
   }
   .quest-head{display:flex;align-items:center;gap:8px;flex:none;margin-bottom:7px}
   .quest-badge{
@@ -475,19 +475,19 @@
   .quest-head .link-btn{font-size:12px;color:#9A7312}
   .quest-hero{display:flex;align-items:center;gap:12px;min-width:0;flex:none}
   .quest-ico{
-    width:62px;height:62px;flex:none;border-radius:19px;background:#fff;border:2px solid #F3DA98;
+    width:66px;height:66px;flex:none;border-radius:20px;background:#fff;border:2px solid #F3DA98;
     display:flex;align-items:center;justify-content:center;box-shadow:0 8px 16px rgba(200,150,20,.16);
   }
-  .quest-ico svg{width:44px;height:44px;display:block}
+  .quest-ico svg{width:48px;height:48px;display:block}
   .quest-txt{min-width:0}
-  .quest-title{font-size:24px;font-weight:900;letter-spacing:-.8px;color:#5C3E00;line-height:1.1}
+  .quest-title{font-size:25px;font-weight:900;letter-spacing:-.9px;color:#5C3E00;line-height:1.1}
   .quest-line{font-size:13px;font-weight:900;color:#A8791B;margin-top:4px;letter-spacing:-.3px}
   .quest-card .js-morning-math{display:flex;flex-direction:column;gap:7px;margin-top:9px;flex:0 0 auto;min-height:0}
   .quest-btn{
     display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
     background:linear-gradient(180deg,#FFC93C 0%,#F2A400 100%);color:#3F2B00;
-    border:2px solid #DE9A00;border-radius:16px;padding:11px 14px;min-height:54px;
-    font-family:inherit;font-size:17.5px;font-weight:900;letter-spacing:-.5px;
+    border:2px solid #DE9A00;border-radius:16px;padding:12px 14px;min-height:58px;
+    font-family:inherit;font-size:18px;font-weight:900;letter-spacing:-.5px;
     box-shadow:0 8px 18px rgba(219,152,0,.30);
     transition:transform .12s ease,box-shadow .15s ease;
   }
@@ -596,7 +596,7 @@
   #homeEvening .bonus-grid{flex:1 1 auto;min-height:0;align-content:stretch}
   #homeEvening .bonus-tile{
     flex-direction:column;flex-wrap:nowrap;align-items:center;justify-content:center;
-    text-align:center;gap:7px;padding:9px 6px 10px;border-radius:16px;
+    text-align:center;gap:6px;padding:7px 6px 8px;border-radius:16px;
   }
   #homeEvening .bonus-tile .bt-ico{width:54px;height:54px;border-radius:16px}
   #homeEvening .bonus-tile .bt-ico svg{width:40px;height:40px}
@@ -1691,7 +1691,7 @@
       <section class="routine-wrap">
         <div class="sec-head">
           <h2>🎒 아침 루틴 5단계</h2>
-          <span class="sec-sub">카드를 눌러 체크! 5개를 모두 하면 몬스터볼 +1 · 원리셈·따풀은 오른쪽 ‘아침 공부’에서 +1</span>
+          <span class="sec-sub">카드를 눌러 체크! 5개를 모두 하면 몬스터볼 +1 · 원리셈·따풀은 오른쪽 ‘⚔️ 아침 특별 퀘스트’에서 +1</span>
           <span class="count-pill js-routine-count">0/5</span>
           <span class="streak-chip js-streak-chip">🔥 0일</span>
           <div class="spacer"></div>
@@ -1798,7 +1798,7 @@
 
         <div class="card today-card bonus-card">
           <div class="sec-head">
-            <h2>⚡ 보너스 공부</h2>
+            <h2>⚡ 보너스</h2>
             <span class="count-pill js-bonus-count">0/4</span>
             <div class="spacer"></div>
             <span class="bonus-sub">하고 싶을 때 도전! · 완료마다 🔴 +1</span>
@@ -1902,14 +1902,14 @@
 
     <div class="card bonus-manage-card" style="margin-top:16px">
       <div class="sec-head">
-        <h2>⚡ 보너스 공부 관리</h2>
+        <h2>⚡ 보너스 관리</h2>
         <div class="count-pill" id="bonusManageCount">0개</div>
         <div class="spacer"></div>
-        <span class="hint">저녁 홈의 ⚡ 보너스 공부 칸에 그대로 보여요</span>
+        <span class="hint">저녁 홈의 ⚡ 보너스 칸에 그대로 보여요</span>
       </div>
       <ul class="list bonus-manage-list" id="bonusManageList"></ul>
       <div class="add-row">
-        <input id="bonusInput" type="text" placeholder="보너스 공부 추가 (예: 한자 쓰기 1장)" enterkeyhint="done" autocomplete="off">
+        <input id="bonusInput" type="text" placeholder="보너스 항목 추가 (예: 한자 쓰기 1장)" enterkeyhint="done" autocomplete="off">
         <button class="btn btn-yellow" id="bonusAdd" type="button">+ 추가</button>
       </div>
     </div>
@@ -3915,7 +3915,7 @@
     var hint = $('editHint');
     if (hint) hint.textContent = editListName === 'evening'
       ? '저녁 루틴이에요. 5개를 추천해요! (5개를 모두 체크하면 몬스터볼 +1)'
-      : '아침 루틴이에요. 5개를 추천해요! 1~5번은 5개를 모두 체크하면 몬스터볼 +1, 원리셈·따풀은 오른쪽 ‘아침 공부’ 카드에서 +1';
+      : '아침 루틴이에요. 5개를 추천해요! 1~5번은 5개를 모두 체크하면 몬스터볼 +1, 원리셈·따풀은 오른쪽 ‘⚔️ 아침 특별 퀘스트’ 카드에서 +1';
     var input = $('routineInput');
     if (input) input.placeholder = editListName === 'evening'
       ? '저녁 루틴 추가 (예: 내일 준비물 챙기기)' : '루틴 추가 (예: 물 한 잔 마시기)';
@@ -4591,7 +4591,7 @@
 
       var html = '';
       if (!n) {
-        html = '<div class="bonus-empty">아직 보너스 공부가 없어요 — 공부 탭에서 추가해 보세요</div>';
+        html = '<div class="bonus-empty">아직 보너스 항목이 없어요 — 공부 탭에서 추가해 보세요</div>';
       } else {
         for (i = 0; i < n; i++) {
           var b = items[i];
@@ -4616,7 +4616,7 @@
     var items = bonusList();
     var html = '', i;
     if (!items.length) {
-      html = '<li class="empty">보너스 공부가 아직 없어요.<br>아래에서 추가해 보세요!</li>';
+      html = '<li class="empty">보너스 항목이 아직 없어요.<br>아래에서 추가해 보세요!</li>';
     } else {
       for (i = 0; i < items.length; i++) {
         var b = items[i];
@@ -4650,7 +4650,7 @@
     var done = bonusDoneIds();
     if (done.indexOf(id) !== -1) { unmarkBonus(id); return; }
     askConfirm('“' + b.label + '” 다 했어요?',
-      '보너스 공부예요. 하고 싶을 때만 해요! 네 하고 누르면 몬스터볼 +1 🔴',
+      '보너스 항목이에요. 하고 싶을 때만 해요! 네 하고 누르면 몬스터볼 +1 🔴',
       '네! 다 했어요 🔴+1',
       function () { markBonus(id); });
   }
@@ -4671,12 +4671,12 @@
     }
     renderBonusStudy();
     SFX.ball();
-    toast('보너스 공부 완료! 몬스터볼 +1 🔴');
+    toast('보너스 완료! 몬스터볼 +1 🔴');
     var items = bonusList();
     if (items.length && bonusDoneInList().length === items.length) {
       confettiBurst();
       SFX.fanfare();
-      toast('보너스 공부까지 다 했어요! 오늘은 진짜 최고! ⚡');
+      toast('보너스까지 다 했어요! 오늘은 진짜 최고! ⚡');
     }
   }
 
@@ -4712,7 +4712,7 @@
     input.value = '';
     renderBonusAll();
     input.focus();
-    toast('보너스 공부에 넣었어요 ⚡');
+    toast('보너스에 넣었어요 ⚡');
   }
 
   function moveBonusItem(id, dir) {
@@ -4744,7 +4744,7 @@
   function deleteBonus(id) {
     var b = bonusById(id);
     if (!b) return;
-    if (!window.confirm('“' + b.label + '” 보너스 공부를 지울까요?\n오늘 체크한 기록도 함께 사라져요.')) return;
+    if (!window.confirm('“' + b.label + '” 보너스에서 지울까요?\n오늘 체크한 기록도 함께 사라져요.')) return;
     var items = bonusList(), next = [], i;
     for (i = 0; i < items.length; i++) if (items[i].id !== id) next.push(items[i]);
     state.bonusItems = next;
@@ -4762,7 +4762,7 @@
       }
     }
     renderBonusAll();
-    toast('보너스 공부에서 지웠어요');
+    toast('보너스에서 지웠어요');
   }
 
   function toggleHomeschool(id, dow) {
