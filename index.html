@@ -2910,18 +2910,44 @@
   function saveStones() { store.set(K.stones, state.stones); }
   function saveStoneAwards() { store.set(K.stoneAwards, state.stoneAwards); }
 
-  /* 100% 완벽한 날: 아침 5/5 + 원리셈·따풀 + 저녁 5/5 + 오늘의 공부 모두 */
+  /* 100% 완벽한 날: 아침 5/5 + 저녁 5/5 (공부는 따로 '올클리어 보너스'로) */
   function todayPerfect() {
     if (!state.items.length || !state.eveningItems.length) return false;
     var doneIds = todayRoutineIds(), i;
-    var bundle = morningBundleItems(), singles = morningSingleItems();
+    var bundle = morningBundleItems();
     for (i = 0; i < bundle.length; i++) if (doneIds.indexOf(bundle[i].id) === -1) return false;
-    for (i = 0; i < singles.length; i++) if (doneIds.indexOf(singles[i].id) === -1) return false;
     if (eveningDoneIds().length !== state.eveningItems.length) return false;
-    var dow = new Date().getDay();
-    var tasks = hsTaskList(dow);
-    if (!tasks.length) return true;
+    return true;
+  }
+
+  /* 공부 올클리어: 원리셈 + 따풀 + 오늘의 공부를 모두 끝냈을 때 하루 한 번 +1 */
+  function studyAllClear() {
+    var singles = morningSingleItems(), i;
+    var doneIds = todayRoutineIds();
+    for (i = 0; i < singles.length; i++) if (doneIds.indexOf(singles[i].id) === -1) return false;
+    var tasks = hsTaskList(new Date().getDay());
+    if (!tasks.length) return false;
     return doneIdsFor(todayKey(), tasks).length === tasks.length;
+  }
+
+  function syncStudyBonus() {
+    var a = awardBox(todayKey());
+    var clear = studyAllClear();
+    if (clear && !a.sb) {
+      a.sb = true;
+      addBalls(1);
+      saveAwards();
+      toast('🎉 오늘 공부 올클리어 보너스! 몬스터볼 +1 🔴');
+      try { SFX.fanfare(); } catch (e) {}
+      try { confettiBurst(); } catch (e) {}
+    } else if (!clear && a.sb) {
+      a.sb = false;
+      addBalls(-1);
+      saveAwards();
+      toast('공부 올클리어 보너스를 돌려 놓았어요 🔴');
+    }
+    updateBallUI();
+    return clear;
   }
 
   function currentStreak() {
@@ -3363,6 +3389,7 @@
     if (!a.mi) a.mi = [];                 /* 따로 받은 아침 항목(원리셈·따풀) */
     if (a.m1 === undefined) a.m1 = false; /* 아침 5개 묶음 보상 */
     if (a.e1 === undefined) a.e1 = false; /* 저녁 5개 묶음 보상 */
+    if (a.sb === undefined) a.sb = false; /* 공부 올클리어 보너스 */
     return a;
   }
 
@@ -3899,6 +3926,7 @@
     SFX.step();
     if (isSingle) grantMorningItem(id);
     syncPerfectDay();
+    syncStudyBonus();
     tickClock();
   }
 
@@ -3926,6 +3954,7 @@
     if (revoked) toast('볼 하나를 돌려 놓았어요 🔴');
     renderRoutine();
     syncPerfectDay();
+    syncStudyBonus();
     tickClock();
   }
 
@@ -4936,6 +4965,7 @@
       if (key === todayKey()) toast('공부 완료! 배지 획득 🏅');
     }
     syncPerfectDay();
+    if (key === todayKey()) syncStudyBonus();
   }
 
   function unmarkHomeschool(id, dow) {
@@ -4960,6 +4990,7 @@
     renderStudy();
     renderHomeHomeschool();
     syncPerfectDay();
+    if (key === todayKey()) syncStudyBonus();
   }
 
   function addStudy() {
