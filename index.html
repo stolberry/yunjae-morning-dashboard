@@ -313,6 +313,17 @@
     word-break:keep-all;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
   }
   .af-sub{display:none}
+  /* 저녁 모드: 날짜·시간 옆 확언 카드 (달빛 보라 테마) */
+  .affirm-card.eve{
+    flex:1 1 auto;
+    background:
+      radial-gradient(240px 130px at 106% -16%, #E9E3FF 0%, rgba(233,227,255,0) 72%),
+      linear-gradient(120deg,#FFFFFF 0%,#F3EFFF 58%,#FFF6E8 100%);
+    border-color:#D3CAF6;box-shadow:var(--shadow);
+  }
+  .affirm-card.eve .af-head{color:#5B4FA8}
+  .affirm-card.eve .af-head .af-ico{font-size:13px}
+  .affirm-card.eve .af-text{color:#3B3266;font-size:15px}
   .wx-card{
     padding:6px 34px 6px 10px;border-radius:18px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 7px;
     align-content:center;overflow:hidden;min-width:0;position:relative;
@@ -355,6 +366,14 @@
   #homeMorning .dt-wx .wx-card .wdesc{font-size:12px}
   #homeMorning .dt-wx .wx-card .wtip{font-size:11px}
   #homeMorning .dt-wx .wx-card .badge{font-size:10.5px;padding:1px 6px}
+  /* 저녁: 왼쪽 60% 위 [날짜·시간 | 오늘의 확언] — 아침과 같은 2칸 구조 */
+  #homeEvening .dt-wx{display:grid;grid-template-columns:1fr 1.05fr;gap:10px;flex:0 0 auto;align-items:stretch;min-width:0}
+  #homeEvening .dt-wx .dt-card{padding:5px 14px}
+  #homeEvening .dt-wx .dt-card .dtc-clock{font-size:30px}
+  #homeEvening .dt-wx .dt-card .dtc-date{font-size:14px}
+  #homeEvening .dt-wx .affirm-card{padding:5px 14px}
+  #homeEvening .dt-wx .affirm-card .af-head{font-size:11.5px}
+  #homeEvening .dt-wx .affirm-card .af-text{font-size:15px}
   .right-top{display:grid;grid-template-columns:1fr;gap:9px;flex:none;min-height:0}
   .right-main{display:grid;grid-template-columns:1fr;gap:9px;flex:1 1 auto;min-height:0}
   .card.today-card{padding:7px 11px;border-radius:18px;min-width:0;display:flex;flex-direction:column;overflow:hidden}
@@ -1081,6 +1100,7 @@
     .hero-count{font-size:clamp(19px,4.6vw,24px)}
     .dt-clock{font-size:22px}
     #homeMorning .dt-wx{grid-template-columns:1fr}
+    #homeEvening .dt-wx{grid-template-columns:1fr}
     .routine-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
     .routine-grid.eve5{grid-template-columns:repeat(2,minmax(0,1fr))}
     .rcard .r-title{font-size:15px}
@@ -1123,6 +1143,14 @@
     .af-head{font-size:13px}
     .af-text{font-size:17px}
     .af-sub{font-size:11.5px}
+    /* 저녁: 날짜·시간 | 확언 한 줄 위주로 조금 크게 */
+    #homeEvening .dt-wx .dt-card{padding:7px 16px}
+    #homeEvening .dt-wx .dt-card .dtc-clock{font-size:32px}
+    #homeEvening .dt-wx .dt-card .dtc-date{font-size:15px}
+    #homeEvening .dt-wx .dt-card .dtc-ico{font-size:17px}
+    #homeEvening .dt-wx .affirm-card{padding:7px 16px}
+    #homeEvening .dt-wx .affirm-card .af-head{font-size:12.5px}
+    #homeEvening .dt-wx .affirm-card .af-text{font-size:16px}
     .wx-card .wtemp{font-size:26px}
     .wx-card .wico{font-size:26px}
     .wx-card .wdesc{font-size:12.5px}
@@ -1387,11 +1415,17 @@
     <div class="mode-pane" id="homeEvening">
 
       <div class="home-grid">
-      <!-- 날짜·시간 + 취침 시간 (왼쪽) -->
+      <!-- 왼쪽 60%: 1행 날짜·시간 | 오늘의 확언, 2행 저녁 히어로 -->
       <div class="left-col">
+      <div class="dt-wx">
       <div class="card dt-card eve">
         <div class="dtc-date"><span class="dtc-ico">📅</span><span class="js-date">불러오는 중…</span></div>
         <div class="dtc-clock js-clock">--:--</div>
+      </div>
+      <div class="affirm-card eve">
+        <div class="af-head"><span class="af-ico">✨</span>오늘의 확언</div>
+        <p class="af-text js-affirm">불러오는 중…</p>
+      </div>
       </div>
       <section class="hero eve-hero">
         <div class="hero-top">
