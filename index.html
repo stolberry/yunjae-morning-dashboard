@@ -1610,8 +1610,23 @@
     return out;
   }
 
-  /* 공부 주간표: 매일 공통 + 요일별 */
-  function weekFromBase(base) {
+  /* 공부 주간표: 숙제(월~금) · 그림일기(일) · 빅박스(월수금) · 사고력(화목) · 피아노(매일) */
+  function newStudyWeek() {
+    var out = {};
+    for (var dow = 0; dow < 7; dow++) {
+      var arr = [];
+      if (dow >= 1 && dow <= 5) arr.push('숙제');
+      if (dow === 0) arr.push('그림일기');
+      if (dow === 1 || dow === 3 || dow === 5) arr.push('빅박스·화상영어');
+      if (dow === 2 || dow === 4) arr.push('사고력수학');
+      arr.push('피아노연습');
+      out[String(dow)] = arr;
+    }
+    return out;
+  }
+
+  /* 예전 기본표(원리셈·리틀팍스 포함 / 숙제만 포함) 확인용 */
+  function oldStudyWeek(base) {
     var out = {};
     for (var dow = 0; dow < 7; dow++) {
       var arr = base.slice();
@@ -1622,29 +1637,36 @@
     }
     return out;
   }
-  var STUDY_BASE = ['숙제'];
-  var OLD_STUDY_BASE = ['원리셈·따풀 숙제', '리틀팍스', '숙제'];
+  var OLD_STUDY_BASES = [
+    ['숙제'],
+    ['원리셈·따풀 숙제', '리틀팍스', '숙제']
+  ];
 
   function defaultHomeschool() {
-    var week = weekFromBase(STUDY_BASE), out = {};
+    var week = newStudyWeek(), out = {};
     for (var d = 0; d < 7; d++) out[String(d)] = mkTasks(week[String(d)]);
     return out;
   }
 
-  /* 이전 기본표(원리셈·따풀, 리틀팍스 포함)인지 확인 */
-  function isOldStudyDefault(ht) {
-    var old = weekFromBase(OLD_STUDY_BASE);
+  function sameWeek(ht, want) {
     for (var d = 0; d < 7; d++) {
       var have = ht[String(d)] || [];
-      var want = old[String(d)];
-      if (have.length !== want.length) return false;
-      for (var i = 0; i < want.length; i++) {
-        var key = normLabel(want[i]), found = false;
+      var w = want[String(d)];
+      if (have.length !== w.length) return false;
+      for (var i = 0; i < w.length; i++) {
+        var key = normLabel(w[i]), found = false;
         for (var j = 0; j < have.length; j++) if (normLabel(have[j] && have[j].label) === key) found = true;
         if (!found) return false;
       }
     }
     return true;
+  }
+
+  function isOldStudyDefault(ht) {
+    for (var i = 0; i < OLD_STUDY_BASES.length; i++) {
+      if (sameWeek(ht, oldStudyWeek(OLD_STUDY_BASES[i]))) return true;
+    }
+    return false;
   }
 
   /* 이전 공부 체크 기록을 새 목록 id로 (같은 이름끼리) */
@@ -2617,6 +2639,17 @@
       + '<path d="M9 36h18" stroke="#9CC0E8" stroke-width="2.4" stroke-linecap="round"/>'
       + '</svg>';
   }
+  function svgDiary() {
+    return '<svg viewBox="0 0 48 48" aria-hidden="true">'
+      + '<rect x="7" y="9" width="27" height="31" rx="4" fill="#FFFDF6" stroke="#C9A063" stroke-width="2.2"/>'
+      + '<path d="M7 15h27" stroke="#E6D2B5" stroke-width="2"/>'
+      + '<circle cx="18" cy="24" r="4" fill="#FFC93C"/>'
+      + '<path d="M11 33l5-6 4 4 5-7 6 9z" fill="#8FD48A" stroke="#5FAE5C" stroke-width="1.6" stroke-linejoin="round"/>'
+      + '<path d="M34 12l8 8-9 9-8-8z" fill="#FFB6C8" stroke="#E07A96" stroke-width="2" stroke-linejoin="round"/>'
+      + '<path d="M34 12l8 8" stroke="#E07A96" stroke-width="2"/>'
+      + '<path d="M31 26l-4 5 5-1z" fill="#E07A96"/>'
+      + '</svg>';
+  }
   function svgPiano() {
     return '<svg viewBox="0 0 48 48" aria-hidden="true">'
       + '<rect x="3" y="16" width="34" height="20" rx="4" fill="#FFFDF6" stroke="#B99A6A" stroke-width="2.2"/>'
@@ -2639,6 +2672,7 @@
   function studyIcon(label) {
     var s = String(label || '');
     if (s.indexOf('피아노') !== -1 || s.indexOf('음악') !== -1) return svgPiano();
+    if (s.indexOf('그림일기') !== -1 || s.indexOf('미술') !== -1 || s.indexOf('그림') !== -1) return svgDiary();
     if (s.indexOf('영어') !== -1 || s.indexOf('화상') !== -1 || s.indexOf('리틀팍스') !== -1) return svgVideo();
     if (s.indexOf('사고력') !== -1 || s.indexOf('수학') !== -1 || s.indexOf('연산') !== -1 || s.indexOf('원리셈') !== -1 || s.indexOf('따풀') !== -1) return svgMath();
     if (s.indexOf('숙제') !== -1 || s.indexOf('받아쓰기') !== -1 || s.indexOf('일기') !== -1 || s.indexOf('문제집') !== -1) return svgHomework();
