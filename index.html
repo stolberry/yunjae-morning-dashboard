@@ -4735,7 +4735,9 @@
   function renderTodayAcademy() {
     var box = $('todayAcademy');
     var dow = new Date().getDay();
-    var list = classesFor(dow).concat(onceFor(todayKey()));
+    var list = classesFor(dow).concat(onceFor(todayKey()).map(function (o) {
+      var c = {}; for (var k in o) c[k] = o[k]; c.once = true; return c;
+    }));
     list.sort(function (a, b) { return minutesOf(a.start) - minutesOf(b.start); });
     box.className = 'today-academy';
     if (!list.length) {
