@@ -298,7 +298,7 @@
   /* ---------------- home grid: 등교 | 학원 | 공부 ---------------- */
   .home-grid{
     display:grid;gap:10px;flex:1 1 auto;min-height:0;
-    grid-template-columns:1.52fr 1fr;
+    grid-template-columns:1fr 1fr;
     grid-template-rows:minmax(0,1fr);
   }
   .home-right{display:flex;flex-direction:column;gap:9px;min-width:0;min-height:0}
@@ -364,7 +364,30 @@
   .acad-empty .btn{font-size:12px;padding:7px 12px;min-height:36px;border-radius:12px}
 
   /* ---------------- 공부 타일 (home card) ---------------- */
-  .hs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;grid-auto-rows:minmax(0,1fr);flex:1 1 auto;min-height:0;align-content:stretch}
+  .hs-grid{display:flex;flex-direction:column;justify-content:center;gap:8px;flex:1 1 auto;min-height:0}
+  .hs-row{
+    display:flex;align-items:center;gap:12px;width:100%;flex:0 0 auto;text-align:left;
+    background:#fff;border:2px solid #EFE6D2;border-radius:16px;padding:9px 14px;
+    box-shadow:0 6px 16px rgba(120,108,72,.08);
+    transition:transform .12s ease,background .15s ease,border-color .15s ease;
+  }
+  .hs-row:active{transform:scale(.985)}
+  .hs-row .hs-ico{
+    width:46px;height:46px;flex:none;border-radius:13px;background:#FFF9EE;border:2px solid #F2E7D2;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .hs-row .hs-ico svg{width:30px;height:30px;display:block}
+  .hs-row .hs-label{flex:1;min-width:0;font-size:17px;font-weight:900;letter-spacing:-.4px;word-break:keep-all}
+  .hs-row .hs-cta{
+    flex:none;display:inline-flex;align-items:center;justify-content:center;gap:4px;
+    background:linear-gradient(180deg,#FFF1C8,#FFE08C);color:#7A4E00;font-weight:900;font-size:12.5px;
+    border:1.5px solid #F3D477;border-radius:999px;padding:9px 14px;min-height:40px;white-space:nowrap;letter-spacing:-.3px;
+  }
+  .hs-row .hs-cta .mini{width:16px;height:16px;flex:none}
+  .hs-row.done{background:linear-gradient(180deg,#FFFCE9 0%,#FFFFFF 72%);border-color:#FFD84D;box-shadow:0 8px 18px rgba(255,203,5,.2)}
+  .hs-row.done .hs-cta{background:#E4F7E6;color:#2F7A3C;border-color:#BFE3C6}
+  .hs-row.done .hs-ico{background:#F6FDF6;border-color:#CFEBD3}
+  .hs-row.done .hs-label{color:#3F7A4A}
   .hs-tile:last-child:nth-child(odd){grid-column:1 / -1}
   .hs-tile{
     position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
@@ -1038,11 +1061,12 @@
     .today-class .t-dot{font-size:16px}
     .solo-note{font-size:13px;margin-top:2px}
     .today-academy{gap:11px}
-    #homeEvening .hs-tile{padding:11px 10px 10px;gap:6px}
-    #homeEvening .hs-tile .hs-ico{width:64px;height:64px;border-radius:18px}
-    #homeEvening .hs-tile .hs-ico svg{width:43px;height:43px}
-    #homeEvening .hs-tile .hs-label{font-size:18px}
-    #homeEvening .hs-tile .hs-cta{font-size:13px;min-height:38px;padding:7px 4px}
+    .hs-row{padding:11px 16px;gap:14px;border-radius:18px}
+    .hs-row .hs-ico{width:52px;height:52px;border-radius:15px}
+    .hs-row .hs-ico svg{width:34px;height:34px}
+    .hs-row .hs-label{font-size:19px}
+    .hs-row .hs-cta{font-size:13.5px;min-height:44px;padding:10px 16px}
+    #homeEvening .hs-grid{gap:10px}
     .hs-grid{gap:9px}
     .hs-tile{border-radius:18px;gap:5px;padding:9px 8px 8px}
     .hs-tile .hs-ico{width:48px;height:48px;border-radius:14px}
@@ -3487,8 +3511,7 @@
       for (var i = 0; i < tasks.length; i++) {
         var t = tasks[i];
         var done = doneIds.indexOf(t.id) !== -1;
-        html += '<button class="hs-tile' + (done ? ' done' : '') + '" type="button" data-act="h-toggle" data-id="' + esc(t.id) + '" aria-pressed="' + done + '">'
-          + '<span class="hs-stamp">✓</span>'
+        html += '<button class="hs-row' + (done ? ' done' : '') + '" type="button" data-act="h-toggle" data-id="' + esc(t.id) + '" aria-pressed="' + done + '">'
           + '<span class="hs-ico">' + studyIcon(t.label) + '</span>'
           + '<span class="hs-label">' + esc(t.label) + '</span>'
           + '<span class="hs-cta">' + (done ? '완료! ✓' : '눌러서 완료 ' + miniBallSvg() + ' +1') + '</span>'
