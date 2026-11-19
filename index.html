@@ -183,24 +183,31 @@
   .hero-status{font-size:12.5px;font-weight:900;color:#7A6A46}
   .hero-progress{position:relative;padding-right:5px;margin-top:3px}
   .hp-track{
-    height:14px;border-radius:999px;background:#EFEADC;border:2px solid #E2DBC8;
-    position:relative;overflow:visible;
+    height:24px;border-radius:999px;background:#F2EFE4;border:2px solid #E4DDC9;
+    position:relative;overflow:hidden;box-shadow:inset 0 2px 5px rgba(120,108,72,.12);
   }
   .hp-fill{
-    height:100%;border-radius:999px;width:0%;transition:width .8s cubic-bezier(.3,.9,.3,1);
-    background:linear-gradient(90deg,#8FE07A 0%,#4FCF5A 55%,#2FB24A 100%);
+    position:absolute;right:0;top:0;bottom:0;width:100%;border-radius:999px;
+    transition:width .8s cubic-bezier(.3,.9,.3,1);
+    background:linear-gradient(180deg,#7EE07F 0%,#45CB58 45%,#2AAE45 100%);
+    box-shadow:inset 0 -3px 0 rgba(0,0,0,.08),0 0 12px rgba(63,180,80,.35);
+  }
+  .hp-fill::after{
+    content:"";position:absolute;left:8px;right:8px;top:3px;height:5px;border-radius:999px;
+    background:rgba(255,255,255,.35);
   }
   .hp-runner{
-    position:absolute;top:50%;left:0;transform:translate(-50%,-56%);
-    width:28px;height:28px;transition:left .8s cubic-bezier(.3,.9,.3,1);pointer-events:none;
-    filter:drop-shadow(0 2px 3px rgba(0,0,0,.16));
+    position:absolute;top:50%;left:0;transform:translate(-50%,-56%);z-index:3;
+    width:32px;height:32px;transition:left .8s cubic-bezier(.3,.9,.3,1);pointer-events:none;
+    filter:drop-shadow(0 2px 3px rgba(0,0,0,.18));
   }
   .hp-runner.run{animation:runnerHop .7s ease-in-out infinite}
   @keyframes runnerHop{0%,100%{transform:translate(-50%,-56%)}50%{transform:translate(-50%,-64%)}}
   .hp-labels{display:flex;justify-content:space-between;font-size:10px;font-weight:900;color:#A79E8B;margin-top:2px}
 
   .hero-side{display:flex;gap:7px;min-width:0;margin-top:4px}
-  .hero-side .stat-pill{flex:1 1 0;min-width:0;padding:6px 10px}
+  .hero-side .stat-pill{flex:0 0 auto;min-width:112px;padding:6px 12px}
+  .hero-gacha{margin-left:auto}
   .stat-pill{
     display:flex;align-items:center;gap:5px;background:#fff;border:2px solid #F0E7D2;
     border-radius:12px;padding:6px 10px;
@@ -287,12 +294,14 @@
   /* ---------------- home grid: 등교 | 학원 | 공부 ---------------- */
   .home-grid{
     display:grid;gap:10px;flex:1 1 auto;min-height:0;
-    grid-template-columns:0.92fr 1.78fr;
+    grid-template-columns:2.05fr 1fr;
     grid-template-rows:minmax(0,1fr);
   }
   .home-right{display:flex;flex-direction:column;gap:9px;min-width:0;min-height:0}
-  .right-top{display:grid;grid-template-columns:1.42fr 1fr;gap:9px;flex:none;min-height:0}
-  .right-main{display:grid;grid-template-columns:1fr 1.06fr;gap:9px;flex:1 1 auto;min-height:0}
+  .home-right>.today-card{flex:1 1 auto}
+  .home-right .wx-card .wsep{display:none}
+  .right-top{display:grid;grid-template-columns:1fr;gap:9px;flex:none;min-height:0}
+  .right-main{display:grid;grid-template-columns:1fr;gap:9px;flex:1 1 auto;min-height:0}
   .card.today-card{padding:9px 12px;border-radius:18px;min-width:0;display:flex;flex-direction:column;overflow:hidden}
   .today-card .sec-head{margin-bottom:6px;gap:6px;flex:none}
   .today-card h2{font-size:17px;letter-spacing:-.6px}
@@ -811,7 +820,7 @@
   }
   .dtc-date{display:flex;align-items:center;gap:7px;font-size:15px;font-weight:900;color:#5F594D;letter-spacing:-.3px;white-space:nowrap}
   .dtc-ico{font-size:16px;line-height:1}
-  .dtc-clock{margin-left:auto;font-size:31px;font-weight:900;letter-spacing:-1.4px;color:#3A3428;font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.05}
+  .dtc-clock{margin-left:auto;font-size:38px;font-weight:900;letter-spacing:-1.8px;color:#3A3428;font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.05}
   .dt-card.eve{background:linear-gradient(120deg,#FFFFFF 0%,#F2EEFF 100%);border-color:#D3CAF6}
   .dt-card.eve .dtc-date{color:#544A8C}
   .dt-card.eve .dtc-clock{color:#3B3266}
@@ -893,7 +902,7 @@
     .hero-pika{width:50px;height:50px}
     .hero-count{font-size:clamp(21px,2.3vw,28px)}
     .dt-clock{font-size:25px}
-    .home-grid{gap:9px;grid-template-columns:0.9fr 1.8fr}
+    .home-grid{gap:9px;grid-template-columns:1.95fr 1fr}
     .today-card h2{font-size:16px}
     .today-class .t-name{font-size:16px}
     .today-class.solo .t-name{font-size:18px}
@@ -902,7 +911,7 @@
     .hs-tile .hs-ico svg{width:27px;height:27px}
   }
   @media (max-width:1080px){
-    .home-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr)}
+    .home-grid{grid-template-columns:minmax(0,1.85fr) minmax(0,1fr)}
     .right-top{grid-template-columns:1fr 1fr}
     .right-main{grid-template-columns:1fr}
   }
@@ -958,7 +967,7 @@
     .dt-card{padding:9px 20px;border-radius:20px}
     .dtc-date{font-size:16.5px}
     .dtc-ico{font-size:18px}
-    .dtc-clock{font-size:37px}
+    .dtc-clock{font-size:44px}
     .ms b{font-size:10.5px}
     .ms span{font-size:11.5px}
     .ms-now{font-size:12.5px}
@@ -988,10 +997,10 @@
     .wx-card .wico{font-size:26px}
     .wx-card .wdesc{font-size:12.5px}
     .wx-card .wtip{font-size:11.5px}
-    .hero-count{font-size:36px}
+    .hero-count{font-size:42px}
     .hero-status{font-size:14px}
-    .hp-track{height:16px}
-    .hp-runner{width:32px;height:32px}
+    .hp-track{height:28px}
+    .hp-runner{width:38px;height:38px}
     .hp-labels{font-size:11px}
     .stat-pill .stat-k{font-size:12.5px}
     .stat-pill .stat-v{font-size:18px}
@@ -1185,7 +1194,6 @@
       </div>
 
         <div class="home-right">
-          <div class="right-top">
           <div class="card affirm-card">
             <div class="af-head"><span class="af-ico">✨</span> 오늘의 확언</div>
             <p class="af-text js-affirm">—</p>
@@ -1194,9 +1202,6 @@
           <div class="card wx-card js-weather">
             <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
           </div>
-
-          </div>
-          <div class="right-main single">
         <div class="card today-card acad-card">
           <div class="sec-head">
             <h2>🏫 오늘의 학원 스케줄</h2>
@@ -1206,7 +1211,6 @@
           </div>
           <div id="todayAcademy" class="today-academy"></div>
         </div>
-          </div>
         </div>
 
       </div>
@@ -1293,7 +1297,6 @@
       </div>
 
         <div class="home-right">
-          <div class="right-top">
           <div class="card affirm-card">
             <div class="af-head"><span class="af-ico">✨</span> 오늘의 확언</div>
             <p class="af-text js-affirm">—</p>
@@ -1302,9 +1305,6 @@
           <div class="card wx-card js-weather">
             <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
           </div>
-
-          </div>
-          <div class="right-main single">
         <div class="card today-card study-card">
           <div class="sec-head">
             <h2>📚 오늘의 공부</h2>
@@ -1315,7 +1315,6 @@
           </div>
           <div class="js-home-hs hs-grid"></div>
         </div>
-          </div>
         </div>
 
       </div>
@@ -2400,14 +2399,17 @@
       }
     }
 
+    /* 지나간 시간(elapsed)만큼 초록색 '남은 시간' 막대가 줄어든다 */
     var pct = 0;
     if (left <= 0) pct = 100;
     else if (now > start) pct = Math.min(100, ((now - start) / (target - start)) * 100);
-    var dp = $('dayProgress'); if (dp) dp.style.width = pct.toFixed(1) + '%';
+    pct = Math.max(0, Math.min(100, pct));
+    var remain = 100 - pct;
+    var dp = $('dayProgress'); if (dp) dp.style.width = remain.toFixed(1) + '%';
     var rn = $('runner');
     if (rn) {
-      rn.style.left = Math.max(0, Math.min(100, pct)).toFixed(1) + '%';
-      if (pct > 0 && pct < 100) rn.classList.add('run'); else rn.classList.remove('run');
+      rn.style.left = pct.toFixed(1) + '%';
+      if (remain > 0 && remain < 100) rn.classList.add('run'); else rn.classList.remove('run');
     }
     var hs = $('heroStatus'); if (hs) hs.textContent = statusFor(left);
 
@@ -2434,7 +2436,7 @@
       }
     }
     pct2 = Math.max(0, Math.min(100, pct2));
-    var ep = $('eveProgress'); if (ep) ep.style.width = pct2.toFixed(1) + '%';
+    var ep = $('eveProgress'); if (ep) ep.style.width = (100 - pct2).toFixed(1) + '%';
     var er = $('eveRunner');
     if (er) {
       er.style.left = pct2.toFixed(1) + '%';
