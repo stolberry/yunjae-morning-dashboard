@@ -303,7 +303,7 @@
   .hp-runner.run{animation:runnerHop .7s ease-in-out infinite}
   /* 아침: 리자몽이 진행바 위를 날아간다 (07:10~08:15), 08:15 이후엔 도착한 메가리자몽X */
   .hero-progress>.hp-runner{
-    top:0;width:44px;height:44px;opacity:0;transform:translate(-50%,-74%);
+    top:0;width:54px;height:54px;opacity:0;transform:translate(-50%,-78%);
     transition:left .8s cubic-bezier(.3,.9,.3,1),opacity .3s ease;
     filter:drop-shadow(0 3px 4px rgba(120,60,0,.28));
   }
@@ -317,8 +317,8 @@
   .hero-progress>.hp-runner.mega-run .rn-mega{opacity:1}
   .hero-progress>.hp-runner.run{animation:charFly .9s ease-in-out infinite}
   @keyframes charFly{
-    0%,100%{transform:translate(-50%,-72%) rotate(-3deg)}
-    50%{transform:translate(-50%,-80%) rotate(3deg)}
+    0%,100%{transform:translate(-50%,-76%) rotate(-3deg)}
+    50%{transform:translate(-50%,-84%) rotate(3deg)}
   }
   @keyframes runnerHop{0%,100%{transform:translate(-50%,-56%)}50%{transform:translate(-50%,-64%)}}
   .hp-labels{display:flex;justify-content:space-between;font-size:10px;font-weight:900;color:#A79E8B;margin-top:2px}
