@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#FFCB05">
-<meta name="description" content="윤재의 아침 등교 루틴 대시보드">
+<meta name="description" content="윤재의 아침·저녁 루틴 대시보드">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -301,6 +301,8 @@
 
   /* 학원 카드 */
   .today-academy{display:flex;flex-direction:column;gap:7px;flex:1 1 auto;min-height:0}
+  .today-academy.multi{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;align-content:stretch}
+  .today-academy.multi .today-class{min-height:0}
   .today-academy .today-class{flex:1 1 auto;min-height:56px}
   .today-class{
     display:flex;align-items:center;gap:10px;background:#F7FBFF;border:2px solid #DCEBFA;
@@ -718,6 +720,87 @@
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
   .foot{text-align:center;font-size:10px;font-weight:800;color:#AEA694;line-height:1.45;padding:0 16px 4px}
 
+  /* ---------------- 아침 · 저녁 모드 ---------------- */
+  .mode-switch{
+    display:inline-flex;align-items:center;gap:3px;flex:none;background:#F1ECDE;
+    border:2px solid #E8E0CC;border-radius:999px;padding:3px;
+  }
+  .mode-pill{
+    border:none;background:none;color:#8A8377;font-weight:900;font-size:14px;
+    padding:7px 15px;border-radius:999px;min-height:38px;display:inline-flex;align-items:center;gap:5px;
+    white-space:nowrap;transition:background .16s ease,color .16s ease,box-shadow .16s ease,transform .12s ease;
+  }
+  .mode-pill:active{transform:scale(.96)}
+  .mode-pill.active{box-shadow:0 4px 12px rgba(120,108,72,.2)}
+  .mode-pill.active[data-mode="morning"]{background:linear-gradient(180deg,#FFE27A,#FFCB05);color:#4A3600}
+  .mode-pill.active[data-mode="evening"]{background:linear-gradient(180deg,#9189DC,#6B62C0);color:#fff}
+
+  body.mode-evening{
+    background:
+      radial-gradient(900px 520px at 8% -10%, #ECE9FF 0%, rgba(236,233,255,0) 62%),
+      radial-gradient(820px 480px at 104% 0%, #FFF1E0 0%, rgba(255,241,224,0) 58%),
+      radial-gradient(720px 520px at 50% 112%, #E9F3FF 0%, rgba(233,243,255,0) 60%),
+      linear-gradient(180deg,#F6F4FF 0%,#FFFBF4 100%);
+    background-attachment:fixed;
+  }
+  .mode-pane{display:none;flex:1 1 auto;flex-direction:column;min-height:0}
+  body.mode-morning #homeMorning,body.mode-evening #homeEvening{display:flex}
+  .home-grid.single-col{grid-template-columns:1fr}
+  .right-main.single{grid-template-columns:1fr}
+
+  .hero-kicker{font-size:12px;font-weight:900;color:#8A6B12;letter-spacing:-.2px}
+  .eve-hero{
+    background:
+      radial-gradient(520px 240px at 100% 0%, #E5DFFF 0%, rgba(229,223,255,0) 70%),
+      linear-gradient(120deg,#F4F1FF 0%,#FFFFFF 52%,#FFF3E2 100%);
+    border:3px solid #CEC5F3;box-shadow:0 10px 24px rgba(96,84,160,.16);
+  }
+  .eve-hero::after{background:radial-gradient(circle,rgba(139,124,220,.2),rgba(139,124,220,0) 70%)}
+  .eve-hero .hero-meta{background:#EDE8FF;border:1.5px solid #D6CCF8;color:#5B4FA8}
+  .eve-hero .hero-datetime{
+    background:linear-gradient(160deg,#FFFFFF 0%,#F1ECFF 100%);border:2.5px solid #D4CBF6;
+    box-shadow:0 6px 16px rgba(96,84,160,.14);
+  }
+  .eve-hero .dt-date{color:#5B4FA8}
+  .eve-hero .hero-kicker{color:#5B4FA8}
+  .eve-hero .hero-status{color:#6C628F}
+  .eve-hero .hero-count.done{color:#4B3F9C}
+  .eve-hero .hero-count.urgent{color:#C24C86}
+  .eve-hero .hp-track{background:#EBE7F7;border-color:#DBD4EF}
+  .eve-hero .hp-fill{background:linear-gradient(90deg,#BCB2F5 0%,#9189DC 55%,#6B62C0 100%)}
+  .eve-hero .hp-runner{filter:drop-shadow(0 2px 3px rgba(70,58,140,.22))}
+  .eve-hero .hp-labels{color:#9A90B8}
+  .eve-hero .stat-pill{border-color:#E5DEF8}
+  .hero-moon{width:54px;height:54px;flex:none;animation:moonBob 3.4s ease-in-out infinite}
+  @keyframes moonBob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-5px) rotate(3deg)}}
+
+  .rcard.ev{border-color:#E7E1F6;box-shadow:0 6px 16px rgba(96,84,160,.09)}
+  .rcard.ev .illu{background:#F8F5FF}
+  .rcard.ev .cta{background:#F1EDFB;color:#655CA8}
+  .rcard.ev.done{background:linear-gradient(180deg,#FFFCE9 0%,#FFFFFF 72%);border-color:#FFD84D;box-shadow:0 8px 18px rgba(255,203,5,.24)}
+  .rcard.ev.done .cta{background:#E4F7E6;color:#2F7A3C}
+  .rcard .rb-badge{
+    align-self:center;font-size:10.5px;font-weight:900;color:#B3281D;background:#FFF0F0;
+    border:1.5px solid #FFD6D6;border-radius:999px;padding:2px 8px;white-space:nowrap;line-height:1.35;
+  }
+  .routine-grid.seven{grid-template-columns:repeat(7,minmax(0,1fr))}
+  .routine-wrap.eve .sec-head h2{color:#4B3F9C}
+  .routine-wrap.eve .count-pill{background:#F1EDFF;border-color:#D9D0F8;color:#54489F}
+  .routine-wrap.eve .ghost-btn{border-color:#E3DBF6;color:#655CA8}
+  .streak-chip{
+    display:inline-flex;align-items:center;gap:4px;font-size:12.5px;font-weight:900;color:#B4551F;
+    background:#FFF1E4;border:2px solid #FFD8BB;border-radius:999px;padding:3px 10px;white-space:nowrap;
+  }
+  .hero-gacha.eve{background:linear-gradient(180deg,#8E86D8,#5F55B0);box-shadow:0 6px 12px rgba(95,85,176,.28)}
+
+  /* 루틴 편집: 아침/저녁 탭 */
+  .list-tabs{display:flex;gap:6px;background:#F3EEE1;border-radius:999px;padding:3px;margin:0 0 12px}
+  .list-tab{
+    flex:1;border:none;background:none;color:#8A8377;font-weight:900;font-size:13.5px;
+    border-radius:999px;padding:8px 10px;min-height:38px;
+  }
+  .list-tab.on{background:#fff;color:#3A3428;box-shadow:0 3px 9px rgba(120,108,72,.16)}
+
   /* ---------------- responsive ---------------- */
   @media (max-width:1399px){
     .hero-count{font-size:clamp(24px,2.2vw,30px)}
@@ -737,6 +820,9 @@
   }
   @media (max-width:1180px){
     .week-grid{grid-template-columns:repeat(4,1fr)}
+    .routine-grid.seven{gap:6px}
+    .routine-grid.seven .r-title{font-size:12.5px}
+    .routine-grid.seven .cta{font-size:11px;padding:6px 2px}
     .form-grid{grid-template-columns:1fr 1fr}
     .top-strip{grid-template-columns:1.5fr 1fr}
     .routine-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}
@@ -775,6 +861,9 @@
   }
   @media (max-width:900px){
     .routine-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .routine-grid.seven{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .mode-switch{order:4}
+    .mode-pill{padding:6px 10px;font-size:12.5px;min-height:34px}
     .rcard{padding:8px}
     .rcard .r-title{font-size:15px}
     .rcard .cta{font-size:12px;padding:8px 4px;min-height:36px}
@@ -796,6 +885,7 @@
     .hero-count{font-size:clamp(19px,4.6vw,24px)}
     .dt-clock{font-size:22px}
     .routine-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    .routine-grid.seven{grid-template-columns:repeat(2,minmax(0,1fr))}
     .rcard .r-title{font-size:15px}
     .wx-card .wsep{display:none}
     .week-grid{grid-template-columns:1fr 1fr}
@@ -808,6 +898,11 @@
   /* 넓은 태블릿(갤럭시탭 S8 울트라 등)에서는 화면에 맞게 크게 */
   @media (min-width:1400px){
     .brand-title{font-size:19px}
+    .mode-pill{font-size:15px;padding:8px 17px;min-height:42px}
+    .routine-grid.seven{gap:9px}
+    .routine-grid.seven .r-title{font-size:15px}
+    .routine-grid.seven .cta{font-size:12px}
+    .rcard .rb-badge{font-size:11px}
     .tab{font-size:15px;padding:9px 15px;min-height:44px}
     .tool-btn{min-height:44px;font-size:13.5px}
     .hero{padding:14px 20px;gap:7px}
@@ -888,6 +983,11 @@
       </div>
     </div>
 
+    <div class="mode-switch" role="group" aria-label="아침 저녁 전환">
+      <button class="mode-pill active" type="button" data-act="mode" data-mode="morning" aria-pressed="true">🌅 아침</button>
+      <button class="mode-pill" type="button" data-act="mode" data-mode="evening" aria-pressed="false">🌙 저녁</button>
+    </div>
+
     <nav class="tabs" aria-label="메뉴">
       <button class="tab active" data-act="tab" data-tab="home" type="button">🏠 대시보드</button>
       <button class="tab" data-act="tab" data-tab="academy" type="button">🏫 학원 스케줄</button>
@@ -907,139 +1007,240 @@
   <!-- ================= DASHBOARD ================= -->
   <section class="panel active" id="panel-home">
 
-    <div class="home-grid">
-    <!-- 등교 시간 (왼쪽 절반) -->
-    <section class="hero">
-      <div class="hero-top">
-        <div class="hero-pika">
-          <svg viewBox="0 0 120 120" width="100%" height="100%" role="img" aria-label="피카츄">
-          <g transform="rotate(-26 40 34)">
-            <ellipse cx="40" cy="32" rx="12" ry="26" fill="#FFD93B" stroke="#4A3B1A" stroke-width="3"/>
-            <path d="M29 19 Q40 2 51 19 Z" fill="#4A3B1A"/>
-          </g>
-          <g transform="rotate(26 80 34)">
-            <ellipse cx="80" cy="32" rx="12" ry="26" fill="#FFD93B" stroke="#4A3B1A" stroke-width="3"/>
-            <path d="M69 19 Q80 2 91 19 Z" fill="#4A3B1A"/>
-          </g>
-          <ellipse cx="60" cy="70" rx="41" ry="36" fill="#FFD93B" stroke="#4A3B1A" stroke-width="3"/>
-          <circle cx="26" cy="84" r="9.5" fill="#FF6B6B" opacity=".92"/>
-          <circle cx="94" cy="84" r="9.5" fill="#FF6B6B" opacity=".92"/>
-          <circle cx="45" cy="62" r="7" fill="#2E2A25"/>
-          <circle cx="47.5" cy="59.5" r="2.4" fill="#FFFFFF"/>
-          <circle cx="75" cy="62" r="7" fill="#2E2A25"/>
-          <circle cx="77.5" cy="59.5" r="2.4" fill="#FFFFFF"/>
-          <ellipse cx="60" cy="72" rx="3.2" ry="2.4" fill="#2E2A25"/>
-          <path d="M52 80 Q56 86 60 80.5 Q64 86 68 80" fill="none" stroke="#2E2A25" stroke-width="2.8" stroke-linecap="round"/>
-        </svg>
-        </div>
-        <div class="hero-id">
-          <div class="hero-name">윤재</div>
-          <div class="hero-meta">07:00 시작 · 08:15 출발</div>
-        </div>
-        <div class="hero-datetime">
-          <div class="dt-clock"><span class="dt-ico">🕒</span><span id="clockTime">--:--</span></div>
-          <div class="dt-date" id="clockDate">불러오는 중…</div>
-        </div>
-      </div>
+    <!-- ---------- 아침 대시보드 ---------- -->
+    <div class="mode-pane" id="homeMorning">
 
-      <div class="hero-mid">
-        <div class="hero-count" id="countdownText">--</div>
-        <div class="hero-status" id="heroStatus">오늘도 힘차게 시작해요!</div>
-      </div>
-
-      <div class="hero-progress">
-        <div class="hp-track">
-          <div class="hp-fill" id="dayProgress"></div>
-          <div class="hp-runner" id="runner">
-              <svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true">
-                <g transform="rotate(-26 40 34)">
-                  <ellipse cx="40" cy="32" rx="12" ry="26" fill="#FFD93B" stroke="#4A3B1A" stroke-width="4"/>
-                  <path d="M29 19 Q40 2 51 19 Z" fill="#4A3B1A"/>
-                </g>
-                <g transform="rotate(26 80 34)">
-                  <ellipse cx="80" cy="32" rx="12" ry="26" fill="#FFD93B" stroke="#4A3B1A" stroke-width="4"/>
-                  <path d="M69 19 Q80 2 91 19 Z" fill="#4A3B1A"/>
-                </g>
-                <ellipse cx="60" cy="70" rx="41" ry="36" fill="#FFD93B" stroke="#4A3B1A" stroke-width="4"/>
-                <circle cx="45" cy="62" r="6" fill="#2E2A25"/>
-                <circle cx="75" cy="62" r="6" fill="#2E2A25"/>
-                <path d="M52 80 Q56 86 60 80.5 Q64 86 68 80" fill="none" stroke="#2E2A25" stroke-width="3" stroke-linecap="round"/>
-              </svg>
-            </div>
-        </div>
-        <div class="hp-labels"><span>07:00 준비 시작</span><span>08:15 학교 출발 ⚡</span></div>
-      </div>
-
-      <div class="hero-side">
-        <div class="stat-pill">
-          <span class="stat-k">루틴</span>
-          <span class="stat-v js-routine-count">0/6</span>
-        </div>
-        <div class="stat-pill balls">
-          <svg class="mini" viewBox="0 0 100 100" aria-hidden="true">
-            <circle cx="50" cy="50" r="46" fill="#fff" stroke="#2E2A25" stroke-width="7"/>
-            <path d="M4 50 A46 46 0 0 1 96 50 Z" fill="#EE1515"/>
-            <rect x="2" y="43" width="96" height="14" fill="#2E2A25"/>
-            <circle cx="50" cy="50" r="14" fill="#fff" stroke="#2E2A25" stroke-width="7"/>
-            <circle cx="50" cy="50" r="5" fill="#EE1515"/>
+      <div class="home-grid">
+      <!-- 등교 시간 (왼쪽) -->
+      <section class="hero">
+        <div class="hero-top">
+          <div class="hero-pika">
+            <svg viewBox="0 0 120 120" width="100%" height="100%" role="img" aria-label="피카츄">
+            <g transform="rotate(-26 40 34)">
+              <ellipse cx="40" cy="32" rx="12" ry="26" fill="#FFD93B" stroke="#4A3B1A" stroke-width="3"/>
+              <path d="M29 19 Q40 2 51 19 Z" fill="#4A3B1A"/>
+            </g>
+            <g transform="rotate(26 80 34)">
+              <ellipse cx="80" cy="32" rx="12" ry="26" fill="#FFD93B" stroke="#4A3B1A" stroke-width="3"/>
+              <path d="M69 19 Q80 2 91 19 Z" fill="#4A3B1A"/>
+            </g>
+            <ellipse cx="60" cy="70" rx="41" ry="36" fill="#FFD93B" stroke="#4A3B1A" stroke-width="3"/>
+            <circle cx="26" cy="84" r="9.5" fill="#FF6B6B" opacity=".92"/>
+            <circle cx="94" cy="84" r="9.5" fill="#FF6B6B" opacity=".92"/>
+            <circle cx="45" cy="62" r="7" fill="#2E2A25"/>
+            <circle cx="47.5" cy="59.5" r="2.4" fill="#FFFFFF"/>
+            <circle cx="75" cy="62" r="7" fill="#2E2A25"/>
+            <circle cx="77.5" cy="59.5" r="2.4" fill="#FFFFFF"/>
+            <ellipse cx="60" cy="72" rx="3.2" ry="2.4" fill="#2E2A25"/>
+            <path d="M52 80 Q56 86 60 80.5 Q64 86 68 80" fill="none" stroke="#2E2A25" stroke-width="2.8" stroke-linecap="round"/>
           </svg>
-          <span class="stat-k">몬스터볼</span>
-          <span class="stat-v js-ball-count">0개</span>
+          </div>
+          <div class="hero-id">
+            <div class="hero-name">윤재</div>
+            <div class="hero-meta">등교 시간 08:15 · 07:00 준비 시작</div>
+          </div>
+          <div class="hero-datetime">
+            <div class="dt-clock"><span class="dt-ico">🕒</span><span class="js-clock">--:--</span></div>
+            <div class="dt-date js-date">불러오는 중…</div>
+          </div>
         </div>
-        <button class="hero-gacha" type="button" data-act="goto" data-tab="dex">도감 가기 →</button>
-      </div>
-    </section>
 
-      <div class="home-right">
-        <div class="right-top">
-        <div class="card affirm-card">
-          <div class="af-head"><span class="af-ico">✨</span> 오늘의 확언</div>
-          <p class="af-text" id="affirmText">—</p>
-          <div class="af-sub">엄마가 응원한대!</div>
+        <div class="hero-mid">
+          <div class="hero-kicker">🏫 등교까지</div>
+          <div class="hero-count" id="countdownText">--</div>
+          <div class="hero-status" id="heroStatus">오늘도 힘차게 시작해요!</div>
         </div>
-        <div class="card wx-card" id="weatherBody">
-          <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
+
+        <div class="hero-progress">
+          <div class="hp-track">
+            <div class="hp-fill" id="dayProgress"></div>
+            <div class="hp-runner" id="runner">
+                <svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true">
+                  <g transform="rotate(-26 40 34)">
+                    <ellipse cx="40" cy="32" rx="12" ry="26" fill="#FFD93B" stroke="#4A3B1A" stroke-width="4"/>
+                    <path d="M29 19 Q40 2 51 19 Z" fill="#4A3B1A"/>
+                  </g>
+                  <g transform="rotate(26 80 34)">
+                    <ellipse cx="80" cy="32" rx="12" ry="26" fill="#FFD93B" stroke="#4A3B1A" stroke-width="4"/>
+                    <path d="M69 19 Q80 2 91 19 Z" fill="#4A3B1A"/>
+                  </g>
+                  <ellipse cx="60" cy="70" rx="41" ry="36" fill="#FFD93B" stroke="#4A3B1A" stroke-width="4"/>
+                  <circle cx="45" cy="62" r="6" fill="#2E2A25"/>
+                  <circle cx="75" cy="62" r="6" fill="#2E2A25"/>
+                  <path d="M52 80 Q56 86 60 80.5 Q64 86 68 80" fill="none" stroke="#2E2A25" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+              </div>
+          </div>
+          <div class="hp-labels"><span>07:00 준비 시작</span><span>08:15 학교 출발 ⚡</span></div>
         </div>
-      
+
+        <div class="hero-side">
+          <div class="stat-pill">
+            <span class="stat-k">아침 루틴</span>
+            <span class="stat-v js-routine-count">0/6</span>
+          </div>
+          <div class="stat-pill balls">
+            <svg class="mini" viewBox="0 0 100 100" aria-hidden="true">
+              <circle cx="50" cy="50" r="46" fill="#fff" stroke="#2E2A25" stroke-width="7"/>
+              <path d="M4 50 A46 46 0 0 1 96 50 Z" fill="#EE1515"/>
+              <rect x="2" y="43" width="96" height="14" fill="#2E2A25"/>
+              <circle cx="50" cy="50" r="14" fill="#fff" stroke="#2E2A25" stroke-width="7"/>
+              <circle cx="50" cy="50" r="5" fill="#EE1515"/>
+            </svg>
+            <span class="stat-k">몬스터볼</span>
+            <span class="stat-v js-ball-count">0개</span>
+          </div>
+          <button class="hero-gacha" type="button" data-act="goto" data-tab="dex">도감 가기 →</button>
         </div>
-        <div class="right-main">
-      <div class="card today-card acad-card">
+      </section>
+
+        <div class="home-right">
+          <div class="right-top">
+          <div class="card affirm-card">
+            <div class="af-head"><span class="af-ico">✨</span> 오늘의 확언</div>
+            <p class="af-text js-affirm">—</p>
+            <div class="af-sub">엄마가 응원한대!</div>
+          </div>
+          <div class="card wx-card js-weather">
+            <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
+          </div>
+
+          </div>
+          <div class="right-main single">
+        <div class="card today-card acad-card">
+          <div class="sec-head">
+            <h2>🏫 오늘의 학원 스케줄</h2>
+            <div class="spacer"></div>
+            <button class="link-btn" type="button" data-act="goto" data-tab="academy">전체 보기 →</button>
+            <button class="link-btn" type="button" data-act="academy-add">+ 학원 추가</button>
+          </div>
+          <div id="todayAcademy" class="today-academy"></div>
+        </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 아침 루틴 (맨 아래) -->
+      <section class="routine-wrap">
         <div class="sec-head">
-          <h2>🏫 오늘의 학원 스케줄</h2>
+          <h2>🎒 아침 루틴 6단계</h2>
+          <span class="sec-sub">1~5번은 체크만! 5개를 다 하면 몬스터볼 +1 · 원리셈·따풀은 따로 +1</span>
+          <span class="count-pill js-routine-count">0/6</span>
+          <span class="streak-chip js-streak-chip">🔥 0일</span>
           <div class="spacer"></div>
-          <button class="link-btn" type="button" data-act="goto" data-tab="academy">전체 보기 →</button>
-          <button class="link-btn" type="button" data-act="academy-add">+ 학원 추가</button>
+          <button class="ghost-btn" type="button" data-act="open-routine-edit">⚙️ 루틴 편집</button>
         </div>
-        <div id="todayAcademy" class="today-academy"></div>
-      </div>
-
-      <div class="card today-card study-card">
-        <div class="sec-head">
-          <h2>📚 오늘의 공부</h2>
-          <span class="count-pill" id="homeHsCount">0/0</span>
-          <div class="spacer"></div>
-          <button class="link-btn" type="button" data-act="hs-add">+ 공부 추가</button>
-          <button class="link-btn" type="button" data-act="goto" data-tab="study">전체 보기 →</button>
-        </div>
-        <div id="homeHomeschool" class="hs-grid"></div>
-      </div>
-        </div>
-      </div>
-
+        <div class="routine-grid" id="routineGrid"></div>
+      </section>
     </div>
 
-    <!-- 아침 루틴 (맨 아래) -->
-    <section class="routine-wrap">
-      <div class="sec-head">
-        <h2>🎒 아침 루틴 6단계</h2>
-        <span class="sec-sub">카드를 누르면 완료 · 몬스터볼 +1</span>
-        <span class="count-pill js-routine-count">0/6</span>
-        <span class="streak-chip" id="streakChip">🔥 0일</span>
-        <div class="spacer"></div>
-        <button class="ghost-btn" type="button" data-act="open-routine-edit">⚙️ 루틴 편집</button>
+    <!-- ---------- 저녁 대시보드 ---------- -->
+    <div class="mode-pane" id="homeEvening">
+
+      <div class="home-grid">
+      <!-- 취침 시간 (왼쪽) -->
+      <section class="hero eve-hero">
+        <div class="hero-top">
+          <div class="hero-moon">
+            <svg viewBox="0 0 120 120" width="100%" height="100%" role="img" aria-label="달">
+              <path d="M80 20a42 42 0 1 0 0 80 34 34 0 1 1 0-80Z" fill="#FFE79C" stroke="#D9B85C" stroke-width="3.2" stroke-linejoin="round"/>
+              <circle cx="26" cy="30" r="3.6" fill="#C9BDF2"/>
+              <circle cx="20" cy="70" r="2.6" fill="#C9BDF2"/>
+              <circle cx="100" cy="34" r="3" fill="#C9BDF2"/>
+              <circle cx="104" cy="86" r="2.4" fill="#C9BDF2"/>
+              <path d="M92 74l1.8 4.2 4.2 1.8-4.2 1.8L92 86l-1.8-4.2-4.2-1.8 4.2-1.8z" fill="#FFFFFF" opacity=".85"/>
+            </svg>
+          </div>
+          <div class="hero-id">
+            <div class="hero-name">윤재</div>
+            <div class="hero-meta">17:30 시작 · 취침 시간 21:00</div>
+          </div>
+          <div class="hero-datetime">
+            <div class="dt-clock"><span class="dt-ico">🌙</span><span class="js-clock">--:--</span></div>
+            <div class="dt-date js-date">불러오는 중…</div>
+          </div>
+        </div>
+
+        <div class="hero-mid">
+          <div class="hero-kicker">🌙 취침까지</div>
+          <div class="hero-count" id="eveCountdownText">--</div>
+          <div class="hero-status" id="eveStatus">오늘 하루도 수고했어요 🌙</div>
+        </div>
+
+        <div class="hero-progress">
+          <div class="hp-track">
+            <div class="hp-fill" id="eveProgress"></div>
+            <div class="hp-runner" id="eveRunner">
+              <svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true">
+                <path d="M80 20a42 42 0 1 0 0 80 34 34 0 1 1 0-80Z" fill="#FFE79C" stroke="#D9B85C" stroke-width="5" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="hp-labels"><span>17:30 저녁 시작 🌙</span><span>21:00 취침 😴</span></div>
+        </div>
+
+        <div class="hero-side">
+          <div class="stat-pill">
+            <span class="stat-k">저녁 루틴</span>
+            <span class="stat-v js-evening-count">0/7</span>
+          </div>
+          <div class="stat-pill balls">
+            <svg class="mini" viewBox="0 0 100 100" aria-hidden="true">
+              <circle cx="50" cy="50" r="46" fill="#fff" stroke="#2E2A25" stroke-width="7"/>
+              <path d="M4 50 A46 46 0 0 1 96 50 Z" fill="#EE1515"/>
+              <rect x="2" y="43" width="96" height="14" fill="#2E2A25"/>
+              <circle cx="50" cy="50" r="14" fill="#fff" stroke="#2E2A25" stroke-width="7"/>
+              <circle cx="50" cy="50" r="5" fill="#EE1515"/>
+            </svg>
+            <span class="stat-k">몬스터볼</span>
+            <span class="stat-v js-ball-count">0개</span>
+          </div>
+          <button class="hero-gacha eve" type="button" data-act="goto" data-tab="dex">도감 가기 →</button>
+        </div>
+      </section>
+
+        <div class="home-right">
+          <div class="right-top">
+          <div class="card affirm-card">
+            <div class="af-head"><span class="af-ico">✨</span> 오늘의 확언</div>
+            <p class="af-text js-affirm">—</p>
+            <div class="af-sub">엄마가 응원한대!</div>
+          </div>
+          <div class="card wx-card js-weather">
+            <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
+          </div>
+
+          </div>
+          <div class="right-main single">
+        <div class="card today-card study-card">
+          <div class="sec-head">
+            <h2>📚 오늘의 공부</h2>
+            <span class="count-pill js-home-hs-count">0/0</span>
+            <div class="spacer"></div>
+            <button class="link-btn" type="button" data-act="hs-add">+ 공부 추가</button>
+            <button class="link-btn" type="button" data-act="goto" data-tab="study">전체 보기 →</button>
+          </div>
+          <div class="js-home-hs hs-grid"></div>
+        </div>
+          </div>
+        </div>
+
       </div>
-      <div class="routine-grid" id="routineGrid"></div>
-    </section>
+
+      <!-- 저녁 루틴 (맨 아래) -->
+      <section class="routine-wrap eve">
+        <div class="sec-head">
+          <h2>🌙 저녁 루틴 7단계</h2>
+          <span class="sec-sub">체크만! 7개를 모두 하면 몬스터볼 +1</span>
+          <span class="count-pill js-evening-count">0/7</span>
+          <span class="streak-chip js-streak-chip">🔥 0일</span>
+          <div class="spacer"></div>
+          <button class="ghost-btn" type="button" data-act="open-routine-edit">⚙️ 루틴 편집</button>
+        </div>
+        <div class="routine-grid seven" id="eveningGrid"></div>
+      </section>
+    </div>
   </section>
 
   <!-- ================= ACADEMY ================= -->
@@ -1124,7 +1325,7 @@
     <section class="card dex-hero">
       <div>
         <h2>🔴 몬스터볼 뽑기</h2>
-        <p>아침 루틴을 다 하면 6개, 공부까지 하면 8~9개! 매일 모아서 뽑기에 도전해 보세요.<br>일반 10개 · 슈퍼 25개 · <b>마스터 50개는 전설·메가진화 100% 확정!</b></p>
+        <p>아침 루틴 2개 · 저녁 루틴 1개 · 오늘의 공부는 항목마다 1개! 매일 모아서 뽑기에 도전해 보세요.<br>일반 10개 · 슈퍼 25개 · <b>마스터 50개는 전설·메가진화 100% 확정!</b></p>
         <div class="gacha-row">
           <button class="gacha-btn normal" type="button" data-act="gacha" data-tier="normal" data-cost="10">
             <span class="gball">
@@ -1194,17 +1395,21 @@
 
 <footer class="foot">
   날씨·미세먼지 정보: Open-Meteo · 천안시 성성동(36.8428, 127.1394) 기준<br>
-  체크 기록·학원 스케줄·포켓몬 도감은 이 브라우저에만 저장돼요 (매일 아침 루틴 새로 시작)
+  체크 기록·학원 스케줄·포켓몬 도감은 이 브라우저에만 저장돼요 (매일 아침·저녁 루틴 새로 시작)
 </footer>
 
 <!-- routine edit modal -->
 <div class="modal" id="routineModal">
   <div class="modal-card">
     <div class="modal-head">
-      <h3>⚙️ 아침 루틴 편집</h3>
+      <h3>⚙️ 루틴 편집</h3>
       <button class="modal-close" type="button" data-act="close-routine-edit">✕</button>
     </div>
-    <p class="hint" style="margin:0 0 12px">이름을 고치거나 순서를 바꿀 수 있어요. 6개를 추천해요!</p>
+    <div class="list-tabs" role="tablist">
+      <button class="list-tab on" type="button" data-act="edit-list" data-list="morning">🌅 아침 루틴</button>
+      <button class="list-tab" type="button" data-act="edit-list" data-list="evening">🌙 저녁 루틴</button>
+    </div>
+    <p class="hint" style="margin:0 0 12px" id="editHint">이름을 고치거나 순서를 바꿀 수 있어요.</p>
     <div id="routineEditList"></div>
     <div class="add-row" style="margin-top:12px">
       <input id="routineInput" type="text" placeholder="루틴 추가 (예: 물 한 잔 마시기)" enterkeyhint="done" autocomplete="off">
@@ -1268,6 +1473,8 @@
 
   var K = {
     items: 'yj_routine_items_v3',
+    eveningItems: 'yj_evening_items_v1',
+    eveningDone: 'yj_evening_done_v1',
     itemsV2: 'yj_routine_items_v2',
     itemsV1: 'yj_routine_items_v1',
     routineDone: 'yj_routine_done_v1',
@@ -1543,7 +1750,7 @@
 
   /* ======================= 상태 ======================= */
   var state = {
-    items: [], routineDone: {}, academies: [],
+    items: [], eveningItems: [], routineDone: {}, eveningDone: {}, academies: [],
     homeschoolTasks: {}, homeschoolDone: {},
     balls: 0, dex: {}, awards: {},
     perfectDays: [], stones: 0, stoneAwards: []
@@ -1551,11 +1758,18 @@
 
   var DEFAULT6 = ['세수·로션', '유산균·물 마시기', '아침먹으면서 영어영상', '용변·양치', '옷입고 양말신기', '원리셈·따풀'];
   var DEFAULT5 = ['세수·로션', '유산균·물 마시기', '아침먹으면서 영어영상', '용변·양치', '옷입고 양말신기'];
+  var DEFAULT_EVENING = ['샤워', '저녁식사', '숙제', '공부', '독서', '양치', '가방정리'];
   var DEFAULT4 = ['세수·로션', '영어영상', '양치', '옷입기'];
 
   function defaultItems() {
     var out = [];
     for (var i = 0; i < DEFAULT6.length; i++) out.push({ id: uid(), label: DEFAULT6[i] });
+    return out;
+  }
+
+  function defaultEveningItems() {
+    var out = [];
+    for (var i = 0; i < DEFAULT_EVENING.length; i++) out.push({ id: uid(), label: DEFAULT_EVENING[i] });
     return out;
   }
 
@@ -1708,6 +1922,7 @@
 
   function loadState() {
     state.routineDone = store.get(K.routineDone, {}) || {};
+    state.eveningDone = store.get(K.eveningDone, {}) || {};
     var aw = store.get(K.awards, {});
     state.awards = (aw && typeof aw === 'object') ? aw : {};
 
@@ -1731,6 +1946,14 @@
       store.set(K.items, items);
     }
     state.items = items;
+
+    /* 저녁 루틴: 7단계 기본값 */
+    var eve = store.get(K.eveningItems, null);
+    if (!(eve && eve.length && eve[0] && eve[0].id)) {
+      eve = defaultEveningItems();
+      store.set(K.eveningItems, eve);
+    }
+    state.eveningItems = eve;
     state.academies = store.get(K.academies, null) || [];
 
     /* 공부 주간표 */
@@ -1765,9 +1988,11 @@
   function saveStones() { store.set(K.stones, state.stones); }
   function saveStoneAwards() { store.set(K.stoneAwards, state.stoneAwards); }
 
+  /* 100% 완벽한 날: 아침 6/6 + 저녁 7/7 + 오늘의 공부 모두 */
   function todayPerfect() {
-    if (!state.items.length) return false;
+    if (!state.items.length || !state.eveningItems.length) return false;
     if (todayRoutineIds().length !== state.items.length) return false;
+    if (eveningDoneIds().length !== state.eveningItems.length) return false;
     var dow = new Date().getDay();
     var tasks = hsTaskList(dow);
     if (!tasks.length) return true;
@@ -1828,8 +2053,7 @@
     setAll('.js-stone-count', String(state.stones));
     setAll('.js-streak-days', String(st));
     setAll('.js-stone-next', st > 0 && st % 3 === 0 ? '돌 받았어요! (다음은 3일 뒤)' : ('다음 돌까지 ' + daysToNextStone() + '일'));
-    var chip = $('streakChip');
-    if (chip) chip.textContent = '🔥 ' + st + '일';
+    setAll('.js-streak-chip', '🔥 ' + st + '일');
   }
 
   function saveBalls() { store.set(K.balls, state.balls); }
@@ -1863,6 +2087,24 @@
   function todayRoutineIds() {
     return existingIds(state.items, state.routineDone[todayKey()] || []);
   }
+  function eveningDoneIds() {
+    return existingIds(state.eveningItems, state.eveningDone[todayKey()] || []);
+  }
+  function isMathRoutine(label) {
+    var s = String(label == null ? '' : label);
+    return s.indexOf('원리셈') !== -1 || s.indexOf('따풀') !== -1;
+  }
+  /* 아침 1~5번(생활 루틴 묶음) / 원리셈·따풀은 따로 보상 */
+  function morningBundleItems() {
+    var out = [];
+    for (var i = 0; i < state.items.length; i++) if (!isMathRoutine(state.items[i].label)) out.push(state.items[i]);
+    return out;
+  }
+  function morningSingleItems() {
+    var out = [];
+    for (var i = 0; i < state.items.length; i++) if (isMathRoutine(state.items[i].label)) out.push(state.items[i]);
+    return out;
+  }
 
   /* ======================= 탭 ======================= */
   function showTab(name) {
@@ -1881,12 +2123,46 @@
     window.scrollTo(0, 0);
   }
 
+  /* ======================= 아침 · 저녁 모드 ======================= */
+  var MODE_SWITCH_MIN = 17 * 60 + 30;   /* 17:30 부터 저녁 모드 */
+  var EVE_H = 17, EVE_M = 30;
+  var BED_H = 21, BED_M = 0;
+  var homeMode = 'morning';
+  var modeManual = false;
+
+  function autoMode() {
+    var d = new Date();
+    return (d.getHours() * 60 + d.getMinutes()) >= MODE_SWITCH_MIN ? 'evening' : 'morning';
+  }
+
+  function applyMode(m) {
+    homeMode = m;
+    document.body.classList.toggle('mode-morning', m !== 'evening');
+    document.body.classList.toggle('mode-evening', m === 'evening');
+    each('.mode-pill', function (b) {
+      var on = b.getAttribute('data-mode') === m;
+      if (on) b.classList.add('active'); else b.classList.remove('active');
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    renderRoutine();
+    tickClock();
+  }
+
+  /* manual=true 이면 이번 화면에서는 자동 전환이 끼어들지 않는다 */
+  function setMode(m, manual) {
+    if (m !== 'morning' && m !== 'evening') return;
+    if (manual) modeManual = true;
+    if (m !== homeMode || manual) applyMode(m);
+  }
+
   /* ======================= 시계 / 카운트다운 ======================= */
   function tickClock() {
     var now = new Date();
     var hh = now.getHours();
-    $('clockTime').textContent = (hh < 12 ? '오전' : '오후') + ' ' + ((hh % 12) || 12) + ':' + pad2(now.getMinutes());
-    $('clockDate').textContent = (now.getMonth() + 1) + '월 ' + now.getDate() + '일 ' + DAY_KO[now.getDay()] + '요일';
+    var clockTxt = (hh < 12 ? '오전' : '오후') + ' ' + ((hh % 12) || 12) + ':' + pad2(now.getMinutes());
+    var dateTxt = (now.getMonth() + 1) + '월 ' + now.getDate() + '일 ' + DAY_KO[now.getDay()] + '요일';
+    setAll('.js-clock', clockTxt);
+    setAll('.js-date', dateTxt);
 
     var key = todayKey();
     if (lastDateKey !== key) {
@@ -1900,38 +2176,86 @@
         renderStudy();
         renderAffirm();
         renderDex();
+        updateStoneUI();
       }
     }
 
+    /* 아침: 등교까지 */
     var target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), SCHOOL_H, SCHOOL_M, 0);
     var start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), PREP_H, 0, 0);
     var left = target - now;
     var txt = $('countdownText');
-
-    txt.classList.remove('urgent', 'done');
-
-    if (left > 0) {
-      var h = Math.floor(left / 3600000);
-      var m = Math.floor((left % 3600000) / 60000);
-      var s = Math.floor((left % 60000) / 1000);
-      if (h > 0) txt.textContent = h + '시간 ' + m + '분 남았어요';
-      else if (m > 0) txt.textContent = m + '분 남았어요';
-      else txt.textContent = s + '초 남았어요!';
-      if (left <= 10 * 60000) txt.classList.add('urgent');
-    } else {
-      txt.textContent = '등교 완료! 오늘도 화이팅!';
-      txt.classList.add('done');
+    if (txt) {
+      txt.classList.remove('urgent', 'done');
+      if (left > 0) {
+        var h = Math.floor(left / 3600000);
+        var m = Math.floor((left % 3600000) / 60000);
+        var s2 = Math.floor((left % 60000) / 1000);
+        if (h > 0) txt.textContent = h + '시간 ' + m + '분 남았어요';
+        else if (m > 0) txt.textContent = m + '분 남았어요';
+        else txt.textContent = s2 + '초 남았어요!';
+        if (left <= 10 * 60000) txt.classList.add('urgent');
+      } else {
+        txt.textContent = '등교 완료! 오늘도 화이팅!';
+        txt.classList.add('done');
+      }
     }
 
     var pct = 0;
     if (left <= 0) pct = 100;
     else if (now > start) pct = Math.min(100, ((now - start) / (target - start)) * 100);
-    $('dayProgress').style.width = pct.toFixed(1) + '%';
-    $('runner').style.left = Math.max(0, Math.min(100, pct)).toFixed(1) + '%';
-    if (pct > 0 && pct < 100) $('runner').classList.add('run');
-    else $('runner').classList.remove('run');
+    var dp = $('dayProgress'); if (dp) dp.style.width = pct.toFixed(1) + '%';
+    var rn = $('runner');
+    if (rn) {
+      rn.style.left = Math.max(0, Math.min(100, pct)).toFixed(1) + '%';
+      if (pct > 0 && pct < 100) rn.classList.add('run'); else rn.classList.remove('run');
+    }
+    var hs = $('heroStatus'); if (hs) hs.textContent = statusFor(left);
 
-    $('heroStatus').textContent = statusFor(left);
+    /* 저녁: 21:00 취침까지 */
+    var bed = new Date(now.getFullYear(), now.getMonth(), now.getDate(), BED_H, BED_M, 0);
+    var eveStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), EVE_H, EVE_M, 0);
+    var eTxt = $('eveCountdownText');
+    var pct2 = 0;
+    if (eTxt) {
+      eTxt.classList.remove('urgent', 'done');
+      if (now < eveStart) {
+        eTxt.textContent = '저녁 루틴은 17:30부터 시작해요';
+        pct2 = 0;
+      } else if (bed - now > 0) {
+        var hl = Math.floor((bed - now) / 3600000);
+        var ml = Math.floor(((bed - now) % 3600000) / 60000);
+        eTxt.textContent = hl + '시간 ' + ml + '분 남았어요';
+        pct2 = ((now - eveStart) / (bed - eveStart)) * 100;
+        if (bed - now <= 10 * 60000) eTxt.classList.add('urgent');
+      } else {
+        eTxt.textContent = '21:00 취침 시간! 오늘도 수고했어요 🌙';
+        eTxt.classList.add('done');
+        pct2 = 100;
+      }
+    }
+    pct2 = Math.max(0, Math.min(100, pct2));
+    var ep = $('eveProgress'); if (ep) ep.style.width = pct2.toFixed(1) + '%';
+    var er = $('eveRunner');
+    if (er) {
+      er.style.left = pct2.toFixed(1) + '%';
+      if (pct2 > 0 && pct2 < 100) er.classList.add('run'); else er.classList.remove('run');
+    }
+    var es = $('eveStatus');
+    if (es) {
+      var eDone = eveningDoneIds().length;
+      var eTotal = state.eveningItems.length;
+      var eRemain = eTotal - eDone;
+      if (eTotal > 0 && eRemain === 0) es.textContent = '저녁 루틴 완벽! 이제 푹 자요 🌙';
+      else if (now >= eveStart) es.textContent = '저녁 루틴 ' + eDone + '/' + eTotal + ' · ' + eRemain + '개 남았어요';
+      else es.textContent = '오늘 하루도 수고했어요 🌙';
+    }
+
+    /* 시간이 지나면 자동으로 모드 전환 (직접 고른 뒤에는 그대로) */
+    if (!modeManual) {
+      var auto = autoMode();
+      if (auto !== homeMode) applyMode(auto);
+    }
   }
 
   function statusFor(left) {
@@ -1977,34 +2301,73 @@
     var a = state.awards[key];
     if (!a.r) a.r = [];
     if (!a.s) a.s = [];
+    if (!a.mi) a.mi = [];                 /* 따로 받은 아침 항목(원리셈·따풀) */
+    if (a.m1 === undefined) a.m1 = false; /* 아침 5개 묶음 보상 */
+    if (a.e1 === undefined) a.e1 = false; /* 저녁 7개 묶음 보상 */
     return a;
   }
 
-  function grantRoutineReward(id) {
+  /* 예전(항목마다 +1) 기록을 새 규칙 기록으로 옮긴다 (오늘 하루만) */
+  function migrateAwardToday() {
     var key = todayKey();
     var a = awardBox(key);
-    var got = false;
-    if (a.r.indexOf(id) === -1) {
-      a.r.push(id);
-      addBalls(1);
-      got = true;
+    if (a.migrated) return;
+    var legacy = a.r || [];
+    if (legacy.length) {
+      var bundle = morningBundleItems(), singles = morningSingleItems(), i;
+      var inBundle = 0;
+      for (i = 0; i < bundle.length; i++) if (legacy.indexOf(bundle[i].id) !== -1) inBundle++;
+      if (bundle.length && inBundle === bundle.length) a.m1 = true;
+      for (i = 0; i < singles.length; i++) {
+        if (legacy.indexOf(singles[i].id) !== -1 && a.mi.indexOf(singles[i].id) === -1) a.mi.push(singles[i].id);
+      }
     }
-    var doneIds = todayRoutineIds();
-    var complete = state.items.length > 0 && doneIds.length === state.items.length;
-    var justDone = false;
-    if (complete && !a.b) {
-      a.b = true;
-      justDone = true;
-    }
+    a.migrated = true;
     saveAwards();
-    if (justDone) {
-      toast('아침 루틴 완벽! 몬스터볼 ' + state.items.length + '개를 다 모았어요 🔴');
+  }
+
+  /* 아침 5개 묶음 보상 */
+  function grantMorningBundle(n) {
+    var a = awardBox(todayKey());
+    if (!a.m1) {
+      a.m1 = true;
+      addBalls(1);
+      saveAwards();
+      toast('아침 생활 루틴 ' + n + '개 완벽! 몬스터볼 +1 🔴');
       SFX.fanfare();
-    } else if (got) {
+      confettiBurst();
+    }
+    updateBallUI();
+    syncPerfectDay();
+  }
+
+  /* 원리셈·따풀은 따로 +1 */
+  function grantMorningItem(id) {
+    var a = awardBox(todayKey());
+    if (a.mi.indexOf(id) === -1) {
+      a.mi.push(id);
+      addBalls(1);
+      saveAwards();
       toast('몬스터볼 +1 🔴');
       SFX.ball();
     }
     updateBallUI();
+    syncPerfectDay();
+  }
+
+  /* 저녁 7개 모두 체크하면 +1 */
+  function grantEveningBundle(n) {
+    var a = awardBox(todayKey());
+    if (!a.e1) {
+      a.e1 = true;
+      addBalls(1);
+      saveAwards();
+      toast('저녁 루틴 ' + n + '개 완벽! 몬스터볼 +1 🔴');
+      SFX.fanfare();
+      confettiBurst();
+    }
+    updateBallUI();
+    syncPerfectDay();
   }
 
   function grantStudyReward(id) {
@@ -2027,7 +2390,14 @@
     { keys: ['영어', '영상', '시청'], img: 'assets/routine-english.png', emoji: '📺' },
     { keys: ['양치', '이빨', '칫솔', '용변'], img: 'assets/routine-brush.png', emoji: '🪥' },
     { keys: ['옷', '입기', '교복', '양말'], img: 'assets/routine-dress.png', emoji: '👕' },
-    { keys: ['원리셈', '따풀', '수학', '연산', '문제집'], img: 'assets/routine-math.png', emoji: '✏️' }
+    { keys: ['원리셈', '따풀', '수학', '연산', '문제집'], img: 'assets/routine-math.png', emoji: '✏️' },
+    /* 저녁 */
+    { keys: ['샤워', '목욕', '씻기'], img: 'assets/evening-shower.png', emoji: '🚿' },
+    { keys: ['저녁식사', '저녁밥', '저녁 먹', '저녁먹'], img: 'assets/evening-dinner.png', emoji: '🍚' },
+    { keys: ['숙제'], img: 'assets/evening-homework.png', emoji: '📝' },
+    { keys: ['공부', '복습', '예습'], img: 'assets/evening-study.png', emoji: '📖' },
+    { keys: ['독서', '책읽', '책 읽'], img: 'assets/evening-reading.png', emoji: '📚' },
+    { keys: ['가방', '정리'], img: 'assets/evening-bag.png', emoji: '🎒' }
   ];
 
   function illuFor(label) {
@@ -2039,6 +2409,11 @@
     return { img: null, emoji: '⭐' };
   }
 
+  function findItem(list, id) {
+    for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
+    return null;
+  }
+
   function miniBallSvg() {
     return '<svg class="mini" viewBox="0 0 100 100" aria-hidden="true">'
       + '<circle cx="50" cy="50" r="46" fill="#fff" stroke="#2E2A25" stroke-width="7"/>'
@@ -2048,56 +2423,95 @@
       + '<circle cx="50" cy="50" r="5" fill="#EE1515"/></svg>';
   }
 
-  function renderRoutine() {
-    var grid = $('routineGrid');
-    var doneIds = todayRoutineIds();
-    var html = '';
-    var i;
+  function routineCardHtml(it, idx, done, isEvening, bundleCount) {
+    var ill = illuFor(it.label);
+    var single = !isEvening && isMathRoutine(it.label);
+    var cta = done ? '완료! ✓' : (single ? '눌러서 완료 ' + miniBallSvg() + ' +1' : '눌러서 체크');
+    var badge = (!isEvening && !single && bundleCount)
+      ? '<span class="rb-badge">' + bundleCount + '개 다 하면 🔴+1</span>' : '';
+    return '<button class="rcard' + (isEvening ? ' ev' : '') + (done ? ' done' : '') + '" type="button" '
+      + 'data-act="' + (isEvening ? 'e-toggle' : 'r-toggle') + '" data-id="' + esc(it.id) + '" aria-pressed="' + done + '">'
+      + '<span class="step">' + (idx + 1) + '</span>'
+      + '<span class="stamp">✓</span>'
+      + '<span class="illu">'
+      + (ill.img
+        ? '<img src="' + esc(ill.img) + '" alt="' + esc(it.label) + ' 그림" loading="' + (idx < 4 ? 'eager' : 'lazy') + '">'
+        : '<span class="emoji">' + ill.emoji + '</span>')
+      + '</span>'
+      + '<span class="r-title">' + esc(it.label) + '</span>'
+      + badge
+      + '<span class="cta">' + cta + '</span>'
+      + '</button>';
+  }
 
+  function renderRoutine() {
+    renderMorningRoutine();
+    renderEveningRoutine();
+  }
+
+  function renderMorningRoutine() {
+    var grid = $('routineGrid');
+    if (!grid) return;
+    var doneIds = todayRoutineIds();
+    var bundleCount = morningBundleItems().length;
+    var html = '';
     if (!state.items.length) {
-      grid.innerHTML = '<div class="empty-soft" style="grid-column:1/-1">아직 루틴이 없어요.<br><small>“루틴 편집”에서 추가해 보세요!</small></div>';
+      html = '<div class="empty-soft" style="grid-column:1/-1">아직 루틴이 없어요.<br><small>“루틴 편집”에서 추가해 보세요!</small></div>';
     } else {
-      for (i = 0; i < state.items.length; i++) {
-        var it = state.items[i];
-        var done = doneIds.indexOf(it.id) !== -1;
-        var ill = illuFor(it.label);
-        html += '<button class="rcard' + (done ? ' done' : '') + '" type="button" data-act="r-toggle" data-id="' + esc(it.id) + '" aria-pressed="' + done + '">'
-          + '<span class="step">' + (i + 1) + '</span>'
-          + '<span class="stamp">✓</span>'
-          + '<span class="illu">'
-          + (ill.img
-            ? '<img src="' + esc(ill.img) + '" alt="' + esc(it.label) + ' 그림" loading="' + (i < 4 ? 'eager' : 'lazy') + '">'
-            : '<span class="emoji">' + ill.emoji + '</span>')
-          + '</span>'
-          + '<span class="r-title">' + esc(it.label) + '</span>'
-          + '<span class="cta">' + (done
-            ? '완료! ✓'
-            : '눌러서 완료 ' + miniBallSvg() + ' +1')
-          + '</span>'
-          + '</button>';
+      for (var i = 0; i < state.items.length; i++) {
+        html += routineCardHtml(state.items[i], i, doneIds.indexOf(state.items[i].id) !== -1, false, bundleCount);
       }
-      grid.innerHTML = html;
+    }
+    grid.innerHTML = html;
+    setAll('.js-routine-count', doneIds.length + '/' + state.items.length);
+  }
+
+  function renderEveningRoutine() {
+    var grid = $('eveningGrid');
+    if (!grid) return;
+    var doneIds = eveningDoneIds();
+    var html = '';
+    if (!state.eveningItems.length) {
+      html = '<div class="empty-soft" style="grid-column:1/-1">아직 저녁 루틴이 없어요.<br><small>“루틴 편집”에서 추가해 보세요!</small></div>';
+    } else {
+      for (var i = 0; i < state.eveningItems.length; i++) {
+        html += routineCardHtml(state.eveningItems[i], i, doneIds.indexOf(state.eveningItems[i].id) !== -1, true, 0);
+      }
+    }
+    grid.innerHTML = html;
+    setAll('.js-evening-count', doneIds.length + '/' + state.eveningItems.length);
+  }
+
+  /* ---------- 아침 루틴 ---------- */
+  function toggleRoutine(id) {
+    if (todayRoutineIds().indexOf(id) !== -1) { unmarkMorning(id); return; }
+
+    var it = findItem(state.items, id);
+    if (!it) return;
+
+    /* 원리셈·따풀: 누를 때 한 번 물어보고 +1 */
+    if (isMathRoutine(it.label)) {
+      askConfirm('“' + it.label + '” 다 했어요?', '네 하고 누르면 몬스터볼을 하나 받아요 🔴', '네! 다 했어요 🔴+1', function () {
+        markMorning(id, true);
+      });
+      return;
     }
 
-    var total = state.items.length;
-    var cnt = doneIds.length;
-    setAll('.js-routine-count', cnt + '/' + total);
+    /* 1~5번: 체크만 (바로 체크) */
+    markMorning(id, false);
+
+    var bundle = morningBundleItems();
+    var done = todayRoutineIds();
+    var all = bundle.length > 0;
+    for (var i = 0; i < bundle.length; i++) if (done.indexOf(bundle[i].id) === -1) all = false;
+    if (all && !awardBox(todayKey()).m1) {
+      askConfirm('아침 생활 루틴 ' + bundle.length + '개를 모두 다 했어요?',
+        bundle.length + '개를 모두 체크했어요! 네 하고 누르면 몬스터볼 1개 🔴',
+        '네! 다 했어요 🔴+1', function () { grantMorningBundle(bundle.length); });
+    }
   }
 
-  function toggleRoutine(id) {
-    var key = todayKey();
-    var arr = state.routineDone[key] || [];
-    if (arr.indexOf(id) !== -1) { unmarkRoutine(id); return; }
-
-    var it = null;
-    for (var i = 0; i < state.items.length; i++) if (state.items[i].id === id) it = state.items[i];
-    var label = it ? it.label : '이 루틴';
-    askConfirm('“' + label + '” 다 했어요?', '네 하고 누르면 몬스터볼을 하나 받아요 🔴', '네! 다 했어요 🔴+1', function () {
-      markRoutine(id);
-    });
-  }
-
-  function markRoutine(id) {
+  function markMorning(id, isSingle) {
     var key = todayKey();
     var arr = state.routineDone[key] || [];
     if (arr.indexOf(id) === -1) arr.push(id);
@@ -2111,14 +2525,12 @@
       setTimeout(function () { if (card) card.classList.remove('pulse'); }, 600);
     }
     SFX.step();
-    grantRoutineReward(id);
-    var doneIds = todayRoutineIds();
-    if (state.items.length > 0 && doneIds.length === state.items.length) confettiBurst();
+    if (isSingle) grantMorningItem(id);
     syncPerfectDay();
     tickClock();
   }
 
-  function unmarkRoutine(id) {
+  function unmarkMorning(id) {
     var key = todayKey();
     var arr = state.routineDone[key] || [];
     var idx = arr.indexOf(id);
@@ -2126,17 +2538,73 @@
     state.routineDone[key] = arr;
     store.set(K.routineDone, state.routineDone);
 
-    /* 볼 돌려주기: 오늘 받은 기록을 지우고 1개 차감 */
+    /* 볼 돌려주기 */
     var a = awardBox(key);
-    var ai = a.r.indexOf(id);
-    if (ai !== -1) {
-      a.r.splice(ai, 1);
+    var it = findItem(state.items, id);
+    var revoked = false;
+    if (it && isMathRoutine(it.label)) {
+      var ai = a.mi.indexOf(id);
+      if (ai !== -1) { a.mi.splice(ai, 1); addBalls(-1); revoked = true; }
+    } else if (a.m1) {
+      a.m1 = false;
       addBalls(-1);
+      revoked = true;
+    }
+    saveAwards();
+    if (revoked) toast('볼 하나를 돌려 놓았어요 🔴');
+    renderRoutine();
+    syncPerfectDay();
+    tickClock();
+  }
+
+  /* ---------- 저녁 루틴 (체크만 · 7개 모두 하면 +1) ---------- */
+  function toggleEvening(id) {
+    if (eveningDoneIds().indexOf(id) !== -1) { unmarkEvening(id); return; }
+    markEvening(id);
+
+    var done = eveningDoneIds();
+    var total = state.eveningItems.length;
+    if (total > 0 && done.length === total && !awardBox(todayKey()).e1) {
+      askConfirm('저녁 루틴 ' + total + '개를 모두 다 했어요?',
+        total + '개를 모두 체크했어요! 네 하고 누르면 몬스터볼 1개 🔴',
+        '네! 다 했어요 🔴+1', function () { grantEveningBundle(total); });
+    }
+  }
+
+  function markEvening(id) {
+    var key = todayKey();
+    var arr = state.eveningDone[key] || [];
+    if (arr.indexOf(id) === -1) arr.push(id);
+    state.eveningDone[key] = arr;
+    store.set(K.eveningDone, state.eveningDone);
+
+    renderEveningRoutine();
+    var card = document.querySelector('#eveningGrid .rcard[data-id="' + id + '"]');
+    if (card) {
+      card.classList.add('pulse');
+      setTimeout(function () { if (card) card.classList.remove('pulse'); }, 600);
+    }
+    SFX.step();
+    syncPerfectDay();
+    tickClock();
+  }
+
+  function unmarkEvening(id) {
+    var key = todayKey();
+    var arr = state.eveningDone[key] || [];
+    var idx = arr.indexOf(id);
+    if (idx !== -1) arr.splice(idx, 1);
+    state.eveningDone[key] = arr;
+    store.set(K.eveningDone, state.eveningDone);
+
+    var a = awardBox(key);
+    if (a.e1) {
+      a.e1 = false;
+      addBalls(-1);
+      saveAwards();
       toast('볼 하나를 돌려 놓았어요 🔴');
     }
-    a.b = false;
-    saveAwards();
-    renderRoutine();
+    renderEveningRoutine();
     syncPerfectDay();
     tickClock();
   }
@@ -2151,14 +2619,16 @@
     state.perfectDays = [];
     state.stoneAwards = [];
     state.routineDone[key] = [];
+    state.eveningDone[key] = [];
     state.homeschoolDone[key] = [];
-    state.awards[key] = { r: [], b: false, s: [] };
+    state.awards[key] = { r: [], b: false, s: [], m1: false, mi: [], e1: false };
     saveBalls();
     saveDex();
     saveStones();
     savePerfect();
     saveStoneAwards();
     store.set(K.routineDone, state.routineDone);
+    store.set(K.eveningDone, state.eveningDone);
     store.set(K.hsDone, state.homeschoolDone);
     saveAwards();
     updateBallUI();
@@ -2173,12 +2643,38 @@
   }
 
   /* ======================= 루틴 편집 모달 ======================= */
+  var editListName = 'morning';
+
+  function editItems() { return editListName === 'evening' ? state.eveningItems : state.items; }
+  function setEditItems(next) {
+    if (editListName === 'evening') state.eveningItems = next;
+    else state.items = next;
+    store.set(editListName === 'evening' ? K.eveningItems : K.items, next);
+  }
+
+  function setEditList(name) {
+    editListName = (name === 'evening') ? 'evening' : 'morning';
+    each('.list-tab', function (b) {
+      var on = b.getAttribute('data-list') === editListName;
+      if (on) b.classList.add('on'); else b.classList.remove('on');
+    });
+    var hint = $('editHint');
+    if (hint) hint.textContent = editListName === 'evening'
+      ? '저녁 루틴이에요. 7개를 추천해요! (7개를 모두 체크하면 몬스터볼 +1)'
+      : '아침 루틴이에요. 6개를 추천해요! (1~5번은 5개를 다 하면 몬스터볼 +1)';
+    var input = $('routineInput');
+    if (input) input.placeholder = editListName === 'evening'
+      ? '저녁 루틴 추가 (예: 내일 준비물 챙기기)' : '루틴 추가 (예: 물 한 잔 마시기)';
+    renderRoutineEdit();
+  }
+
   function renderRoutineEdit() {
     var box = $('routineEditList');
     if (!box) return;
+    var list = editItems();
     var html = '';
-    for (var i = 0; i < state.items.length; i++) {
-      var it = state.items[i];
+    for (var i = 0; i < list.length; i++) {
+      var it = list[i];
       html += '<div class="edit-row">'
         + '<input type="text" value="' + esc(it.label) + '" data-id="' + esc(it.id) + '" data-role="routine-name" aria-label="루틴 이름">'
         + '<button class="mv" type="button" data-act="r-move" data-id="' + esc(it.id) + '" data-dir="-1" aria-label="위로">↑</button>'
@@ -2186,7 +2682,7 @@
         + '<button class="icon-btn" style="font-size:17px" type="button" data-act="r-del" data-id="' + esc(it.id) + '" aria-label="삭제">🗑️</button>'
         + '</div>';
     }
-    if (!state.items.length) html = '<div class="empty-soft">루틴이 없어요. 아래에서 추가해 주세요!</div>';
+    if (!list.length) html = '<div class="empty-soft">루틴이 없어요. 아래에서 추가해 주세요!</div>';
     box.innerHTML = html;
 
     var inputs = box.querySelectorAll('[data-role="routine-name"]');
@@ -2202,7 +2698,7 @@
   }
 
   function openRoutineEdit() {
-    renderRoutineEdit();
+    setEditList(homeMode === 'evening' ? 'evening' : 'morning');
     $('routineModal').classList.add('show');
     setTimeout(function () { $('routineInput').focus(); }, 120);
   }
@@ -2234,8 +2730,9 @@
     var input = $('routineInput');
     var v = input.value.trim();
     if (!v) { input.focus(); return; }
-    state.items.push({ id: uid(), label: v });
-    store.set(K.items, state.items);
+    var list = editItems().slice();
+    list.push({ id: uid(), label: v });
+    setEditItems(list);
     input.value = '';
     renderRoutineEdit();
     renderRoutine();
@@ -2243,37 +2740,40 @@
   }
 
   function deleteRoutine(id) {
-    var it = null, i;
-    for (i = 0; i < state.items.length; i++) if (state.items[i].id === id) it = state.items[i];
+    var list = editItems();
+    var it = findItem(list, id);
     if (!it) return;
     if (!window.confirm('“' + it.label + '” 항목을 삭제할까요?')) return;
     var next = [];
-    for (i = 0; i < state.items.length; i++) if (state.items[i].id !== id) next.push(state.items[i]);
-    state.items = next;
-    store.set(K.items, state.items);
+    for (var i = 0; i < list.length; i++) if (list[i].id !== id) next.push(list[i]);
+    setEditItems(next);
     renderRoutineEdit();
     renderRoutine();
+    syncPerfectDay();
   }
 
   function moveRoutine(id, dir) {
+    var list = editItems().slice();
     var idx = -1, i;
-    for (i = 0; i < state.items.length; i++) if (state.items[i].id === id) idx = i;
+    for (i = 0; i < list.length; i++) if (list[i].id === id) idx = i;
     if (idx < 0) return;
     var to = idx + dir;
-    if (to < 0 || to >= state.items.length) return;
-    var tmp = state.items[idx];
-    state.items[idx] = state.items[to];
-    state.items[to] = tmp;
-    store.set(K.items, state.items);
+    if (to < 0 || to >= list.length) return;
+    var tmp = list[idx];
+    list[idx] = list[to];
+    list[to] = tmp;
+    setEditItems(list);
     renderRoutineEdit();
     renderRoutine();
   }
 
   function renameRoutine(id, label) {
-    for (var i = 0; i < state.items.length; i++) {
-      if (state.items[i].id === id) state.items[i].label = label;
+    var list = editItems().slice();
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].id === id) list[i].label = label;
     }
-    store.set(K.items, state.items);
+    setEditItems(list);
+    renderRoutine();
   }
 
   /* ======================= 인라인 수정 ======================= */
@@ -2431,6 +2931,7 @@
     var box = $('todayAcademy');
     var dow = new Date().getDay();
     var list = classesFor(dow);
+    box.className = 'today-academy' + (list.length > 1 ? ' multi' : '');
     if (!list.length) {
       box.innerHTML = '<div class="acad-empty">'
         + '<span class="acad-ico">' + svgBag() + '</span>'
@@ -2652,33 +3153,33 @@
 
   /* 홈 대시보드의 “오늘의 공부” */
   function renderHomeHomeschool() {
-    var box = $('homeHomeschool');
-    if (!box) return;
+    var boxes = document.querySelectorAll('.js-home-hs');
+    if (!boxes.length) return;
     var dow = new Date().getDay();
     var tasks = hsTaskList(dow);
     var key = todayKey();
     var doneIds = doneIdsFor(key, tasks);
-    var pill = $('homeHsCount');
-    if (pill) pill.textContent = doneIds.length + '/' + tasks.length;
+    setAll('.js-home-hs-count', doneIds.length + '/' + tasks.length);
 
+    var html;
     if (!tasks.length) {
-      box.innerHTML = '<div class="hs-empty">' + svgBook()
+      html = '<div class="hs-empty">' + svgBook()
         + '<span>오늘은 공부 숙제가 없어요</span>'
         + '<span style="font-size:12px;font-weight:800;color:#A79E8B">“+ 공부 추가”로 넣을 수 있어요</span></div>';
-      return;
+    } else {
+      html = '';
+      for (var i = 0; i < tasks.length; i++) {
+        var t = tasks[i];
+        var done = doneIds.indexOf(t.id) !== -1;
+        html += '<button class="hs-tile' + (done ? ' done' : '') + '" type="button" data-act="h-toggle" data-id="' + esc(t.id) + '" aria-pressed="' + done + '">'
+          + '<span class="hs-stamp">✓</span>'
+          + '<span class="hs-ico">' + studyIcon(t.label) + '</span>'
+          + '<span class="hs-label">' + esc(t.label) + '</span>'
+          + '<span class="hs-cta">' + (done ? '완료! ✓' : '눌러서 완료 ' + miniBallSvg() + ' +1') + '</span>'
+          + '</button>';
+      }
     }
-    var html = '';
-    for (var i = 0; i < tasks.length; i++) {
-      var t = tasks[i];
-      var done = doneIds.indexOf(t.id) !== -1;
-      html += '<button class="hs-tile' + (done ? ' done' : '') + '" type="button" data-act="h-toggle" data-id="' + esc(t.id) + '" aria-pressed="' + done + '">'
-        + '<span class="hs-stamp">✓</span>'
-        + '<span class="hs-ico">' + studyIcon(t.label) + '</span>'
-        + '<span class="hs-label">' + esc(t.label) + '</span>'
-        + '<span class="hs-cta">' + (done ? '완료! ✓' : '눌러서 완료 ' + miniBallSvg() + ' +1') + '</span>'
-        + '</button>';
-    }
-    box.innerHTML = html;
+    for (var j = 0; j < boxes.length; j++) boxes[j].innerHTML = html;
   }
 
   function toggleHomeschool(id, dow) {
@@ -2787,7 +3288,7 @@
     var now = new Date();
     var start = new Date(now.getFullYear(), 0, 0);
     var doy = Math.floor((now - start) / 86400000);
-    $('affirmText').textContent = '“' + AFFIRMS[doy % AFFIRMS.length] + '”';
+    setAll('.js-affirm', '“' + AFFIRMS[doy % AFFIRMS.length] + '”');
   }
 
   /* ======================= 날씨 ======================= */
@@ -2872,10 +3373,13 @@
   }
 
   function renderWeather(model, noteHtml) {
-    var box = $('weatherBody');
+    var boxes = document.querySelectorAll('.js-weather');
+    if (!boxes.length) return;
+    var i;
     if (!model || model.temp == null) {
-      box.innerHTML = '<div class="wx-error">날씨를 불러오지 못했어요.<br>'
+      var err = '<div class="wx-error">날씨를 불러오지 못했어요.<br>'
         + '<button class="retry" type="button" data-act="wx-retry" style="margin-top:6px">다시 불러오기</button></div>';
+      for (i = 0; i < boxes.length; i++) boxes[i].innerHTML = err;
       return;
     }
 
@@ -2897,7 +3401,7 @@
     else if (g25 && (g25[1] === 'bad' || g25[1] === 'verybad')) extras.push('😷 마스크');
     if (baseTemp <= 0) extras.push('🧦 따뜻한 양말');
 
-    box.innerHTML = ''
+    var html = ''
       + '<span class="wico">' + info[1] + '</span>'
       + '<span class="wtemp">' + fmt1(model.temp) + '°</span>'
       + '<span class="wdesc">' + info[0] + (model.feels != null ? ' · 체감 ' + fmt1(model.feels) + '°' : '') + ' · ☔ ' + Math.round(pop) + '%</span>'
@@ -2906,6 +3410,7 @@
       + '<span class="wsep"></span>'
       + '<span class="wtip">' + out.icon + ' ' + esc(out.short) + (extras.length ? ' · ' + extras.join(' · ') : '') + '</span>'
       + '<button class="retry" type="button" data-act="wx-retry" title="' + esc((noteHtml || 'Open-Meteo 실시간 · 천안시 성성동') + (model.tmax != null && model.tmin != null ? ' · 최고 ' + fmt1(model.tmax) + '° / 최저 ' + fmt1(model.tmin) + '°' : '')) + '">↻</button>';
+    for (i = 0; i < boxes.length; i++) boxes[i].innerHTML = html;
   }
 
   function weatherError() {
@@ -3069,8 +3574,8 @@
     }
     html += '<div style="text-align:center;font-size:11px;font-weight:800;color:' + (state.stones > 0 ? '#8A6B12' : '#A79E8B') + '">'
       + (state.stones > 0
-        ? ('보유 💎 ' + state.stones + '개 · 루틴+공부 3일 연속마다 1개')
-        : '진화의 돌이 필요해요 (루틴+공부 3일 연속 완료!)')
+        ? ('보유 💎 ' + state.stones + '개 · 아침+저녁+공부 3일 연속마다 1개')
+        : '진화의 돌이 필요해요 (아침+저녁+공부 3일 연속 완료!)')
       + '</div></div>';
     return html;
   }
@@ -3322,14 +3827,23 @@
       case 'goto':
         showTab(el.getAttribute('data-tab'));
         break;
+      case 'mode':
+        setMode(el.getAttribute('data-mode'), true);
+        break;
       case 'r-toggle':
         toggleRoutine(id);
+        break;
+      case 'e-toggle':
+        toggleEvening(id);
         break;
       case 'open-routine-edit':
         openRoutineEdit();
         break;
       case 'close-routine-edit':
         closeRoutineEdit();
+        break;
+      case 'edit-list':
+        setEditList(el.getAttribute('data-list'));
         break;
       case 'r-move':
         moveRoutine(id, parseInt(el.getAttribute('data-dir'), 10));
@@ -3383,7 +3897,9 @@
         quickPreset(el.getAttribute('data-name'));
         break;
       case 'wx-retry':
-        $('weatherBody').innerHTML = '<span class="skel" style="height:20px;width:100%;border-radius:10px"></span>';
+        each('.js-weather', function (b) {
+          b.innerHTML = '<span class="skel" style="height:20px;width:100%;border-radius:10px"></span>';
+        });
         loadWeather();
         break;
       case 'gacha':
@@ -3480,11 +3996,13 @@
   /* ======================= 시작 ======================= */
   function init() {
     loadState();
+    migrateAwardToday();
     fillAcDayChecks();
     selectedDow = new Date().getDay();
     lastDateKey = null;
     refreshSoundBtn();
-    tickClock();
+    homeMode = autoMode();
+    applyMode(homeMode);
     renderRoutine();
     renderTodayAcademy();
     renderHomeHomeschool();
