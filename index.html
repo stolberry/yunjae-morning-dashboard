@@ -162,10 +162,13 @@
   .hero-top{display:flex;align-items:center;gap:10px;position:relative;z-index:1}
   .hero-pika{width:54px;height:54px;flex:none;animation:pikaBob 2.6s ease-in-out infinite}
   @keyframes pikaBob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(2deg)}}
-  .hero-id{flex:1;min-width:0}
+  .hero-id{flex:1;min-width:0;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .hero-status-box{margin-left:auto;flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:4px;position:relative;z-index:1}
+  .hero-status-box .hero-count{font-size:clamp(20px,1.7vw,26px);letter-spacing:-.8px;margin:0}
+  .hero-status-box .ms-test{font-size:11px;padding:4px 9px;min-height:26px}
   .hero-name{font-size:20px;font-weight:900;letter-spacing:-.6px;line-height:1.1}
   .hero-meta{
-    display:inline-block;margin-top:3px;font-size:11px;font-weight:900;color:#8A6B12;
+    display:inline-block;margin-top:0;font-size:11px;font-weight:900;color:#8A6B12;
     background:#FFF3BF;border:1.5px solid #FFE08A;border-radius:999px;padding:2px 9px;white-space:nowrap;
   }
   .hero-date{font-size:11px;font-weight:800;color:var(--muted);margin-top:3px}
@@ -1193,12 +1196,12 @@
           </div>
           <div class="hero-id">
             <div class="hero-name">윤재</div>
-            <div class="hero-meta">등교 시간 08:15 · 07:00 준비 시작</div>
+            <div class="hero-meta">07:00 시작 · 08:15 출발</div>
           </div>
-        </div>
-
-        <div class="hero-mid">
-          <div class="hero-count" id="countdownText">--</div>
+          <div class="hero-status-box">
+            <div class="hero-count" id="countdownText">--</div>
+            <button class="ms-test" type="button" data-act="ms-test">🔔 알림 테스트</button>
+          </div>
         </div>
 
         <div class="hero-progress">
@@ -1232,10 +1235,6 @@
             <span class="ms" data-ms="0730" style="left:40%"><b>07:30</b><span>🪥 양치</span></span>
             <span class="ms down" data-ms="0745" style="left:60%"><b>07:45</b><span>✏️ 원리셈</span></span>
             <span class="ms" data-ms="0815" style="left:100%"><b>08:15</b><span>🎒 등교</span></span>
-          </div>
-          <div class="ms-foot">
-            <span class="ms-now" id="msNow">오늘도 힘차게 시작해요!</span>
-            <button class="ms-test" type="button" data-act="ms-test">🔔 알림 테스트</button>
           </div>
         </div>
 
@@ -1320,12 +1319,12 @@
           </div>
           <div class="hero-id">
             <div class="hero-name">윤재</div>
-            <div class="hero-meta">17:30 시작 · 취침 시간 21:00</div>
+            <div class="hero-meta">17:30 시작 · 21:00 취침</div>
           </div>
-        </div>
-
-        <div class="hero-mid">
-          <div class="hero-count" id="eveCountdownText">--</div>
+          <div class="hero-status-box">
+            <div class="hero-count" id="eveCountdownText">--</div>
+            <button class="ms-test" type="button" data-act="ms-test-eve">🔔 알림 테스트</button>
+          </div>
         </div>
 
         <div class="hero-progress">
@@ -1348,10 +1347,6 @@
             <span class="ms" style="left:28.571%"><b>18:30</b><span>✏️ 숙제</span></span>
             <span class="ms down" style="left:71.429%"><b>20:00</b><span>🎒 가방정리·양치</span></span>
             <span class="ms" style="left:100%"><b>21:00</b><span>🌙 취침</span></span>
-          </div>
-          <div class="ms-foot">
-            <span class="ms-now" id="eveMsNow">오늘 하루도 수고했어요 🌙</span>
-            <button class="ms-test" type="button" data-act="ms-test-eve">🔔 알림 테스트</button>
           </div>
         </div>
 
