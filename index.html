@@ -492,35 +492,38 @@
   .hs-row.done .hs-label{color:#3F7A4A}
 
   /* ---------------- 저녁 오른쪽: 오늘의 공부(위) + ⚡ 보너스 공부(아래) --------------
-     항목 이름이 최대한 크게 보이도록 카드 안쪽 여백과 머리말은 좁게,
+     오늘의 공부는 한 줄에 하나씩(넣은 순서 그대로) 크게, 보너스 공부는 네 과목을 한 줄로.
      완료 버튼은 ‘🔴+1 / ✓ 완료’ 알약으로 짧게 — 남는 가로 폭은 전부 이름에 준다. */
-  #homeEvening .study-card{padding:4px 8px 5px;display:flex;flex-direction:column;min-height:0}
-  #homeEvening .study-card .sec-head{margin-bottom:2px;gap:5px}
-  #homeEvening .study-card .count-pill{font-size:12px;padding:2px 8px}
+  #homeEvening .study-card{padding:5px 9px 6px;display:flex;flex-direction:column;min-height:0}
+  #homeEvening .study-card .sec-head{margin-bottom:3px;gap:6px}
+  #homeEvening .study-card .count-pill{font-size:12.5px;padding:2px 9px}
   #homeEvening .study-card .hs-grid{
-    display:grid;grid-template-columns:1fr 1fr;gap:5px;flex:1 1 auto;min-height:0;max-height:214px;margin:auto 0;
-    grid-auto-rows:minmax(0,1fr);align-content:stretch;overflow:hidden;
+    display:grid;grid-template-columns:1fr;grid-auto-rows:51px;gap:5px;flex:1 1 auto;min-height:0;
+    align-content:safe center;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;
   }
-  #homeEvening .study-card .hs-row{padding:5px 8px;gap:7px;border-radius:13px;border-width:1.5px;min-height:0}
-  #homeEvening .study-card .hs-row .hs-ico{width:34px;height:34px;border-radius:10px;border-width:1.5px}
-  #homeEvening .study-card .hs-row .hs-ico svg{width:27px;height:27px}
-  #homeEvening .study-card .hs-row .hs-label{font-size:17px;line-height:1.15;font-weight:900;letter-spacing:-.5px;color:#241F19}
-  #homeEvening .study-card .hs-row .hs-cta{font-size:12.5px;padding:4px 9px;min-height:30px;gap:3px;letter-spacing:-.2px}
+  #homeEvening .study-card .hs-grid::-webkit-scrollbar{width:8px}
+  #homeEvening .study-card .hs-grid::-webkit-scrollbar-track{background:transparent}
+  #homeEvening .study-card .hs-grid::-webkit-scrollbar-thumb{background:#E6DCC4;border-radius:999px}
+  #homeEvening .study-card .hs-row{padding:6px 10px;gap:9px;border-radius:14px;border-width:1.5px;min-height:0}
+  #homeEvening .study-card .hs-row .hs-ico{width:36px;height:36px;border-radius:11px;border-width:1.5px}
+  #homeEvening .study-card .hs-row .hs-ico svg{width:29px;height:29px}
+  #homeEvening .study-card .hs-row .hs-label{font-size:16.5px;line-height:1.15;font-weight:900;letter-spacing:-.5px;color:#241F19}
+  #homeEvening .study-card .hs-row .hs-cta{font-size:12.5px;padding:4px 11px;min-height:30px;gap:3px;letter-spacing:-.2px}
   #homeEvening .study-card .hs-row .hs-cta .mini{width:16px;height:16px}
-  #homeEvening .study-card .hs-row:last-child:nth-child(odd){grid-column:1 / -1}
   #homeEvening .study-card .hs-empty{grid-column:1 / -1}
 
   #homeEvening .home-right>.bonus-card{flex:0 0 auto}
-  #homeEvening .bonus-card{padding:4px 8px 5px;background:linear-gradient(180deg,#FFFBEC 0%,#FFFFFF 62%);border-color:#F3E3B4}
-  #homeEvening .bonus-card .sec-head{margin-bottom:2px;gap:5px}
+  #homeEvening .bonus-card{padding:5px 9px 6px;background:linear-gradient(180deg,#FFFBEC 0%,#FFFFFF 62%);border-color:#F3E3B4}
+  #homeEvening .bonus-card .sec-head{margin-bottom:3px;gap:6px}
   #homeEvening .bonus-card h2{color:#7A5B00}
-  #homeEvening .bonus-card .count-pill{font-size:12px;padding:2px 8px;background:#FFF4CF;border-color:#EFD996;color:#8A6B12}
+  #homeEvening .bonus-card .count-pill{font-size:12.5px;padding:2px 9px;background:#FFF4CF;border-color:#EFD996;color:#8A6B12}
   #homeEvening .bonus-sub{font-size:11px;font-weight:900;color:#A08A4A;letter-spacing:-.3px;white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
-  .bonus-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;flex:1 1 auto;min-height:0}
+  /* ⚡ 보너스 공부: 네 과목을 한 줄로 나란히 — 아이콘+이름을 위에, 몬스터볼 버튼을 그 아래 */
+  .bonus-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;flex:1 1 auto;min-height:0}
   .bonus-tile{
-    display:flex;align-items:center;justify-content:flex-start;gap:7px;width:100%;min-width:0;text-align:left;
-    background:#FFFFFF;border:1.5px dashed #EBD9A8;border-radius:12px;padding:6px 8px;
-    box-shadow:0 4px 12px rgba(160,140,80,.08);font-family:inherit;
+    display:flex;flex-wrap:wrap;align-items:center;align-content:center;gap:3px 5px;width:100%;min-width:0;
+    background:#FFFFFF;border:1.5px dashed #EBD9A8;border-radius:12px;padding:5px 5px 6px;
+    box-shadow:0 4px 12px rgba(160,140,80,.08);font-family:inherit;text-align:left;
     transition:transform .12s ease,background .15s ease,border-color .15s ease;
   }
   .bonus-tile:active{transform:scale(.98)}
@@ -529,11 +532,11 @@
     display:flex;align-items:center;justify-content:center;
   }
   .bonus-tile .bt-ico svg{width:26px;height:26px;display:block}
-  .bonus-tile .bt-label{flex:1;min-width:0;font-size:16px;font-weight:900;color:#241F19;letter-spacing:-.4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bonus-tile .bt-label{flex:1 1 0;min-width:0;font-size:16.5px;font-weight:900;color:#241F19;letter-spacing:-.5px;line-height:1.12;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .bonus-tile .bt-cta{
-    flex:none;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;
+    flex:0 0 100%;display:flex;align-items:center;justify-content:center;gap:3px;white-space:nowrap;
     background:#FFF1C8;color:#7A4E00;border:1.5px solid #F3D477;border-radius:999px;
-    padding:3px 8px;font-size:11.5px;font-weight:900;letter-spacing:-.3px;
+    padding:3px 4px;min-height:26px;font-size:12px;font-weight:900;letter-spacing:-.3px;
   }
   .bonus-tile .bt-cta .mini{width:15px;height:15px;flex:none}
   .bonus-tile.done{background:linear-gradient(180deg,#FFFCE9,#FFF7DC);border-style:solid;border-color:#FFD84D;box-shadow:0 8px 18px rgba(255,203,5,.18)}
@@ -876,6 +879,8 @@
     background:rgba(40,34,22,.5);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);padding:16px;
   }
   .modal.show{display:flex;animation:fadeIn .18s ease}
+  /* 도감 상세 위에 확인 창이 한 겹 더 뜨도록 */
+  #confirmModal{z-index:95}
   .modal-card{
     background:#fff;border-radius:28px;max-width:520px;width:100%;max-height:90vh;overflow:auto;
     padding:22px;box-shadow:0 24px 60px rgba(0,0,0,.3);position:relative;
@@ -920,6 +925,13 @@
   .type{font-size:12.5px;font-weight:900;color:#fff;border-radius:999px;padding:6px 13px;text-shadow:0 1px 2px rgba(0,0,0,.16)}
   .reveal-desc{font-size:15px;font-weight:800;line-height:1.6;color:#5F594D;background:#FBF8F0;border-radius:16px;padding:14px;margin:6px 0 14px}
   .reveal-actions{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}
+  /* 도감 상세: 놓아주기 (쓴 볼의 절반을 돌려받기) */
+  .btn-release{
+    background:#FFF4F1;color:#B2402C;border:2px solid #F6CFC3;
+    display:block;font-size:13.5px;min-height:40px;padding:9px 15px;border-radius:13px;font-weight:900;
+    margin:0 auto 9px;
+  }
+  .btn-release:active{background:#FFE6DE;transform:scale(.97)}
 
   .flash{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:79;transition:opacity .12s ease}
   .flash.on{opacity:.92}
@@ -1389,27 +1401,23 @@
   }
 
   /* 실제 태블릿(주소·상태 표시줄 포함): 보이는 높이가 짧아도 잘리지 않게 */
-  /* 901~919px: 줄 높이가 얼마 안 모자라는 구간 — 아이콘만 살짝 줄여 아래가 잘리지 않게 */
-  @media (min-height:901px) and (max-height:919px){
-    #homeEvening .study-card .hs-row{padding:4px 8px}
-    #homeEvening .study-card .hs-row .hs-ico{width:32px;height:32px}
-    #homeEvening .study-card .hs-row .hs-ico svg{width:26px;height:26px}
-  }
   @media (max-height:900px){
     .routine-wrap{flex:0 6 auto}
-    #homeEvening .study-card{padding:3px 7px 4px}
-    #homeEvening .study-card .hs-row{padding:4px 7px;gap:6px;border-radius:12px}
-    #homeEvening .study-card .hs-row .hs-ico{width:29px;height:29px;border-radius:9px}
-    #homeEvening .study-card .hs-row .hs-ico svg{width:23px;height:23px}
+    #homeEvening .study-card{padding:4px 7px 5px}
+    #homeEvening .study-card .hs-grid{grid-auto-rows:41px;gap:4px}
+    #homeEvening .study-card .hs-row{padding:5px 8px;gap:7px;border-radius:12px}
+    #homeEvening .study-card .hs-row .hs-ico{width:28px;height:28px;border-radius:9px}
+    #homeEvening .study-card .hs-row .hs-ico svg{width:22px;height:22px}
     #homeEvening .study-card .hs-row .hs-label{font-size:15.5px}
-    #homeEvening .study-card .hs-row .hs-cta{font-size:11.5px;min-height:26px;padding:3px 7px}
+    #homeEvening .study-card .hs-row .hs-cta{font-size:11.5px;min-height:26px;padding:3px 9px}
     #homeEvening .study-card .hs-row .hs-cta .mini{width:14px;height:14px}
-    #homeEvening .bonus-card{padding:3px 7px 4px}
-    #homeEvening .bonus-tile{padding:4px 7px;gap:6px}
+    #homeEvening .bonus-card{padding:4px 7px 5px}
+    #homeEvening .bonus-grid{gap:4px}
+    #homeEvening .bonus-tile{padding:4px 4px 5px;gap:2px 4px}
     #homeEvening .bonus-tile .bt-ico{width:28px;height:28px;border-radius:9px}
     #homeEvening .bonus-tile .bt-ico svg{width:22px;height:22px}
     #homeEvening .bonus-tile .bt-label{font-size:14.5px}
-    #homeEvening .bonus-tile .bt-cta{font-size:11px;padding:2px 7px}
+    #homeEvening .bonus-tile .bt-cta{font-size:11px;padding:2px 3px;min-height:24px}
     #homeEvening .bonus-tile .bt-cta .mini{width:13px;height:13px}
     .rcard .illu{flex:1 1 auto;height:auto;min-height:0;max-height:none;aspect-ratio:auto}
     .rcard{gap:4px}
@@ -2039,7 +2047,8 @@
     momPin: 'yj_mom_pin_v1',
     praises: 'yj_praises_v1',
     studyReading: 'yj_study_migrated_reading_v1',
-    bonusDone: 'yj_bonus_done_v1'
+    bonusDone: 'yj_bonus_done_v1',
+    dexCosts: 'yj_dex_costs_v1'
   };
 
   var W_URL = 'https://api.open-meteo.com/v1/forecast?latitude=36.8428&longitude=127.1394'
@@ -2309,7 +2318,7 @@
   var state = {
     items: [], eveningItems: [], routineDone: {}, eveningDone: {}, academies: [],
     homeschoolTasks: {}, homeschoolDone: {}, bonusDone: {},
-    balls: 0, dex: {}, awards: {},
+    balls: 0, dex: {}, dexCosts: {}, awards: {},
     perfectDays: [], stones: 0, stoneAwards: [],
     momPin: '', praises: []
   };
@@ -2627,6 +2636,9 @@
     state.balls = (typeof balls === 'number' && balls >= 0) ? balls : 0;
     var dex = store.get(K.dex, {});
     state.dex = (dex && typeof dex === 'object') ? dex : {};
+    /* 놓아주면 쓴 몬스터볼의 절반을 돌려주려고, 잡은 볼 값을 종류별로 쌓아 둔다 */
+    var dcost = store.get(K.dexCosts, null);
+    state.dexCosts = (dcost && typeof dcost === 'object' && !(typeof dcost.slice === 'function')) ? dcost : {};
 
     var pd = store.get(K.perfect, []);
     state.perfectDays = (pd && pd.length && typeof pd.slice === 'function') ? pd : [];
@@ -2737,6 +2749,7 @@
 
   function saveBalls() { store.set(K.balls, state.balls); }
   function saveDex() { store.set(K.dex, state.dex); }
+  function saveDexCosts() { store.set(K.dexCosts, state.dexCosts); }
   function saveAwards() { store.set(K.awards, state.awards); }
 
   /* ======================= 날짜 유틸 ======================= */
@@ -3698,6 +3711,7 @@
     var key = todayKey();
     state.balls = 0;
     state.dex = {};
+    state.dexCosts = {};
     state.stones = 0;
     state.perfectDays = [];
     state.stoneAwards = [];
@@ -3709,6 +3723,7 @@
     state.awards[key] = { r: [], b: false, s: [], m1: false, mi: [], e1: false, bs: [] };
     saveBalls();
     saveDex();
+    saveDexCosts();
     saveStones();
     savePerfect();
     saveStoneAwards();
@@ -4846,6 +4861,46 @@
     updateBallUI();
   }
 
+  /* ======================= 🔄 놓아주기 =======================
+     잡을 때 쓴 몬스터볼 값을 종류별로 쌓아 두고(LIFO), 놓아주면 그 절반을 돌려준다.
+     기록이 없는 예전 포켓몬은 등급 기본값(일반·진화 10볼 / 전설·메가진화 50볼)으로 계산. */
+  function dexCostPush(id, cost) {
+    var k = String(id);
+    if (!state.dexCosts[k] || typeof state.dexCosts[k].slice !== 'function') state.dexCosts[k] = [];
+    state.dexCosts[k].push(cost);
+    saveDexCosts();
+  }
+  function dexCostOf(p) {
+    var arr = state.dexCosts[String(p.id)];
+    if (arr && arr.length && typeof arr.slice === 'function') {
+      var last = arr[arr.length - 1];
+      if (typeof last === 'number' && last > 0) return last;
+    }
+    return (p.tier === '전설' || p.tier === '메가진화') ? 50 : 10;
+  }
+  function dexRefund(p) { return Math.floor(dexCostOf(p) / 2); }
+
+  function releasePokemon(p) {
+    if (!p) return;
+    var id = String(p.id);
+    var cnt = state.dex[p.id] || 0;
+    if (!cnt) return;
+    var refund = dexRefund(p);
+    cnt -= 1;
+    if (cnt > 0) state.dex[p.id] = cnt;
+    else delete state.dex[p.id];
+    var arr = state.dexCosts[id];
+    if (arr && typeof arr.slice === 'function' && arr.length) arr.pop();
+    saveDex();
+    saveDexCosts();
+    addBalls(refund);
+    renderDex();
+    SFX.ball();
+    toast(p.name + '을(를) 놓아주고 몬스터볼 +' + refund + '개를 돌려받았어요!');
+    if (cnt > 0) showReveal(p, false, cnt, null, true);
+    else $('revealModal').classList.remove('show');
+  }
+
   function evoSection(p) {
     var nexts = EVO[p.id] || [];
     if (!nexts.length) return '';
@@ -4872,7 +4927,7 @@
     return html;
   }
 
-  function showReveal(p, isNew, count, kind) {
+  function showReveal(p, isNew, count, kind, canRelease) {
     var body = $('revealBody');
     var tc = TIER[p.tier] || TIER['일반'];
     var d = DRAW[kind] || null;
@@ -4889,6 +4944,9 @@
       + '<div class="types">' + typeBadges(p) + '</div>'
       + '<div class="reveal-desc">' + esc(p.desc) + '</div>'
       + evoSection(p)
+      + (canRelease && count > 0
+        ? '<button class="btn btn-release" type="button" data-act="release" data-id="' + p.id + '">🔄 놓아주기 (+' + dexRefund(p) + '볼)</button>'
+        : '')
       + '<div class="reveal-actions">'
       + '<button class="btn btn-yellow" type="button" data-act="close-reveal">확인</button>'
       + (d ? '<button class="btn btn-blue" type="button" data-act="gacha" data-tier="' + kind + '" data-cost="' + d.cost + '">한 번 더! (' + d.name + ' 볼 ' + d.cost + '개)</button>' : '')
@@ -5106,6 +5164,7 @@
       var isNew = !state.dex[p.id];
       state.dex[p.id] = (state.dex[p.id] || 0) + 1;
       saveDex();
+      dexCostPush(p.id, d.cost);
 
       if (btn) btn.classList.remove('rolling');
       rolling = false;
@@ -5313,12 +5372,23 @@
       case 'close-pin':
         closePinModal();
         break;
+      case 'release': {
+        var rp = byId(parseInt(id, 10));
+        if (!rp) break;
+        if ((state.dex[rp.id] || 0) <= 0) break;
+        var refund = dexRefund(rp);
+        askConfirm('정말 ' + rp.name + '을(를) 놓아줄까요?',
+          '몬스터볼 +' + refund + '개를 돌려받아요!',
+          '네, 놓아줘요 🔴+' + refund,
+          function () { releasePokemon(rp); });
+        break;
+      }
       case 'dex-view': {
         var pid = parseInt(id, 10);
         var pp = byId(pid);
         if (!pp) break;
         var cc = state.dex[pp.id] || 0;
-        if (cc > 0) { showReveal(pp, false, cc); }
+        if (cc > 0) { showReveal(pp, false, cc, null, true); }
         else { toast('아직 만나지 못한 포켓몬이에요. 몬스터볼로 만나 보세요!'); SFX.nope(); }
         break;
       }

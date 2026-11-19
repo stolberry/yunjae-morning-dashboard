@@ -27,6 +27,9 @@
   - 일반 뽑기 10개 / 슈퍼 뽑기 25개 / 마스터 뽑기 50개(전설·메가 100%)
   - 61마리 (일반·진화·전설·메가진화) · 무한다이노 포함
   - 진화: 💎 진화의 돌 1개 (일반 진화) / 2개 (메가진화)
+  - 🔄 **놓아주기**: 도감에서 잡은 포켓몬을 누르면 상세 창에서 **🔄 놓아주기 (+N볼)** —
+    놓아주면 잡을 때 쓴 몬스터볼의 **절반**(내림)을 돌려받아요
+    (일반·진화 10볼 → +5 / 전설·메가진화 50볼 → +25, 예전 기록은 등급 기본값으로 계산)
 
 ## 몬스터볼 보상 규칙
 
@@ -59,7 +62,7 @@
 아침 체크(`yj_routine_done_v1`), 아침 목록(`yj_routine_items_v3`),
 저녁 체크(`yj_evening_done_v1`), 저녁 목록(`yj_evening_items_v1`),
 학원(`yj_academies_v1`), 공부 주간표(`yj_homeschool_tasks_v1`), 공부 체크(`yj_homeschool_done_v1`),
-몬스터볼(`yj_balls_v1`), 도감(`yj_dex_v1`), 보상 기록(`yj_awards_v1`),
+몬스터볼(`yj_balls_v1`), 도감(`yj_dex_v1`), 도감 볼 값(`yj_dex_costs_v1`), 보상 기록(`yj_awards_v1`),
 완벽한 날(`yj_perfect_days_v1`), 진화의 돌(`yj_stones_v1`, `yj_stone_awards_v1`),
 엄마 비밀번호(`yj_mom_pin_v1`), 특급칭찬 기록(`yj_praises_v1`),
 공부표 ‘원서 낭독’ 이전 기록(`yj_study_migrated_reading_v1`), 보너스 공부 체크(`yj_bonus_done_v1`).
