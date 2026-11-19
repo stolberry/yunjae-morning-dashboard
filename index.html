@@ -699,11 +699,11 @@
     word-break:keep-all;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
   }
   .study-tile .st-cta{
-    width:100%;flex:none;display:flex;align-items:center;justify-content:center;gap:3px;
+    width:100%;flex:none;display:flex;align-items:center;justify-content:center;gap:4px;
     background:#FFF1C8;color:#7A4E00;border:1.5px solid #F3D477;border-radius:999px;
-    padding:3px 6px;min-height:27px;font-size:11.5px;font-weight:900;letter-spacing:-.3px;white-space:nowrap;
+    padding:4px 6px;min-height:32px;font-size:11.5px;font-weight:900;letter-spacing:-.3px;white-space:nowrap;
   }
-  .study-tile .st-cta .mini{width:13px;height:13px;flex:none}
+  .study-tile .st-cta .mini{width:21px;height:21px;flex:none}
   .study-tile.done{background:linear-gradient(180deg,#FFFCE9,#FFF8DF);border-color:#FFD84D}
   .study-tile.done .st-label{color:#3F7A4A}
   .study-tile.done .st-cta{background:#E4F7E6;color:#2F7A3C;border-color:#BFE3C6}
@@ -716,7 +716,9 @@
   #homeEvening .bonus-sub{
     flex:1 1 auto;min-width:0;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
     font-size:11px;font-weight:900;color:#A08A4A;letter-spacing:-.3px;
+    display:inline-flex;align-items:center;justify-content:flex-end;gap:3px;
   }
+  #homeEvening .bonus-sub .mini{width:14px;height:14px;flex:none;display:block}
   /* ⚡ 보너스: 포켓몬 카드 네 장을 한 줄로 (뒤집으면 몬스터볼) */
   .bonus-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;flex:1 1 auto;min-height:0;grid-auto-rows:minmax(0,1fr)}
   #homeEvening .bonus-grid{flex:1 1 auto;min-height:0;align-content:stretch}
@@ -1966,7 +1968,7 @@
           <div class="sec-head">
             <h2>⚡ 보너스</h2>
             <span class="count-pill js-bonus-count">0/4</span>
-            <span class="bonus-sub">하고 싶을 때 도전! · 🔴+1</span>
+            <span class="bonus-sub">하고 싶을 때 도전! · <svg class="mini" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#fff" stroke="#2E2A25" stroke-width="7"/><path d="M4 50 A46 46 0 0 1 96 50 Z" fill="#EE1515"/><rect x="2" y="43" width="96" height="14" fill="#2E2A25"/><circle cx="50" cy="50" r="14" fill="#fff" stroke="#2E2A25" stroke-width="7"/><circle cx="50" cy="50" r="5" fill="#EE1515"/></svg>+1</span>
           </div>
           <div class="bonus-grid js-bonus-grid"></div>
         </div>
@@ -3935,7 +3937,6 @@
       + ' aria-pressed="' + done + '" aria-label="' + esc(o.label) + (done ? ' 완료 취소' : ' 완료하고 몬스터볼 +1') + '">'
       + '<span class="pk-inner">'
       + '<span class="pk-face pk-front">'
-      + '<span class="pk-plus">🔴 +1</span>'
       + '<span class="pk-ico">' + o.ico + '</span>'
       + '<span class="pk-name">' + esc(o.label) + '</span>'
       + '</span>'
