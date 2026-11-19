@@ -533,6 +533,19 @@
   }
   .dex-tile .new{position:absolute;top:7px;left:7px;background:var(--red);color:#fff;border-radius:999px;font-size:9.5px;font-weight:900;padding:2px 6px}
 
+  .stone-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
+  .stone-chip{
+    display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:900;color:#5B2CA8;
+    background:#F3EAFF;border:2px solid #DCCBFF;border-radius:999px;padding:5px 11px;white-space:nowrap;
+  }
+  .stone-chip b{font-size:14px}
+  .stone-chip.fire{color:#B4551F;background:#FFF1E4;border-color:#FFD8BB}
+  .stone-chip small{font-size:10.5px;font-weight:800;opacity:.8}
+  .streak-chip{
+    display:inline-flex;align-items:center;font-size:12px;font-weight:900;color:#B4551F;
+    background:#FFF1E4;border:2px solid #FFD8BB;border-radius:999px;padding:3px 10px;white-space:nowrap;
+  }
+
   /* ---------------- evolve (pokedex detail) ---------------- */
   .evo-box{
     margin:8px 0 10px;background:linear-gradient(120deg,#F6F1FF,#FFF9E3);border:2px solid #E4D6FF;
@@ -895,6 +908,7 @@
         <h2>🎒 아침 루틴 6단계</h2>
         <span class="sec-sub">카드를 누르면 완료 · 몬스터볼 +1</span>
         <span class="count-pill js-routine-count">0/6</span>
+        <span class="streak-chip" id="streakChip">🔥 0일</span>
         <div class="spacer"></div>
         <button class="ghost-btn" type="button" data-act="open-routine-edit">⚙️ 루틴 편집</button>
       </div>
@@ -1028,6 +1042,10 @@
             <span class="gacha-txt">마스터 뽑기<small>볼 30개 · <b class="js-gacha-state">30개 필요</b></small></span>
           </button>
         </div>
+        <div class="stone-row">
+          <span class="stone-chip">💎 진화의 돌 <b class="js-stone-count">0</b>개</span>
+          <span class="stone-chip fire">🔥 연속 <b class="js-streak-days">0</b>일 <small class="js-stone-next">다음 돌까지 3일</small></span>
+        </div>
       </div>
       <div class="dex-stats">
         <div class="dex-stat"><b class="js-dex-caught">0</b><span>만난 포켓몬</span></div>
@@ -1127,6 +1145,9 @@
     balls: 'yj_balls_v1',
     dex: 'yj_dex_v1',
     awards: 'yj_awards_v1',
+    perfect: 'yj_perfect_days_v1',
+    stones: 'yj_stones_v1',
+    stoneAwards: 'yj_stone_awards_v1',
     sound: 'yj_sound_v1'
   };
 
@@ -1391,7 +1412,8 @@
   var state = {
     items: [], routineDone: {}, academies: [],
     homeschoolTasks: {}, homeschoolDone: {},
-    balls: 0, dex: {}, awards: {}
+    balls: 0, dex: {}, awards: {},
+    perfectDays: [], stones: 0, stoneAwards: []
   };
 
   var DEFAULT6 = ['세수·로션', '유산균·물 마시기', '아침먹으면서 영어영상', '용변·양치', '옷입고 양말신기', '원리셈·따풀'];
@@ -1574,6 +1596,85 @@
     state.balls = (typeof balls === 'number' && balls >= 0) ? balls : 0;
     var dex = store.get(K.dex, {});
     state.dex = (dex && typeof dex === 'object') ? dex : {};
+
+    var pd = store.get(K.perfect, []);
+    state.perfectDays = (pd && pd.length && typeof pd.slice === 'function') ? pd : [];
+    var stn = store.get(K.stones, 0);
+    state.stones = (typeof stn === 'number' && stn >= 0) ? stn : 0;
+    var sa = store.get(K.stoneAwards, []);
+    state.stoneAwards = (sa && typeof sa.slice === 'function') ? sa : [];
+  }
+
+  /* ======================= 완벽한 하루 · 진화의 돌 ======================= */
+  function savePerfect() { store.set(K.perfect, state.perfectDays); }
+  function saveStones() { store.set(K.stones, state.stones); }
+  function saveStoneAwards() { store.set(K.stoneAwards, state.stoneAwards); }
+
+  function todayPerfect() {
+    if (!state.items.length) return false;
+    if (todayRoutineIds().length !== state.items.length) return false;
+    var dow = new Date().getDay();
+    var tasks = hsTaskList(dow);
+    if (!tasks.length) return true;
+    return doneIdsFor(todayKey(), tasks).length === tasks.length;
+  }
+
+  function currentStreak() {
+    var d = new Date();
+    if (state.perfectDays.indexOf(dateKey(d)) === -1) d.setDate(d.getDate() - 1);
+    var n = 0;
+    while (state.perfectDays.indexOf(dateKey(d)) !== -1) {
+      n++;
+      d.setDate(d.getDate() - 1);
+    }
+    return n;
+  }
+
+  function daysToNextStone() {
+    var st = currentStreak();
+    var r = st % 3;
+    return r === 0 ? (st === 0 ? 3 : 3) : (3 - r);
+  }
+
+  /* 오늘의 완벽 여부를 저장하고, 3일 연속마다 진화의 돌을 준다 */
+  function syncPerfectDay() {
+    var key = todayKey();
+    var perfect = todayPerfect();
+    var idx = state.perfectDays.indexOf(key);
+    if (perfect && idx === -1) { state.perfectDays.push(key); savePerfect(); }
+    if (!perfect && idx !== -1) { state.perfectDays.splice(idx, 1); savePerfect(); }
+
+    var streak = currentStreak();
+    if (perfect) {
+      if (streak > 0 && streak % 3 === 0 && state.stoneAwards.indexOf(key) === -1) {
+        state.stoneAwards.push(key);
+        state.stones += 1;
+        saveStoneAwards();
+        saveStones();
+        toast('🔥 ' + streak + '일 연속 완벽! 💎 진화의 돌 +1');
+        SFX.fanfare();
+        confettiBurst();
+      }
+    } else {
+      var ai = state.stoneAwards.indexOf(key);
+      if (ai !== -1) {
+        state.stoneAwards.splice(ai, 1);
+        state.stones = Math.max(0, state.stones - 1);
+        saveStoneAwards();
+        saveStones();
+        toast('진화의 돌을 돌려 놓았어요 💎');
+      }
+    }
+    updateStoneUI();
+  }
+
+  function updateStoneUI() {
+    var st = currentStreak();
+    setAll('.js-stone-count', String(state.stones));
+    setAll('.js-streak-days', String(st));
+    setAll('.js-stone-next', st > 0 && st % 3 === 0 ? '돌 받았어요! (다음은 3일 뒤)' : ('다음 돌까지 ' + daysToNextStone() + '일'));
+    var chip = $('streakChip');
+    if (chip) chip.textContent = '🔥 ' + st + '일';
   }
 
   function saveBalls() { store.set(K.balls, state.balls); }
@@ -1858,6 +1959,7 @@
     grantRoutineReward(id);
     var doneIds = todayRoutineIds();
     if (state.items.length > 0 && doneIds.length === state.items.length) confettiBurst();
+    syncPerfectDay();
     tickClock();
   }
 
@@ -1880,6 +1982,7 @@
     a.b = false;
     saveAwards();
     renderRoutine();
+    syncPerfectDay();
     tickClock();
   }
 
@@ -2417,6 +2520,7 @@
       SFX.fanfare();
       if (key === todayKey()) toast('공부 완료! 배지 획득 🏅');
     }
+    syncPerfectDay();
   }
 
   function unmarkHomeschool(id, dow) {
@@ -2440,6 +2544,7 @@
     }
     renderStudy();
     renderHomeHomeschool();
+    syncPerfectDay();
   }
 
   function addStudy() {
@@ -2755,16 +2860,20 @@
     for (var i = 0; i < nexts.length; i++) {
       var np = byId(nexts[i]);
       if (!np) continue;
+      var isMega = (np.tier === '메가진화');
+      var cost = isMega ? 2 : 1;
+      var ok = state.stones >= cost;
       html += '<div class="evo-row">'
-        + '<span class="evo-name">→ ' + esc(np.name) + '</span>'
-        + (cnt >= 2
-          ? '<button class="btn btn-yellow" type="button" data-act="evolve" data-id="' + p.id + '" data-to="' + np.id + '" data-mode="dup">중복 2마리로 진화</button>'
-          : '<span class="evo-need">중복 2마리 필요</span>')
-        + '<button class="btn btn-blue" type="button" data-act="evolve" data-id="' + p.id + '" data-to="' + np.id + '" data-mode="balls"'
-        + (state.balls < EVO_BALLS ? ' disabled' : '') + '>몬스터볼 ' + EVO_BALLS + '개로 진화</button>'
+        + '<span class="evo-name">→ ' + esc(np.name) + (isMega ? ' <small style="color:#5B2CA8">메가진화</small>' : '') + '</span>'
+        + '<button class="btn btn-yellow" type="button" data-act="evolve" data-id="' + p.id + '" data-to="' + np.id + '" data-mode="stone" data-cost="' + cost + '"'
+        + (ok ? '' : ' disabled') + '>💎 진화의 돌 ' + cost + '개로 진화</button>'
         + '</div>';
     }
-    html += '<div style="text-align:center;font-size:11px;font-weight:800;color:#A79E8B">같은 포켓몬을 2마리 모으면 공짜로 진화!</div></div>';
+    html += '<div style="text-align:center;font-size:11px;font-weight:800;color:' + (state.stones > 0 ? '#8A6B12' : '#A79E8B') + '">'
+      + (state.stones > 0
+        ? ('보유 💎 ' + state.stones + '개 · 루틴+공부 3일 연속마다 1개')
+        : '진화의 돌이 필요해요 (루틴+공부 3일 연속 완료!)')
+      + '</div></div>';
     return html;
   }
 
@@ -2846,24 +2955,20 @@
     }, 1500);
   }
 
-  function evolvePokemon(fromId, toId, mode) {
+  function evolvePokemon(fromId, toId, mode, cost) {
     var from = byId(fromId), to = byId(toId);
     if (!from || !to) return;
+    cost = cost || ((to.tier === '메가진화') ? 2 : 1);
     var cnt = state.dex[fromId] || 0;
     if (!cnt) { SFX.nope(); toast('먼저 ' + from.name + '를 만나야 해요'); return; }
-
-    if (mode === 'dup') {
-      if (cnt < 2) { SFX.nope(); toast(from.name + '가 2마리 있어야 해요!'); return; }
-      state.dex[fromId] = cnt - 1;
-    } else {
-      if (state.balls < EVO_BALLS) {
-        SFX.nope();
-        toast('몬스터볼이 ' + (EVO_BALLS - state.balls) + '개 더 필요해요');
-        return;
-      }
-      state.balls -= EVO_BALLS;
-      saveBalls();
+    if (state.stones < cost) {
+      SFX.nope();
+      toast('진화의 돌이 필요해요 (루틴+공부 3일 연속 완료!)');
+      return;
     }
+
+    state.stones -= cost;
+    saveStones();
 
     var isNew = !state.dex[toId];
     state.dex[toId] = (state.dex[toId] || 0) + 1;
@@ -2877,6 +2982,7 @@
       $('flash').classList.remove('on');
       renderDex();
       updateBallUI();
+      updateStoneUI();
       showReveal(to, isNew, state.dex[toId], null);
       confettiBurst();
       toast(from.name + ' → ' + to.name + ' 진화 성공! ✨');
@@ -2989,7 +3095,7 @@
         renderDex();
         break;
       case 'evolve':
-        evolvePokemon(parseInt(id, 10), parseInt(el.getAttribute('data-to'), 10), el.getAttribute('data-mode'));
+        evolvePokemon(parseInt(id, 10), parseInt(el.getAttribute('data-to'), 10), el.getAttribute('data-mode'), parseInt(el.getAttribute('data-cost'), 10));
         break;
       case 'close-reveal':
         $('revealModal').classList.remove('show');
@@ -3084,6 +3190,8 @@
     renderAffirm();
     renderDex();
     updateBallUI();
+    updateStoneUI();
+    syncPerfectDay();
     loadWeather();
 
     setInterval(tickClock, 1000);
