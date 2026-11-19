@@ -790,7 +790,7 @@
       <h3>⚙️ 아침 루틴 편집</h3>
       <button class="modal-close" type="button" data-act="close-routine-edit">✕</button>
     </div>
-    <p class="hint" style="margin:0 0 12px">이름을 고치거나 순서를 바꿀 수 있어요. 4개를 추천해요!</p>
+    <p class="hint" style="margin:0 0 12px">이름을 고치거나 순서를 바꿀 수 있어요. 5개를 추천해요!</p>
     <div id="routineEditList"></div>
     <div class="add-row" style="margin-top:12px">
       <input id="routineInput" type="text" placeholder="루틴 추가 (예: 물 한 잔 마시기)" enterkeyhint="done" autocomplete="off">
@@ -1288,13 +1288,13 @@
     { keys: ['옷', '입기', '교복', '양말'], img: 'assets/routine-dress.png', emoji: '👕' }
   ];
 
-  function illuFor(label, idx) {
+  function illuFor(label) {
     for (var i = 0; i < ILLUS.length; i++) {
       for (var j = 0; j < ILLUS[i].keys.length; j++) {
         if (String(label).indexOf(ILLUS[i].keys[j]) !== -1) return ILLUS[i];
       }
     }
-    return ILLUS[idx % ILLUS.length];
+    return { img: null, emoji: '⭐' };
   }
 
   function miniBallSvg() {
@@ -1318,7 +1318,7 @@
       for (i = 0; i < state.items.length; i++) {
         var it = state.items[i];
         var done = doneIds.indexOf(it.id) !== -1;
-        var ill = illuFor(it.label, i);
+        var ill = illuFor(it.label);
         html += '<button class="rcard' + (done ? ' done' : '') + '" type="button" data-act="r-toggle" data-id="' + esc(it.id) + '" aria-pressed="' + done + '">'
           + '<span class="step">' + (i + 1) + '</span>'
           + '<span class="stamp">✓</span>'
