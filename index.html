@@ -907,31 +907,6 @@
   .msb-text{font-size:19px;font-weight:900;letter-spacing:-.6px;color:#3A3428;white-space:nowrap}
   .msb-x{border:none;background:rgba(0,0,0,.06);color:#6C665C;width:30px;height:30px;border-radius:50%;font-weight:900;font-size:14px;flex:none}
 
-  /* 실제 태블릿(주소·상태 표시줄 포함): 보이는 높이가 짧아도 잘리지 않게 */
-  @media (max-height:900px){
-    .routine-wrap{flex:0 6 auto}
-    .rcard .illu{flex:1 1 auto;height:auto;min-height:0;max-height:none}
-    .rcard{gap:4px}
-    .rcard .r-title{font-size:15px;padding:0 18px}
-    .rcard .cta{min-height:36px;font-size:12.5px}
-    .hero-mid{gap:2px}
-    .board{padding-top:6px;padding-bottom:5px}
-  }
-  @media (max-height:820px){
-    .rcard .r-title{font-size:14px}
-    .rcard .cta{min-height:33px;font-size:12px}
-    .dt-card{padding:5px 14px}
-    .dtc-clock{font-size:30px}
-    .clock-ampm{font-size:13px;vertical-align:2px}
-    .hero-count{font-size:clamp(22px,2vw,30px)}
-    .hero{padding:9px 14px}
-    .hp-track{height:18px}
-    .ms-labels{height:30px}
-    .ms-foot{margin-top:2px}
-    .ms-now{font-size:11px;padding:2px 8px}
-    .ms-test{font-size:10px;padding:3px 7px;min-height:24px}
-  }
-
   /* ---------------- responsive ---------------- */
   @media (max-width:1399px){
     .hero-count{font-size:clamp(24px,2.2vw,30px)}
@@ -1116,6 +1091,31 @@
     .rcard .stamp{width:27px;height:27px;font-size:15px}
     .foot{font-size:10.5px}
   }
+  /* 실제 태블릿(주소·상태 표시줄 포함): 보이는 높이가 짧아도 잘리지 않게 */
+  @media (max-height:900px){
+    .routine-wrap{flex:0 6 auto}
+    .rcard .illu{flex:1 1 auto;height:auto;min-height:0;max-height:none}
+    .rcard{gap:4px}
+    .rcard .r-title{font-size:15px;padding:0 18px}
+    .rcard .cta{min-height:36px;font-size:12.5px}
+    .hero-mid{gap:2px}
+    .board{padding-top:6px;padding-bottom:5px}
+  }
+  @media (max-height:820px){
+    .rcard .r-title{font-size:14px}
+    .rcard .cta{min-height:33px;font-size:12px}
+    .dt-card{padding:5px 14px}
+    .dtc-clock{font-size:30px}
+    .clock-ampm{font-size:13px;vertical-align:2px}
+    .hero-count{font-size:clamp(22px,2vw,30px)}
+    .hero{padding:9px 14px}
+    .hp-track{height:18px}
+    .ms-labels{height:30px}
+    .ms-foot{margin-top:2px}
+    .ms-now{font-size:11px;padding:2px 8px}
+    .ms-test{font-size:10px;padding:3px 7px;min-height:24px}
+  }
+
 </style>
 </head>
 <body>
