@@ -1852,7 +1852,7 @@
   }
   /* v12: 왼쪽 히어로(타임바) 높이를 오전 주중·오전 주말·오후 모두 같은 값으로 고정.
      루틴 3×2 칸은 남는 높이를 그대로 받으므로 세 화면의 카드 크기·그림 비율이 똑같아진다. */
-  .left-col{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0;--hero-h:264px}
+  .left-col,#homeMorning .morning-left{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0;--hero-h:264px}
   #homeMorning .morning-left>.hero,#homeEvening .left-col>.hero{
     flex:0 0 var(--hero-h);height:var(--hero-h);min-height:0;
   }
@@ -2075,7 +2075,7 @@
   }
   /* 낮은 화면(주소창 포함 1480×780 등)에서는 히어로를 조금 납작하게 해서 루틴 칸을 넓게 */
   @media (max-height:830px) and (min-width:861px){
-    .left-col{--hero-h:202px}
+    .left-col,#homeMorning .morning-left{--hero-h:202px;gap:6px}
     #homeEvening .home-right>.study-card{flex:1.2 1 0}
     #homeEvening .home-right>.habit-card{flex:1 1 0}
     #homeEvening .home-right>.bonus-card{flex:0.85 1 0}
