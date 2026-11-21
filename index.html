@@ -1855,6 +1855,170 @@
     .study-tile .st-ico svg{width:27px;height:27px}
     .study-tile .st-label{font-size:13.5px}
   }
+  /* ============================================================
+     v11: 히어로 맨 위 · 루틴 6단계(3×2) · 오른쪽 40% 두 줄 머리 · 생활습관 미션
+     ============================================================ */
+  #homeMorning .home-grid,#homeEvening .home-grid{
+    grid-template-columns:1.5fr 1fr;grid-template-rows:minmax(0,1fr);gap:9px 12px;
+  }
+  .left-col{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0}
+  #homeMorning .morning-left>.hero,#homeEvening .left-col>.hero{flex:0 0 auto;min-height:0}
+  .left-col>.routine-wrap{flex:1 1 auto;min-height:0;margin-top:0}
+  #homeMorning .home-right,#homeEvening .home-right{
+    display:flex;flex-direction:column;gap:7px;min-width:0;min-height:0;
+  }
+  #homeMorning .home-right>.today-card,#homeEvening .home-right>.today-card,
+  #homeMorning .home-right>.habit-card,#homeEvening .home-right>.habit-card{flex:1 1 0;min-height:0}
+
+  /* ---- 루틴 6단계: 3열 × 2행 ---- */
+  .routine-grid,.routine-grid.eve5{
+    grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:8px;
+  }
+  .routine-wrap .sec-head{margin-bottom:6px;gap:7px;flex:none;flex-wrap:nowrap;min-width:0}
+  .routine-wrap .sec-head h2{font-size:18px;letter-spacing:-.7px;flex:none;white-space:nowrap}
+  .routine-wrap .sec-sub{font-size:12px;white-space:nowrap;flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .routine-wrap .count-pill{font-size:13px;padding:4px 10px;flex:none}
+  .routine-wrap .ghost-btn{min-height:34px;padding:6px 11px;font-size:12.5px;flex:none}
+  .routine-wrap .streak-chip{flex:none}
+  .routine-grid .rcard{padding:6px 7px 7px;gap:4px;border-radius:15px}
+  .routine-grid .rcard .r-title{font-size:15.5px;padding-left:24px}
+  .routine-grid .rcard .cta{font-size:12px;min-height:26px;padding:3px 9px}
+  .routine-grid .rcard .illu{aspect-ratio:auto;flex:1 1 auto;min-height:0;border-radius:10px}
+  .routine-grid .rcard .illu img{object-fit:cover;object-position:center 20%}
+
+  /* ---- 오른쪽 40% 맨 위: 한 줄씩 두 개의 납작한 막대 ---- */
+  .dt-bar,.affirm-bar{
+    flex:0 0 44px;height:44px;min-height:44px;max-height:44px;
+    display:flex;align-items:center;gap:9px;padding:0 14px;border-radius:16px;overflow:hidden;min-width:0;
+  }
+  .dt-bar .dtc-date{
+    display:flex;align-items:center;gap:7px;font-size:16px;font-weight:900;color:#5F594D;letter-spacing:-.3px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;
+  }
+  .dt-bar .dtc-ico{font-size:16px;flex:none}
+  .dt-bar .dtc-clock{
+    margin-left:auto;flex:none;font-size:20px;font-weight:900;color:#3A3428;letter-spacing:-.7px;
+    font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.1;
+  }
+  .dt-bar .dtc-clock .clock-ampm{font-size:13px;font-weight:900;color:#8A6B12;margin-right:4px;vertical-align:2px}
+  .dt-bar.eve .dtc-date{color:#544A8C}
+  .dt-bar.eve .dtc-clock{color:#3B3266}
+  .dt-bar.eve .dtc-clock .clock-ampm{color:#6A5BA8}
+
+  /* 날씨 막대: 한 줄에 아이콘·기온·설명·미세먼지·옷차림 */
+  .home-right .wx-card{
+    flex:0 0 52px;height:52px;min-height:52px;max-height:52px;
+    display:flex;flex-wrap:nowrap;align-items:center;gap:0 8px;padding:0 34px 0 14px;border-radius:16px;overflow:hidden;min-width:0;
+  }
+  .home-right .wx-card .wico{font-size:23px;line-height:1;flex:none}
+  .home-right .wx-card .wtemp{font-size:23px;font-weight:900;letter-spacing:-1px;line-height:1;flex:none}
+  .home-right .wx-card .wdesc{
+    font-size:12.5px;font-weight:900;color:#6C665C;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    min-width:0;flex:0 1 auto;
+  }
+  .home-right .wx-card .wsep{display:none}
+  .home-right .wx-card .badge{font-size:11px;padding:2px 7px;flex:none}
+  .home-right .wx-card .wtip{
+    font-size:11.5px;font-weight:900;color:#8A8377;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    min-width:0;flex:1 1 auto;text-align:right;
+  }
+  .home-right .wx-card>.retry{
+    position:absolute;top:50%;right:8px;transform:translateY(-50%);
+    width:22px;height:22px;min-height:0;padding:0;font-size:11px;border-radius:50%;line-height:1;
+  }
+
+  /* 특급칭찬 막대: 40% 폭 전체를 쓰고 넘치면 천천히 흐른다 */
+  .affirm-bar{flex:0 0 44px;gap:8px;padding:0 14px}
+  .affirm-bar .af-ico{font-size:17px}
+  .affirm-bar .af-text{font-size:16px;font-weight:800;letter-spacing:-.4px;line-height:1.2}
+  .affirm-bar .af-when{flex:none;font-size:10.5px;padding:1px 6px}
+
+  /* ---- 🌱 생활습관 미션 ---- */
+  .habit-card{
+    display:flex;flex-direction:column;padding:7px 11px 8px;border-radius:18px;min-width:0;overflow:hidden;
+    background:linear-gradient(180deg,#F6FCF4 0%,#FFFFFF 62%);border-color:#CFE7C9;
+  }
+  .habit-card .sec-head{margin-bottom:5px;gap:6px;flex:none}
+  .habit-card h2{font-size:17px;letter-spacing:-.6px;color:#2F6B3C}
+  .habit-card .count-pill{font-size:12.5px;padding:2px 9px;background:#EAF7E6;border-color:#BFE3B6;color:#2F7A3C}
+  .habit-card .link-btn{font-size:12px;padding:2px 2px;color:#3E8A50}
+  .habit-list{display:flex;flex-direction:column;justify-content:center;gap:6px;flex:1 1 auto;min-height:0;overflow:hidden}
+  .habit-row{
+    display:flex;align-items:center;gap:8px;width:100%;min-width:0;text-align:left;
+    background:#fff;border:2px solid #DFEEDB;border-radius:14px;padding:5px 8px;
+    box-shadow:0 4px 10px rgba(90,130,80,.07);transition:transform .12s ease,background .15s ease,border-color .15s ease;
+  }
+  .habit-row:active{transform:scale(.985)}
+  .habit-row .hb-ico{
+    width:34px;height:34px;flex:none;border-radius:11px;background:#F0F9ED;border:1.5px solid #D5EBCF;
+    display:flex;align-items:center;justify-content:center;font-size:19px;line-height:1;
+  }
+  .habit-row .hb-body{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:1px}
+  .habit-row .hb-name{
+    font-size:15px;font-weight:900;color:#25321F;letter-spacing:-.5px;line-height:1.2;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .habit-row .hb-streak{font-size:11.5px;font-weight:900;color:#C97A00;letter-spacing:-.3px;line-height:1.15}
+  .habit-row .hb-streak.zero{color:#A79E8B}
+  .habit-row .hb-streak b{color:#E0620B;font-weight:900}
+  .habit-row .hb-check{
+    width:32px;height:32px;flex:none;border-radius:50%;border:2.5px solid #DCE8D8;background:#fff;
+    display:flex;align-items:center;justify-content:center;color:transparent;font-size:16px;font-weight:900;
+  }
+  .habit-row.done{background:linear-gradient(180deg,#F3FCF1,#FFFFFF);border-color:#9FD69A}
+  .habit-row.done .hb-name{color:#2F7A3C}
+  .habit-row.done .hb-check{background:#3FA34D;border-color:#3FA34D;color:#fff}
+  .habit-row.done .hb-ico{background:#EFF9EC;border-color:#B9E2B3}
+  .habit-note{
+    flex:none;margin-top:4px;text-align:center;font-size:11.5px;font-weight:900;color:#5E8A66;letter-spacing:-.3px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .habit-empty{
+    flex:1 1 auto;display:flex;align-items:center;justify-content:center;text-align:center;
+    background:#F7FBF5;border:2px dashed #D9E9D4;border-radius:14px;padding:10px;
+    font-size:13px;font-weight:900;color:#7C9A80;line-height:1.4;
+  }
+
+  /* ---- ⚡ 보너스: 한눈에 여러 개 (4열 그리드) ---- */
+  #homeEvening .bonus-grid{
+    display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));
+    gap:6px;flex:1 1 auto;min-height:0;overflow:visible;max-height:none;align-content:stretch;justify-content:stretch;
+  }
+  #homeEvening .bonus-grid .pk-card{flex:none;width:100%;height:100%;min-width:0}
+  #homeEvening .bonus-grid.bonus-grid-many{overflow:visible;max-height:none;align-content:stretch}
+  #homeEvening .bonus-grid.bonus-grid-many .pk-face{gap:1px;padding:3px}
+  #homeEvening .bonus-grid.bonus-grid-many .pk-tag{font-size:7px;padding:1px 4px}
+  #homeEvening .bonus-grid.bonus-grid-many .pk-ico{width:22px;height:22px}
+  #homeEvening .bonus-grid.bonus-grid-many .pk-ico svg{width:20px;height:20px}
+  #homeEvening .bonus-grid.bonus-grid-many .pk-name{font-size:12px;-webkit-line-clamp:1;letter-spacing:-.4px}
+  #homeEvening .bonus-grid.bonus-grid-many .pk-ball{width:24px;height:24px}
+  #homeEvening .bonus-grid.bonus-grid-many .pk-done{font-size:11px}
+  #homeEvening .bonus-grid.bonus-grid-many .pk-gain{font-size:9.5px;padding:1px 5px}
+
+  .habit-manage-list .item .check{color:transparent}
+  .habit-manage-list .item.done .check{color:#fff}
+  .hm-streak{
+    flex:none;font-size:11.5px;font-weight:900;color:#8A8377;letter-spacing:-.3px;white-space:nowrap;
+    background:#F6F4EC;border:1.5px solid #EDE7D9;border-radius:999px;padding:3px 9px;
+  }
+  .hm-streak.hit{color:#B96A00;background:#FFF6DE;border-color:#F3D477}
+
+  /* 좁은 화면에서는 다시 세로로 차곡차곡 */
+  @media (max-width:860px){
+    #homeMorning .home-grid,#homeEvening .home-grid{grid-template-columns:1fr;grid-template-rows:auto;gap:9px}
+    #homeMorning .morning-left>.hero,#homeEvening .left-col>.hero{flex:0 0 auto}
+    .left-col>.routine-wrap{flex:0 0 auto}
+    .routine-grid,.routine-grid.eve5{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto}
+    .routine-grid .rcard .illu{aspect-ratio:1/1}
+    #homeMorning .home-right>.today-card,#homeEvening .home-right>.today-card,
+    #homeMorning .home-right>.habit-card,#homeEvening .home-right>.habit-card{flex:0 0 auto}
+    #homeEvening .bonus-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto}
+    #homeEvening .bonus-grid .pk-card{height:150px}
+    .home-right .wx-card{flex:0 0 auto;height:auto;min-height:56px;max-height:none;flex-wrap:wrap;padding:6px 34px 6px 14px}
+    .home-right .wx-card .wtip{white-space:normal;text-align:left;flex:1 1 100%}
+    .habit-card{padding-bottom:10px}
+    .habit-list{gap:7px}
+  }
 </style>
 </head>
 <body>
@@ -1905,17 +2069,8 @@
     <div class="mode-pane" id="homeMorning">
 
       <div class="home-grid">
-      <!-- 왼쪽 60%: 1행 날짜·시간 | 오늘 날씨, 2행 등교 히어로 -->
+      <!-- 왼쪽 60%: 위 등교 히어로, 아래 아침 루틴 6단계(3×2) -->
       <div class="left-col morning-left">
-      <div class="dt-wx">
-      <div class="card dt-card">
-        <div class="dtc-date"><span class="dtc-ico">📅</span><span class="js-date">불러오는 중…</span></div>
-        <div class="dtc-clock js-clock">--:--</div>
-      </div>
-      <div class="card wx-card js-weather">
-        <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
-      </div>
-      </div>
 
       <section class="hero">
         <div class="hero-top">
@@ -1956,7 +2111,7 @@
         <div class="hero-side">
           <div class="stat-pill">
             <span class="stat-k">아침 루틴</span>
-            <span class="stat-v js-routine-count">0/5</span>
+            <span class="stat-v js-routine-count">0/6</span>
           </div>
           <div class="stat-pill balls">
             <svg class="mini" viewBox="0 0 100 100" aria-hidden="true">
@@ -1973,9 +2128,29 @@
           <button class="hero-gacha" type="button" data-act="goto" data-tab="dex">도감 가기 →</button>
         </div>
       </section>
+
+      <!-- 아침 루틴 6단계: 히어로 바로 아래 3×2 -->
+      <section class="routine-wrap">
+        <div class="sec-head">
+          <h2>🎒 아침 루틴 6단계</h2>
+          <span class="sec-sub">6개를 모두 하면 <span class="gball ball-mini" data-ball="normal" aria-hidden="true"></span> +1</span>
+          <span class="count-pill js-routine-count">0/6</span>
+          <span class="streak-chip js-streak-chip">🔥 0일</span>
+          <div class="spacer"></div>
+          <button class="ghost-btn" type="button" data-act="open-routine-edit">⚙️ 루틴 편집</button>
+        </div>
+        <div class="routine-grid" id="routineGrid"></div>
+      </section>
       </div><!-- /morning-left -->
 
         <div class="home-right">
+        <div class="card dt-card dt-bar">
+          <span class="dtc-date"><span class="dtc-ico">📅</span><span class="js-date">불러오는 중…</span></span>
+          <span class="dtc-clock js-clock">--:--</span>
+        </div>
+        <div class="card wx-card js-weather">
+          <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
+        </div>
         <div class="card today-card acad-card">
           <div class="sec-head">
             <h2>📅 오늘의 스케줄</h2>
@@ -1994,41 +2169,28 @@
           </div>
           <div class="js-morning-math" id="morningMath"></div>
         </div>
+
+        <section class="card habit-card" aria-label="생활습관 미션">
+          <div class="sec-head">
+            <h2>🌱 생활습관 미션</h2>
+            <span class="count-pill js-habit-count">0/2</span>
+            <div class="spacer"></div>
+            <button class="link-btn" type="button" data-act="habit-edit">⚙️ 습관 편집</button>
+          </div>
+          <div class="habit-list js-habit-list"></div>
+          <div class="habit-note js-habit-note">🔥 3일·5일 연속 달성하면 <b>🌟 특급칭찬</b>!</div>
+        </section>
         </div>
 
       </div>
-
-      <!-- 아침 루틴 (맨 아래) -->
-      <section class="routine-wrap">
-        <div class="sec-head">
-          <h2>🎒 아침 루틴 5단계</h2>
-          <span class="sec-sub">5개를 모두 하면 <span class="gball ball-mini" data-ball="normal" aria-hidden="true"></span> +1</span>
-          <span class="count-pill js-routine-count">0/5</span>
-          <span class="streak-chip js-streak-chip">🔥 0일</span>
-          <div class="spacer"></div>
-          <button class="ghost-btn" type="button" data-act="open-routine-edit">⚙️ 루틴 편집</button>
-        </div>
-        <div class="routine-grid" id="routineGrid"></div>
-      </section>
     </div>
 
     <!-- ---------- 저녁 대시보드 ---------- -->
     <div class="mode-pane" id="homeEvening">
 
       <div class="home-grid">
-      <!-- 왼쪽 60%: 1행 날짜·시간 | 오늘의 확언, 2행 저녁 히어로 -->
+      <!-- 왼쪽 60%: 위 저녁 히어로, 아래 저녁 루틴 6단계(3×2) -->
       <div class="left-col">
-      <div class="dt-wx">
-      <div class="card dt-card eve">
-        <div class="dtc-date"><span class="dtc-ico">📅</span><span class="js-date">불러오는 중…</span></div>
-        <div class="dtc-clock js-clock">--:--</div>
-      </div>
-      <div class="affirm-card eve" data-act="goto" data-tab="praise" role="button" tabindex="0" aria-label="특급칭찬 보기">
-        <span class="af-ico" aria-hidden="true">🌟</span>
-        <span class="af-view js-affirm"><span class="af-track js-affirm-track"><span class="af-text js-affirm-text">불러오는 중…</span></span></span>
-        <span class="af-when js-affirm-when" hidden></span>
-      </div>
-      </div>
       <section class="hero eve-hero">
         <div class="hero-top">
           <div class="hero-moon">
@@ -2069,7 +2231,7 @@
         <div class="hero-side">
           <div class="stat-pill">
             <span class="stat-k">저녁 루틴</span>
-            <span class="stat-v js-evening-count">0/5</span>
+            <span class="stat-v js-evening-count">0/6</span>
           </div>
           <div class="stat-pill balls">
             <svg class="mini" viewBox="0 0 100 100" aria-hidden="true">
@@ -2086,9 +2248,31 @@
           <button class="hero-gacha eve" type="button" data-act="goto" data-tab="dex">도감 가기 →</button>
         </div>
       </section>
+
+      <!-- 저녁 루틴 6단계: 히어로 바로 아래 3×2 -->
+      <section class="routine-wrap eve">
+        <div class="sec-head">
+          <h2>🌙 저녁 루틴 6단계</h2>
+          <span class="sec-sub">6개를 모두 하면 <span class="gball ball-mini" data-ball="normal" aria-hidden="true"></span> +1</span>
+          <span class="count-pill js-evening-count">0/6</span>
+          <span class="streak-chip js-streak-chip">🔥 0일</span>
+          <div class="spacer"></div>
+          <button class="ghost-btn" type="button" data-act="open-routine-edit">⚙️ 루틴 편집</button>
+        </div>
+        <div class="routine-grid eve5" id="eveningGrid"></div>
+      </section>
       </div>
 
         <div class="home-right">
+        <div class="card dt-card eve dt-bar">
+          <span class="dtc-date"><span class="dtc-ico">📅</span><span class="js-date">불러오는 중…</span></span>
+          <span class="dtc-clock js-clock">--:--</span>
+        </div>
+        <div class="affirm-card eve affirm-bar" data-act="goto" data-tab="praise" role="button" tabindex="0" aria-label="특급칭찬 보기">
+          <span class="af-ico" aria-hidden="true">🌟</span>
+          <span class="af-view js-affirm"><span class="af-track js-affirm-track"><span class="af-text js-affirm-text">불러오는 중…</span></span></span>
+          <span class="af-when js-affirm-when" hidden></span>
+        </div>
         <div class="card today-card study-card">
           <div class="sec-head">
             <h2>✅ 오늘 꼭 할 일</h2>
@@ -2099,6 +2283,17 @@
           </div>
           <div class="js-home-hs hs-grid"></div>
         </div>
+
+        <section class="card habit-card" aria-label="생활습관 미션">
+          <div class="sec-head">
+            <h2>🌱 생활습관 미션</h2>
+            <span class="count-pill js-habit-count">0/2</span>
+            <div class="spacer"></div>
+            <button class="link-btn" type="button" data-act="habit-edit">⚙️ 습관 편집</button>
+          </div>
+          <div class="habit-list js-habit-list"></div>
+          <div class="habit-note js-habit-note">🔥 3일·5일 연속 달성하면 <b>🌟 특급칭찬</b>!</div>
+        </section>
 
         <div class="card today-card bonus-card">
           <div class="sec-head">
@@ -2111,19 +2306,6 @@
         </div>
 
       </div>
-
-      <!-- 저녁 루틴 (맨 아래) -->
-      <section class="routine-wrap eve">
-        <div class="sec-head">
-          <h2>🌙 저녁 루틴 5단계</h2>
-          <span class="sec-sub">5개를 모두 하면 <span class="gball ball-mini" data-ball="normal" aria-hidden="true"></span> +1</span>
-          <span class="count-pill js-evening-count">0/5</span>
-          <span class="streak-chip js-streak-chip">🔥 0일</span>
-          <div class="spacer"></div>
-          <button class="ghost-btn" type="button" data-act="open-routine-edit">⚙️ 루틴 편집</button>
-        </div>
-        <div class="routine-grid eve5" id="eveningGrid"></div>
-      </section>
     </div>
   </section>
 
@@ -2251,6 +2433,17 @@
         <button class="btn btn-yellow" id="bonusAdd" type="button">+ 추가</button>
       </div>
     </div>
+
+    <div class="card habit-manage-card" style="margin-top:16px">
+      <div class="sec-head">
+        <h2>🌱 생활습관 미션</h2>
+        <div class="count-pill" id="habitManageCount">0개</div>
+        <div class="spacer"></div>
+        <button class="btn btn-yellow" type="button" data-act="habit-edit">⚙️ 습관 편집</button>
+      </div>
+      <ul class="list habit-manage-list" id="habitManageList"></ul>
+      <p class="hint" style="margin:10px 0 0">이번 주에 집중할 습관 1~3개만 골라 주세요. 아침·저녁 화면의 🌱 생활습관 미션에 그대로 보여요. 연속 일수가 쌓이고 3일·5일 연속에는 🌟 특급칭찬!</p>
+    </div>
   </section>
 
   <!-- ================= POKEDEX ================= -->
@@ -2377,6 +2570,25 @@
     </div>
     <div class="reset-row">
       <button class="reset-btn" type="button" data-act="reset-test">🔄 테스트 기록 초기화 (볼·도감·오늘 체크·칭찬 0으로)</button>
+    </div>
+  </div>
+</div>
+
+<!-- habit edit modal -->
+<div class="modal" id="habitModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>🌱 생활습관 미션 편집</h3>
+      <button class="modal-close" type="button" data-act="habit-edit-close">✕</button>
+    </div>
+    <p class="hint" style="margin:0 0 12px">매일 체크하면 🔥 연속 일수가 쌓여요. 3일·5일 연속을 채우면 🌟 특급칭찬! (몬스터볼은 주지 않아요)</p>
+    <div id="habitEditList"></div>
+    <div class="add-row" style="margin-top:12px">
+      <input id="habitInput" type="text" placeholder="습관 추가 (예: 🧹 자기 전 책상 정리하기)" enterkeyhint="done" autocomplete="off">
+      <button class="btn btn-yellow" id="habitAdd" type="button">+ 추가</button>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-blue" type="button" data-act="habit-edit-close">완료</button>
     </div>
   </div>
 </div>
@@ -2520,7 +2732,10 @@
     bonusDone: 'yj_bonus_done_v1',
     bonusItems: 'yj_bonus_items_v1',
     missionDone: 'yj_morning_mission_done_v1',
-    dexCosts: 'yj_dex_costs_v1'
+    dexCosts: 'yj_dex_costs_v1',
+    habits: 'yj_habits_v1',
+    habitDone: 'yj_habit_done_v1',
+    routinesV6: 'yj_routines_v6_migrated'
   };
 
   var W_URL = 'https://api.open-meteo.com/v1/forecast?latitude=36.8428&longitude=127.1394'
@@ -2794,18 +3009,31 @@
   var state = {
     items: [], eveningItems: [], routineDone: {}, eveningDone: {}, academies: [],
     homeschoolTasks: {}, homeschoolDone: {}, bonusDone: {}, bonusItems: [],
+    habits: [], habitDone: {},
     balls: 0, dex: {}, dexCosts: {}, awards: {},
     perfectDays: [], stones: 0, stoneAwards: [], academies: [], once: [],
     missionDone: {},
     momPin: '', praises: []
   };
 
-  var DEFAULT6 = ['세수·로션', '유산균·물 마시기', '아침식사·영어영상', '용변·양치', '옷입고 양말신기', '원리셈·따풀'];
+  var DEFAULT6 = ['잠자리 정리', '세수·로션', '유산균·물 마시기', '아침식사·영어영상', '용변·양치', '옷입고 양말신기', '원리셈·따풀'];
+  /* v10까지의 기본값(자다리 정리 전) — 저장된 목록이 이거면 v11 기본값으로 올린다 */
+  var DEFAULT6_OLD = ['세수·로션', '유산균·물 마시기', '아침식사·영어영상', '용변·양치', '옷입고 양말신기', '원리셈·따풀'];
   var OLD_ENGLISH_LABEL = '아침먹으면서 영어영상';
   var DEFAULT5 = ['세수·로션', '유산균·물 마시기', '아침먹으면서 영어영상', '용변·양치', '옷입고 양말신기'];
-  var DEFAULT_EVENING = ['샤워', '저녁식사', '숙제·공부', '양치·가방정리', '독서'];
+  var DEFAULT_EVENING = ['신발정리·옷정리', '샤워', '저녁식사', '숙제·공부', '양치·가방정리', '독서'];
+  /* v10까지의 기본값(신발정리 전) */
+  var DEFAULT_EVENING_OLD5 = ['샤워', '저녁식사', '숙제·공부', '양치·가방정리', '독서'];
   var DEFAULT_EVENING_OLD7 = ['샤워', '저녁식사', '숙제', '공부', '독서', '양치', '가방정리'];
   var DEFAULT4 = ['세수·로션', '영어영상', '양치', '옷입기'];
+
+  /* 🌱 생활습관 미션: 이번 주에 집중할 습관 1~3개. 매일 체크로 🔥 연속 일수가 쌓이고
+     3일·5일 연속에는 🌟 특급칭찬 — 당연한 일이라 몬스터볼은 주지 않는다. */
+  var DEFAULT_HABITS = [
+    '⏰ 알람 울리면 바로 일어나기',
+    '🍽️ 다 먹은 그릇 싱크대에 두기'
+  ];
+  var HABIT_MAX = 3;
 
   /* ⚡ 보너스 공부: 하고 싶을 때 도전하는 선택 과목. 공부 탭에서 직접 추가·수정·순서 바꾸기.
      완료마다 몬스터볼 +1, 100% 완벽한 날·연속 기록 조건에는 들어가지 않아요. */
@@ -3076,6 +3304,33 @@
     if (achanged) saveAwards();
   }
 
+  /* v11 루틴 6단계 마이그레이션 (한 번만)
+     - 아침: '잠자리 정리'가 없으면 맨 앞에 넣는다 (엄마가 고친 목록은 그대로 살린다)
+     - 저녁: '신발정리·옷정리'가 없으면 맨 앞에 넣는다
+     - 이미 있으면 순서만 맨 앞으로 올린다 */
+  function ensureRoutineFirst(list, label) {
+    var want = normLabel(label), i;
+    for (i = 0; i < list.length; i++) {
+      if (normLabel(list[i] && list[i].label).indexOf(want) !== -1) {
+        if (i === 0) return false;
+        var it = list.splice(i, 1)[0];
+        list.unshift(it);
+        return true;
+      }
+    }
+    list.unshift({ id: uid(), label: label });
+    return true;
+  }
+
+  function migrateRoutinesV6() {
+    if (store.get(K.routinesV6, false)) return;
+    var changed = false;
+    if (ensureRoutineFirst(state.items, '잠자리 정리')) { store.set(K.items, state.items); changed = true; }
+    if (ensureRoutineFirst(state.eveningItems, '신발정리·옷정리')) { store.set(K.eveningItems, state.eveningItems); changed = true; }
+    store.set(K.routinesV6, true);
+    if (changed) splitMathItems();
+  }
+
   function loadState() {
     state.routineDone = store.get(K.routineDone, {}) || {};
     state.eveningDone = store.get(K.eveningDone, {}) || {};
@@ -3113,18 +3368,28 @@
     state.items = items;
     splitMathItems();
 
-    /* 저녁 루틴: 5단계 기본값 (예전 7단계 기본값이면 자동으로 올린다) */
+    /* 저녁 루틴: 6단계 기본값 (예전 5단계·7단계 기본값이면 자동으로 올린다) */
     var eve = store.get(K.eveningItems, null);
     if (!(eve && eve.length && eve[0] && eve[0].id)) {
       eve = defaultEveningItems();
       store.set(K.eveningItems, eve);
-    } else if (isDefaultList(eve, DEFAULT_EVENING_OLD7)) {
+    } else if (isDefaultList(eve, DEFAULT_EVENING_OLD7) || isDefaultList(eve, DEFAULT_EVENING_OLD5)) {
       var freshEve = defaultEveningItems();
       remapEveningProgress(eve, freshEve);
       eve = freshEve;
       store.set(K.eveningItems, eve);
     }
     state.eveningItems = eve;
+    state.habitDone = store.get(K.habitDone, {}) || {};
+    var hb = store.get(K.habits, null);
+    if (!(hb && typeof hb.slice === 'function' && hb.length)) {
+      hb = [];
+      for (var hbi = 0; hbi < DEFAULT_HABITS.length; hbi++) hb.push({ id: 'habit-' + uid(), label: DEFAULT_HABITS[hbi] });
+      store.set(K.habits, hb);
+    }
+    state.habits = sanitizeHabitItems(hb);
+
+    migrateRoutinesV6();
     state.academies = store.get(K.academies, null) || [];
     /* 하루 일정(날짜가 정해진 별도 스케줄) — 60일 지난 기록은 자동으로 정리 */
     var once = store.get(K.once, null);
@@ -3219,7 +3484,7 @@
   function saveStones() { store.set(K.stones, state.stones); }
   function saveStoneAwards() { store.set(K.stoneAwards, state.stoneAwards); }
 
-  /* 100% 완벽한 날: 아침 5/5 + 저녁 5/5 (공부는 따로 '올클리어 보너스'로) */
+  /* 100% 완벽한 날: 아침 6/6 + 저녁 6/6 (공부는 따로 '올클리어 보너스'로) */
   function todayPerfect() {
     if (!state.items.length || !state.eveningItems.length) return false;
     var doneIds = todayRoutineIds(), i;
@@ -3380,7 +3645,7 @@
       else tabs[j].classList.remove('active');
     }
     if (name === 'academy') { renderWeek(); renderOnce(); }
-    if (name === 'study') renderStudy();
+    if (name === 'study') { renderStudy(); renderHabitManage(); }
     if (name === 'dex') renderDex();
     if (name === 'praise') renderPraise();
     window.scrollTo(0, 0);
@@ -3997,6 +4262,8 @@
         renderBonusStudy();
         renderStudy();
         renderAffirm();
+        renderHabits();
+        renderHabitManage();
         renderDex();
         updateStoneUI();
       }
@@ -4492,10 +4759,12 @@
 
   /* ======================= 루틴 카드 ======================= */
   var ILLUS = [
+    { keys: ['잠자리', '이불', '침대'], img: 'assets/routine-bed.png', emoji: '🛏️' },
     { keys: ['세수', '로션', '씻', '손'], img: 'assets/routine-wash.png', emoji: '🧼' },
     { keys: ['유산균', '물 마시', '물마시', '영양제'], img: 'assets/routine-probiotics.png', emoji: '🥛' },
     { keys: ['영어', '영상', '시청'], img: 'assets/routine-english.png', emoji: '📺' },
     { keys: ['양치', '이빨', '칫솔', '용변'], img: 'assets/routine-brush.png', emoji: '🪥' },
+    { keys: ['신발'], img: 'assets/routine-shoes-clothes.png', emoji: '👟' },
     { keys: ['옷', '입기', '교복', '양말'], img: 'assets/routine-dress.png', emoji: '👕' },
     { keys: ['원리셈', '따풀', '수학', '연산', '문제집'], img: 'assets/routine-math.png', emoji: '✏️' },
     /* 저녁 */
@@ -4907,8 +5176,8 @@
     });
     var hint = $('editHint');
     if (hint) hint.textContent = editListName === 'evening'
-      ? '저녁 루틴이에요. 5개를 추천해요! (5개를 모두 체크하면 몬스터볼 +1)'
-      : '아침 루틴이에요. 5개를 추천해요! 1~5번은 5개를 모두 체크하면 몬스터볼 +1, 원리셈·따풀은 오른쪽 ‘🔥 아침 미션’ 카드에서 +1';
+      ? '저녁 루틴이에요. 6개를 추천해요! (6개를 모두 체크하면 몬스터볼 +1)'
+      : '아침 루틴이에요. 6개를 추천해요! 6개를 모두 체크하면 몬스터볼 +1, 원리셈·따풀은 오른쪽 ‘🔥 아침 미션’ 카드에서 +1';
     var input = $('routineInput');
     if (input) input.placeholder = editListName === 'evening'
       ? '저녁 루틴 추가 (예: 내일 준비물 챙기기)' : '루틴 추가 (예: 물 한 잔 마시기)';
@@ -5656,6 +5925,264 @@
     }
   }
 
+  /* ======================= 🌱 생활습관 미션 ======================= */
+  /* 이번 주에 집중할 습관 1~3개. 매일 체크하면 🔥 연속 일수만 쌓이고
+     몬스터볼은 주지 않는다 (당연한 일엔 보상 대신 연속 기록·특급칭찬). */
+  var HABIT_MILESTONES = [3, 5];
+
+  function habitSplit(label) {
+    var s = String(label == null ? '' : label).trim();
+    var m = s.match(/^([^\w\uAC00-\uD7A3]+)\s*/);
+    if (m) return { ico: m[1], text: s.slice(m[0].length) || s };
+    return { ico: '🌱', text: s };
+  }
+
+  function sanitizeHabitItems(arr) {
+    var out = [], seen = {}, i;
+    for (i = 0; i < arr.length && out.length < HABIT_MAX; i++) {
+      var it = arr[i];
+      if (!it || typeof it !== 'object') continue;
+      var label = String(it.label == null ? '' : it.label).trim();
+      if (!label) continue;
+      var id = String(it.id == null ? '' : it.id).trim();
+      if (!id || seen[id]) id = 'habit-' + uid();
+      seen[id] = true;
+      out.push({ id: id, label: label });
+    }
+    return out;
+  }
+
+  function habitList() { return (state.habits && typeof state.habits.slice === 'function') ? state.habits : []; }
+  function saveHabits() { store.set(K.habits, state.habits); }
+  function saveHabitDone() { store.set(K.habitDone, state.habitDone); }
+
+  function habitById(id) {
+    var arr = habitList();
+    for (var i = 0; i < arr.length; i++) if (arr[i].id === id) return arr[i];
+    return null;
+  }
+
+  /* 오늘 체크한 습관 중 지금 목록에 있는 것만 */
+  function habitDoneInList() {
+    var arr = state.habitDone[todayKey()] || [], items = habitList(), out = [];
+    for (var i = 0; i < items.length; i++) if (arr.indexOf(items[i].id) !== -1) out.push(items[i].id);
+    return out;
+  }
+
+  /* 오늘(또는 오늘 체크 전이면 어제)부터 거슬러 올라간 연속 일수 */
+  function habitStreak(id) {
+    var d = new Date();
+    var today = state.habitDone[dateKey(d)] || [];
+    if (today.indexOf(id) === -1) d.setDate(d.getDate() - 1);
+    var n = 0, guard = 0;
+    while (guard++ < 400) {
+      var arr = state.habitDone[dateKey(d)] || [];
+      if (arr.indexOf(id) === -1) break;
+      n++;
+      d.setDate(d.getDate() - 1);
+    }
+    return n;
+  }
+
+  /* 다음 특급칭찬까지 남은 날 (없으면 0) */
+  function habitDaysToNext() {
+    var items = habitList(), best = 0;
+    for (var i = 0; i < items.length; i++) {
+      var st = habitStreak(items[i].id);
+      for (var j = 0; j < HABIT_MILESTONES.length; j++) {
+        var need = HABIT_MILESTONES[j] - st;
+        if (need > 0 && (best === 0 || need < best)) best = need;
+      }
+    }
+    return best;
+  }
+
+  function habitMilestoneLabel(st) {
+    if (st <= 0) return '오늘부터 시작!';
+    var hit = false;
+    for (var i = 0; i < HABIT_MILESTONES.length; i++) if (st >= HABIT_MILESTONES[i]) hit = true;
+    return '🔥 ' + st + '일 연속' + (hit ? ' 🌟' : '');
+  }
+
+  function habitRowHtml(h, done) {
+    var sp = habitSplit(h.label);
+    var st = habitStreak(h.id);
+    return '<button class="habit-row' + (done ? ' done' : '') + '" type="button" data-act="habit-toggle" data-id="' + esc(h.id) + '"'
+      + ' aria-pressed="' + (done ? 'true' : 'false') + '" aria-label="' + esc(sp.text) + (done ? ' 체크 취소' : ' 오늘 체크') + '">'
+      + '<span class="hb-ico" aria-hidden="true">' + esc(sp.ico) + '</span>'
+      + '<span class="hb-body">'
+      + '<span class="hb-name">' + esc(sp.text) + '</span>'
+      + '<span class="hb-streak' + (st > 0 ? '' : ' zero') + '">' + habitMilestoneLabel(st) + '</span>'
+      + '</span>'
+      + '<span class="hb-check" aria-hidden="true">✓</span>'
+      + '</button>';
+  }
+
+  function renderHabits() {
+    var items = habitList(), done = habitDoneInList(), i;
+    var html = '';
+    if (!items.length) {
+      html = '<div class="habit-empty">이번 주에 집중할 습관을 정해 보세요.<br>“⚙️ 습관 편집”에서 1~3개만 골라요!</div>';
+    } else {
+      for (i = 0; i < items.length; i++) html += habitRowHtml(items[i], done.indexOf(items[i].id) !== -1);
+    }
+    each('.js-habit-list', function (box) { box.innerHTML = html; });
+    setAll('.js-habit-count', done.length + '/' + items.length);
+    var need = habitDaysToNext();
+    var note = need > 0
+      ? '다음 🌟 특급칭찬까지 ' + need + '일!'
+      : '🔥 3일·5일 연속 달성하면 <b>🌟 특급칭찬</b>!';
+    each('.js-habit-note', function (el) { el.innerHTML = note; });
+  }
+
+  function toggleHabit(id) {
+    var h = habitById(id);
+    if (!h) return;
+    var key = todayKey();
+    var arr = state.habitDone[key] || [];
+    var idx = arr.indexOf(id);
+    if (idx !== -1) {
+      arr.splice(idx, 1);
+      state.habitDone[key] = arr;
+      saveHabitDone();
+      renderHabits();
+      renderHabitManage();
+      try { SFX.step(); } catch (e) {}
+      return;
+    }
+    arr.push(id);
+    state.habitDone[key] = arr;
+    saveHabitDone();
+    var st = habitStreak(id);
+    renderHabits();
+    renderHabitManage();
+    try { SFX.ball(); } catch (e) {}
+    var sp = habitSplit(h.label);
+    if (st === 3 || st === 5) {
+      confettiBurst();
+      try { SFX.fanfare(); } catch (e) {}
+      toast('🔥 ' + st + '일 연속! “' + sp.text + '” — 엄마의 🌟 특급칭찬 받을 시간이에요!');
+    } else {
+      toast('🌱 “' + sp.text + '” 체크! ' + (st > 0 ? '🔥 ' + st + '일 연속' : '오늘부터 시작!'));
+    }
+  }
+
+  /* ---- ✅ 할 일 탭: 생활습관 보기·체크 ---- */
+  function renderHabitManage() {
+    var list = $('habitManageList');
+    if (!list) return;
+    var items = habitList(), done = habitDoneInList(), html = '', i;
+    if (!items.length) {
+      html = '<li class="empty">이번 주 습관이 아직 없어요.<br>“⚙️ 습관 편집”에서 추가해 보세요!</li>';
+    } else {
+      for (i = 0; i < items.length; i++) {
+        var sp = habitSplit(items[i].label);
+        var st = habitStreak(items[i].id);
+        var isDone = done.indexOf(items[i].id) !== -1;
+        html += '<li class="item habit-manage-item' + (isDone ? ' done' : '') + '">'
+          + '<button class="check" type="button" data-act="habit-toggle" data-id="' + esc(items[i].id) + '" aria-label="' + esc(sp.text) + (isDone ? ' 체크 취소' : ' 오늘 체크') + '">✓</button>'
+          + '<span class="item-label" data-act="habit-edit" role="button" tabindex="0" aria-label="' + esc(sp.text) + ' 편집">' + esc(sp.ico) + ' ' + esc(sp.text) + '</span>'
+          + '<span class="hm-streak' + (st >= 3 ? ' hit' : '') + '">' + habitMilestoneLabel(st) + '</span>'
+          + '</li>';
+      }
+    }
+    list.innerHTML = html;
+    var cnt = $('habitManageCount');
+    if (cnt) cnt.textContent = items.length + '개';
+  }
+
+  /* ---- ⚙️ 습관 편집 모달 ---- */
+  function renderHabitEdit() {
+    var box = $('habitEditList');
+    if (!box) return;
+    var items = habitList(), html = '';
+    for (var i = 0; i < items.length; i++) {
+      var it = items[i];
+      html += '<div class="edit-row">'
+        + '<input type="text" value="' + esc(it.label) + '" data-id="' + esc(it.id) + '" data-role="habit-name" aria-label="습관 이름">'
+        + '<button class="mv" type="button" data-act="habit-move" data-id="' + esc(it.id) + '" data-dir="-1" aria-label="위로"' + (i === 0 ? ' disabled' : '') + '>↑</button>'
+        + '<button class="mv" type="button" data-act="habit-move" data-id="' + esc(it.id) + '" data-dir="1" aria-label="아래로"' + (i === items.length - 1 ? ' disabled' : '') + '>↓</button>'
+        + '<button class="icon-btn" style="font-size:17px" type="button" data-act="habit-del" data-id="' + esc(it.id) + '" aria-label="삭제">🗑️</button>'
+        + '</div>';
+    }
+    if (!items.length) html = '<div class="empty-soft">이번 주 습관이 없어요. 아래에서 추가해 주세요!</div>';
+    if (items.length >= HABIT_MAX) html += '<p class="hint" style="margin:8px 0 0">습관은 ' + HABIT_MAX + '개까지예요. 하나를 지우고 새로 넣어 주세요.</p>';
+    box.innerHTML = html;
+
+    var inputs = box.querySelectorAll('[data-role="habit-name"]');
+    for (var j = 0; j < inputs.length; j++) {
+      inputs[j].addEventListener('change', function () {
+        var id = this.getAttribute('data-id');
+        var v = this.value.trim();
+        if (!v) return;
+        renameHabit(id, v);
+      });
+    }
+  }
+
+  function openHabitEdit() {
+    renderHabitEdit();
+    $('habitModal').classList.add('show');
+    setTimeout(function () { var i = $('habitInput'); if (i) i.focus(); }, 120);
+  }
+  function closeHabitEdit() {
+    $('habitModal').classList.remove('show');
+    renderHabits();
+    renderHabitManage();
+  }
+
+  function addHabitFrom(input) {
+    if (!input) return;
+    var v = input.value.trim();
+    if (!v) { input.focus(); return; }
+    if (habitList().length >= HABIT_MAX) { toast('습관은 ' + HABIT_MAX + '개까지 넣을 수 있어요 🌱'); return; }
+    state.habits = habitList().slice();
+    state.habits.push({ id: 'habit-' + uid(), label: v });
+    saveHabits();
+    input.value = '';
+    renderHabitEdit();
+    renderHabits();
+    renderHabitManage();
+    input.focus();
+  }
+
+  function renameHabit(id, label) {
+    var arr = habitList().slice();
+    for (var i = 0; i < arr.length; i++) if (arr[i].id === id) arr[i] = { id: id, label: label };
+    state.habits = arr;
+    saveHabits();
+    renderHabits();
+    renderHabitManage();
+    renderHabitEdit();
+  }
+
+  function deleteHabit(id) {
+    var h = habitById(id);
+    if (!h) return;
+    if (!window.confirm('“' + habitSplit(h.label).text + '” 습관을 뺄까요?')) return;
+    var arr = [], list = habitList();
+    for (var i = 0; i < list.length; i++) if (list[i].id !== id) arr.push(list[i]);
+    state.habits = arr;
+    saveHabits();
+    renderHabitEdit();
+    renderHabits();
+    renderHabitManage();
+  }
+
+  function moveHabit(id, dir) {
+    var arr = habitList().slice(), idx = -1, i;
+    for (i = 0; i < arr.length; i++) if (arr[i].id === id) idx = i;
+    if (idx < 0) return;
+    var to = idx + dir;
+    if (to < 0 || to >= arr.length) return;
+    var tmp = arr[idx]; arr[idx] = arr[to]; arr[to] = tmp;
+    state.habits = arr;
+    saveHabits();
+    renderHabitEdit();
+    renderHabits();
+    renderHabitManage();
+  }
+
   /* ======================= ⚡ 보너스 공부 ======================= */
   function bonusList() {
     return (state.bonusItems && typeof state.bonusItems.slice === 'function') ? state.bonusItems : [];
@@ -5711,6 +6238,10 @@
     if (grid) {
       var n = items.length;
       grid.style.justifyContent = n >= 4 ? 'space-between' : 'space-evenly';
+      /* 4열로 접어서 한눈에 최대 8개(2줄) — 4개까지는 한 줄에 크게 */
+      var rows = Math.max(1, Math.ceil(n / 4));
+      grid.style.gridTemplateRows = 'repeat(' + rows + ',minmax(0,1fr))';
+      grid.style.overflowY = rows > 3 ? 'auto' : '';
       if (n > 4) grid.classList.add('bonus-grid-many');
       else grid.classList.remove('bonus-grid-many');
 
@@ -6795,6 +7326,21 @@
       case 'b-del':
         deleteBonus(id);
         break;
+      case 'habit-toggle':
+        toggleHabit(id);
+        break;
+      case 'habit-edit':
+        openHabitEdit();
+        break;
+      case 'habit-edit-close':
+        closeHabitEdit();
+        break;
+      case 'habit-move':
+        moveHabit(id, parseInt(el.getAttribute('data-dir'), 10));
+        break;
+      case 'habit-del':
+        deleteHabit(id);
+        break;
       case 'hs-add':
         selectedDow = new Date().getDay();
         showTab('study');
@@ -6927,6 +7473,7 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
       $('routineModal').classList.remove('show');
+      if ($('habitModal') && $('habitModal').classList.contains('show')) closeHabitEdit();
       $('revealModal').classList.remove('show');
       if ($('praiseModal').classList.contains('show')) closePraiseModal();
       if ($('pinModal').classList.contains('show')) closePinModal();
@@ -6950,6 +7497,10 @@
   $('bonusInput').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') { e.preventDefault(); addBonus(); }
   });
+  $('habitAdd').addEventListener('click', function () { addHabitFrom($('habitInput')); });
+  $('habitInput').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') { e.preventDefault(); addHabitFrom($('habitInput')); }
+  });
   $('acSave').addEventListener('click', saveAcademy);
   $('onceSave').addEventListener('click', addOnce);
   $('onceName').addEventListener('keydown', function (e) {
@@ -6971,6 +7522,9 @@
   $('cutscene').addEventListener('click', function () { csSkip(); });
   $('routineModal').addEventListener('click', function (e) {
     if (e.target === this) closeRoutineEdit();
+  });
+  $('habitModal').addEventListener('click', function (e) {
+    if (e.target === this) closeHabitEdit();
   });
   $('praiseModal').addEventListener('click', function (e) {
     if (e.target === this) closePraiseModal();
@@ -7035,6 +7589,8 @@
     renderHomeHomeschool();
     renderBonusStudy();
     renderBonusManage();
+    renderHabits();
+    renderHabitManage();
     renderWeek();
     renderOnce();
     renderStudy();
