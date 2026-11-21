@@ -2022,6 +2022,17 @@
     .habit-card{padding-bottom:10px}
     .habit-list{gap:7px}
   }
+  /* 낮은 화면(주소창 포함 1480×780 등)에서는 히어로를 조금 납작하게 해서 루틴 칸을 넓게 */
+  @media (max-height:830px) and (min-width:861px){
+    .hero{padding:7px 12px;gap:4px}
+    .hero-pika{width:74px;height:74px}
+    #homeMorning .hero.weekend .hero-weekend-note{margin:4px 2px;padding:9px 12px;font-size:14px}
+    .hero-side .stat-pill{padding:4px 9px}
+    .hero-gacha{padding:6px 10px;font-size:12px}
+    .left-col{gap:6px}
+    .routine-wrap .sec-head{margin-bottom:4px}
+    .hero-count{font-size:clamp(20px,2.2vw,30px)}
+  }
 </style>
 </head>
 <body>
@@ -5135,6 +5146,7 @@
     state.eveningDone[key] = [];
     state.homeschoolDone[key] = [];
     state.bonusDone[key] = [];
+    state.habitDone[key] = [];
     state.awards[key] = { r: [], b: false, s: [], m1: false, mi: [], e1: false, bs: [] };
     saveBalls();
     saveDex();
@@ -5147,6 +5159,7 @@
     store.set(K.eveningDone, state.eveningDone);
     store.set(K.hsDone, state.homeschoolDone);
     store.set(K.bonusDone, state.bonusDone);
+    store.set(K.habitDone, state.habitDone);
     saveAwards();
     updateBallUI();
     updateStoneUI();
@@ -5155,6 +5168,8 @@
     renderHomeHomeschool();
     renderBonusStudy();
     renderStudy();
+    renderHabits();
+    renderHabitManage();
     renderDex();
     renderPraise();
     closeRoutineEdit();

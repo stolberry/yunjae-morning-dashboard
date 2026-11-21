@@ -8,16 +8,9 @@
 <body>
 <pre id="out">…</pre>
 <script>
-  function key(off) {
-    var d = new Date();
-    d.setDate(d.getDate() - off);
-    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-  }
-  var hb = JSON.parse(localStorage.getItem('yj_habits_v1') || '[]');
-  var done = JSON.parse(localStorage.getItem('yj_habit_done_v1') || '{}');
-  if (hb[0]) { done[key(1)] = [hb[0].id]; done[key(2)] = [hb[0].id]; delete done[key(0)]; }
-  localStorage.setItem('yj_habit_done_v1', JSON.stringify(done));
-  document.getElementById('out').textContent = JSON.stringify({ habits: hb, done: done }, null, 1);
+  /* 확인용으로 넣었던 생활습관 연속 기록을 지운다 */
+  localStorage.removeItem('yj_habit_done_v1');
+  document.getElementById('out').textContent = 'habit history cleared';
 </script>
 </body>
 </html>
