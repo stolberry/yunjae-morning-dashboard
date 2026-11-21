@@ -405,50 +405,37 @@
   /* ---------------- top strip: 확언 | 날씨 ---------------- */
   .top-strip{display:grid;grid-template-columns:1.6fr 1fr;gap:10px;flex:none;margin-bottom:9px}
   .affirm-card{
-    padding:6px 12px;border-radius:18px;display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;
+    padding:6px 12px;border-radius:18px;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:10px;
+    min-width:0;cursor:pointer;
     background:linear-gradient(120deg,#FFF6D6 0%,#FFEDE9 55%,#EAF3FF 100%);
     border:2px solid #FFE0A8;
   }
+  .affirm-card:active{filter:brightness(.98)}
   .af-head{display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:900;color:#8A6B12;letter-spacing:-.3px}
-  .af-head .af-ico{font-size:14px}
+  .af-ico{font-size:19px;flex:none;line-height:1}
   .af-text{
-    margin:0;font-size:14.5px;font-weight:900;letter-spacing:-.4px;line-height:1.3;color:#3F3A2E;
-    word-break:keep-all;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+    margin:0;display:block;flex:0 0 auto;white-space:nowrap;font-size:18px;font-weight:800;letter-spacing:-.5px;
+    line-height:1.25;color:#3F3A2E;word-break:keep-all;
   }
   .af-sub{display:none}
-  /* 저녁 모드: 날짜·시간 옆 확언 카드 (달빛 보라 테마) */
-  .affirm-card.eve{
-    flex:1 1 auto;
-    background:
-      radial-gradient(240px 130px at 106% -16%, #E9E3FF 0%, rgba(233,227,255,0) 72%),
-      linear-gradient(120deg,#FFFFFF 0%,#F3EFFF 58%,#FFF6E8 100%);
-    border-color:#D3CAF6;box-shadow:var(--shadow);
-  }
-  .affirm-card.eve{flex-direction:row;align-items:center;gap:10px;cursor:pointer}
-  .affirm-card.eve:active{filter:brightness(.98)}
-  .affirm-card.eve .af-ico{font-size:19px;flex:none;line-height:1}
   /* 최신 특급칭찬: 한 줄 — 자리가 남으면 가운데 정렬, 넘치면 끊김 없이 천천히 흘러가기 */
-  .affirm-card.eve .af-view{flex:1 1 auto;min-width:0;overflow:hidden;display:flex;align-items:center;justify-content:center}
-  .affirm-card.eve .af-track{display:flex;align-items:center;gap:0;flex:0 0 auto;white-space:nowrap}
-  .affirm-card.eve .af-text{
-    display:block;flex:0 0 auto;white-space:nowrap;color:#3B3266;font-size:18px;font-weight:800;letter-spacing:-.5px;line-height:1.25;
-    -webkit-line-clamp:none;
-  }
-  .affirm-card.eve .af-view.is-scroll{
+  .affirm-card .af-view{flex:1 1 auto;min-width:0;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .affirm-card .af-track{display:flex;align-items:center;gap:0;flex:0 0 auto;white-space:nowrap}
+  .affirm-card .af-view.is-scroll{
     justify-content:flex-start;
     /* 흐를 때는 양쪽 끝을 살짝 흐리게 해서 글자가 뚝 잘린 느낌을 없앤다 */
     -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%);
     mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%);
   }
-  .affirm-card.eve .af-view.is-scroll .af-track{
+  .affirm-card .af-view.is-scroll .af-track{
     gap:var(--af-gap,64px);animation:afMarquee var(--af-dur,14s) linear infinite;will-change:transform;
   }
   @keyframes afMarquee{from{transform:translateX(0)}to{transform:translateX(var(--af-shift,0px))}}
-  .affirm-card.eve .af-when{
-    flex:none;font-size:10.5px;font-weight:900;color:#5B4B9A;background:#fff;border:1.5px solid #D9D0F7;
+  .affirm-card .af-when{
+    flex:none;font-size:10.5px;font-weight:900;color:#8A6B12;background:#fff;border:1.5px solid #EFD9A6;
     border-radius:999px;padding:2px 7px;letter-spacing:-.2px;line-height:1.2;
   }
-  .affirm-card.eve .af-when[hidden]{display:none}
+  .affirm-card .af-when[hidden]{display:none}
   .wx-card{
     padding:6px 34px 6px 10px;border-radius:18px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 7px;
     align-content:center;overflow:hidden;min-width:0;position:relative;
@@ -2237,6 +2224,11 @@
         <div class="card wx-card js-weather">
           <span class="skel" style="height:18px;width:100%;border-radius:10px"></span>
         </div>
+        <div class="affirm-card affirm-bar" data-act="goto" data-tab="praise" role="button" tabindex="0" aria-label="특급칭찬 보기">
+          <span class="af-ico" aria-hidden="true">🌟</span>
+          <span class="af-view js-affirm"><span class="af-track js-affirm-track"><span class="af-text js-affirm-text">불러오는 중…</span></span></span>
+          <span class="af-when js-affirm-when" hidden></span>
+        </div>
         <div class="card today-card acad-card">
           <div class="sec-head">
             <h2>📅 오늘의 스케줄</h2>
@@ -2343,11 +2335,6 @@
         <div class="card dt-card eve dt-bar">
           <span class="dtc-date"><span class="dtc-ico">📅</span><span class="js-date">불러오는 중…</span></span>
           <span class="dtc-clock js-clock">--:--</span>
-        </div>
-        <div class="affirm-card eve affirm-bar" data-act="goto" data-tab="praise" role="button" tabindex="0" aria-label="특급칭찬 보기">
-          <span class="af-ico" aria-hidden="true">🌟</span>
-          <span class="af-view js-affirm"><span class="af-track js-affirm-track"><span class="af-text js-affirm-text">불러오는 중…</span></span></span>
-          <span class="af-when js-affirm-when" hidden></span>
         </div>
         <div class="card today-card study-card">
           <div class="sec-head">
