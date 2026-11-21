@@ -2107,7 +2107,7 @@
     display:inline-flex;align-items:center;justify-content:center;gap:3px;
   }
   .rb-mini.reroll{font-size:14px;letter-spacing:-.3px}
-  .rb-mini.off{opacity:.45;border-color:#E3EAE5;background:#F4F7F5;color:#8C9A92;box-shadow:none}
+  .rb-mini.off{border-color:#E1E7E3;background:#F1F4F2;color:#8C9A92;box-shadow:none}
   .bonus-roulette.locked .rb-title{color:#8A6B12}
 
   /* ---- v12: 포켓몬 카드도 조용하게 — 반짝임(pkShine) 등 계속 도는 애니메이션 없음 ---- */
@@ -6670,7 +6670,7 @@
       return '<div class="bonus-roulette picked">'
         + '<span class="rb-ico" aria-hidden="true">' + bonusIconFor(item.label) + '</span>'
         + '<span class="rb-body"><b class="rb-title">' + esc(item.label) + '</b>'
-        + '<small class="rb-sub">하고 싶을 때만! 완료하면 몬스터볼 +1</small></span>'
+        + '<small class="rb-sub">' + (left > 0 ? '하고 싶을 때만! 완료하면 몬스터볼 +1' : '완료하면 몬스터볼 +1 · 다시 돌리기는 끝!') + '</small></span>'
         + '<button class="rb-btn go" type="button" data-act="b-toggle" data-id="' + esc(item.id) + '" aria-label="' + esc(item.label) + ' 완료하고 몬스터볼 +1">✓ 완료</button>'
         + (left > 0
             ? '<button class="rb-mini reroll" type="button" data-act="bonus-spin"'
