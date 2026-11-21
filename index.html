@@ -2066,6 +2066,52 @@
   #homeEvening .bonus-grid .pk-card,#homeEvening .bonus-grid .pk-card *{animation:none}
   #homeEvening .bonus-grid .pk-card:hover,#homeEvening .bonus-grid .pk-card:active{transform:none;filter:none}
 
+  /* ---- v12: ✅ 오늘 꼭 할 일 = 오전 미션과 같은 포켓몬 카드 ---- */
+  #homeEvening .study-card .hs-grid{
+    display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-evenly;align-items:center;align-content:center;
+    row-gap:8px;flex:1 1 auto;min-height:0;overflow-y:auto;
+  }
+  #homeEvening .study-card .hs-grid .pk-card{flex:0 0 calc((100% - 30px) / 4);min-width:0;max-height:198px;height:100%}
+  #homeEvening .study-card .hs-grid .hs-empty{flex:1 1 100%;align-self:center}
+
+  /* ---- v12: ⚡ 보너스 = 오늘의 랜덤 룰렛 (한 줄·가벼운 디자인, 계속 도는 애니메이션 없음) ---- */
+  #homeEvening .home-right>.bonus-card{flex:0 0 122px;height:122px;min-height:0}
+  #homeEvening .bonus-grid{
+    display:flex;flex-direction:row;align-items:center;justify-content:stretch;gap:0;
+    flex:1 1 auto;min-height:0;overflow:visible;max-height:none;
+  }
+  .bonus-roulette{
+    display:flex;align-items:center;gap:10px;width:100%;height:100%;min-width:0;
+    padding:8px 12px;border-radius:14px;
+    background:linear-gradient(120deg,#F8FBFF 0%,#F4FAF3 100%);border:2px solid #DCEAE3;
+  }
+  .bonus-roulette.picked{background:linear-gradient(120deg,#FFFDF4 0%,#F7FBFF 100%);border-color:#CFE4FA}
+  .bonus-roulette.locked{background:linear-gradient(120deg,#FFF9E8 0%,#FFFDF6 100%);border-color:#F0E2B8}
+  .bonus-roulette.spinning{border-style:dashed}
+  .rb-ico{width:38px;height:38px;flex:none;display:flex;align-items:center;justify-content:center;font-size:24px;line-height:1}
+  .rb-ico svg{width:30px;height:30px;display:block}
+  .rb-body{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:1px}
+  .rb-title{
+    font-size:15.5px;font-weight:900;color:#26402F;letter-spacing:-.5px;line-height:1.2;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .rb-sub{font-size:11px;font-weight:800;color:#7C8E82;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rb-btn{
+    flex:none;border:none;border-radius:11px;padding:9px 14px;font-size:13px;font-weight:900;color:#fff;
+    background:linear-gradient(180deg,#5CC470,#3AA24C);box-shadow:0 4px 10px rgba(60,150,80,.22);font-family:inherit;
+  }
+  .rb-btn.draw{background:linear-gradient(180deg,#84BBF2,#4E8FD8);box-shadow:0 4px 10px rgba(70,130,200,.22)}
+  .rb-mini{
+    flex:none;width:36px;height:36px;border-radius:11px;border:2px solid #DCEAE3;background:#fff;
+    font-size:15px;line-height:1;font-family:inherit;
+  }
+  .bonus-roulette.locked .rb-title{color:#8A6B12}
+
+  /* ---- v12: 포켓몬 카드도 조용하게 — 반짝임(pkShine) 등 계속 도는 애니메이션 없음 ---- */
+  .pk-front::after{display:none!important;animation:none!important}
+  .pk-card,.pk-card *{animation:none}
+  .pk-card .pk-inner{transition:transform .45s cubic-bezier(.25,1.1,.4,1)}
+
   /* ---- v12: 타임바는 조용하게 (태블릿 배터리) ----
      반짝임·흐름·콩콩 뛰는 무한 애니메이션은 끄고, 막대와 포켓몬은 시계에 맞춰
      부드럽게 이동(transition)만 한다. */
@@ -2098,7 +2144,8 @@
     .dt-bar{flex:0 0 56px;height:56px;min-height:56px;max-height:56px}
     .dt-bar .dtc-clock{font-size:25px}
     .dt-bar .dtc-date{font-size:16.5px}
-    #homeEvening .home-right>.bonus-card{flex:0 0 152px;height:152px}
+    #homeEvening .home-right>.bonus-card{flex:0 0 112px;height:112px}
+    #homeEvening .study-card .hs-grid .pk-card{max-height:178px}
     #homeEvening .study-tile .st-ico{width:44px;height:44px}
     #homeEvening .study-tile .st-ico svg{width:38px;height:38px}
     #homeEvening .study-tile .st-label{font-size:18px}
@@ -2842,6 +2889,7 @@
     praises: 'yj_praises_v1',
     studyReading: 'yj_study_migrated_reading_v1',
     bonusDone: 'yj_bonus_done_v1',
+    bonusPick: 'yj_bonus_pick_v1',
     bonusItems: 'yj_bonus_items_v1',
     missionDone: 'yj_morning_mission_done_v1',
     missions: 'yj_morning_missions_v1',
@@ -3125,7 +3173,7 @@
     habits: [], habitDone: {},
     balls: 0, dex: {}, dexCosts: {}, awards: {},
     perfectDays: [], stones: 0, stoneAwards: [], academies: [], once: [],
-    missionDone: {}, missions: { weekday: [], weekend: [] },
+    missionDone: {}, missions: { weekday: [], weekend: [] }, bonusPick: null,
     momPin: '', praises: []
   };
 
@@ -3558,6 +3606,8 @@
     var bd = store.get(K.bonusDone, null);
     state.bonusDone = (bd && typeof bd === 'object' && !(typeof bd.slice === 'function')) ? bd : {};
     state.bonusDone = pruneBonusDone(state.bonusDone);
+    var bpk = store.get(K.bonusPick, null);
+    state.bonusPick = (bpk && typeof bpk === 'object' && bpk.key && bpk.id) ? bpk : null;
 
     /* ⚔️ 아침 미션 '지각 안하기' 체크 (날짜별로 새로 시작) */
     var mdn = store.get(K.missionDone, null);
@@ -6242,15 +6292,18 @@
         + '<span style="font-size:12px;font-weight:800;color:#A79E8B">“+ 할 일 추가”로 넣을 수 있어요</span></div>';
     } else {
       html = '';
+      /* 오전 미션(🔥)과 똑같은 포켓몬 카드 — MISSION 01, 눌러서 완료 +1 */
       for (var i = 0; i < tasks.length; i++) {
         var t = tasks[i];
-        var done = doneIds.indexOf(t.id) !== -1;
-        html += '<button class="study-tile' + (done ? ' done' : '') + '" type="button" data-act="h-toggle" data-id="' + esc(t.id) + '" aria-pressed="' + done + '"'
-          + ' aria-label="' + esc(t.label) + (done ? ' 완료 취소' : ' 완료하고 몬스터볼 +1') + '">'
-          + '<span class="st-ico">' + studyIcon(t.label) + '</span>'
-          + '<span class="st-label">' + esc(t.label) + '</span>'
-          + '<span class="st-cta">' + (done ? '✓ 완료' : miniBallSvg() + '+1') + '</span>'
-          + '</button>';
+        html += pokeCardHtml({
+          act: 'h-toggle',
+          id: t.id,
+          label: t.label,
+          ico: studyIcon(t.label),
+          theme: 'mission',
+          tag: 'MISSION ' + pad2(i + 1),
+          done: doneIds.indexOf(t.id) !== -1
+        });
       }
     }
     for (var j = 0; j < boxes.length; j++) {
@@ -6564,42 +6617,111 @@
     return (arr && typeof arr.slice === 'function') ? arr : [];
   }
 
+  /* ======================= ⚡ 보너스: 오늘의 랜덤 룰렛 =======================
+     하루 한 번만 완료(+1볼). 다시 돌리기는 몇 번이든 자유.
+     계속 도는 애니메이션 없이, 누를 때만 1.2초쯤 이름이 돌아간다. */
+  var bonusSpinning = false, bonusSpinTimer = null;
+
+  function bonusPickToday() {
+    var p = state.bonusPick;
+    return (p && p.key === todayKey() && p.id) ? p.id : null;
+  }
+  function setBonusPick(id) {
+    state.bonusPick = { key: todayKey(), id: id || null };
+    store.set(K.bonusPick, state.bonusPick);
+  }
+  function bonusLockedToday() { return bonusDoneInList().length > 0; }
+
+  function bonusRouletteHtml(mode, item) {
+    var pool = bonusList();
+    if (mode === 'spinning') {
+      return '<div class="bonus-roulette spinning">'
+        + '<span class="rb-ico" aria-hidden="true">🎡</span>'
+        + '<span class="rb-body"><b class="rb-title js-rb-name">' + esc(item ? item.label : '오늘의 보너스') + '</b>'
+        + '<small class="rb-sub">룰렛 도는 중…</small></span>'
+        + '</div>';
+    }
+    if (mode === 'locked') {
+      var name = item ? item.label : '오늘의 보너스';
+      return '<div class="bonus-roulette locked">'
+        + '<span class="rb-ico" aria-hidden="true">🎉</span>'
+        + '<span class="rb-body"><b class="rb-title">' + esc(name) + ' 완료!</b>'
+        + '<small class="rb-sub">오늘의 보너스는 여기까지 · 내일 또 돌려요</small></span>'
+        + (item ? '<button class="rb-mini" type="button" data-act="bonus-undo" data-id="' + esc(item.id) + '" aria-label="완료 되돌리기">↩️</button>' : '')
+        + '</div>';
+    }
+    if (mode === 'picked') {
+      return '<div class="bonus-roulette picked">'
+        + '<span class="rb-ico" aria-hidden="true">' + bonusIconFor(item.label) + '</span>'
+        + '<span class="rb-body"><b class="rb-title">' + esc(item.label) + '</b>'
+        + '<small class="rb-sub">하고 싶을 때만! 완료하면 몬스터볼 +1</small></span>'
+        + '<button class="rb-btn go" type="button" data-act="b-toggle" data-id="' + esc(item.id) + '" aria-label="' + esc(item.label) + ' 완료하고 몬스터볼 +1">✓ 완료</button>'
+        + '<button class="rb-mini" type="button" data-act="bonus-spin" aria-label="다시 돌리기">🔄</button>'
+        + '</div>';
+    }
+    return '<div class="bonus-roulette idle">'
+      + '<span class="rb-ico" aria-hidden="true">🎡</span>'
+      + '<span class="rb-body"><b class="rb-title">오늘의 랜덤 보너스 뽑기!</b>'
+      + '<small class="rb-sub">후보 ' + pool.length + '개 · 눌러서 돌리기</small></span>'
+      + '<button class="rb-btn draw" type="button" data-act="bonus-spin">돌리기</button>'
+      + '</div>';
+  }
+
   function renderBonusStudy() {
     var grid = document.querySelector('.js-bonus-grid');
-    var items = bonusList();
-    var done = bonusDoneInList();
-    var i;
+    if (!grid) return;
+    if (bonusSpinning) return;                 /* 도는 중에는 다시 그리지 않는다 */
+    var items = bonusList(), done = bonusDoneInList();
+    grid.classList.remove('bonus-grid-many');
+    grid.style.justifyContent = '';
+    grid.style.gridTemplateRows = '';
+    grid.style.overflowY = '';
 
-    if (grid) {
-      var n = items.length;
-      grid.style.justifyContent = n >= 4 ? 'space-between' : 'space-evenly';
-      /* 4열로 접어서 한눈에 최대 8개(2줄) — 4개까지는 한 줄에 크게 */
-      var rows = Math.max(1, Math.ceil(n / 4));
-      grid.style.gridTemplateRows = 'repeat(' + rows + ',minmax(0,1fr))';
-      grid.style.overflowY = rows > 3 ? 'auto' : '';
-      if (n > 4) grid.classList.add('bonus-grid-many');
-      else grid.classList.remove('bonus-grid-many');
-
-      var html = '';
-      if (!n) {
-        html = '<div class="bonus-empty">아직 보너스 항목이 없어요 — 할 일 탭에서 추가해 보세요</div>';
-      } else {
-        for (i = 0; i < n; i++) {
-          var b = items[i];
-          html += pokeCardHtml({
-            act: 'b-toggle',
-            id: b.id,
-            label: b.label,
-            ico: bonusIconFor(b.label),
-            theme: 'bonus',
-            tag: 'BONUS ' + pad2(i + 1),
-            done: done.indexOf(b.id) !== -1
-          });
-        }
-      }
-      grid.innerHTML = html;
+    if (!items.length) {
+      grid.innerHTML = '<div class="bonus-empty">아직 보너스 항목이 없어요 — 할 일 탭에서 추가해 보세요</div>';
+      setAll('.js-bonus-count', '0/1');
+      return;
     }
-    setAll('.js-bonus-count', done.length + '/' + items.length);
+    if (bonusLockedToday()) {
+      var doneItem = null, i;
+      for (i = 0; i < items.length; i++) if (done.indexOf(items[i].id) !== -1) doneItem = items[i];
+      grid.innerHTML = bonusRouletteHtml('locked', doneItem);
+      setAll('.js-bonus-count', '1/1');
+      return;
+    }
+    var pickId = bonusPickToday(), pick = null;
+    for (var j = 0; j < items.length; j++) if (items[j].id === pickId) pick = items[j];
+    grid.innerHTML = pick ? bonusRouletteHtml('picked', pick) : bonusRouletteHtml('idle', null);
+    setAll('.js-bonus-count', '0/1');
+  }
+
+  /* 룰렛 돌리기 — 누를 때만 1.2초, 그 뒤로는 멈춘 채로 둔다 */
+  function spinBonusRoulette() {
+    var pool = bonusList();
+    if (!pool.length) { toast('보너스 항목이 먼저 필요해요 — ✅ 할 일 탭에서 추가해 주세요'); return; }
+    if (bonusLockedToday()) { toast('오늘 보너스는 이미 완료했어요! 내일 또 돌려요 🎡'); return; }
+    if (bonusSpinning) return;
+    var grid = document.querySelector('.js-bonus-grid');
+    if (!grid) return;
+
+    bonusSpinning = true;
+    grid.innerHTML = bonusRouletteHtml('spinning', pool[0]);
+    var ticks = 0, total = 12;
+    clearInterval(bonusSpinTimer);
+    bonusSpinTimer = setInterval(function () {
+      var el = grid.querySelector('.js-rb-name');
+      if (el) el.textContent = pool[Math.floor(Math.random() * pool.length)].label;
+      ticks++;
+      if (ticks >= total) {
+        clearInterval(bonusSpinTimer);
+        bonusSpinTimer = null;
+        bonusSpinning = false;
+        var pick = pool[Math.floor(Math.random() * pool.length)];
+        setBonusPick(pick.id);
+        renderBonusStudy();
+        try { SFX.step(); } catch (e) {}
+      }
+    }, 95);
   }
 
   /* 공부 탭의 ⚡ 보너스 공부 관리 */
@@ -6786,6 +6908,7 @@
     var tasks = hsTaskList(dow);
     var cnt = 0, i;
     for (i = 0; i < tasks.length; i++) if (arr.indexOf(tasks[i].id) !== -1) cnt++;
+    markJustFlipped(id);            /* 방금 누른 카드만 뒤집혀 볼이 톡 (오전 미션과 같은 느낌) */
     renderStudy();
     renderHomeHomeschool();
 
@@ -7696,6 +7819,12 @@
         break;
       case 'm-toggle':
         toggleOwnMission(id);
+        break;
+      case 'bonus-spin':
+        spinBonusRoulette();
+        break;
+      case 'bonus-undo':
+        unmarkBonus(id);
         break;
       case 'hs-add':
         selectedDow = new Date().getDay();
