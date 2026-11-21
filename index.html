@@ -2313,7 +2313,7 @@
         </div>
         <div class="card today-card math-card" id="morningMathCard">
           <div class="sec-head">
-            <h2>🔥 오전 미션</h2>
+            <h2>🔥 미션</h2>
             <span class="sec-sub"><span class="gball ball-mini" data-ball="normal" aria-hidden="true"></span> +1</span>
             <div class="spacer"></div>
             <button class="link-btn" type="button" data-act="mission-edit">⚙️ 편집</button>
@@ -2411,7 +2411,7 @@
         </div>
         <div class="card today-card study-card">
           <div class="sec-head">
-            <h2>✅ 오늘 꼭 할 일</h2>
+            <h2>🔥 미션</h2>
             <span class="count-pill js-home-hs-count">0/0</span>
             <div class="spacer"></div>
             <button class="link-btn" type="button" data-act="hs-add">+ 할 일 추가</button>
@@ -2422,7 +2422,7 @@
 
         <section class="card habit-card" aria-label="생활습관 미션">
           <div class="sec-head">
-            <h2>🌱 생활습관 미션</h2>
+            <h2>🌱 생활습관</h2>
             <span class="count-pill js-habit-count">0/2</span>
             <div class="spacer"></div>
             <button class="link-btn" type="button" data-act="habit-edit">⚙️ 습관 편집</button>
@@ -2572,13 +2572,13 @@
 
     <div class="card habit-manage-card" style="margin-top:16px">
       <div class="sec-head">
-        <h2>🌱 생활습관 미션</h2>
+        <h2>🌱 생활습관</h2>
         <div class="count-pill" id="habitManageCount">0개</div>
         <div class="spacer"></div>
         <button class="btn btn-yellow" type="button" data-act="habit-edit">⚙️ 습관 편집</button>
       </div>
       <ul class="list habit-manage-list" id="habitManageList"></ul>
-      <p class="hint" style="margin:10px 0 0">이번 주에 집중할 습관 1~3개만 골라 주세요. 오전·오후 화면의 🌱 생활습관 미션에 그대로 보여요. 연속 일수가 쌓이고 3일·5일 연속에는 🌟 특급칭찬!</p>
+      <p class="hint" style="margin:10px 0 0">이번 주에 집중할 습관 1~3개만 골라 주세요. 오전·오후 화면의 🌱 생활습관에 그대로 보여요. 연속 일수가 쌓이고 3일·5일 연속에는 🌟 특급칭찬!</p>
     </div>
   </section>
 
@@ -2714,7 +2714,7 @@
 <div class="modal" id="habitModal">
   <div class="modal-card">
     <div class="modal-head">
-      <h3>🌱 생활습관 미션 편집</h3>
+      <h3>🌱 생활습관 편집</h3>
       <button class="modal-close" type="button" data-act="habit-edit-close">✕</button>
     </div>
     <p class="hint" style="margin:0 0 12px">매일 체크하면 🔥 연속 일수가 쌓여요. 3일·5일 연속을 채우면 🌟 특급칭찬! (몬스터볼은 주지 않아요)</p>
@@ -2733,7 +2733,7 @@
 <div class="modal" id="missionModal">
   <div class="modal-card">
     <div class="modal-head">
-      <h3>🔥 오전 미션 편집</h3>
+      <h3>🔥 미션 편집</h3>
       <button class="modal-close" type="button" data-act="mission-edit-close">✕</button>
     </div>
     <div class="list-tabs">
@@ -6386,7 +6386,7 @@
   }
 
   function habitMilestoneLabel(st) {
-    if (st <= 0) return '오늘부터 시작!';
+    if (st <= 0) return '';
     var hit = false;
     for (var i = 0; i < HABIT_MILESTONES.length; i++) if (st >= HABIT_MILESTONES[i]) hit = true;
     return '🔥 ' + st + '일 연속' + (hit ? ' 🌟' : '');
@@ -6400,7 +6400,7 @@
       + '<span class="hb-ico" aria-hidden="true">' + esc(sp.ico) + '</span>'
       + '<span class="hb-body">'
       + '<span class="hb-name">' + esc(sp.text) + '</span>'
-      + '<span class="hb-streak' + (st > 0 ? '' : ' zero') + '">' + habitMilestoneLabel(st) + '</span>'
+      + (st > 0 ? '<span class="hb-streak">' + habitMilestoneLabel(st) + '</span>' : '')
       + '</span>'
       + '<span class="hb-check" aria-hidden="true">✓</span>'
       + '</button>';
@@ -6618,9 +6618,10 @@
   }
 
   /* ======================= ⚡ 보너스: 오늘의 랜덤 룰렛 =======================
-     하루 한 번만 완료(+1볼). 다시 돌리기는 몇 번이든 자유.
+     하루 3개까지 완료(+1볼씩). 다시 돌리기는 몇 번이든 자유.
      계속 도는 애니메이션 없이, 누를 때만 1.2초쯤 이름이 돌아간다. */
   var bonusSpinning = false, bonusSpinTimer = null;
+  var BONUS_PER_DAY = 3;
 
   function bonusPickToday() {
     var p = state.bonusPick;
@@ -6630,10 +6631,18 @@
     state.bonusPick = { key: todayKey(), id: id || null };
     store.set(K.bonusPick, state.bonusPick);
   }
-  function bonusLockedToday() { return bonusDoneInList().length > 0; }
+  /* 아직 안 한 보너스만 후보 */
+  function bonusPoolLeft() {
+    var items = bonusList(), done = bonusDoneIds(), out = [], i;
+    for (i = 0; i < items.length; i++) if (done.indexOf(items[i].id) === -1) out.push(items[i]);
+    return out;
+  }
+  function bonusLockedToday() {
+    return bonusDoneInList().length >= BONUS_PER_DAY || bonusPoolLeft().length === 0;
+  }
 
   function bonusRouletteHtml(mode, item) {
-    var pool = bonusList();
+    var left = bonusPoolLeft();
     if (mode === 'spinning') {
       return '<div class="bonus-roulette spinning">'
         + '<span class="rb-ico" aria-hidden="true">🎡</span>'
@@ -6642,12 +6651,12 @@
         + '</div>';
     }
     if (mode === 'locked') {
-      var name = item ? item.label : '오늘의 보너스';
+      var n = bonusDoneInList().length;
       return '<div class="bonus-roulette locked">'
         + '<span class="rb-ico" aria-hidden="true">🎉</span>'
-        + '<span class="rb-body"><b class="rb-title">' + esc(name) + ' 완료!</b>'
-        + '<small class="rb-sub">오늘의 보너스는 여기까지 · 내일 또 돌려요</small></span>'
-        + (item ? '<button class="rb-mini" type="button" data-act="bonus-undo" data-id="' + esc(item.id) + '" aria-label="완료 되돌리기">↩️</button>' : '')
+        + '<span class="rb-body"><b class="rb-title">오늘 보너스 ' + n + '개 완료!</b>'
+        + '<small class="rb-sub">오늘은 여기까지 · 내일 또 돌려요</small></span>'
+        + (item ? '<button class="rb-mini" type="button" data-act="bonus-undo" data-id="' + esc(item.id) + '" aria-label="마지막으로 완료한 보너스 되돌리기">↩️</button>' : '')
         + '</div>';
     }
     if (mode === 'picked') {
@@ -6662,7 +6671,7 @@
     return '<div class="bonus-roulette idle">'
       + '<span class="rb-ico" aria-hidden="true">🎡</span>'
       + '<span class="rb-body"><b class="rb-title">오늘의 랜덤 보너스 뽑기!</b>'
-      + '<small class="rb-sub">후보 ' + pool.length + '개 · 눌러서 돌리기</small></span>'
+      + '<small class="rb-sub">남은 후보 ' + left.length + '개 · 눌러서 돌리기</small></span>'
       + '<button class="rb-btn draw" type="button" data-act="bonus-spin">돌리기</button>'
       + '</div>';
   }
@@ -6679,27 +6688,29 @@
 
     if (!items.length) {
       grid.innerHTML = '<div class="bonus-empty">아직 보너스 항목이 없어요 — 할 일 탭에서 추가해 보세요</div>';
-      setAll('.js-bonus-count', '0/1');
+      setAll('.js-bonus-count', '0/' + BONUS_PER_DAY);
       return;
     }
     if (bonusLockedToday()) {
-      var doneItem = null, i;
-      for (i = 0; i < items.length; i++) if (done.indexOf(items[i].id) !== -1) doneItem = items[i];
-      grid.innerHTML = bonusRouletteHtml('locked', doneItem);
-      setAll('.js-bonus-count', '1/1');
+      var lastDone = null, i;
+      for (i = 0; i < items.length; i++) if (done.indexOf(items[i].id) !== -1) lastDone = items[i];
+      grid.innerHTML = bonusRouletteHtml('locked', lastDone);
+      setAll('.js-bonus-count', done.length + '/' + BONUS_PER_DAY);
       return;
     }
-    var pickId = bonusPickToday(), pick = null;
-    for (var j = 0; j < items.length; j++) if (items[j].id === pickId) pick = items[j];
+    var pickId = bonusPickToday(), pick = null, j;
+    if (pickId && done.indexOf(pickId) === -1) {
+      for (j = 0; j < items.length; j++) if (items[j].id === pickId) pick = items[j];
+    }
     grid.innerHTML = pick ? bonusRouletteHtml('picked', pick) : bonusRouletteHtml('idle', null);
-    setAll('.js-bonus-count', '0/1');
+    setAll('.js-bonus-count', done.length + '/' + BONUS_PER_DAY);
   }
 
   /* 룰렛 돌리기 — 누를 때만 1.2초, 그 뒤로는 멈춘 채로 둔다 */
   function spinBonusRoulette() {
-    var pool = bonusList();
-    if (!pool.length) { toast('보너스 항목이 먼저 필요해요 — ✅ 할 일 탭에서 추가해 주세요'); return; }
-    if (bonusLockedToday()) { toast('오늘 보너스는 이미 완료했어요! 내일 또 돌려요 🎡'); return; }
+    var pool = bonusPoolLeft();
+    if (!pool.length) { toast('오늘 보너스는 다 했어요! 내일 또 돌려요 🎡'); return; }
+    if (bonusLockedToday()) { toast('오늘 보너스는 다 했어요! 내일 또 돌려요 🎡'); return; }
     if (bonusSpinning) return;
     var grid = document.querySelector('.js-bonus-grid');
     if (!grid) return;
