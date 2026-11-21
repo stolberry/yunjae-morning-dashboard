@@ -1869,6 +1869,9 @@
   }
   #homeMorning .home-right>.today-card,#homeEvening .home-right>.today-card,
   #homeMorning .home-right>.habit-card,#homeEvening .home-right>.habit-card{flex:1 1 0;min-height:0}
+  /* 저녁: 오늘 꼭 할 일은 납작하게, 보너스는 여러 개가 한눈에 보이도록 조금 더 */
+  #homeEvening .home-right>.study-card{flex:0.85 1 0}
+  #homeEvening .home-right>.bonus-card{flex:1.2 1 0}
 
   /* ---- 루틴 6단계: 3열 × 2행 ---- */
   .routine-grid,.routine-grid.eve5{
@@ -2284,6 +2287,15 @@
           <div class="js-home-hs hs-grid"></div>
         </div>
 
+        <div class="card today-card bonus-card">
+          <div class="sec-head">
+            <h2>⚡ 보너스</h2>
+            <span class="count-pill js-bonus-count">0/4</span>
+            <span class="bonus-sub">하고 싶을 때 도전! · <svg class="mini" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#fff" stroke="#2E2A25" stroke-width="7"/><path d="M4 50 A46 46 0 0 1 96 50 Z" fill="#EE1515"/><rect x="2" y="43" width="96" height="14" fill="#2E2A25"/><circle cx="50" cy="50" r="14" fill="#fff" stroke="#2E2A25" stroke-width="7"/><circle cx="50" cy="50" r="5" fill="#EE1515"/></svg>+1</span>
+          </div>
+          <div class="bonus-grid js-bonus-grid"></div>
+        </div>
+
         <section class="card habit-card" aria-label="생활습관 미션">
           <div class="sec-head">
             <h2>🌱 생활습관 미션</h2>
@@ -2294,15 +2306,6 @@
           <div class="habit-list js-habit-list"></div>
           <div class="habit-note js-habit-note">🔥 3일·5일 연속 달성하면 <b>🌟 특급칭찬</b>!</div>
         </section>
-
-        <div class="card today-card bonus-card">
-          <div class="sec-head">
-            <h2>⚡ 보너스</h2>
-            <span class="count-pill js-bonus-count">0/4</span>
-            <span class="bonus-sub">하고 싶을 때 도전! · <svg class="mini" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#fff" stroke="#2E2A25" stroke-width="7"/><path d="M4 50 A46 46 0 0 1 96 50 Z" fill="#EE1515"/><rect x="2" y="43" width="96" height="14" fill="#2E2A25"/><circle cx="50" cy="50" r="14" fill="#fff" stroke="#2E2A25" stroke-width="7"/><circle cx="50" cy="50" r="5" fill="#EE1515"/></svg>+1</span>
-          </div>
-          <div class="bonus-grid js-bonus-grid"></div>
-        </div>
         </div>
 
       </div>
@@ -6711,12 +6714,15 @@
     var html = ''
       + '<span class="wico">' + info[1] + '</span>'
       + '<span class="wtemp">' + fmt1(model.temp) + '°</span>'
-      + '<span class="wdesc">' + info[0] + (model.feels != null ? ' · 체감 ' + fmt1(model.feels) + '°' : '') + ' · ☔ ' + Math.round(pop) + '%</span>'
-      + '<span class="wsep"></span>'
+      + '<span class="wdesc">' + info[0]
+        + (model.feels != null ? ' · 체감 ' + fmt1(model.feels) + '°' : '')
+        + (pop >= 30 ? ' · ☔ ' + Math.round(pop) + '%' : '') + '</span>'
       + badgeHtml
-      + '<span class="wsep"></span>'
-      + '<span class="wtip">' + out.icon + ' ' + esc(out.short) + (extras.length ? ' · ' + extras.join(' · ') : '') + '</span>'
-      + '<button class="retry" type="button" data-act="wx-retry" title="' + esc((noteHtml || 'Open-Meteo 실시간 · 천안시 성성동') + (model.tmax != null && model.tmin != null ? ' · 최고 ' + fmt1(model.tmax) + '° / 최저 ' + fmt1(model.tmin) + '°' : '')) + '">↻</button>';
+      + '<span class="wtip">' + out.icon + ' ' + esc(out.short) + (extras.length ? ' · ' + esc(extras[0]) : '') + '</span>'
+      + '<button class="retry" type="button" data-act="wx-retry" title="' + esc((noteHtml || 'Open-Meteo 실시간 · 천안시 성성동')
+        + ' · 체감 ' + (model.feels != null ? fmt1(model.feels) + '°' : '-') + ' · ☔ ' + Math.round(pop) + '%'
+        + (model.tmax != null && model.tmin != null ? ' · 최고 ' + fmt1(model.tmax) + '° / 최저 ' + fmt1(model.tmin) + '°' : '')
+        + ' · ' + out.text + (extras.length ? ' · ' + extras.join(' · ') : '')) + '">↻</button>';
     for (i = 0; i < boxes.length; i++) boxes[i].innerHTML = html;
   }
 
