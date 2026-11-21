@@ -1980,6 +1980,27 @@
   }
   .hm-streak.hit{color:#B96A00;background:#FFF6DE;border-color:#F3D477}
 
+  /* ---- 🔥 미션 탭의 🔥 오전 미션 카드 (평일·주말 목록 미리보기) ---- */
+  .mission-manage-card .mm-groups{display:flex;flex-direction:column;gap:9px}
+  .mm-group{
+    display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:13px;
+    background:#F8FAFB;border:1.5px solid #E6EEF2;
+  }
+  .mm-group.today{background:#FFFDF3;border-color:#F2E3B4}
+  .mm-head{
+    flex:none;min-width:96px;font-size:13.5px;font-weight:900;color:#26402F;letter-spacing:-.4px;
+    display:flex;flex-direction:column;gap:1px;padding-top:2px;
+  }
+  .mm-head small{font-size:10.5px;font-weight:800;color:#8A8377;letter-spacing:-.2px}
+  .mm-group.today .mm-head small{color:#B98A12}
+  .mm-chips{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;gap:6px}
+  .mm-chip{
+    font-size:13px;font-weight:800;color:#2E3B34;letter-spacing:-.35px;
+    background:#fff;border:1.5px solid #DCE6EA;border-radius:999px;padding:5px 11px;
+  }
+  .mm-group.today .mm-chip{border-color:#EFDC9F;background:#fff}
+  .mm-empty{font-size:12.5px;font-weight:800;color:#9AA6A0}
+
   /* ---- v12: ✅ 오늘 꼭 할 일 — 오후 화면의 주인공 ---- */
   #homeEvening .study-card{
     border-color:#B7D6F7;
@@ -2176,7 +2197,7 @@
     <nav class="tabs" aria-label="메뉴">
       <button class="tab active" data-act="tab" data-tab="home" type="button">🏠 대시보드</button>
       <button class="tab" data-act="tab" data-tab="academy" type="button">📅 스케줄</button>
-      <button class="tab" data-act="tab" data-tab="study" type="button">✅ 할 일</button>
+      <button class="tab" data-act="tab" data-tab="study" type="button">🔥 미션</button>
       <button class="tab" data-act="tab" data-tab="dex" type="button">🔴 포켓몬 도감 <span class="badge js-ball-count">0</span></button>
       <button class="tab" data-act="tab" data-tab="praise" type="button">🌟 칭찬 <span class="badge praise-badge js-praise-count">0</span></button>
     </nav>
@@ -2294,7 +2315,7 @@
             <span class="sec-sub"><span class="gball ball-mini" data-ball="normal" aria-hidden="true"></span> +1</span>
             <div class="spacer"></div>
             <button class="link-btn" type="button" data-act="mission-edit">⚙️ 편집</button>
-            <button class="link-btn" type="button" data-act="goto" data-tab="study">할 일 탭 →</button>
+            <button class="link-btn" type="button" data-act="goto" data-tab="study">미션 탭 →</button>
           </div>
           <div class="js-morning-math" id="morningMath"></div>
         </div>
@@ -2395,7 +2416,7 @@
             <h2>🔥 MISSION</h2>
             <span class="count-pill js-home-hs-count">0/0</span>
             <div class="spacer"></div>
-            <button class="link-btn" type="button" data-act="hs-add">+ 할 일 추가</button>
+            <button class="link-btn" type="button" data-act="hs-add">+ 미션 추가</button>
             <button class="link-btn" type="button" data-act="goto" data-tab="study">전체 보기 →</button>
           </div>
           <div class="js-home-hs hs-grid"></div>
@@ -2508,22 +2529,33 @@
   <section class="panel" id="panel-study">
     <div class="card">
       <div class="sec-head">
-        <h2>✅ 할 일 체크</h2>
+        <h2>🔥 오늘 미션</h2>
         <div class="count-pill" id="studyCount">0 / 0</div>
         <div class="spacer"></div>
-        <span class="hint">오늘 할 일을 체크하면 몬스터볼 +1</span>
+        <span class="hint">오늘 미션을 체크하면 몬스터볼 +1</span>
       </div>
       <div class="day-tabs" id="studyDayTabs"></div>
       <div class="study-head">
         <span class="study-date" id="studyDateLabel">—</span>
-        <span class="hint">요일을 누르면 그 요일 할 일을 볼 수 있어요</span>
+        <span class="hint">요일을 누르면 그 요일 미션을 볼 수 있어요</span>
       </div>
       <ul class="list" id="studyList"></ul>
       <div class="add-row">
-        <input id="studyInput" type="text" placeholder="할 일 추가 (예: 리틀팍스 20분)" enterkeyhint="done" autocomplete="off">
+        <input id="studyInput" type="text" placeholder="미션 추가 (예: 리틀팍스 20분)" enterkeyhint="done" autocomplete="off">
         <button class="btn btn-yellow" id="studyAdd" type="button">+ 추가</button>
       </div>
-      <div class="study-badge" id="studyBadge">오늘 할 일을 체크하면 몬스터볼을 받을 수 있어요 🔴</div>
+      <div class="study-badge" id="studyBadge">오늘 미션을 체크하면 몬스터볼을 받을 수 있어요 🔴</div>
+    </div>
+
+    <div class="card mission-manage-card" style="margin-top:16px">
+      <div class="sec-head">
+        <h2>🔥 오전 미션</h2>
+        <div class="count-pill" id="missionManageCount">0개</div>
+        <div class="spacer"></div>
+        <button class="btn btn-yellow" type="button" data-act="mission-edit">⚙️ 오전 미션 편집 (평일·주말)</button>
+      </div>
+      <div class="mm-groups" id="missionManageList"></div>
+      <p class="hint" style="margin:10px 0 0">평일(월~금)·주말(토·일) 미션을 여기서 바로 고칠 수 있어요. 오전 화면의 🔥 MISSION에 그대로 보여요. 미션 하나를 끝낼 때마다 몬스터볼 +1 🔴</p>
     </div>
 
     <div class="card bonus-manage-card" style="margin-top:16px">
@@ -3795,7 +3827,7 @@
       else tabs[j].classList.remove('active');
     }
     if (name === 'academy') { renderWeek(); renderOnce(); }
-    if (name === 'study') { renderStudy(); renderHabitManage(); }
+    if (name === 'study') { renderStudy(); renderHabitManage(); renderMissionManage(); }
     if (name === 'dex') renderDex();
     if (name === 'praise') renderPraise();
     window.scrollTo(0, 0);
@@ -4614,7 +4646,7 @@
     addBalls(1);
     saveAwards();
     updateBallUI();
-    toast('할 일 완료! 몬스터볼 +1 🔴');
+    toast('미션 완료! 몬스터볼 +1 🔴');
     SFX.ball();
     return true;
   }
@@ -5186,6 +5218,29 @@
   function closeMissionEdit() {
     $('missionModal').classList.remove('show');
     renderMorningMath();
+    renderMissionManage();
+  }
+
+  /* 🔥 미션 탭의 🔥 오전 미션 카드 — 평일·주말 미션을 한눈에 */
+  function renderMissionManage() {
+    var box = $('missionManageList');
+    if (!box) return;
+    var groups = [['weekday', '🏫 평일', '월~금'], ['weekend', '🌈 주말', '토·일']];
+    var today = missionWhich(), html = '', total = 0, g, i;
+    for (g = 0; g < groups.length; g++) {
+      var key = groups[g][0], arr = missionList(key);
+      total += arr.length;
+      html += '<div class="mm-group' + (key === today ? ' today' : '') + '">'
+        + '<span class="mm-head">' + groups[g][1]
+        + '<small>' + groups[g][2] + (key === today ? ' · 오늘' : '') + '</small></span>'
+        + '<span class="mm-chips">';
+      if (!arr.length) html += '<span class="mm-empty">아직 없어요 — “⚙️ 오전 미션 편집”에서 추가해 보세요</span>';
+      for (i = 0; i < arr.length; i++) html += '<span class="mm-chip">' + esc(arr[i].label) + '</span>';
+      html += '</span></div>';
+    }
+    box.innerHTML = html;
+    var cnt = $('missionManageCount');
+    if (cnt) cnt.textContent = total + '개';
   }
   function setMissionTab(which) {
     missionEditWhich = (which === 'weekend') ? 'weekend' : 'weekday';
@@ -5980,11 +6035,11 @@
     var doneIds = doneIdsFor(key, tasks);
     var i;
 
-    $('studyDateLabel').textContent = prettyDate(d) + ' 할 일' + (isToday ? ' (오늘)' : '');
+    $('studyDateLabel').textContent = prettyDate(d) + ' 미션' + (isToday ? ' (오늘)' : '');
 
     var html = '';
     if (!tasks.length) {
-      html = '<li class="empty">이 요일에는 할 일이 없어요.<br>아래에서 추가해 보세요!</li>';
+      html = '<li class="empty">이 요일에는 미션이 없어요.<br>아래에서 추가해 보세요!</li>';
     } else {
       for (i = 0; i < tasks.length; i++) {
         var t = tasks[i];
@@ -6011,11 +6066,11 @@
     var badge = $('studyBadge');
     if (tasks.length > 0 && doneIds.length === tasks.length) {
       badge.className = 'study-badge earned';
-      badge.innerHTML = '<span class="stamp">🏅</span>' + esc(DAY_KO[dow]) + '요일 할 일 완료! 배지 획득!<br>'
+      badge.innerHTML = '<span class="stamp">🏅</span>' + esc(DAY_KO[dow]) + '요일 미션 완료! 배지 획득!<br>'
         + '<span style="font-size:12px;font-weight:800;opacity:.85">' + tasks.length + '개 모두 끝냈어요' + (isToday ? ' · 몬스터볼도 받았어요 🔴' : '') + '</span>';
     } else if (tasks.length === 0) {
       badge.className = 'study-badge';
-      badge.innerHTML = '오늘 할 일을 체크하면 몬스터볼을 받을 수 있어요 🔴';
+      badge.innerHTML = '오늘 미션을 체크하면 몬스터볼을 받을 수 있어요 🔴';
     } else {
       badge.className = 'study-badge';
       badge.innerHTML = '조금만 더! ' + (tasks.length - doneIds.length) + '개 남았어요 🏅'
@@ -6217,8 +6272,8 @@
     var html;
     if (!tasks.length) {
       html = '<div class="hs-empty">' + svgBook()
-        + '<span>오늘은 할 일이 없어요</span>'
-        + '<span style="font-size:12px;font-weight:800;color:#A79E8B">“+ 할 일 추가”로 넣을 수 있어요</span></div>';
+        + '<span>오늘은 미션이 없어요</span>'
+        + '<span style="font-size:12px;font-weight:800;color:#A79E8B">“+ 미션 추가”로 넣을 수 있어요</span></div>';
     } else {
       html = '';
       /* 오전 미션(🔥)과 똑같은 포켓몬 카드 — MISSION 01, 눌러서 완료 +1 */
@@ -6641,7 +6696,7 @@
     grid.style.overflowY = '';
 
     if (!items.length) {
-      grid.innerHTML = '<div class="bonus-empty">아직 보너스 항목이 없어요 — 할 일 탭에서 추가해 보세요</div>';
+      grid.innerHTML = '<div class="bonus-empty">아직 보너스 항목이 없어요 — 미션 탭에서 추가해 보세요</div>';
       setAll('.js-bonus-count', '0/' + BONUS_PER_DAY);
       return;
     }
@@ -6859,7 +6914,7 @@
     var arr = state.homeschoolDone[key] || [];
     if (arr.indexOf(id) !== -1) { unmarkHomeschool(id, dow); return; }
 
-    var tasks = hsTaskList(dow), label = '이 할 일', i;
+    var tasks = hsTaskList(dow), label = '이 미션', i;
     for (i = 0; i < tasks.length; i++) if (tasks[i].id === id) label = tasks[i].label;
     var isToday = (key === todayKey());
     askConfirm('“' + label + '” 다 했어요?',
@@ -6888,7 +6943,7 @@
     if (tasks.length > 0 && cnt === tasks.length) {
       confettiBurst();
       SFX.fanfare();
-      if (key === todayKey()) toast('할 일 완료! 배지 획득 🏅');
+      if (key === todayKey()) toast('미션 완료! 배지 획득 🏅');
     }
     syncPerfectDay();
     if (key === todayKey()) syncStudyBonus();
@@ -8052,6 +8107,7 @@
     renderBonusManage();
     renderHabits();
     renderHabitManage();
+    renderMissionManage();
     renderWeek();
     renderOnce();
     renderStudy();
