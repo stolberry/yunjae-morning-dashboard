@@ -2041,7 +2041,7 @@
   #homeEvening .bonus-card{
     padding:6px 9px 7px;background:#FCFBF6;border-color:#EAE2CE;box-shadow:none;
   }
-  #homeEvening .bonus-card h2{font-size:15px;color:#8A7A50}
+  #homeEvening .bonus-card h2{font-size:16px;color:#8A7A50;white-space:nowrap;letter-spacing:-.55px}
   #homeEvening .bonus-card .count-pill{
     font-size:11.5px;padding:2px 8px;background:#F6F2E4;border-color:#E6DCC0;color:#8A7A50;
   }
@@ -2088,6 +2088,17 @@
   .bonus-roulette.picked{background:linear-gradient(120deg,#FFFDF4 0%,#F7FBFF 100%);border-color:#CFE4FA}
   .bonus-roulette.locked{background:linear-gradient(120deg,#FFF9E8 0%,#FFFDF6 100%);border-color:#F0E2B8}
   .bonus-roulette.spinning{border-style:dashed}
+  /* v13: 대기 상태는 그림 배너 하나 — 상자를 통째로 눌러 돌린다 */
+  .bonus-roulette.idle{
+    display:block;position:relative;padding:0;border:0;background:none;box-shadow:none;
+    overflow:hidden;border-radius:14px;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent;
+    transition:transform .12s ease,filter .15s ease;
+  }
+  .bonus-roulette.idle:active{transform:scale(.985);filter:brightness(.985)}
+  .bonus-roulette.idle .rb-img{
+    display:block;width:100%;height:100%;object-fit:cover;object-position:center 50%;
+    border-radius:14px;pointer-events:none;user-select:none;
+  }
   .rb-ico{width:38px;height:38px;flex:none;display:flex;align-items:center;justify-content:center;font-size:24px;line-height:1}
   .rb-ico svg{width:30px;height:30px;display:block}
   .rb-body{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:1px}
@@ -2409,17 +2420,6 @@
           <span class="dtc-date"><span class="dtc-ico">📅</span><span class="js-date">불러오는 중…</span></span>
           <span class="dtc-clock js-clock">--:--</span>
         </div>
-        <div class="card today-card study-card">
-          <div class="sec-head">
-            <h2>🔥 미션</h2>
-            <span class="count-pill js-home-hs-count">0/0</span>
-            <div class="spacer"></div>
-            <button class="link-btn" type="button" data-act="hs-add">+ 할 일 추가</button>
-            <button class="link-btn" type="button" data-act="goto" data-tab="study">전체 보기 →</button>
-          </div>
-          <div class="js-home-hs hs-grid"></div>
-        </div>
-
         <section class="card habit-card" aria-label="생활습관 미션">
           <div class="sec-head">
             <h2>🌱 생활습관</h2>
@@ -2431,9 +2431,20 @@
           <div class="habit-note js-habit-note">🔥 3일·5일 연속 달성하면 <b>🌟 특급칭찬</b>!</div>
         </section>
 
+        <div class="card today-card study-card">
+          <div class="sec-head">
+            <h2>🔥 미션</h2>
+            <span class="count-pill js-home-hs-count">0/0</span>
+            <div class="spacer"></div>
+            <button class="link-btn" type="button" data-act="hs-add">+ 할 일 추가</button>
+            <button class="link-btn" type="button" data-act="goto" data-tab="study">전체 보기 →</button>
+          </div>
+          <div class="js-home-hs hs-grid"></div>
+        </div>
+
         <div class="card today-card bonus-card">
           <div class="sec-head">
-            <h2>⚡ 보너스</h2>
+            <h2>🎲 랜덤 보너스 뽑기</h2>
             <span class="count-pill js-bonus-count">0/4</span>
             <span class="bonus-sub">하고 싶을 때 도전! · <svg class="mini" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#fff" stroke="#2E2A25" stroke-width="7"/><path d="M4 50 A46 46 0 0 1 96 50 Z" fill="#EE1515"/><rect x="2" y="43" width="96" height="14" fill="#2E2A25"/><circle cx="50" cy="50" r="14" fill="#fff" stroke="#2E2A25" stroke-width="7"/><circle cx="50" cy="50" r="5" fill="#EE1515"/></svg>+1</span>
           </div>
@@ -6642,7 +6653,6 @@
   }
 
   function bonusRouletteHtml(mode, item) {
-    var left = bonusPoolLeft();
     if (mode === 'spinning') {
       return '<div class="bonus-roulette spinning">'
         + '<span class="rb-ico" aria-hidden="true">🎡</span>'
@@ -6668,12 +6678,10 @@
         + '<button class="rb-mini" type="button" data-act="bonus-spin" aria-label="다시 돌리기">🔄</button>'
         + '</div>';
     }
-    return '<div class="bonus-roulette idle">'
-      + '<span class="rb-ico" aria-hidden="true">🎡</span>'
-      + '<span class="rb-body"><b class="rb-title">오늘의 랜덤 보너스 뽑기!</b>'
-      + '<small class="rb-sub">남은 후보 ' + left.length + '개 · 눌러서 돌리기</small></span>'
-      + '<button class="rb-btn draw" type="button" data-act="bonus-spin">돌리기</button>'
-      + '</div>';
+    return '<button class="bonus-roulette idle" type="button" data-act="bonus-spin"'
+      + ' aria-label="랜덤 보너스 뽑기 — 눌러서 룰렛 돌리기">'
+      + '<img class="rb-img" src="assets/bonus-roulette.png" alt="" draggable="false">'
+      + '</button>';
   }
 
   function renderBonusStudy() {
