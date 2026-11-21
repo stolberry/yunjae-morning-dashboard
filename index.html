@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#FFCB05">
-<meta name="description" content="윤재의 아침·저녁 루틴 대시보드">
+<meta name="description" content="윤재의 오전·오후 루틴 대시보드">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1861,8 +1861,12 @@
   #homeMorning .home-grid,#homeEvening .home-grid{
     grid-template-columns:1.5fr 1fr;grid-template-rows:minmax(0,1fr);gap:9px 12px;
   }
-  .left-col{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0}
-  #homeMorning .morning-left>.hero,#homeEvening .left-col>.hero{flex:0 0 auto;min-height:0}
+  /* v12: 왼쪽 히어로(타임바) 높이를 오전 주중·오전 주말·오후 모두 같은 값으로 고정.
+     루틴 3×2 칸은 남는 높이를 그대로 받으므로 세 화면의 카드 크기·그림 비율이 똑같아진다. */
+  .left-col{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0;--hero-h:264px}
+  #homeMorning .morning-left>.hero,#homeEvening .left-col>.hero{
+    flex:0 0 var(--hero-h);height:var(--hero-h);min-height:0;
+  }
   .left-col>.routine-wrap{flex:1 1 auto;min-height:0;margin-top:0}
   #homeMorning .home-right,#homeEvening .home-right{
     display:flex;flex-direction:column;gap:7px;min-width:0;min-height:0;
@@ -2017,7 +2021,7 @@
   /* 좁은 화면에서는 다시 세로로 차곡차곡 */
   @media (max-width:860px){
     #homeMorning .home-grid,#homeEvening .home-grid{grid-template-columns:1fr;grid-template-rows:auto;gap:9px}
-    #homeMorning .morning-left>.hero,#homeEvening .left-col>.hero{flex:0 0 auto}
+    #homeMorning .morning-left>.hero,#homeEvening .left-col>.hero{flex:0 0 auto;height:auto}
     .left-col>.routine-wrap{flex:0 0 auto}
     .routine-grid,.routine-grid.eve5{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto}
     .routine-grid .rcard .illu{aspect-ratio:1/1}
@@ -2032,6 +2036,7 @@
   }
   /* 낮은 화면(주소창 포함 1480×780 등)에서는 히어로를 조금 납작하게 해서 루틴 칸을 넓게 */
   @media (max-height:830px) and (min-width:861px){
+    .left-col{--hero-h:202px}
     .hero{padding:7px 12px;gap:4px}
     .hero-pika{width:74px;height:74px}
     #homeMorning .hero.weekend .hero-weekend-note{margin:4px 2px;padding:9px 12px;font-size:14px}
@@ -2062,9 +2067,9 @@
       </div>
     </div>
 
-    <div class="mode-switch" role="group" aria-label="아침 저녁 전환">
-      <button class="mode-pill active" type="button" data-act="mode" data-mode="morning" aria-pressed="true">🌅 아침</button>
-      <button class="mode-pill" type="button" data-act="mode" data-mode="evening" aria-pressed="false">🌙 저녁</button>
+    <div class="mode-switch" role="group" aria-label="오전 오후 전환">
+      <button class="mode-pill active" type="button" data-act="mode" data-mode="morning" aria-pressed="true">☀️ 오전</button>
+      <button class="mode-pill" type="button" data-act="mode" data-mode="evening" aria-pressed="false">🌇 오후</button>
     </div>
 
     <nav class="tabs" aria-label="메뉴">
@@ -2132,7 +2137,7 @@
         <div class="hero-weekend-note">☀️ 오늘은 학교 없이 느긋한 주말 아침! 좋아하는 걸 마음껏 해 봐요</div>
         <div class="hero-side">
           <div class="stat-pill">
-            <span class="stat-k">아침 루틴</span>
+            <span class="stat-k">오전 루틴</span>
             <span class="stat-v js-routine-count">0/6</span>
           </div>
           <div class="stat-pill balls">
@@ -2154,7 +2159,7 @@
       <!-- 아침 루틴 6단계: 히어로 바로 아래 3×2 -->
       <section class="routine-wrap">
         <div class="sec-head">
-          <h2>🎒 아침 루틴 6단계</h2>
+          <h2>🎒 오전 루틴 6단계</h2>
           <span class="sec-sub">6개를 모두 하면 <span class="gball ball-mini" data-ball="normal" aria-hidden="true"></span> +1</span>
           <span class="count-pill js-routine-count">0/6</span>
           <span class="streak-chip js-streak-chip">🔥 0일</span>
@@ -2184,9 +2189,10 @@
         </div>
         <div class="card today-card math-card" id="morningMathCard">
           <div class="sec-head">
-            <h2>🔥 아침 미션</h2>
+            <h2>🔥 오전 미션</h2>
             <span class="sec-sub"><span class="gball ball-mini" data-ball="normal" aria-hidden="true"></span> +1</span>
             <div class="spacer"></div>
+            <button class="link-btn" type="button" data-act="mission-edit">⚙️ 편집</button>
             <button class="link-btn" type="button" data-act="goto" data-tab="study">할 일 탭 →</button>
           </div>
           <div class="js-morning-math" id="morningMath"></div>
@@ -2252,7 +2258,7 @@
 
         <div class="hero-side">
           <div class="stat-pill">
-            <span class="stat-k">저녁 루틴</span>
+            <span class="stat-k">오후 루틴</span>
             <span class="stat-v js-evening-count">0/6</span>
           </div>
           <div class="stat-pill balls">
@@ -2274,7 +2280,7 @@
       <!-- 저녁 루틴 6단계: 히어로 바로 아래 3×2 -->
       <section class="routine-wrap eve">
         <div class="sec-head">
-          <h2>🌙 저녁 루틴 6단계</h2>
+          <h2>🌇 오후 루틴 6단계</h2>
           <span class="sec-sub">6개를 모두 하면 <span class="gball ball-mini" data-ball="normal" aria-hidden="true"></span> +1</span>
           <span class="count-pill js-evening-count">0/6</span>
           <span class="streak-chip js-streak-chip">🔥 0일</span>
@@ -2447,7 +2453,7 @@
         <h2>⚡ 보너스 관리</h2>
         <div class="count-pill" id="bonusManageCount">0개</div>
         <div class="spacer"></div>
-        <span class="hint">저녁 홈의 ⚡ 보너스 칸에 그대로 보여요</span>
+        <span class="hint">오후 홈의 ⚡ 보너스 칸에 그대로 보여요</span>
       </div>
       <ul class="list bonus-manage-list" id="bonusManageList"></ul>
       <div class="add-row">
@@ -2464,7 +2470,7 @@
         <button class="btn btn-yellow" type="button" data-act="habit-edit">⚙️ 습관 편집</button>
       </div>
       <ul class="list habit-manage-list" id="habitManageList"></ul>
-      <p class="hint" style="margin:10px 0 0">이번 주에 집중할 습관 1~3개만 골라 주세요. 아침·저녁 화면의 🌱 생활습관 미션에 그대로 보여요. 연속 일수가 쌓이고 3일·5일 연속에는 🌟 특급칭찬!</p>
+      <p class="hint" style="margin:10px 0 0">이번 주에 집중할 습관 1~3개만 골라 주세요. 오전·오후 화면의 🌱 생활습관 미션에 그대로 보여요. 연속 일수가 쌓이고 3일·5일 연속에는 🌟 특급칭찬!</p>
     </div>
   </section>
 
@@ -2473,7 +2479,7 @@
     <section class="card dex-hero">
       <div>
         <h2>🔴 몬스터볼 뽑기</h2>
-        <p>아침 루틴 2개 · 저녁 루틴 1개 · 오늘 꼭 할 일은 항목마다 1개! 매일 모아서 뽑기에 도전해 보세요.<br>일반 10개 · 슈퍼 25개 · <b>마스터 50개는 전설·메가진화 100% 확정!</b></p>
+        <p>오전 루틴 2개 · 오후 루틴 1개 · 오늘 꼭 할 일은 항목마다 1개! 매일 모아서 뽑기에 도전해 보세요.<br>일반 10개 · 슈퍼 25개 · <b>마스터 50개는 전설·메가진화 100% 확정!</b></p>
         <div class="gacha-row">
           <button class="gacha-btn normal" type="button" data-act="gacha" data-tier="normal" data-cost="10">
             <span class="gball" data-ball="normal"></span>
@@ -2542,7 +2548,7 @@
 
 <footer class="foot">
   날씨·미세먼지 정보: Open-Meteo · 천안시 성성동(36.8428, 127.1394) 기준<br>
-  체크 기록·학원 스케줄·포켓몬 도감은 이 브라우저에만 저장돼요 (매일 아침·저녁 루틴 새로 시작)
+  체크 기록·학원 스케줄·포켓몬 도감은 이 브라우저에만 저장돼요 (매일 오전·오후 루틴 새로 시작)
 </footer>
 
 <!-- ⚙️ 타임바 · 알림 편집 modal -->
@@ -2553,8 +2559,8 @@
       <button class="modal-close" type="button" data-act="ms-close" aria-label="닫기">✕</button>
     </div>
     <div class="list-tabs" role="tablist">
-      <button class="list-tab on" type="button" data-act="ms-mode" data-mode="morning">🌅 아침 타임바</button>
-      <button class="list-tab" type="button" data-act="ms-mode" data-mode="evening">🌙 저녁 타임바</button>
+      <button class="list-tab on" type="button" data-act="ms-mode" data-mode="morning">☀️ 오전 타임바</button>
+      <button class="list-tab" type="button" data-act="ms-mode" data-mode="evening">🌇 오후 타임바</button>
     </div>
     <p class="ms-hint" id="msHint">시간과 이름을 바꾸고, 구간마다 알림을 켜고 끌 수 있어요. 알림 문구를 비우면 "7:10 식사 시간이에요"처럼 자동으로 읽어 줘요.</p>
     <button class="ms-notify-btn" id="msNotifyBtn" type="button" data-act="ms-notify">🔔 기기 알림 켜기</button>
@@ -2578,8 +2584,8 @@
       <button class="modal-close" type="button" data-act="close-routine-edit">✕</button>
     </div>
     <div class="list-tabs" role="tablist">
-      <button class="list-tab on" type="button" data-act="edit-list" data-list="morning">🌅 아침 루틴</button>
-      <button class="list-tab" type="button" data-act="edit-list" data-list="evening">🌙 저녁 루틴</button>
+      <button class="list-tab on" type="button" data-act="edit-list" data-list="morning">☀️ 오전 루틴</button>
+      <button class="list-tab" type="button" data-act="edit-list" data-list="evening">🌇 오후 루틴</button>
     </div>
     <p class="hint" style="margin:0 0 12px" id="editHint">이름을 고치거나 순서를 바꿀 수 있어요.</p>
     <div id="routineEditList"></div>
@@ -2611,6 +2617,29 @@
     </div>
     <div class="form-actions">
       <button class="btn btn-blue" type="button" data-act="habit-edit-close">완료</button>
+    </div>
+  </div>
+</div>
+
+<!-- 오전 미션 편집 modal (평일 / 주말) -->
+<div class="modal" id="missionModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>🔥 오전 미션 편집</h3>
+      <button class="modal-close" type="button" data-act="mission-edit-close">✕</button>
+    </div>
+    <div class="list-tabs">
+      <button class="list-tab on" type="button" data-act="mission-tab" data-list="weekday">🏫 평일 미션</button>
+      <button class="list-tab" type="button" data-act="mission-tab" data-list="weekend">🌈 주말 미션</button>
+    </div>
+    <p class="hint" style="margin:0 0 12px">월~금은 <b>🏫 평일 미션</b>, 토·일은 <b>🌈 주말 미션</b>이 대시보드에 나와요. 미션을 하나 끝낼 때마다 🟡 몬스터볼 +1!</p>
+    <div id="missionEditList"></div>
+    <div class="add-row" style="margin-top:12px">
+      <input id="missionInput" type="text" placeholder="평일 미션 추가 (예: 받아쓰기 1장)" enterkeyhint="done" autocomplete="off">
+      <button class="btn btn-yellow" id="missionAdd" type="button">+ 평일 미션 추가</button>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-blue" type="button" data-act="mission-edit-close">완료</button>
     </div>
   </div>
 </div>
@@ -2754,6 +2783,7 @@
     bonusDone: 'yj_bonus_done_v1',
     bonusItems: 'yj_bonus_items_v1',
     missionDone: 'yj_morning_mission_done_v1',
+    missions: 'yj_morning_missions_v1',
     dexCosts: 'yj_dex_costs_v1',
     habits: 'yj_habits_v1',
     habitDone: 'yj_habit_done_v1',
@@ -3034,7 +3064,7 @@
     habits: [], habitDone: {},
     balls: 0, dex: {}, dexCosts: {}, awards: {},
     perfectDays: [], stones: 0, stoneAwards: [], academies: [], once: [],
-    missionDone: {},
+    missionDone: {}, missions: { weekday: [], weekend: [] },
     momPin: '', praises: []
   };
 
@@ -3044,6 +3074,9 @@
   var OLD_ENGLISH_LABEL = '아침먹으면서 영어영상';
   var DEFAULT5 = ['세수·로션', '유산균·물 마시기', '아침먹으면서 영어영상', '용변·양치', '옷입고 양말신기'];
   var DEFAULT_EVENING = ['신발정리·옷정리', '샤워', '저녁식사', '숙제·공부', '양치·가방정리', '독서'];
+  /* 🔥 오전 미션 기본값 — 평일(월~금)과 주말(토·일)을 따로 둔다 */
+  var DEFAULT_MISSION_WEEKDAY = ['원리셈', '따풀', '지각 안하기'];
+  var DEFAULT_MISSION_WEEKEND = ['원리셈', '따풀', '책 읽기'];
   /* v10까지의 기본값(신발정리 전) */
   var DEFAULT_EVENING_OLD5 = ['샤워', '저녁식사', '숙제·공부', '양치·가방정리', '독서'];
   var DEFAULT_EVENING_OLD7 = ['샤워', '저녁식사', '숙제', '공부', '독서', '양치', '가방정리'];
@@ -3389,6 +3422,16 @@
     if (renamed) store.set(K.items, items);
     state.items = items;
     splitMathItems();
+
+    /* 🔥 오전 미션: 평일·주말 목록 (처음이면 지금 쓰는 미션으로 만들어 둔다) */
+    var mss = store.get(K.missions, null);
+    if (!(mss && typeof mss === 'object' && (mss.weekday || mss.weekend))) {
+      mss = defaultMissions();
+      store.set(K.missions, mss);
+    } else {
+      mss = { weekday: sanitizeMissionList(mss.weekday), weekend: sanitizeMissionList(mss.weekend) };
+    }
+    state.missions = mss;
 
     /* 저녁 루틴: 6단계 기본값 (예전 5단계·7단계 기본값이면 자동으로 올린다) */
     var eve = store.get(K.eveningItems, null);
@@ -4110,7 +4153,7 @@
     var hint = $('msHint');
     refreshMsNotifyBtn();
     if (hint) {
-      hint.textContent = (msEditMode === 'evening' ? '저녁' : '아침') + ' 타임바의 첫 구간이 시작, 마지막 구간이 '
+      hint.textContent = (msEditMode === 'evening' ? '오후' : '오전') + ' 타임바의 첫 구간이 시작, 마지막 구간이 '
         + (msEditMode === 'evening' ? '취침' : '등교') + ' 시각이 돼요. 시간·이름을 바꾸고 구간마다 알림을 켜고 끌 수 있어요.'
         + ' 알림 문구를 비우면 "7:10 식사 시간이에요"처럼 자동으로 읽어 줘요.';
     }
@@ -4172,7 +4215,7 @@
     renderTimeline();
     tickClock();
     closeMsModal();
-    toast(msEditMode === 'evening' ? '저녁 타임바를 저장했어요 🌙' : '아침 타임바를 저장했어요 ☀️');
+    toast(msEditMode === 'evening' ? '오후 타임바를 저장했어요 🌇' : '오전 타임바를 저장했어요 ☀️');
   }
 
   /* ======================= 아침 · 저녁 모드 ======================= */
@@ -4391,8 +4434,8 @@
       var eDone = eveningDoneIds().length;
       var eTotal = state.eveningItems.length;
       var eRemain = eTotal - eDone;
-      if (eTotal > 0 && eRemain === 0) es.textContent = '저녁 루틴 완벽! 이제 푹 자요 🌙';
-      else if (now >= eveStart) es.textContent = '저녁 루틴 ' + eDone + '/' + eTotal + ' · ' + eRemain + '개 남았어요';
+      if (eTotal > 0 && eRemain === 0) es.textContent = '오후 루틴 완벽! 이제 푹 자요 🌙';
+      else if (now >= eveStart) es.textContent = '오후 루틴 ' + eDone + '/' + eTotal + ' · ' + eRemain + '개 남았어요';
       else es.textContent = '오늘 하루도 수고했어요 🌙';
     }
 
@@ -4453,6 +4496,7 @@
     if (!a.r) a.r = [];
     if (!a.s) a.s = [];
     if (!a.mi) a.mi = [];                 /* 따로 받은 아침 항목(원리셈·따풀) */
+    if (!a.ms) a.ms = [];                 /* 오전 미션 중 직접 추가한 항목 */
     if (a.m1 === undefined) a.m1 = false; /* 아침 5개 묶음 보상 */
     if (a.e1 === undefined) a.e1 = false; /* 저녁 5개 묶음 보상 */
     if (a.sb === undefined) a.sb = false; /* 공부 올클리어 보너스 */
@@ -4485,7 +4529,7 @@
       a.m1 = true;
       addBalls(1);
       saveAwards();
-      toast('아침 생활 루틴 ' + n + '개 완벽! 몬스터볼 +1 🔴');
+      toast('오전 루틴 ' + n + '개 완벽! 몬스터볼 +1 🔴');
       SFX.fanfare();
       confettiBurst();
     }
@@ -4514,7 +4558,7 @@
       a.e1 = true;
       addBalls(1);
       saveAwards();
-      toast('저녁 루틴 ' + n + '개 완벽! 몬스터볼 +1 🔴');
+      toast('오후 루틴 ' + n + '개 완벽! 몬스터볼 +1 🔴');
       SFX.fanfare();
       confettiBurst();
     }
@@ -4913,41 +4957,245 @@
     setAll('.js-routine-count', doneCount + '/' + bundleCount);
   }
 
-  /* ✏️ 아침 공부(원리셈 / 따풀): 두 장의 포켓몬 카드 — 누르면 뒤집혀 몬스터볼 +1 */
+  /* ======================= 🔥 오전 미션 (평일·주말) =======================
+     미션 카드 한 장을 누르면 3D로 뒤집히며 몬스터볼 +1. 원리셈·따풀은 오전 루틴 쪽
+     기록을 그대로 쓰고, 지각 안하기와 직접 추가한 미션은 하루마다 새로 시작한다. */
+  function isWeekendNow() { var d = new Date().getDay(); return d === 0 || d === 6; }
+  function missionWhich() { return isWeekendNow() ? 'weekend' : 'weekday'; }
+  function missionList(which) {
+    var m = state.missions || {}, arr = m[which];
+    return (arr && typeof arr.slice === 'function') ? arr : [];
+  }
+  function missionListToday() { return missionList(missionWhich()); }
+  function saveMissions() { store.set(K.missions, state.missions); }
+
+  function sanitizeMissionList(arr) {
+    var out = [];
+    if (!arr || typeof arr.slice !== 'function') return out;
+    for (var i = 0; i < arr.length; i++) {
+      var it = arr[i];
+      if (!it) continue;
+      var label = String(it.label == null ? '' : it.label).trim();
+      if (!label) continue;
+      var ref = (it.ref === 'math' || it.ref === 'late') ? it.ref : 'own';
+      out.push({ id: String(it.id || ('ms-' + uid())), ref: ref, label: label });
+      if (out.length >= 6) break;
+    }
+    return out;
+  }
+
+  /* 처음 한 번: 지금 쓰던 미션(원리셈·따풀·지각 안하기)으로 평일·주말 목록을 만든다 */
+  function defaultMissions() {
+    var wd = [], we = [], i, math = morningSingleItems();
+    for (i = 0; i < math.length; i++) {
+      wd.push({ id: math[i].id, ref: 'math', label: math[i].label });
+      we.push({ id: math[i].id, ref: 'math', label: math[i].label });
+    }
+    if (!wd.length) {
+      wd.push({ id: 'ms-' + uid(), ref: 'own', label: DEFAULT_MISSION_WEEKDAY[0] });
+      we.push({ id: 'ms-' + uid(), ref: 'own', label: DEFAULT_MISSION_WEEKDAY[0] });
+    }
+    wd.push({ id: 'late', ref: 'late', label: '지각 안하기' });
+    we.push({ id: 'ms-' + uid(), ref: 'own', label: DEFAULT_MISSION_WEEKEND[DEFAULT_MISSION_WEEKEND.length - 1] });
+    return { weekday: wd, weekend: we };
+  }
+
+  /* 목록 항목 → 실제 카드 (수학 항목은 오전 루틴 id, 지각은 late, 나머지는 미션 자체 id) */
+  function resolveMission(m) {
+    if (!m) return null;
+    if (m.ref === 'math') {
+      var it = findItem(state.items, m.id);
+      if (it) return { kind: 'math', id: it.id, label: m.label || it.label };
+    }
+    if (m.ref === 'late') return { kind: 'late', id: 'late', label: m.label || '지각 안하기' };
+    return { kind: 'own', id: m.id, label: m.label };
+  }
+
+  function missionIcon(label) {
+    var t = String(label == null ? '' : label);
+    if (t.indexOf('원리셈') !== -1) return svgMathCalc();
+    if (t.indexOf('따풀') !== -1) return svgMathPul();
+    if (t.indexOf('지각') !== -1) return svgLate();
+    if (t.indexOf('책') !== -1 || t.indexOf('독서') !== -1) return svgBook();
+    return svgMath();
+  }
+
+  function missionOwnDone(id) {
+    var d = state.missionDone[todayKey()];
+    return !!(d && d.indexOf(id) !== -1);
+  }
+
+  /* ✏️ 오전 미션: 오늘(평일/주말) 목록을 포켓몬 카드로 — 누르면 뒤집혀 몬스터볼 +1 */
   function renderMorningMath() {
     var box = $('morningMath'), card = $('morningMathCard');
     if (!box || !card) return;
-    var items = morningSingleItems();
     card.style.display = '';
 
+    var list = missionListToday();
     var doneIds = todayRoutineIds();
-    var html = '';
-    for (var i = 0; i < items.length; i++) {
-      var it = items[i];
-      var ico = it.label.indexOf('원리셈') !== -1 ? svgMathCalc()
-        : (it.label.indexOf('따풀') !== -1 ? svgMathPul() : svgMath());
+    var html = '', n = 0, i;
+    for (i = 0; i < list.length; i++) {
+      var r = resolveMission(list[i]);
+      if (!r) continue;
+      var done = r.kind === 'math' ? (doneIds.indexOf(r.id) !== -1)
+        : (r.kind === 'late' ? lateMissionDone() : missionOwnDone(r.id));
+      n++;
       html += pokeCardHtml({
-        act: 'r-toggle',
-        id: it.id,
-        label: it.label,
-        ico: ico,
+        act: r.kind === 'late' ? 'late-toggle' : (r.kind === 'math' ? 'r-toggle' : 'm-toggle'),
+        id: r.id,
+        label: r.label,
+        ico: missionIcon(r.label),
         theme: 'mission',
-        tag: 'MISSION ' + pad2(i + 1),
-        done: doneIds.indexOf(it.id) !== -1
+        tag: 'MISSION ' + pad2(n),
+        done: done
       });
     }
-    /* ⏰ 지각 안하기 — 매일 새로 시작하는 세 번째 미션 */
-    html += pokeCardHtml({
-      act: 'late-toggle',
-      id: 'late',
-      label: '지각 안하기',
-      ico: svgLate(),
-      theme: 'mission',
-      tag: 'MISSION ' + pad2(items.length + 1),
-      done: lateMissionDone()
-    });
+    if (!list.length) {
+      html = '<div class="empty-soft" style="grid-column:1/-1">오늘의 오전 미션이 아직 없어요.<br><small>“⚙️ 편집”에서 추가해 보세요!</small></div>';
+    }
     box.innerHTML = html;
     box.style.justifyContent = 'space-evenly';
+  }
+
+  /* 🔥 오전 미션 중 직접 추가한 항목 (책 읽기 등) — 하루마다 새로, 몬스터볼 +1 */
+  function toggleOwnMission(id) {
+    var list = missionListToday(), m = null, i;
+    for (i = 0; i < list.length; i++) if (list[i].id === id) { m = list[i]; break; }
+    if (!m) return;
+    if (missionOwnDone(id)) { unmarkOwnMission(id); return; }
+    var r = resolveMission(m);
+    askConfirm('“' + (r ? r.label : m.label) + '” 다 했어요?',
+      '네 하고 누르면 몬스터볼을 하나 받아요 🔴',
+      '네! 다 했어요 🔴+1',
+      function () { markOwnMission(id); });
+  }
+
+  function markOwnMission(id) {
+    var key = todayKey();
+    var arr = state.missionDone[key] || [];
+    if (arr.indexOf(id) === -1) arr.push(id);
+    state.missionDone[key] = arr;
+    saveMissionDone();
+
+    var a = awardBox(key);
+    if (a.ms.indexOf(id) === -1) { a.ms.push(id); addBalls(1); saveAwards(); }
+    markJustFlipped(id);
+    renderMorningMath();
+    SFX.ball();
+    toast('미션 완료! 몬스터볼 +1 🔴');
+  }
+
+  function unmarkOwnMission(id) {
+    var key = todayKey();
+    var arr = state.missionDone[key] || [];
+    var i = arr.indexOf(id);
+    if (i !== -1) arr.splice(i, 1);
+    state.missionDone[key] = arr;
+    saveMissionDone();
+
+    var a = awardBox(key);
+    var j = a.ms.indexOf(id);
+    if (j !== -1) { a.ms.splice(j, 1); addBalls(-1); saveAwards(); toast('볼 하나를 돌려 놓았어요 🔴'); }
+    renderMorningMath();
+  }
+
+  /* ---- ⚙️ 오전 미션 편집 모달 (평일 / 주말) ---- */
+  var missionEditWhich = null;
+
+  function renderMissionEdit() {
+    var box = $('missionEditList');
+    if (!box) return;
+    if (missionEditWhich !== 'weekend') missionEditWhich = 'weekday';
+    var arr = missionList(missionEditWhich), html = '', i;
+    for (i = 0; i < arr.length; i++) {
+      var it = arr[i];
+      html += '<div class="edit-row">'
+        + '<input type="text" value="' + esc(it.label) + '" data-id="' + esc(it.id) + '" data-role="mission-name" aria-label="미션 이름">'
+        + '<button class="mv" type="button" data-act="mission-move" data-id="' + esc(it.id) + '" data-dir="-1" aria-label="위로"' + (i === 0 ? ' disabled' : '') + '>↑</button>'
+        + '<button class="mv" type="button" data-act="mission-move" data-id="' + esc(it.id) + '" data-dir="1" aria-label="아래로"' + (i === arr.length - 1 ? ' disabled' : '') + '>↓</button>'
+        + '<button class="icon-btn" style="font-size:17px" type="button" data-act="mission-del" data-id="' + esc(it.id) + '" aria-label="삭제">🗑️</button>'
+        + '</div>';
+    }
+    if (!arr.length) {
+      html = '<div class="empty-soft">' + (missionEditWhich === 'weekend' ? '주말' : '평일') + ' 미션이 없어요.<br>아래에서 추가해 주세요!</div>';
+    }
+    box.innerHTML = html;
+
+    var tabs = document.querySelectorAll('[data-act="mission-tab"]');
+    for (i = 0; i < tabs.length; i++) tabs[i].classList.toggle('on', tabs[i].getAttribute('data-list') === missionEditWhich);
+
+    var inputs = box.querySelectorAll('[data-role="mission-name"]');
+    for (i = 0; i < inputs.length; i++) {
+      inputs[i].addEventListener('change', function () {
+        renameMission(this.getAttribute('data-id'), this.value);
+      });
+    }
+    var label = missionEditWhich === 'weekend' ? '주말' : '평일';
+    var addBtn = $('missionAdd');
+    if (addBtn) addBtn.textContent = '+ ' + label + ' 미션 추가';
+    var inp = $('missionInput');
+    if (inp) inp.setAttribute('placeholder', label + ' 미션 추가 (예: ' + (missionEditWhich === 'weekend' ? '책 10쪽 읽기' : '받아쓰기 1장') + ')');
+  }
+
+  function openMissionEdit() {
+    missionEditWhich = missionWhich();
+    renderMissionEdit();
+    $('missionModal').classList.add('show');
+    setTimeout(function () { var i = $('missionInput'); if (i) i.focus(); }, 120);
+  }
+  function closeMissionEdit() {
+    $('missionModal').classList.remove('show');
+    renderMorningMath();
+  }
+  function setMissionTab(which) {
+    missionEditWhich = (which === 'weekend') ? 'weekend' : 'weekday';
+    renderMissionEdit();
+  }
+  function addMissionFrom(input) {
+    if (!input) return;
+    var v = input.value.trim();
+    if (!v) { input.focus(); return; }
+    var arr = missionList(missionEditWhich).slice();
+    if (arr.length >= 6) { toast('오전 미션은 6개까지 넣을 수 있어요 🔥'); return; }
+    arr.push({ id: 'ms-' + uid(), ref: 'own', label: v });
+    state.missions[missionEditWhich] = arr;
+    saveMissions();
+    input.value = '';
+    renderMissionEdit();
+    renderMorningMath();
+    input.focus();
+  }
+  function renameMission(id, label) {
+    var v = String(label == null ? '' : label).trim();
+    if (!v) { renderMissionEdit(); return; }
+    var arr = missionList(missionEditWhich).slice(), i;
+    for (i = 0; i < arr.length; i++) if (arr[i].id === id) arr[i] = { id: arr[i].id, ref: arr[i].ref, label: v };
+    state.missions[missionEditWhich] = arr;
+    saveMissions();
+    renderMissionEdit();
+    renderMorningMath();
+  }
+  function deleteMission(id) {
+    var arr = missionList(missionEditWhich), keep = [], i, gone = null;
+    for (i = 0; i < arr.length; i++) { if (arr[i].id === id) gone = arr[i]; else keep.push(arr[i]); }
+    if (!gone) return;
+    if (!window.confirm('“' + gone.label + '” 미션을 뺄까요?')) return;
+    state.missions[missionEditWhich] = keep;
+    saveMissions();
+    renderMissionEdit();
+    renderMorningMath();
+  }
+  function moveMission(id, dir) {
+    var arr = missionList(missionEditWhich).slice(), idx = -1, i;
+    for (i = 0; i < arr.length; i++) if (arr[i].id === id) idx = i;
+    if (idx < 0) return;
+    var to = idx + dir;
+    if (to < 0 || to >= arr.length) return;
+    var tmp = arr[idx]; arr[idx] = arr[to]; arr[to] = tmp;
+    state.missions[missionEditWhich] = arr;
+    saveMissions();
+    renderMissionEdit();
+    renderMorningMath();
   }
 
   /* ⚔️ 아침 미션 — ⏰ 지각 안하기 (하루마다 새로) */
@@ -4999,7 +5247,7 @@
     var doneIds = eveningDoneIds();
     var html = '';
     if (!state.eveningItems.length) {
-      html = '<div class="empty-soft" style="grid-column:1/-1">아직 저녁 루틴이 없어요.<br><small>“루틴 편집”에서 추가해 보세요!</small></div>';
+      html = '<div class="empty-soft" style="grid-column:1/-1">아직 오후 루틴이 없어요.<br><small>“루틴 편집”에서 추가해 보세요!</small></div>';
     } else {
       for (var i = 0; i < state.eveningItems.length; i++) {
         html += routineCardHtml(state.eveningItems[i], i, doneIds.indexOf(state.eveningItems[i].id) !== -1, true, 0);
@@ -5032,7 +5280,7 @@
     var all = bundle.length > 0;
     for (var i = 0; i < bundle.length; i++) if (done.indexOf(bundle[i].id) === -1) all = false;
     if (all && !awardBox(todayKey()).m1) {
-      askConfirm('아침 생활 루틴 ' + bundle.length + '개를 모두 다 했어요?',
+      askConfirm('오전 루틴 ' + bundle.length + '개를 모두 다 했어요?',
         bundle.length + '개를 모두 체크했어요! 네 하고 누르면 몬스터볼 1개 🔴',
         '네! 다 했어요 🔴+1', function () { grantMorningBundle(bundle.length); });
     }
@@ -5095,7 +5343,7 @@
     var done = eveningDoneIds();
     var total = state.eveningItems.length;
     if (total > 0 && done.length === total && !awardBox(todayKey()).e1) {
-      askConfirm('저녁 루틴 ' + total + '개를 모두 다 했어요?',
+      askConfirm('오후 루틴 ' + total + '개를 모두 다 했어요?',
         total + '개를 모두 체크했어요! 네 하고 누르면 몬스터볼 1개 🔴',
         '네! 다 했어요 🔴+1', function () { grantEveningBundle(total); });
     }
@@ -5202,11 +5450,11 @@
     });
     var hint = $('editHint');
     if (hint) hint.textContent = editListName === 'evening'
-      ? '저녁 루틴이에요. 6개를 추천해요! (6개를 모두 체크하면 몬스터볼 +1)'
-      : '아침 루틴이에요. 6개를 추천해요! 6개를 모두 체크하면 몬스터볼 +1, 원리셈·따풀은 오른쪽 ‘🔥 아침 미션’ 카드에서 +1';
+      ? '오후 루틴이에요. 6개를 추천해요! (6개를 모두 체크하면 몬스터볼 +1)'
+      : '오전 루틴이에요. 6개를 추천해요! 6개를 모두 체크하면 몬스터볼 +1, 원리셈·따풀은 오른쪽 ‘🔥 아침 미션’ 카드에서 +1';
     var input = $('routineInput');
     if (input) input.placeholder = editListName === 'evening'
-      ? '저녁 루틴 추가 (예: 내일 준비물 챙기기)' : '루틴 추가 (예: 물 한 잔 마시기)';
+      ? '오후 루틴 추가 (예: 내일 준비물 챙기기)' : '루틴 추가 (예: 물 한 잔 마시기)';
     renderRoutineEdit();
   }
 
@@ -6950,8 +7198,8 @@
     }
     html += '<div style="text-align:center;font-size:11px;font-weight:800;color:' + (state.stones > 0 ? '#8A6B12' : '#A79E8B') + '">'
       + (state.stones > 0
-        ? ('보유 💎 ' + state.stones + '개 · 아침+저녁+공부 3일 연속마다 1개')
-        : '진화의 돌이 필요해요 (아침+저녁+공부 3일 연속 완료!)')
+        ? ('보유 💎 ' + state.stones + '개 · 오전+오후+공부 3일 연속마다 1개')
+        : '진화의 돌이 필요해요 (오전+오후+공부 3일 연속 완료!)')
       + '</div></div>';
     return html;
   }
@@ -7370,6 +7618,24 @@
       case 'habit-del':
         deleteHabit(id);
         break;
+      case 'mission-edit':
+        openMissionEdit();
+        break;
+      case 'mission-edit-close':
+        closeMissionEdit();
+        break;
+      case 'mission-tab':
+        setMissionTab(el.getAttribute('data-list'));
+        break;
+      case 'mission-move':
+        moveMission(id, parseInt(el.getAttribute('data-dir'), 10));
+        break;
+      case 'mission-del':
+        deleteMission(id);
+        break;
+      case 'm-toggle':
+        toggleOwnMission(id);
+        break;
       case 'hs-add':
         selectedDow = new Date().getDay();
         showTab('study');
@@ -7525,6 +7791,10 @@
   $('bonusAdd').addEventListener('click', addBonus);
   $('bonusInput').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') { e.preventDefault(); addBonus(); }
+  });
+  $('missionAdd').addEventListener('click', function () { addMissionFrom($('missionInput')); });
+  $('missionInput').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') { e.preventDefault(); addMissionFrom($('missionInput')); }
   });
   $('habitAdd').addEventListener('click', function () { addHabitFrom($('habitInput')); });
   $('habitInput').addEventListener('keydown', function (e) {
