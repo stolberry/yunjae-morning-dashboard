@@ -2064,6 +2064,16 @@
   #homeEvening .bonus-grid .pk-card,#homeEvening .bonus-grid .pk-card *{animation:none}
   #homeEvening .bonus-grid .pk-card:hover,#homeEvening .bonus-grid .pk-card:active{transform:none;filter:none}
 
+  /* ---- v12: 타임바는 조용하게 (태블릿 배터리) ----
+     반짝임·흐름·콩콩 뛰는 무한 애니메이션은 끄고, 막대와 포켓몬은 시계에 맞춰
+     부드럽게 이동(transition)만 한다. */
+  .hero-pika,.hp-fill,.hp-fill::before,.hp-fill .hp-comet,.hp-runner.run,
+  .hero-progress>.hp-runner.run,.hero-moon,
+  #homeEvening .hero-progress>.hp-runner.sleepy.run,
+  #homeMorning .hp-fill,#homeEvening .hp-fill,
+  #homeMorning .hp-track,#homeEvening .hp-track{animation:none!important}
+  .hp-fill::before{opacity:0}
+
   /* 좁은 화면에서는 다시 세로로 차곡차곡 */
   @media (max-width:860px){
     #homeMorning .home-grid,#homeEvening .home-grid{grid-template-columns:1fr;grid-template-rows:auto;gap:9px}
