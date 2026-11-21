@@ -4144,9 +4144,18 @@
     }
   }
 
-  /* 등록된 시각이 되면 하루 한 번만 */
+  /* 토·일 판별 (알림 갈래에서도 같은 기준을 쓴다) */
+  function isWeekend(d) {
+    d = d || new Date();
+    var w = d.getDay();
+    return w === 0 || w === 6;
+  }
+
+  /* 등록된 시각이 되면 하루 한 번만
+     오전 등교 알림(MS)은 화면의 등교 타임바와 같이 평일에만 울리고,
+     오후·취침 알림(MS_EVE)은 주말에도 그대로 울린다. */
   function checkMilestoneAlert(now) {
-    checkListAlert(MS, now);
+    if (!isWeekend(now)) checkListAlert(MS, now);
     checkListAlert(MS_EVE, now);
   }
 
@@ -5032,7 +5041,7 @@
   /* ======================= 🔥 오전 미션 (평일·주말) =======================
      미션 카드 한 장을 누르면 3D로 뒤집히며 몬스터볼 +1. 원리셈·따풀은 오전 루틴 쪽
      기록을 그대로 쓰고, 지각 안하기와 직접 추가한 미션은 하루마다 새로 시작한다. */
-  function isWeekendNow() { var d = new Date().getDay(); return d === 0 || d === 6; }
+  function isWeekendNow() { return isWeekend(new Date()); }
   function missionWhich() { return isWeekendNow() ? 'weekend' : 'weekday'; }
   function missionList(which) {
     var m = state.missions || {}, arr = m[which];
