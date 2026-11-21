@@ -190,48 +190,11 @@
     -webkit-user-drag:none;pointer-events:none;
     transition:opacity .45s ease,transform .5s cubic-bezier(.25,1.4,.4,1);
   }
-  .hero-pika .evo-char{opacity:1;transform:scale(1.06)}
-  .hero-pika .evo-mega{opacity:0;transform:scale(1.3)}
-  .hero-pika .evo-flame{position:absolute;inset:0;z-index:2;display:none;place-items:center}
-  .hero-pika .evo-flame svg{width:54%;height:54%;display:block;filter:drop-shadow(0 2px 3px rgba(150,70,0,.25))}
-  /* 07:10~08:15: 리자몽은 막대 위에서 달리고, 배지에는 불꽃 문장만 */
-  .hero-pika.rest .evo-char,.hero-pika.rest .evo-mega{opacity:0}
-  .hero-pika.rest .evo-flame{display:grid}
-  .hero-pika .evo-burst{
-    position:absolute;inset:-8px;border-radius:50%;z-index:3;opacity:0;pointer-events:none;
-    background:radial-gradient(circle,rgba(255,255,255,.96) 0%,rgba(130,220,255,.78) 32%,rgba(46,134,224,0) 68%);
-  }
-  /* 메가리자몽X: 푸른 불꽃 테두리 */
-  .hero-pika.mega{
-    background:#0C1F38;
-    box-shadow:0 0 0 2px #FFFFFF,0 0 0 5px #2E86E0,0 0 15px 4px rgba(72,190,255,.55),0 8px 18px rgba(18,74,140,.28);
-    animation:megaFloat 3.4s ease-in-out infinite;
-  }
-  @keyframes megaFloat{0%,100%{transform:translateY(0) rotate(-1.6deg)}50%{transform:translateY(-4px) rotate(1.6deg)}}
-  .hero-pika.mega::before{background:conic-gradient(from 0deg,#6FD3FF,#1C5AA8,#A9ECFF,#2E86E0,#7FE6FF,#1C5AA8,#6FD3FF);animation-duration:8s}
-  .hero-pika.mega::after{
-    background:radial-gradient(circle at 50% 30%,#F8FDFF 0%,#E2F1FF 56%,#C2DEF9 100%);
-    box-shadow:inset 0 0 10px rgba(58,138,208,.38);
-  }
-  .hero-pika.mega .evo-char{opacity:0;transform:scale(.82)}
-  .hero-pika.mega .evo-mega{opacity:1;transform:scale(1.14)}
-  /* 진화 연출: 반짝 + 부풀었다 줄어드는 플래시 */
-  .hero-pika.evolving{animation:evoPulse 1.15s cubic-bezier(.2,.9,.3,1)}
-  .hero-pika.evolving .evo-burst{animation:evoBurst 1.15s ease-out}
-  .hero-pika.evolving::after{box-shadow:inset 0 0 20px rgba(255,255,255,.95),inset 0 0 12px rgba(120,215,255,.9)}
-  @keyframes evoPulse{
-    0%{transform:scale(1)}
-    16%{transform:scale(1.32) rotate(-6deg)}
-    38%{transform:scale(.92) rotate(5deg)}
-    62%{transform:scale(1.16) rotate(-3deg)}
-    100%{transform:scale(1) rotate(0)}
-  }
-  @keyframes evoBurst{
-    0%{opacity:0;transform:scale(.45)}
-    20%{opacity:1;transform:scale(1.15)}
-    65%{opacity:.4;transform:scale(1.85)}
-    100%{opacity:0;transform:scale(2.3)}
-  }
+  /* v13: 배지 속 포켓몬은 하루 종일 그대로 (진화·불꽃 문장·플래시 없음) */
+  .hero-pika .evo-char{opacity:1;transform:scale(1.04)}
+  /* 테두리 회전도 멈춘다 (태블릿 배터리) */
+  .hero-pika::before{animation:none}
+  .hero-pika{cursor:default}
   .hero-id{flex:1;min-width:0;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
   .hero-status-box{margin-left:auto;flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:4px;position:relative;z-index:1}
   .hero-status-box .hero-count{font-size:clamp(20px,1.7vw,26px);letter-spacing:-.8px;margin:0}
@@ -315,20 +278,14 @@
     opacity:0;transition:opacity .3s ease;pointer-events:none;-webkit-user-drag:none;
   }
   .hero-progress>.hp-runner.on{opacity:1}
-  .hero-progress>.hp-runner.on .rn-char{opacity:1}
-  .hero-progress>.hp-runner.mega-run{opacity:1;filter:drop-shadow(0 0 12px rgba(90,190,255,.95))}
-  .hero-progress>.hp-runner.mega-run .rn-mega{opacity:1}
+  .hero-progress>.hp-runner.on .rn-sol{opacity:1}
+  .hero-progress>.hp-runner.mega-run{opacity:1;filter:drop-shadow(0 0 11px rgba(255,196,72,.9))}
+  .hero-progress>.hp-runner.mega-run .rn-sol{opacity:1}
   .hero-progress>.hp-runner.run{animation:charFly .9s ease-in-out infinite}
-  /* 저녁: 17:30부터 메가리자몽X, 20:00부터 잠만보 */
+  /* 저녁: 17:30부터 21:00까지 루나아라가 달린다 (잠만보 교체 없음) */
   #homeEvening .hero-progress>.hp-runner{filter:drop-shadow(0 3px 5px rgba(70,58,140,.3))}
-  #homeEvening .hero-progress>.hp-runner.on .rn-mega{opacity:1}
-  #homeEvening .hero-progress>.hp-runner.sleepy .rn-snor{opacity:1}
-  #homeEvening .hero-progress>.hp-runner.sleepy{opacity:1;filter:drop-shadow(0 3px 6px rgba(70,58,140,.32))}
-  #homeEvening .hero-progress>.hp-runner.sleepy.run{animation:snoozeBob 1.6s ease-in-out infinite}
-  @keyframes snoozeBob{
-    0%,100%{transform:translate(-50%,-82%) rotate(-2deg)}
-    50%{transform:translate(-50%,-86%) rotate(2deg)}
-  }
+  #homeEvening .hero-progress>.hp-runner.on .rn-lun{opacity:1}
+  #homeEvening .hero-progress>.hp-runner.mega-run .rn-lun{opacity:1}
   @keyframes charFly{
     0%,100%{transform:translate(-50%,-82%) rotate(-3deg)}
     50%{transform:translate(-50%,-90%) rotate(3deg)}
@@ -1335,8 +1292,16 @@
   .eve-hero .hp-runner{filter:drop-shadow(0 2px 3px rgba(70,58,140,.22))}
   .eve-hero .hp-labels{color:#9A90B8}
   .eve-hero .stat-pill{border-color:#E5DEF8}
-  .hero-moon{width:54px;height:54px;flex:none;animation:moonBob 3.4s ease-in-out infinite}
-  @keyframes moonBob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-5px) rotate(3deg)}}
+  /* v13: 오후 히어로 배지 = 루나아라 (달 대신) */
+  .hero-luna{
+    position:relative;width:78px;height:78px;flex:none;border-radius:50%;display:grid;place-items:center;
+    overflow:hidden;background:radial-gradient(circle at 50% 30%,#FBF8FF 0%,#EDE6FF 58%,#D6C8F8 100%);
+    box-shadow:0 0 0 2px #FFFFFF,0 0 0 5px #9C86E4,0 0 15px 3px rgba(140,110,220,.42),0 8px 16px rgba(60,40,120,.2);
+  }
+  .hero-luna img{
+    width:92%;height:92%;object-fit:contain;pointer-events:none;-webkit-user-drag:none;
+    filter:drop-shadow(0 2px 2px rgba(60,40,120,.28));
+  }
 
   .rcard.ev{border-color:#E7E1F6;box-shadow:0 6px 16px rgba(96,84,160,.09)}
   .rcard.ev .illu{background:#F8F5FF}
@@ -2234,14 +2199,10 @@
 
       <section class="hero">
         <div class="hero-top">
-          <button class="hero-pika" id="heroEvo" type="button" data-act="evo-preview" aria-label="리자몽 · 눌러서 메가진화 미리보기" title="리자몽 · 누르면 메가진화 연출">
-            <img class="evo-char" src="assets/charizard-6.png" alt="리자몽" draggable="false">
-            <img class="evo-mega" src="assets/mega-charizard-x-10034.png" alt="메가리자몽X" draggable="false">
-            <span class="evo-flame" aria-hidden="true">
-              <svg viewBox="0 0 48 48"><path d="M25 5c1 6-5 8-5 14 0 3 2 5 2 8a6 6 0 0 0 12 0c0-4-3-6-3-9 5 3 9 8 9 14a14 14 0 0 1-28 0C12 18 22 14 25 5z" fill="#FF9A1F"/><path d="M25 20c0 4-3 5-3 9a6 6 0 0 0 12 0c0-3-3-4-3-7 3 2 5 5 5 8a10 10 0 0 1-20 0c0-5 5-8 9-10z" fill="#FFD347"/></svg>
-            </span>
-            <span class="evo-burst" aria-hidden="true"></span>
-          </button>
+          <!-- v13: 오전 배지는 하루 종일 솔가레오 (진화 없음) -->
+          <div class="hero-pika" id="heroEvo" aria-label="솔가레오">
+            <img class="evo-char" src="assets/solgaleo-791.png" alt="솔가레오" draggable="false">
+          </div>
           <div class="hero-id">
             <div class="hero-name">윤재</div>
             <div class="hero-meta">07:00 시작 · 08:15 출발</div>
@@ -2259,10 +2220,9 @@
           <div class="hp-track">
             <div class="hp-fill" id="dayProgress"><span class="hp-comet" aria-hidden="true"></span></div>
           </div>
-          <!-- 07:10~08:15 리자몽이 막대 앞쪽 끝을 달린다 / 08:15 이후에는 도착한 메가리자몽X -->
+          <!-- v13: 07:10~08:15 솔가레오가 막대 위를 달리고, 08:15 이후에도 결승점에 그대로 -->
           <div class="hp-runner" id="runner" aria-hidden="true">
-            <img class="rn-char" src="assets/charizard-6.png" alt="" draggable="false">
-            <img class="rn-mega" src="assets/mega-charizard-x-10034.png" alt="" draggable="false">
+            <img class="rn-sol" src="assets/solgaleo-791.png" alt="" draggable="false">
           </div>
           <div class="ms-labels"></div>
         </div>
@@ -2327,7 +2287,7 @@
         </div>
         <div class="card today-card math-card" id="morningMathCard">
           <div class="sec-head">
-            <h2>🔥 미션</h2>
+            <h2>🔥 MISSION</h2>
             <span class="sec-sub"><span class="gball ball-mini" data-ball="normal" aria-hidden="true"></span> +1</span>
             <div class="spacer"></div>
             <button class="link-btn" type="button" data-act="mission-edit">⚙️ 편집</button>
@@ -2348,15 +2308,9 @@
       <div class="left-col">
       <section class="hero eve-hero">
         <div class="hero-top">
-          <div class="hero-moon">
-            <svg viewBox="0 0 120 120" width="100%" height="100%" role="img" aria-label="달">
-              <path d="M80 20a42 42 0 1 0 0 80 34 34 0 1 1 0-80Z" fill="#FFE79C" stroke="#D9B85C" stroke-width="3.2" stroke-linejoin="round"/>
-              <circle cx="26" cy="30" r="3.6" fill="#C9BDF2"/>
-              <circle cx="20" cy="70" r="2.6" fill="#C9BDF2"/>
-              <circle cx="100" cy="34" r="3" fill="#C9BDF2"/>
-              <circle cx="104" cy="86" r="2.4" fill="#C9BDF2"/>
-              <path d="M92 74l1.8 4.2 4.2 1.8-4.2 1.8L92 86l-1.8-4.2-4.2-1.8 4.2-1.8z" fill="#FFFFFF" opacity=".85"/>
-            </svg>
+          <!-- v13: 오후 배지는 하루 종일 루나아라 (진화·잠만보 교체 없음) -->
+          <div class="hero-luna" aria-label="루나아라">
+            <img src="assets/lunala-792.png" alt="루나아라" draggable="false">
           </div>
           <div class="hero-id">
             <div class="hero-name">윤재</div>
@@ -2375,10 +2329,9 @@
           <div class="hp-track">
             <div class="hp-fill" id="eveProgress"><span class="hp-comet" aria-hidden="true"></span></div>
           </div>
-          <!-- 17:30~19:59 메가리자몽X가 달리고, 20:00부터는 잠만보가 취침을 향해 -->
+          <!-- v13: 17:30부터 21:00까지 루나아라가 취침을 향해 (잠만보 교체 없음) -->
           <div class="hp-runner" id="eveRunner" aria-hidden="true">
-            <img class="rn-mega" src="assets/mega-charizard-x-10034.png" alt="" draggable="false">
-            <img class="rn-snor" src="assets/snorlax-143.png" alt="" draggable="false">
+            <img class="rn-lun" src="assets/lunala-792.png" alt="" draggable="false">
           </div>
           <div class="ms-labels"></div>
         </div>
@@ -2436,7 +2389,7 @@
 
         <div class="card today-card study-card">
           <div class="sec-head">
-            <h2>🔥 미션</h2>
+            <h2>🔥 MISSION</h2>
             <span class="count-pill js-home-hs-count">0/0</span>
             <div class="spacer"></div>
             <button class="link-btn" type="button" data-act="hs-add">+ 할 일 추가</button>
@@ -4377,58 +4330,16 @@
     if (m !== homeMode || manual) applyMode(m);
   }
 
-  /* ======================= 리자몽 → 메가리자몽X 진화 ======================= */
-  var heroRealMega = false;    /* 지금 시각 기준 진짜 상태 (08:15 지나면 true) */
-  var heroRealRest = false;    /* 07:10~08:15: 리자몽은 막대 위, 배지는 불꽃 문장 */
-  var heroPreviewing = false;  /* 배지·알림 테스트로 잠깐 보여주는 중 */
-  var evoPreviewTimer = null, evoFlashTimer = null;
-  var RUN_START_MIN = 7 * 60 + 10;   /* 리자몽이 막대 위로 올라가는 시각 (둘째 구간) */
-  var SLEEPY_MIN = 20 * 60;          /* 잠만보로 바뀌는 시각 (마지막 바로 앞 구간) */
+  /* ======================= 히어로 배지 포켓몬 (진화 없음) =======================
+     v13: 오전은 솔가레오, 오후는 루나아라로 하루 종일 그대로.
+     예전 진화 연출을 부르던 곳이 남아 있어도 안전하도록 빈 함수로 둔다. */
+  var RUN_START_MIN = 7 * 60 + 10;   /* 오전: 솔가레오가 막대 위로 올라가는 시각 (둘째 구간) */
+  var SLEEPY_MIN = 20 * 60;          /* 예전 잠만보 시각 (지금은 쓰지 않음) */
 
-  function applyHeroState(mega, rest, animate) {
-    var b = $('heroEvo');
-    if (!b) return;
-    var was = b.classList.contains('mega');
-    b.classList.toggle('mega', mega);
-    b.classList.toggle('rest', !mega && !!rest);
-    var label = mega ? '메가리자몽X' : (rest ? '리자몽이 막대 위를 달려요' : '리자몽');
-    b.setAttribute('aria-label', label + ' · 눌러서 메가진화 미리보기');
-    b.title = label + ' · 누르면 메가진화 연출';
-    if (mega && !was && animate !== false) playEvoFlash(b);
-  }
-
-  function playEvoFlash(b) {
-    b = b || $('heroEvo');
-    if (!b) return;
-    b.classList.remove('evolving');
-    void b.offsetWidth;   /* 애니메이션 다시 시작 */
-    b.classList.add('evolving');
-    if (soundOn) { SFX.unlock(); SFX.evolve(); }
-    clearTimeout(evoFlashTimer);
-    evoFlashTimer = setTimeout(function () { b.classList.remove('evolving'); }, 1200);
-  }
-
-  /* 07:00~07:09 리자몽은 배지에, 07:10부터 막대 위를 달리고, 08:15에 메가리자몽X */
-  function updateHeroEvolution(pct, mins) {
-    heroRealMega = pct >= 100;
-    heroRealRest = (!heroRealMega && mins >= RUN_START_MIN);
-    if (heroPreviewing) return;
-    applyHeroState(heroRealMega, heroRealRest);
-  }
-
-  /* 🔔 알림 테스트·배지 누르기: 잠깐 메가진화 연출(기본 3초) */
-  function evoPreview(sec) {
-    var b = $('heroEvo');
-    if (!b) return;
-    heroPreviewing = true;
-    applyHeroState(true, false, false);
-    playEvoFlash(b);
-    clearTimeout(evoPreviewTimer);
-    evoPreviewTimer = setTimeout(function () {
-      heroPreviewing = false;
-      applyHeroState(heroRealMega, heroRealRest, false);
-    }, (sec || 3) * 1000);
-  }
+  function applyHeroState() {}
+  function playEvoFlash() {}
+  function updateHeroEvolution() {}
+  function evoPreview() {}
 
   /* ======================= 시계 / 카운트다운 ======================= */
   function tickClock() {
@@ -4546,12 +4457,9 @@
     var ep = $('eveProgress'); if (ep) ep.style.width = (100 - pct2).toFixed(1) + '%';
     var er = $('eveRunner');
     if (er) {
-      var eveMins = now.getHours() * 60 + now.getMinutes();
       var eveOn = (now >= eveStart);
-      var sleepy = (eveMins >= SLEEPY_MIN);
       er.style.left = (now >= bed ? 97 : pct2).toFixed(1) + '%';
-      er.classList.toggle('on', eveOn && !sleepy);
-      er.classList.toggle('sleepy', eveOn && sleepy);
+      er.classList.toggle('on', eveOn || now >= bed);
       er.classList.toggle('run', eveOn && now < bed);
     }
     var es = $('eveStatus');
