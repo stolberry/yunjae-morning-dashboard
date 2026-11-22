@@ -526,38 +526,42 @@
   .today-academy .acad-row{flex:0 0 auto}
 
   /* 하루 일정(📌) 칸과 목록 */
-  .acad-tile.once{background:#FFF7F3;border-color:#FFD9CF}
-  .acad-tile.once .ac-name{color:#9A3B26}
   .once-list{margin-top:12px}
   .once-list .oc-when{flex:none;font-size:12.5px;font-weight:900;color:#B24B32;white-space:nowrap}
   .once-list .oc-time{flex:none;font-size:12.5px;font-weight:800;color:#8A8377;white-space:nowrap}
   .once-list .item.past{opacity:.5}
   .once-list .item.today{background:#FFFBF0;border-color:#FFE08A}
 
-  /* 학원 칸: 시간순으로 가로로 — 위 이름+준비물, 아래 시간 */
-  .acad-tiles{display:flex;flex-wrap:wrap;justify-content:space-evenly;gap:8px 0;min-width:0;flex:1 1 auto;align-items:stretch}
-  /* 오늘의 스케줄 칸은 보너스·미션 카드와 똑같은 크기(1/4 폭 · 칸을 꽉 채우는 높이) */
-  .acad-tile{flex:0 0 calc((100% - 30px) / 4);min-width:0}
-  .acad-tile{
-    display:flex;flex-direction:column;gap:3px;min-width:0;align-items:center;justify-content:center;text-align:center;
-    background:#F7FBFF;border:1.5px solid #DCEBFA;border-radius:13px;padding:8px 8px 9px;
+  /* v106: 오늘의 스케줄 — 시간 이른 순서로 한 줄씩 쌓는 목록 (왼쪽 시간 · 이름 · 준비물) */
+  .acad-list{
+    display:flex;flex-direction:column;justify-content:center;gap:6px;
+    flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;
   }
-  .acad-tile .ac-ico{width:28px;height:28px;flex:none;display:flex;align-items:center;justify-content:center;margin-bottom:1px}
-  .acad-tile .ac-ico svg{width:26px;height:26px;display:block}
-  .acad-tile .ac-name{
-    flex:0 1 auto;min-width:0;max-width:100%;font-size:16px;font-weight:900;letter-spacing:-.5px;color:#1F3E5C;text-align:center;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  .acad-item{
+    display:flex;align-items:center;gap:9px;width:100%;min-width:0;flex:0 0 auto;
+    background:#fff;border:1.5px solid #DCEBFA;border-radius:13px;padding:6px 11px;
+    box-shadow:0 4px 10px rgba(70,110,150,.06);
   }
-  .acad-tile .ac-memo{
-    align-self:center;max-width:100%;font-size:10.5px;font-weight:900;color:#2C6BA8;
-    background:#EAF3FF;border:1.5px solid #D3E6FA;border-radius:999px;padding:1px 7px;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.3px;
-  }
-  .acad-tile .ac-time{
-    margin-top:1px;font-size:14.5px;font-weight:700;color:#24507C;text-align:center;
-    font-variant-numeric:tabular-nums;letter-spacing:-.2px;white-space:nowrap;
+  .acad-item .ai-time{
+    flex:0 0 106px;min-width:0;font-size:15px;font-weight:900;color:#24507C;
+    font-variant-numeric:tabular-nums;letter-spacing:-.3px;white-space:nowrap;
     overflow:hidden;text-overflow:ellipsis;
   }
+  .acad-item .ai-ico{width:26px;height:26px;flex:none;display:flex;align-items:center;justify-content:center}
+  .acad-item .ai-ico svg{width:22px;height:22px;display:block}
+  .acad-item .ai-name{
+    flex:1 1 auto;min-width:0;font-size:16px;font-weight:900;letter-spacing:-.5px;color:#1F3E5C;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .acad-item .ai-memo{
+    flex:0 1 auto;max-width:38%;font-size:11.5px;font-weight:900;color:#2C6BA8;
+    background:#EAF3FF;border:1.5px solid #D3E6FA;border-radius:999px;padding:2px 8px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.3px;
+  }
+  /* 그날만 있는 📌 일정은 따뜻한 색으로 구분 */
+  .acad-item.once{background:#FFFBF7;border-color:#FFE0D6}
+  .acad-item.once .ai-time{color:#B24B32}
+  .acad-item.once .ai-name{color:#9A3B26}
 
   /* 학원 없는 날 */
   .acad-empty{
@@ -5873,21 +5877,19 @@
         + '</div>';
       return;
     }
-    /* 시간이 이른 순서대로 가로로 나란히 — 위에 이름·준비물, 아래에 시간 */
-    var html = '<div class="acad-tiles">';
+    /* v106: 시간 이른 순서대로 한 줄씩 — 왼쪽 시간, 오른쪽 이름·준비물 */
+    var html = '<div class="acad-list">';
     for (var i = 0; i < list.length; i++) {
       var a = list[i];
-      html += '<div class="acad-tile' + (a.once ? ' once' : '') + '">'
-        + '<span class="ac-ico">' + (a.once ? svgPin() : svgSchool()) + '</span>'
-        + '<span class="ac-name" title="' + esc(a.name) + '">' + esc(a.name) + '</span>'
-        + (a.memo ? '<span class="ac-memo" title="' + esc(a.memo) + '">🎒 ' + esc(a.memo) + '</span>' : '')
-        + '<span class="ac-time">' + esc(timeLabelShort(a)) + '</span>'
+      html += '<div class="acad-item' + (a.once ? ' once' : '') + '">'
+        + '<span class="ai-time">' + esc(timeLabelShort(a)) + '</span>'
+        + '<span class="ai-ico">' + (a.once ? svgPin() : svgSchool()) + '</span>'
+        + '<span class="ai-name" title="' + esc(a.name) + '">' + esc(a.name) + '</span>'
+        + (a.memo ? '<span class="ai-memo" title="' + esc(a.memo) + '">🎒 ' + esc(a.memo) + '</span>' : '')
         + '</div>';
     }
     html += '</div>';
     box.innerHTML = html;
-    var tiles = box.querySelector('.acad-tiles');
-    if (tiles) tiles.style.justifyContent = list.length >= 4 ? 'space-between' : 'space-evenly';
   }
 
   /* ======================= 📌 하루 일정(별도 스케줄) ======================= */
