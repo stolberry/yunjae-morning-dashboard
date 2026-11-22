@@ -534,12 +534,14 @@
 
   /* v106: 오늘의 스케줄 — 시간 이른 순서로 한 줄씩 쌓는 목록 (왼쪽 시간 · 이름 · 준비물) */
   .acad-list{
-    display:flex;flex-direction:column;justify-content:center;gap:6px;
+    display:flex;flex-direction:column;justify-content:center;gap:7px;
     flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;
   }
+  /* 일정이 1~3개면 카드 높이를 적당히 나눠 쓰고, 많으면 48px로 촘촘히 + 스크롤 */
   .acad-item{
-    display:flex;align-items:center;gap:9px;width:100%;min-width:0;flex:0 0 auto;
-    background:#fff;border:1.5px solid #DCEBFA;border-radius:13px;padding:6px 11px;
+    display:flex;align-items:center;gap:9px;width:100%;min-width:0;
+    flex:1 1 auto;min-height:48px;max-height:60px;
+    background:#fff;border:1.5px solid #DCEBFA;border-radius:13px;padding:6px 12px;
     box-shadow:0 4px 10px rgba(70,110,150,.06);
   }
   .acad-item .ai-time{
