@@ -544,11 +544,6 @@
     background:#fff;border:1.5px solid #DCEBFA;border-radius:13px;padding:6px 12px;
     box-shadow:0 4px 10px rgba(70,110,150,.06);
   }
-  .acad-item .ai-time{
-    flex:0 0 106px;min-width:0;font-size:15px;font-weight:900;color:#24507C;
-    font-variant-numeric:tabular-nums;letter-spacing:-.3px;white-space:nowrap;
-    overflow:hidden;text-overflow:ellipsis;
-  }
   .acad-item .ai-ico{width:26px;height:26px;flex:none;display:flex;align-items:center;justify-content:center}
   .acad-item .ai-ico svg{width:22px;height:22px;display:block}
   .acad-item .ai-name{
@@ -559,6 +554,11 @@
     flex:0 1 auto;max-width:38%;font-size:11.5px;font-weight:900;color:#2C6BA8;
     background:#EAF3FF;border:1.5px solid #D3E6FA;border-radius:999px;padding:2px 8px;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.3px;
+  }
+  /* v107: 이름 다음에 시간이 오른쪽에 붙는 순서 (독서토론  2:30 ~ 3:30) */
+  .acad-item .ai-time{
+    flex:none;margin-left:auto;text-align:right;font-size:15px;font-weight:900;color:#24507C;
+    font-variant-numeric:tabular-nums;letter-spacing:-.3px;white-space:nowrap;
   }
   /* 그날만 있는 📌 일정은 따뜻한 색으로 구분 */
   .acad-item.once{background:#FFFBF7;border-color:#FFE0D6}
@@ -5879,15 +5879,15 @@
         + '</div>';
       return;
     }
-    /* v106: 시간 이른 순서대로 한 줄씩 — 왼쪽 시간, 오른쪽 이름·준비물 */
+    /* v107: 이름 다음에 시간이 오른쪽 — 아이콘, 이름, 준비물, 시간 */
     var html = '<div class="acad-list">';
     for (var i = 0; i < list.length; i++) {
       var a = list[i];
       html += '<div class="acad-item' + (a.once ? ' once' : '') + '">'
-        + '<span class="ai-time">' + esc(timeLabelShort(a)) + '</span>'
         + '<span class="ai-ico">' + (a.once ? svgPin() : svgSchool()) + '</span>'
         + '<span class="ai-name" title="' + esc(a.name) + '">' + esc(a.name) + '</span>'
         + (a.memo ? '<span class="ai-memo" title="' + esc(a.memo) + '">🎒 ' + esc(a.memo) + '</span>' : '')
+        + '<span class="ai-time">' + esc(timeLabelShort(a)) + '</span>'
         + '</div>';
     }
     html += '</div>';
