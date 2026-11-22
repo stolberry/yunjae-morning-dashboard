@@ -1,7 +1,7 @@
 /* 윤재 루틴 - 오프라인/홈화면 추가용 서비스워커
    같은 주소의 파일만 캐시하고, 항상 네트워크를 먼저 확인합니다.
    페이지(문서) 요청은 브라우저 캐시를 건너뛰고 새로 받아, 고친 화면이 바로 보이게 합니다. */
-var CACHE = 'yj-pokemon-morning-v104';
+var CACHE = 'yj-pokemon-morning-v105';
 
 self.addEventListener('install', function () {
   self.skipWaiting();
