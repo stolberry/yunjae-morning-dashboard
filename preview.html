@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>미리보기(임시)</title>
+<style>
+  html,body{margin:0;padding:0;background:#8a8a8a}
+  body{display:flex;align-items:flex-start;justify-content:flex-start}
+  iframe{display:block;border:0;background:#fff;overflow:hidden}
+</style>
+</head>
+<body>
+<script>
+(function(){
+  var q = new URLSearchParams(location.search);
+  var w = parseInt(q.get('w') || '1480', 10);
+  var h = parseInt(q.get('h') || '924', 10);
+  var src = q.get('src') || 'index.html?preview=1';
+  var f = document.createElement('iframe');
+  f.setAttribute('width', w);
+  f.setAttribute('height', h);
+  f.style.width = w + 'px';
+  f.style.height = h + 'px';
+  f.src = src;
+  document.body.appendChild(f);
+})();
+</script>
+</body>
+</html>
