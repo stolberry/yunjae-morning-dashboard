@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>test seed</title></head>
+<body style="font-family:sans-serif;padding:24px">
+<p id="log">seeding…</p>
+<script>
+(function () {
+  function p2(n) { return (n < 10 ? '0' : '') + n; }
+  function key(off) {
+    var d = new Date(); d.setDate(d.getDate() - off);
+    return d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate());
+  }
+  var mode = (location.search.match(/mode=(\w+)/) || [])[1] || 'seed';
+  var log = document.getElementById('log');
+  if (mode === 'clear') {
+    ['yj_habits_v1', 'yj_habit_done_v1', 'yj_stones_v1', 'yj_stone_awards_v1'].forEach(function (k) {
+      localStorage.removeItem(k);
+    });
+    log.textContent = 'cleared';
+    return;
+  }
+  localStorage.setItem('yj_habits_v1', JSON.stringify([{ id: 'habit-test1', label: '🧪 테스트 습관' }]));
+  var done = {};
+  done[key(2)] = ['habit-test1'];
+  done[key(1)] = ['habit-test1'];
+  localStorage.setItem('yj_habit_done_v1', JSON.stringify(done));
+  localStorage.setItem('yj_stones_v1', '0');
+  localStorage.setItem('yj_stone_awards_v1', '[]');
+  log.textContent = 'seeded 2d+1d for habit-test1, stones=0';
+})();
+</script>
+</body>
+</html>
