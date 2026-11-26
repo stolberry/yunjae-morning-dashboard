@@ -1183,6 +1183,12 @@
 
   /* reveal */
   .reveal-card{text-align:center;max-width:460px}
+  /* 진화 갈래가 많은 포켓몬(이브이 등): 상세 창을 넓히고 진화 줄을 2열로 */
+  .reveal-card.many{max-width:660px}
+  .reveal-card.many .evo-rows{display:grid;grid-template-columns:1fr 1fr;gap:9px 14px;align-items:center}
+  .reveal-card.many .evo-row{margin-bottom:0;justify-content:flex-start}
+  .reveal-card.many .evo-row .btn{margin-left:auto}
+  .reveal-card.many .reveal-img{width:190px;height:190px}
   .reveal-badge{display:inline-block;font-size:12px;font-weight:900;border-radius:999px;padding:6px 14px;background:#FFF3BF;color:#8A6B12;margin-bottom:6px}
   .reveal-badge.new{background:#FFE1DE;color:#B3281D}
   .reveal-img{
@@ -7470,7 +7476,7 @@
     if (!nexts.length) return '';
     var cnt = state.dex[p.id] || 0;
     if (!cnt) return '';
-    var html = '<div class="evo-box"><div class="evo-title">✨ ' + esc(p.name) + ' 진화시키기</div>';
+    var html = '<div class="evo-box"><div class="evo-title">✨ ' + esc(p.name) + ' 진화시키기</div><div class="evo-rows">';
     for (var i = 0; i < nexts.length; i++) {
       var np = byId(nexts[i]);
       if (!np) continue;
@@ -7483,7 +7489,7 @@
         + (ok ? '' : ' disabled') + '>💎 진화의 돌 ' + cost + '개로 진화</button>'
         + '</div>';
     }
-    html += '<div style="text-align:center;font-size:11px;font-weight:800;color:' + (state.stones > 0 ? '#8A6B12' : '#A79E8B') + '">'
+    html += '</div><div style="text-align:center;font-size:11px;font-weight:800;color:' + (state.stones > 0 ? '#8A6B12' : '#A79E8B') + '">'
       + (state.stones > 0
         ? ('보유 💎 ' + state.stones + '개 · 오전+오후+공부 3일 연속마다 1개')
         : '진화의 돌이 필요해요 (오전+오후+공부 3일 연속 완료!)')
@@ -7493,6 +7499,8 @@
 
   function showReveal(p, isNew, count, kind, canRelease) {
     var body = $('revealBody');
+    var manyEvo = ((EVO[p.id] || []).length > 3);
+    body.className = 'modal-card reveal-card' + (manyEvo ? ' many' : '');
     var tc = TIER[p.tier] || TIER['일반'];
     var d = DRAW[kind] || null;
     body.innerHTML = '<div class="modal-head">'
